@@ -1,12 +1,8 @@
-# Semi-Autonomous Mobile Robot Navigation in Populated Enviroments #
+# Semi-Autonomous Mobile Robot Navigation in Populated Enviroments
 
-## Some tekst in heading 2 ##
+## Main objective of Master Thesis
 
-
-### Some tekst in heading 2 ###
-
-* test bullet
-* second bullet
-
-1. first number
-2. second number
+1. Develop a local path planner based on splines formulated as a constraint optimization problem
+2. This path planner should be able to include dynamic obstacle avoidance
+3. Take into account tje dynamics of the wheelchair
+4. Fast enough so that the user doesn't feel the latency (goal : 5 Hz)
