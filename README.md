@@ -10,5 +10,3 @@
 
 1. first number
 2. second number
-
-#what is this ?
