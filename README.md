@@ -1,5 +1,5 @@
-# Semi-Autonomous Mobile Robot Navigation in Populated Enviroments 1 #
-===========================
+# Semi-Autonomous Mobile Robot Navigation in Populated Enviroments #
+====================================================================
 
 ## Some tekst in heading 2 ##
 -----------------------------
