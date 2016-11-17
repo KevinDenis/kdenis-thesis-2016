@@ -4,7 +4,7 @@
 De doelstelling van deze masterproef is om een lokale padplanner te ontwikkelen die paden genereert in een dynamische omgeving
 De padplanner moet de dynamiek van zijn omgeving kunnen schatten om botsingsvrije pad op te kunnen stellen. 
 Deze complexe lokale paden bestaan uit vierde en vijfde orde Bézierkrommes. 
-Het voorgesteld algoritme is een uitbreiding van een al bestaande padplanner die enkel circulaire paden genereert.  
+Het voorgesteld algoritme is een uitbreiding van een al bestaande padplanner die enkel circulaire paden genereert.
 Deze schiet tekort in sommige situaties, b.v.b. wanneer de rolstoel naast een deur is. 
 Dit algoritme heeft als hoofddoel om toegepast te kunnen worden op een semi-autonome rolstoelen, welke bijkomende vereisten met zich meebrengt. 
 Er moet niet één mogelijk pad uit dit algoritme komen maar meerdere. 
@@ -26,3 +26,16 @@ en de dynamische randvoorwaarden van van de rolstoel zelf (maximale versnelling/
 2. This path planner should be able to include dynamic obstacle avoidance
 3. Take into account the dynamics of the wheelchair
 4. Fast enough so that the user doesn't feel the latency (goal : 5 Hz)
+
+## Git organization
+
+### src (Source code)
+
+### adm (Administration)
+
+### ppr (Paper)
+
+### prs	(Presentation)
+
+
+
