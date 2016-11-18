@@ -14,7 +14,7 @@ Bereikt
 -   Update doelstellingen masterproef en 4 concrete
     meetbare objectieven.
 
-Overzicht van padplanner {#overzicht-van-padplanner .unnumbered}
+Overzicht van padplanner
 ------------------------
 
 Illustratie van de padplanner geformuleerd als een COP in MATLAB
