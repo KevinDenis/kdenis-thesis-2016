@@ -43,7 +43,7 @@ Mogelijke oplossing voor deze problemen : Door spline in meerdere delen
 te berekenen en het lokaal assenstelsel te roteren kan dit probleem
 opgelost worden
 
-Cubic Spline Approximation {#cubic-spline-approximation .unnumbered}
+Cubic Spline Approximation
 --------------------------
 
 ### Pro’s
@@ -62,7 +62,7 @@ Cubic Spline Approximation {#cubic-spline-approximation .unnumbered}
 
 -   Zelfde opmerkingen als bij Cubic Spline Interpolation
 
-Bézier curves {#bézier-curves .unnumbered}
+Bézier curves
 -------------
 
 ### Pro’s
