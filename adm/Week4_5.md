@@ -53,16 +53,6 @@ In \[fig:BezierOptAlpha\] en \[fig:BezierOptN\] kan men figuren vinden
 van de optimalisatie resultaten met toenemende waarde van $\alpha$ en
 $n$ respectievelijk.
 
-\[b\]<span>0.49</span> ![\[fig:BezierOptN\]Optimalisatie met
-verschillende waardes voor $n$. Zowel de buiging-energie als de lengte
-van de kromme dalen met het toenemen $n$. De rekentijd neemt wel toe met
-toenemende $n$.](BezierOpt_alpha.eps "fig:"){width="105.00000%"}
-
-\[b\]<span>0.49</span> ![\[fig:BezierOptN\]Optimalisatie met
-verschillende waardes voor $n$. Zowel de buiging-energie als de lengte
-van de kromme dalen met het toenemen $n$. De rekentijd neemt wel toe met
-toenemende $n$.](BezierOpt_n.eps "fig:"){width="105.00000%"}
-
 Wat ik heb gelezen
 ------------------
 
