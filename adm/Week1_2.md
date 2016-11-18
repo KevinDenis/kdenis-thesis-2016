@@ -1,7 +1,7 @@
-Week 1 - 2 {#week-1---2 .unnumbered}
+Week 1 - 2
 ==========
 
-Doel {#doel .unnumbered}
+Doel
 ----
 
 -   Opmerkingen van Meneer Bruyninckx toevoegen aan huidig visie
@@ -12,7 +12,7 @@ Doel {#doel .unnumbered}
 -   Verder uitwerking van het stuksgewijs toevoegen van Bézier Curves,
     en graad van continuiteit garanderen.
 
-Bereikt {#bereikt .unnumbered}
+Bereikt
 -------
 
 -   Opmerkingen van Meneer Bruyninckx toevoegen aan huidig visie
@@ -20,11 +20,10 @@ Bereikt {#bereikt .unnumbered}
 
 -   Verder uitwerking van het stuksgewijs toevoegen van Bézier Curves.
 
-Cubic Spline Interpolation {#cubic-spline-interpolation .unnumbered}
+Cubic Spline Interpolation
 --------------------------
 
-### Pro’s {#pros .unnumbered}
-
+### Pro’s 
 -   Polynoom gaat door alle gegeven punten.
 
 -   Oriëntatie kan op een indirecte manier gegeven worden, door de
@@ -33,7 +32,7 @@ Cubic Spline Interpolation {#cubic-spline-interpolation .unnumbered}
 -   Toevoegen van punt zal enkel voor een lokale verandering zorgen
     (groot voordeel tegenover bvb Lagrange Interpolatie)
 
-### Con’s {#cons .unnumbered}
+### Con’s
 
 -   Werkt enkel met stijgende waarde van x.
 
@@ -47,7 +46,7 @@ opgelost worden
 Cubic Spline Approximation {#cubic-spline-approximation .unnumbered}
 --------------------------
 
-### Pro’s {#pros-1 .unnumbered}
+### Pro’s
 
 -   Op eerste zicht niet logisch, maar door grote gewichten op begin en
     eindpunt te zetten zorgt men voor paden die door begin en eindpunt
@@ -59,14 +58,14 @@ Cubic Spline Approximation {#cubic-spline-approximation .unnumbered}
 -   Door met de interpoleer gewichten variëren creëert men licht
     verschillende paden.
 
-### Con’s {#cons-1 .unnumbered}
+### Con’s
 
 -   Zelfde opmerkingen als bij Cubic Spline Interpolation
 
 Bézier curves {#bézier-curves .unnumbered}
 -------------
 
-### Pro’s {#pros-2 .unnumbered}
+### Pro’s
 
 Cubic Bézier Curve lijkt een ideale oplossing, omdat :
 
@@ -79,7 +78,7 @@ Cubic Bézier Curve lijkt een ideale oplossing, omdat :
 -   Wel ervoor zorgen dat G-2 en C-2 continue is (zeker wanneer curve
     uit meerdere Bézier curves opbouw)
 
-### OPM {#opm .unnumbered}
+### OPM
 
 -   Indien ik C2 continu Bézier curves aan elkaar toe wil voegen, en nog
     steeds vrij wil zijn voor positie en oriëntatie van begin en
@@ -88,7 +87,7 @@ Cubic Bézier Curve lijkt een ideale oplossing, omdat :
 Maar, moet dit echt? Zou een controller niet makkelijk deze niet
 continue versnelling op kunnen vangen?
 
-Controle punten {#controle-punten .unnumbered}
+Controle punten
 ---------------
 
 Tot nu toe heb ik niet het probleem bekeken van waar ik de punten krijg,
@@ -100,7 +99,7 @@ Een andere mogelijkheid zou zijn dat ik enkel de huidige positie en
 oriëntatie, doel en de free-space heb, en hiermee paden moet genereren.
 Dit laat veel meer vrijheid toe voor het genereren van paden
 
-Concrete vragen {#concrete-vragen .unnumbered}
+Concrete vragen
 ---------------
 
 1.  Mijn dilemma is het volgende : moet ik mij enkel in Bézier curves
@@ -114,7 +113,7 @@ Concrete vragen {#concrete-vragen .unnumbered}
 3.  Meneer Bruyninckx, zou u de term “dichtheid van paden” kunnen
     uitleggen?
 
-Opmerkingen voor volgende week {#opmerkingen-voor-volgende-week .unnumbered}
+Opmerkingen voor volgende week
 ------------------------------
 
 -   Een concrete methode uitwerken voor het genereren van punten als
