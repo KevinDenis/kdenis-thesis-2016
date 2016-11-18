@@ -28,13 +28,6 @@ punt van Bézierkromme controleert of deze ver genoeg van het obstakel
 is. In @MercyEtAl2016, is er een elegantere methode (en ook sneller)
 ontwikkeld. Deze methode is nog niet geïmplementeerd.
 
-![\[fig:sepHyperPlanes\] Tussen twee niet overlappende convexe sets C en
-D is er altijd een scheidende hypervlak, bepaald voor $a^Tx=b$. $a$ is
-hier de vector bepaald door de twee dichtstbijzijnde punten in C en D.
-$b$ de offset van deze vlak. In deze toepassing is C de robot en is
-voorlopig tot een cirkel herleid. D is hier een obstakel gevormd door
-een convexe polygoon.](sepHyperPlanes.PNG){width="70.00000%"}
-
 -   Randvoorwaarden. *Voorlopig enkel geometrisch*.
 
     -   Begin- en eindpunt liggen vast \[eq:startPos,eq:endPos\]
@@ -53,10 +46,6 @@ een convexe polygoon.](sepHyperPlanes.PNG){width="70.00000%"}
 In \[fig:BezierOptObs\] kan men de resultaten van het
 optimaliseringsprobleem vinden met en zonder rekening te houden met een
 obstakel.
-
-![\[fig:BezierOptObs\]Optimalisatie met en zonder rekening houden van
-het obstakel, respectievelijk in het blauw en
-rood.](BezierOptObs.eps){width="70.00000%"}
 
 Wat ik heb gelezen
 ------------------
