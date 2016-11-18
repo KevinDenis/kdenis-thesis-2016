@@ -1,10 +1,10 @@
-Week 0 {#week-0 .unnumbered}
+Week 0
 ======
 
 Hierin is het werk gemaakt in de weken voor het begin van de
 academiejaar gebundeld.
 
-Doel {#doel .unnumbered}
+Doel
 ----
 
 -   Concreet doel voor thesis tegen eind september.
@@ -14,7 +14,7 @@ Doel {#doel .unnumbered}
 
 -   Leren werken met gitlab.
 
-Bereikt {#bereikt .unnumbered}
+Bereikt
 -------
 
 -   Concreet doel voor thesis tegen eind september.\
@@ -45,7 +45,7 @@ Bereikt {#bereikt .unnumbered}
     -   NURBS : cfr. splines maar controle punt heeft een vrij te kiezen
         gewicht
 
-Opmerkingen voor volgende week {#opmerkingen-voor-volgende-week .unnumbered}
+Opmerkingen voor volgende week
 ------------------------------
 
 -   Benchmark maken om meerdere methodes (Bezier Curves, Splines
@@ -54,7 +54,7 @@ Opmerkingen voor volgende week {#opmerkingen-voor-volgende-week .unnumbered}
 
 -   Leren werken met gitlab.
 
-Wat ik heb gelezen {#wat-ik-heb-gelezen .unnumbered}
+Wat ik heb gelezen
 ------------------
 
 -   @DemeesterEtAl2012
