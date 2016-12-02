@@ -1,9 +1,10 @@
 # Semi-Autonomous Mobile Robot Navigation in Populated Enviroments
+Master thesis of Kevin Denis, under supervision of Professor Bruyninckx and Professor Demeester. 
 
 ## Doelstelling
 De doelstelling van deze masterproef is om een lokale padplanner te ontwikkelen die paden genereert in een dynamische omgeving
 De padplanner moet de dynamiek van zijn omgeving kunnen schatten om botsingsvrije pad op te kunnen stellen. 
-Deze complexe lokale paden bestaan uit vierde en vijfde orde Bézierkrommes. 
+Deze complexe lokale paden bestaan uit derde en vierde orde Bézierkrommes. 
 Het voorgesteld algoritme is een uitbreiding van een al bestaande padplanner die enkel circulaire paden genereert.
 Deze schiet tekort in sommige situaties, b.v.b. wanneer de rolstoel naast een deur is. 
 Dit algoritme heeft als hoofddoel om toegepast te kunnen worden op een semi-autonome rolstoelen, welke bijkomende vereisten met zich meebrengt. 
@@ -30,13 +31,13 @@ en de dynamische randvoorwaarden van van de rolstoel zelf (maximale versnelling/
 ## Git organization
 
 ### src (Source code)
+Here is all the source code used for this thesis.
 
 ### adm (Administration)
-
+Here, all the administrative mather for this thesis is stored (e.g. logs, meeting rapport, etc.).
 
 ### ppr (Paper)
+Here, the source code for the paper and pdf's will be available.
 
 ### prs	(Presentation)
-
-
-
+Here, the source code for the presentation (mid-term and final) and pdf's will be available.
