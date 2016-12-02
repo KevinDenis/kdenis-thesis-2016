@@ -1,18 +1,17 @@
 function f = objectiveFunction(x,y,initCOP)
 %objectiveFunction Summary of this function goes here
 %   Detailed explanation goes here
-P=[x y]; 
 t=initCOP.t;
 Pstart=initCOP.Pstart;
 Pgoal=initCOP.Pgoal;
 weights=initCOP.weights;
 kappa_max=initCOP.kappa_max;
-
+P=[x y];
 d_eg=Pgoal(1:2)-P(end,:);
 d_sg=Pgoal(1:2)-Pstart(1:2);
 
    
-[~,dB,~,kappa]=BezierCurve(P,t);
+[~,dB,~,kappa]=BezierCurve(x,y,t);
 dx=dB(:,1);
 dy=dB(:,2);
 

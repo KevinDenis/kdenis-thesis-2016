@@ -1,7 +1,15 @@
-x=[1 1 1]';
-y=x;
-norm([x y])
+clear
+close all
+clc
+n=2;
+syms t z
 
-d=max(sqrt(x.^2+y.^2))
+bM=bernsteinMatrix(n,t);
 
-[x y]/d
+bezierMatrix=zeros(n+1);
+
+for ii=1:length(bM)
+    bezierMatrix(ii,:)=sym2poly(bM(ii));
+end
+
+bernsteinMatrix(2,(z-1))

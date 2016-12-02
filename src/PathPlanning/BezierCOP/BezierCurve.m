@@ -1,6 +1,6 @@
-function [B,dB,ddB,kappa]=BezierCurve(P,varargin)
+function [B,dB,ddB,kappa]=BezierCurve(x,y,varargin)
 
-if nargin == 1
+if nargin == 2
     t = linspace(0,1,101)'; 
 elseif isscalar(varargin{1})
     t=linspace(0,1,varargin{1})';
@@ -8,29 +8,36 @@ elseif isvector(varargin{1})
     t=varargin{1};
 end
 
-[nn,mm]=size(P);
-n=nn-1; % n = order of the bézier curve = # controlpoints - 1
+[nx,mx]=size(x);
+[ny,my]=size(y);
+if mx ~=1 && nx == 1
+    x=x';
+    nx=mx;
+end
+if my ~=1 && ny == 1
+    y=y';
+end
 
-if mm ~= 2
-    disp('please write your point this way [x_i y_i]')
+n=nx-1; % n = order of the bézier curve = # controlpoints - 1
+
+if length(x) ~= length(y)
+    disp('x and y dont have the same length.')
     return
 end
 
-x=P(:,1);
-y=P(:,2);
-dP=[diffMatrix(x) diffMatrix(y)];
-ddP=[diffMatrix(diffMatrix(x)) diffMatrix(diffMatrix(y))];
+dx=diffMatrix(x);
+dy=diffMatrix(y);
+ddx=diffMatrix(dx);
+ddy=diffMatrix(dy);
 
+B=bernsteinMatrix(n, t)*[x y];
+dB=n*bernsteinMatrix(n-1,t)*[dx dy];
+ddB=(n-1)*(n)*bernsteinMatrix(n-2,t)*[ddx ddy];
 
+dxx=dB(:,1);
+dyy=dB(:,2);
+ddxx=ddB(:,1);
+ddyy=ddB(:,2);
 
-B=bernsteinMatrix(n, t)*P;
-dB=n*bernsteinMatrix(n-1,t)*dP;
-ddB=(n-1)*(n)*bernsteinMatrix(n-2,t)*ddP;
-
-dx=dB(:,1);
-dy=dB(:,2);
-ddx=ddB(:,1);
-ddy=ddB(:,2);
-
-kappa=((dx.*ddy-dy.*ddx))./((dx.^2+dy.^2).^(3/2));
+kappa=((dxx.*ddyy-dyy.*ddxx))./((dxx.^2+dyy.^2).^(3/2));
 end
