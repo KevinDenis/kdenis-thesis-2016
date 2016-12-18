@@ -1,4 +1,4 @@
-function g = constraints(x,y,a,b,initCOP)
+function g = constraintsSplitted(x,y,a,b,initCOP)
 %CONSTRAINTS Summary of this function goes here
 %   Detailed explanation goes here
 t=initCOP.t;
@@ -24,20 +24,10 @@ g{2}= x(2) >= x(1);
 g{3}= y(2) == tan(theta1)*(x(2)-x(1))+y(1);
 g{4}= s.^2 <= 2^2;
 g{5}= kappa.^2 <= kappa_max^2;
-
-if 1
-    g{6}=[x y]*a-b<=0;
-%     g{6}=B*a-b<=0;
-%     g{6}=B(:,1).*a(:,1)+B(:,2).*a(:,2)-b<=0;
-    g{7}=obs*a-b>=0;
-    g{8}=norm_2(a)<=1;
-else
-    g{6}=[x_start y_start]*a(:,1)-b(1)<=0;
-    g{7}=[x_end y_end]*a(:,2)-b(2)<=0;
-    g{8}=obs*a(:,1)-b(1)>=0;
-    g{9}=obs*a(:,2)-b(2)>=0;
-    g{10}=norm_2(a(:,1))<=1;
-    g{11}=norm_2(a(:,2))<=1;
-end
-
+g{6}=[x_start y_start]*a(:,1)-b(1)<=0;
+g{7}=[x_end y_end]*a(:,2)-b(2)<=0;
+g{8}=obs*a(:,1)-b(1)>=0;
+g{9}=obs*a(:,2)-b(2)>=0;
+g{10}=norm_2(a(:,1))<=1;
+g{11}=norm_2(a(:,2))<=1;
 end

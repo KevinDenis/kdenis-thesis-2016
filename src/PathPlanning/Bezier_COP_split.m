@@ -7,7 +7,7 @@ clc
 x1=0; y1=0; theta1=0; Pstart=[x1,y1,theta1]; % start position and orientation
 xg=2; yg=2; thetg=pi/2; Pgoal=[xg,yg,thetg]; % end position and orientation
 n=4; % order of the bezier curve
-t=linspace(0,1,101)'; % overall resolution of the solver
+t=linspace(0,1,201)'; % overall resolution of the solver
 kappa_max=3;
 % Weigting factor for objective function
 % these will be normalized (for conviniance) and rounded off and then
@@ -46,12 +46,12 @@ y.setInit(getInitValY(y1,yg,n))
 % y.setInit([0;0;1;1]);
 y.setLb(y1-1); y.setUb(yg+1)
 % a
-a=optivar(2,1,'a');
-a.setInit([1;0])
+a=optivar(2,2,'a');
+a.setInit([1 1;0 0])
 a.setLb(-1); a.setUb(1)
 % b
-b=optivar(1,1,'b');
-b.setInit(0)
+b=optivar(2,1,'b');
+b.setInit([0 0])
 % b.setLb(y1-1); a.setUb(yg+1)
 
 sol = optisolve(objectiveFunction(x,y,initCOP),constraints(x,y,a,b,initCOP));
@@ -59,9 +59,18 @@ x_sol=optival(x);
 y_sol=optival(y);
 a_sol=optival(a);
 b_sol=optival(b);
-disp([x_sol y_sol])
-sepLineX=0:0.1:2;
-sepLineY=(b_sol-a_sol(1)*sepLineX)/a_sol(2);
+
+sepLineX1=0:0.1:2;
+sepLineY1=(b_sol(1)-a_sol(1,1)*sepLineX1)/a_sol(2,1);
+
+
+sepLineX2=0:0.1:2;
+sepLineY2=(b_sol(2)-a_sol(1,2)*sepLineX2)/a_sol(2,2);
+
+x_start=zeroToZMatrix*x_sol;
+x_end=zToTMatrix*x_sol;
+y_start=zeroToZMatrix*y_sol;
+y_end=zToTMatrix*y_sol;
 
 
 
@@ -70,6 +79,10 @@ sepLineY=(b_sol-a_sol(1)*sepLineX)/a_sol(2);
 co=get(gca,'ColorOrder'); % get default color for plot
 
 [B,~,~,kappa]=BezierCurve(x_sol,y_sol,t);
+[B_start,~,~,~]=BezierCurve(x_start,y_start,t);
+[B_end,~,~,~]=BezierCurve(x_end,y_end,t);
+
+
 % disp(' '); disp('======================='); disp(' ')
 % disp(Pgoal(1:2)-B(end,:))
 % disp(abs(thetag-atan(dB(end,2)/dB(end,1))))
@@ -78,23 +91,34 @@ figure(1)
 % subplot(2,1,1)
 title('Bezier curve with control points')
 hold on
-plot(B(:,1),B(:,2),'Color',co(1,:),'LineWidth',1.5); 
-scatter(x_sol,y_sol,[],co(1,:),'filled')
-fill(x_sol(convhull(x_sol,y_sol)),y_sol(convhull(x_sol,y_sol)),co(1,:),'FaceAlpha',0.2)
+fill(x_sol,y_sol,co(1,:),'FaceAlpha',0.2)
+
+fill(x_start,y_start,co(3,:),'FaceAlpha',0.2)
+plot(B_start(:,1),B_start(:,2),'Color',co(3,:),'LineWidth',1.5); 
+scatter(x_start,y_start,[],co(3,:),'filled')
+
+fill(x_end,y_end,co(4,:),'FaceAlpha',0.2)
+plot(B_end(:,1),B_end(:,2),'Color',co(4,:),'LineWidth',1.5); 
+scatter(x_end,y_end,[],co(4,:),'filled')
+
 scatter([Pstart(1) Pgoal(1)],[Pstart(2) Pgoal(2)],100,co(2,:),'Marker','*')
 fill(obs(:,1),obs(:,2),'k')
-plot(sepLineX,sepLineY,'Color',co(3,:),'LineWidth',1.5)
-hold off
+
+plot(sepLineX1,sepLineY1,'Color',co(3,:),'LineWidth',1.5)
+plot(sepLineX2,sepLineY2,'Color',co(4,:),'LineWidth',1.5)
+
 xlabel('x [m]')
 ylabel('y [m]')
 axis([-0.5 2.5 -0.5 2.5])
 axis equal
-legend('Bezier curve','Bezier Control Point','Convex hull','Start-Goal position ','Obstacle','Separating Hyperplane','Location','NW')
-figure(2)
+legend('Convex hull', ...
+        'Convex hull 1','Splitted Bezier curve 1','Splitted Bezier Control Point 1',...
+        'Convex hull 2','Splitted Bezier curve 2','Splitted Bezier Control Point 2',...
+        'Start-Goal position ','Obstacle','Separating Hyperplane 1','Separating Hyperplane 2', 'Location','NW')
 % subplot(2,1,2)
-title('Curvature \kappa(t)')
-hold on;
-plot(t,kappa)
-xlabel('t [/]')
-ylabel('\kappa [1/m]')
-hold off
+% title('Curvature \kappa(t)')
+% hold on;
+% plot(t,kappa)
+% xlabel('t [/]')
+% ylabel('\kappa [1/m]')
+% hold off
