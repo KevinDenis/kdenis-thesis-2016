@@ -1,5 +1,5 @@
 # Semi-Autonomous Mobile Robot Navigation in Populated Enviroments
-Master thesis of Kevin Denis, under supervision of Professor Bruyninckx and Professor Demeester. 
+Master thesis of Kevin Denis, under supervision of Professor Bruyninckx and Professor Demeester, mentored by Johan Philips. 
 
 ## Doelstelling
 De doelstelling van deze masterproef is om een lokale padplanner te ontwikkelen die paden genereert in een dynamische omgeving
