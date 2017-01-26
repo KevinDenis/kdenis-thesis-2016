@@ -2,29 +2,27 @@ clear
 close all
 clc
 
-stateLatice=[];
-x_max=2;
-dx=0.5;
-X_vec=0:dx:x_max;
-Y_vec=X_vec;
-dth=pi/2;
-TH1_vec=-pi/2:dth:pi/2;
-THend_vec=TH1_vec;
-grid_TH1_X_Y_THend=getAllComb(TH1_vec,X_vec,Y_vec,THend_vec);
-grid_X_Y_L1 = abs(grid_TH1_X_Y_THend(:,2))+abs(abs(grid_TH1_X_Y_THend(:,3)));
+x1=0; y1=0; th1=pi/4; Pstart=[x1,y1,th1]; % start sposition and orientation
+xend=2; yend=2; thend=pi/2; Pend=[xend,yend,thend]; % end position and orientation
+n=4; % order of the bezier curve
+t=linspace(0,1,101)'; % overall resolution of the solver
+kappa_max=1.5;
+initCOP=struct('Pstart',Pstart,'Pend',Pend,'n',n,'t',t,'kappa_max',kappa_max);
 
-progressbar('Overall State Lattice Progress','Current Manhatten Distance Progress')
+u=1;
+v=1;
 
-progressbar('Overall State Lattice Progress','Current Manhatten Distance Progress')
-for ii=1/dx:2*x_max/dx
+[B,dB,ddB,kappa]=BezierCurve_FixedPose(Pstart,Pend,u,v,t);
 
-    kk=IsNear(grid_X_Y_L1,ii*dx,1e-3);
-    grid_kk=grid_TH1_X_Y_THend(kk,:);
-    for jj=1:size(grid_kk,1)
-        pause(0.01) % Do something important
-        % Update all bars
-        frac2 = jj/size(grid_kk,1);
-        frac1 = (ii-1/dx+frac2)/(2*x_max/dx-1/dx+1);
-        progressbar(frac1, frac2)
-    end
-end
+plot(B(:,1),B(:,2)); hold on
+x =[         0;
+    0.7071;
+    2.0000;
+    2.0000];
+
+y =[
+
+         0;
+    0.7071;
+    1.0000;
+    2.0000]; scatter(x,y)

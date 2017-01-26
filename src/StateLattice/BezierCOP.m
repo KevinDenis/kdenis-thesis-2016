@@ -19,7 +19,7 @@ y=optivar(n,1,'y');
 y.setInit(y_init)
 y.setLb(min_val); y.setUb(max_val)
 
-ipoptOptions=struct('max_iter',300,'tol',1e-3,'print_level',0);
+ipoptOptions=struct('max_iter',300,'tol',1e-3,'print_level',3);
 solveOptions=struct('ipopt',ipoptOptions);
 
 sol = optisolve(objectiveFunction(x,y,initCOP),constraints(x,y,initCOP),solveOptions);
@@ -45,3 +45,6 @@ disp(' ')
 disp('============================================')
 disp(' ')
 end
+
+
+

@@ -9,7 +9,10 @@ kappa_max=initCOP.kappa_max;
 x1=Pstart(1); y1=Pstart(2); th1=Pstart(3);
 xend=Pend(1); yend=Pend(2); thend=Pend(3);
 
-[~,~,~,kappa]=BezierCurve(x,y,t);
+[~,dB,~,kappa]=BezierCurve(x,y,t);
+
+dx=dB(:,1);
+dy=dB(:,2);
 
 g{1}=[x(1) y(1) x(end) y(end)]'==[x1 y1 xend yend]';
 

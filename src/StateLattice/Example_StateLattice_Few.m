@@ -7,12 +7,9 @@ stateLatice=[];
 % General parameters
 tic
 
-toPoint=[1,0;
-         1,1;
-         2,0;
-         2,2];
+% toPoint=[1,0;1,1;2,0;2,2];
 
-% toPoint=[1,0];
+toPoint=[2,0];
 dth=pi/8;
 
 for ii =1:size(toPoint,1)

@@ -26,7 +26,7 @@ x1=0;
 xend=1;
 y1=0;
 yend=1;
-disc=0.02;
+disc=0.01;
 
 X_vec=x1+0.1:disc:xend-0.1;
 Y_vec=y1+0.1:disc:yend-0.1;
@@ -37,12 +37,6 @@ for ii=1:length(X_vec)
         x_ii=[x1;X_vec(ii);xend];
         y_jj=[y1;Y_vec(jj);yend];
         kappa_res(ii,jj)=objectiveFunction(x_ii,y_jj,initCOP);
-        plot(X(:,jj),kappa_res(:,jj))
-        drawnow
     end
 end
-% plot(X_vec,kappa_res)
-mesh(X,Y,kappa_res)
-% jj=23
-slice
-% plot(X(:,jj),kappa_res(:,jj))
+contour(X,Y,kappa_res)

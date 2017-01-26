@@ -5,17 +5,16 @@ clc
 %% Init
 % General parameters
 stateLatice=[];
-tic
 
-x1=0; y1=0; th1=-pi/2; Pstart=[x1,y1,th1]; % start sposition and orientation
-xend=0; yend=1; thend=-pi/2; Pend=[xend,yend,thend]; % end position and orientation
-n=4; % order of the bezier curve
-t=linspace(0,1,1001)'; % overall resolution of the solver
+x1=0; y1=0; th1=0; Pstart=[x1,y1,th1]; % start sposition and orientation
+xend=0; yend=2; thend=pi/2; Pend=[xend,yend,thend]; % end position and orientation
+n=5; % order of the bezier curve
+t=linspace(0,1,101)'; % overall resolution of the solver
 kappa_max=1.5;
 initCOP=struct('Pstart',Pstart,'Pend',Pend,'n',n,'t',t,'kappa_max',kappa_max);
 
-
 optPath=BezierCOP(initCOP);
+
 if ~isempty(optPath)
     stateLatice=[stateLatice; optPath];
     x=optPath.x;

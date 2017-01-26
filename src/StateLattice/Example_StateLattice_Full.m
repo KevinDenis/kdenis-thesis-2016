@@ -7,10 +7,10 @@ clc
 % General parameters
 stateLatice=[];
 x_max=2;
-dx=0.5;
+dx=1;
 X_vec=0:dx:x_max;
 Y_vec=X_vec;
-dth=pi/4;
+dth=pi/8;
 TH1_vec=-pi/2:dth:pi/2;
 THend_vec=TH1_vec;
 grid_TH1_X_Y_THend=getAllComb(TH1_vec,X_vec,Y_vec,THend_vec);
@@ -52,7 +52,7 @@ for ii=1/dx:2*x_max/dx
     end
     hold off
 
-    saveCurrentFigure
+%     saveCurrentFigure
     close gcf
 
 end
