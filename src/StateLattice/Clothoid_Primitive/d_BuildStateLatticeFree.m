@@ -6,18 +6,9 @@
 %                                                                         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-clearvars -except grid_XY LSLset StateLattice SL_W robotPose LabGrid
-% if ~exist('StateLattice', 'var')
-%     disp('loading StateLattice.mat')
-%     load('StateLattice.mat')
-% end
-close all
-clc
-addpath('ClothoidG1fitting');
-%#ok<*SAGROW,*UNRCH>
+initWorkspace
 
-dx=0.1;
-dth=pi/8;
+
 showPlot=true;
 
 % Import Image
@@ -70,12 +61,12 @@ for ii=1:n
        any(PathOccXY_ii(:,1)>LabGrid_R.XWorldLimits(2)) || ...
        any(PathOccXY_ii(:,2)<LabGrid_R.YWorldLimits(1)) || ...
        any(PathOccXY_ii(:,2)>LabGrid_R.YWorldLimits(2))
-       StateLattice(ii).free=false;
+       StateLattice(ii).free=false; %#ok<SAGROW> % False Positive, is it not growing ! 
     else
         if any(getOccupancy(LabGrid_R,PathOccXY_ii))
-            StateLattice(ii).free=false;
+            StateLattice(ii).free=false; %#ok<SAGROW> % False Positive, is it not growing ! 
         else
-            StateLattice(ii).free=true;
+            StateLattice(ii).free=true; %#ok<SAGROW> % False Positive, is it not growing ! 
         end
     end
 %     progressbar(ii/n)
@@ -103,7 +94,6 @@ if showPlot
     plotSimpleRobot(robotPose)
     l=legend('discrete grids','clothoids','circular arcs','reachable grids');
     set(l,'FontSize',12);
-    pause()
-    saveCurrentFigure
-    
+%     pause()
+%     saveCurrentFigure   
 end

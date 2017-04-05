@@ -3,29 +3,33 @@ function plotPath(Path)
 %   Detailed explanation goes here
 %   Notes :
 %   * quickly plots in one shot thanks to nan (could also be inf)
-%   * is pre-allocation really quicker in this 
 co=get(groot,'DefaultAxesColorOrder');
 
-[Path_k_cte,Path_k_notcte] = sortMotionPremPlot(Path,[],[]);
+[Path_Circ,Path_Cloth] = sortPathPlot(Path);
 
-X_k_cte=[];
-Y_k_cte=[];
-for ii=1:length(Path_k_cte)
-   X_k_cte=[X_k_cte;Path_k_cte(ii).X;nan];
-   Y_k_cte=[Y_k_cte;Path_k_cte(ii).Y;nan]; 
+X_Circ=zeros(1);
+Y_Circ=zeros(1);
+kk=0;
+for ii=1:length(Path_Circ)
+    kk=kk(end)+(1:(length(Path_Circ(ii).X)+1));
+    X_Circ(kk)=[Path_Circ(ii).X;nan];
+    Y_Circ(kk)=[Path_Circ(ii).Y;nan]; 
 end
 
-X_k_notcte=[];
-Y_k_notcte=[];
-for ii=1:length(Path_k_notcte)
-   X_k_notcte=[X_k_notcte;Path_k_notcte(ii).X;nan];
-   Y_k_notcte=[Y_k_notcte;Path_k_notcte(ii).Y;nan]; 
+
+X_Cloth=zeros(1);
+Y_Cloth=zeros(1);
+kk=0;
+for ii=1:length(Path_Cloth)
+    kk=kk(end)+(1:(length(Path_Cloth(ii).X)+1));
+    X_Cloth(kk)=[Path_Cloth(ii).X;nan];
+    Y_Cloth(kk)=[Path_Cloth(ii).Y;nan]; 
 end
 
 XY=unique([[Path.x0].',[Path.y0].';[Path.x1].',[Path.y1].'],'rows');
     
-plot(X_k_notcte,Y_k_notcte,'Color',co(1,:),'Linewidth',1);  
-plot(X_k_cte,Y_k_cte,'Color',co(2,:),'Linewidth',2);
+plot(X_Cloth,Y_Cloth,'Color',co(1,:),'Linewidth',1);  
+plot(X_Circ,Y_Circ,'Color',co(2,:),'Linewidth',2);
 plot(XY(:,1),XY(:,2),'k*')
 
 

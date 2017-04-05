@@ -1,16 +1,17 @@
-function [SL_Cleaned] = CleanupStateLattice(SL)
-%UNTITLED Summary of this function goes here
+function [Path_Cleaned] = CleanupStateLattice(Path)
+%[Path_Cleaned] = CleanupStateLattice(Path) Summary of this function goes here
 %   Detailed explanation goes here
 %   Note :
 %   * This relies on the fact that a cloth connection is max 2
 
 % check if there is not 2 times start end (impossible normaly)
-voxel=[[SL.x0].',[SL.y0].',[SL.th0].' [SL.x1].',[SL.y1].',[SL.th1].'];
+voxel=[[Path.x0].',[Path.y0].',[Path.th0].' [Path.x1].',[Path.y1].',[Path.th1].'];
 [~,idx,~]=unique(voxel,'rows');
-SL=SL(idx);
+Path=Path(idx);
 voxel=voxel(idx,:);
    
-toDelete=[];
+toDelete=zeros(1);
+nn=1;
 for ii=2:length(voxel)
     % gather all voxels before current voxel
     prevVoxelSet=voxel(1:ii-1,:); 
@@ -26,16 +27,17 @@ for ii=2:length(voxel)
         prevEndVoxels_start=prevStartVoxelSet(idxEndPrevVox,:);
         idxStartOldToStartNew=findVector(prevVoxelSet,[prevEndVoxels_start startVoxel_ii]);
         if ~isnan(idxStartOldToStartNew)
-            toDelete=[toDelete;ii];
+            toDelete(nn)=ii;
+            nn=nn+1;
         end
     end
 end
 
-SL_Cleaned=SL;
-SL_Cleaned(toDelete)=[];
+Path_Cleaned=Path;
+Path_Cleaned(toDelete)=[];
 
 % assign path ID, could this be faster ?
-for ii=1:length(SL_Cleaned)
-    SL_Cleaned(ii).ID=ii;
+for ii=1:length(Path_Cleaned)
+    Path_Cleaned(ii).ID=ii;
 end
 end

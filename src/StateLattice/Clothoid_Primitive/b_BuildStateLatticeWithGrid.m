@@ -9,8 +9,6 @@
 %                                                                         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%#ok<*NBRAK>
-
 %% Clean-up MATLAB
 initWorkspace
 
@@ -32,7 +30,7 @@ for ii=1:n
         LSLset_mod.y0=y1_ii;
         LSLset_mod.th0=th1_ii;
         [MotionPremRotTrans] = getMotionPremFromGrid(grid_XY,LSLset_mod);
-        kk=kk(end)+[1:length(MotionPremRotTrans)];
+        kk=kk(end)+(1:length(MotionPremRotTrans));
         StateLattice(kk)=MotionPremRotTrans;
     end
     % this is used for plotting example
@@ -40,7 +38,6 @@ for ii=1:n
         MotionPremKeep=MotionPremRotTrans;
     end
 end
-
 StateLattice=CleanupStateLattice(StateLattice);
 
 %% Plot Local State Lattice

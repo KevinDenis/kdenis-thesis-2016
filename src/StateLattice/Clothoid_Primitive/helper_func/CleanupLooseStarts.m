@@ -1,12 +1,12 @@
-function [SL_Cleaned] = CleanupLooseStarts(SL)
-%UNTITLED Summary of this function goes here
+function [Path_Cleaned] = CleanupLooseStarts(Path)
+%[Path_Cleaned] = CleanupLooseStarts(Path) Summary of this function goes here
 %   Detailed explanation goes here
 %   Note :
 %   * This relies on the fact that a cloth connection is max 2
 %   * This could be done _much_ faster, by not using end points and adding
 %   by bulk lone start points
-voxel=[[SL.x0].',[SL.y0].',[SL.th0].' [SL.x1].',[SL.y1].',[SL.th1].'];
 
+voxel=[[Path.x0].',[Path.y0].',[Path.th0].' [Path.x1].',[Path.y1].',[Path.th1].'];
 toDelete=zeros(1);
 nn=1;
 for ii=1:length(voxel)
@@ -18,8 +18,8 @@ for ii=1:length(voxel)
     end
 end
 
-SL_Cleaned=SL;
+Path_Cleaned=Path;
 if toDelete~=0
-    SL_Cleaned(toDelete)=[];
+    Path_Cleaned(toDelete)=[];
 end
 end

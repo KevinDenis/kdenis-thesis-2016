@@ -1,14 +1,16 @@
-clearvars -except grid_XY LSLset StateLattice SL_W ROI0 ROI1 idxIn0 idxIn1
-% if ~exist('StateLattice', 'var')
-%     load('StateLattice.mat');
-% end
-close all
-clc
-addpath('ClothoidG1fitting');
-%#ok<*SAGROW,*UNRCH>
+% Notes :
+%   * better to have a res 2x of the robot compared to the final grid
 
-% notes :
-% better to have a res 2x of the robot compared to the final grid
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                         %
+%                        State Latice Structure                           %
+%[ x0 y0 th0 x1 y1 th1 X Y TH k dk Ltot intK PathOccXY pathCost free ID ] %
+%                                                                         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%#ok<*UNRCH>
+
+initWorkspace
 
 showPlot=false;
 
@@ -59,7 +61,7 @@ XY_occ_shell=grid2world(robotShellGrid,[ii_occ_shell jj_occ_shell]);
 % show(PathOccGrid)
 
 if showPlot
-    figure(2)
+    figure(2) 
 else
     progressbar('Calculating Occupancy Grid of Local State Lattice')
 end
@@ -91,7 +93,7 @@ for nn=1:n
     jj_occ_Path=jj_all_Path(occval_Path==1);
     PathOccXY=grid2world(PathOccGrid,[ii_occ_Path jj_occ_Path]);
    
-    StateLattice(nn).PathOccXY=PathOccXY;
+    StateLattice(nn).PathOccXY=PathOccXY; %#ok<SAGROW> % False Positive, is it not growing ! 
         
     if showPlot
 %         if IsNear(MotionPrem(nn).th0,pi/2,1e-4) 

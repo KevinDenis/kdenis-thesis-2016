@@ -12,7 +12,7 @@
 
 initWorkspace
 
-showPlot=true;
+showPlot=false;
 
 % grid 1 : 0.1x0.1 --> 1.5m x 1.5m
 % grid 2 : 0.25x0.25 --> 2m
@@ -79,14 +79,16 @@ grid_XY=unique(grid_XY,'rows');
 grid_XY=[grid_XY(:,1) grid_XY(:,2); -grid_XY(:,1) grid_XY(:,2)];
 grid_XY=unique(grid_XY,'rows');
 
+ROI0=LSLset.ROI;
+idxIn0=inpolygon(grid_XY(:,1),grid_XY(:,2),ROI0(:,1),ROI0(:,2));
+
+ROI1=RotTransXY(ROI0,1.1781,1.5,1);
+idxIn1=inpolygon(grid_XY(:,1),grid_XY(:,2),ROI1(:,1),ROI1(:,2));
+
 if showPlot
     co=get(groot,'DefaultAxesColorOrder');
 
-    ROI0=LSLset.ROI;
-    idxIn0=inpolygon(grid_XY(:,1),grid_XY(:,2),ROI0(:,1),ROI0(:,2));
 
-    ROI1=RotTransXY(ROI0,1.1781,1.5,1);
-    idxIn1=inpolygon(grid_XY(:,1),grid_XY(:,2),ROI1(:,1),ROI1(:,2));
     
     figure()
     title('Multi-size grid')
@@ -96,7 +98,6 @@ if showPlot
     l=legend('discrete grids');set(l,'FontSize',12);
 %     pause()
 %     saveCurrentFigure
-    
     
     figure()
     title('Multi-size grid, with different robot poses')

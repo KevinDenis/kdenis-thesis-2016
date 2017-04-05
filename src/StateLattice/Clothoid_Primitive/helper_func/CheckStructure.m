@@ -1,30 +1,30 @@
-function CheckStructure(MotionStructure)
-%CHECKSTRUCTURE Summary of this function goes here
+function CheckStructure(Path)
+%CheckStructure(Path) Summary of this function goes here
 %   Detailed explanation goes here
 
-for ii=1:length(MotionStructure)
+for ii=1:length(Path)
     
-    if ~IsNear(MotionStructure(ii).X(1), MotionStructure(ii).x0,1e-3)
+    if ~IsNear(Path(ii).X(1), Path(ii).x0,1e-3)
         disp('error x0')
     end    
     
-    if ~IsNear(MotionStructure(ii).X(end), MotionStructure(ii).x1,1e-3)
+    if ~IsNear(Path(ii).X(end), Path(ii).x1,1e-3)
         disp('error x1')
     end 
     
-    if ~IsNear(MotionStructure(ii).Y(1), MotionStructure(ii).y0,1e-3)
+    if ~IsNear(Path(ii).Y(1), Path(ii).y0,1e-3)
         disp('error y0')
     end    
     
-    if ~IsNear(MotionStructure(ii).Y(end), MotionStructure(ii).y1,1e-3)
+    if ~IsNear(Path(ii).Y(end), Path(ii).y1,1e-3)
         disp('error y1')
     end
     
-    if ~IsNear(MotionStructure(ii).TH(1), MotionStructure(ii).th0,1e-3)
+    if ~IsNear(Path(ii).TH(1), Path(ii).th0,1e-3)
         disp('error th0')
     end    
     
-    if ~IsNear(MotionStructure(ii).TH(end), MotionStructure(ii).th1,1e-3)
+    if ~IsNear(Path(ii).TH(end), Path(ii).th1,1e-3)
         disp('error th1')
     end
     

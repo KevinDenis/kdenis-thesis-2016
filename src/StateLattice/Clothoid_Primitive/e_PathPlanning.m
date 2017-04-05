@@ -76,7 +76,7 @@ if showPlot
     hold off
     l1=legend('optimal path','visited nodes','robot');
     set(l1,'FontSize',12);
-    pause()
-    saveCurrentFigure
+%     pause()
+%     saveCurrentFigure
 end
 %}
