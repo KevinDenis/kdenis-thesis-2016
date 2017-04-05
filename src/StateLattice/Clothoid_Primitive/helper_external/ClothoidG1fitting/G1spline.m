@@ -23,7 +23,7 @@
 %                                                                             %
 %=============================================================================%
 function [theta,k,dk,L,nevalG1,nevalF,iter,Fvalue,Fgradnorm] = G1spline( PNTS, varargin )
-  global G1SPLINE_PNTS G1SPLINE_NBUILD_CLOTHOID;
+  global G1SPLINE_PNTS G1SPLINE_NBUILD_CLOTHOID G1SPLINE_NBUILD_CLOTHOID ;
   G1SPLINE_PNTS            = PNTS ;
   G1SPLINE_NBUILD_CLOTHOID = 0 ;
   %
@@ -60,7 +60,7 @@ end
 %
 %
 function RES = target( THETA )
-  global G1SPLINE_PNTS G1SPLINE_NBUILD_CLOTHOID;
+  global G1SPLINE_PNTS G1SPLINE_NBUILD_CLOTHOID G1SPLINE_NBUILD_CLOTHOID ;
   N   = length(THETA) ;
   k   = zeros(N-1,1) ;
   dk  = zeros(N-1,1) ;
