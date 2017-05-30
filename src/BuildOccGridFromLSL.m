@@ -5,7 +5,7 @@
 %                        (Path and Obstacle Based)                        %
 %                                                                         %
 % Overview :                                                              %
-% * First, the traditional "Path Based" Occupancy grid is calculated,     % 
+% * First, the traditional "Path Based" Occupancy grid is calculated,     %
 %   since this is the most logical way for generating an occupancy grid   %
 %   of each path, by letting the shape of the robot move over the paths   %
 %   calculated in the previous step.                                      %

@@ -18,6 +18,8 @@
 %                                                                         %
 %   * getLocalStateLatticeSettings : loads additional settings for the LSL%
 %                                                                         %
+%   * BuildMultiSizeGrid : creates a multi-size grid based on LSLsettings %
+%                                                                         %
 %   * BuildLSLWithClothoids : Build Local State Lattice based on clothoids%
 %                                                                         %
 %   * BuildLSLWithCircles : Build Local State Lattice based on circles    %
