@@ -1,37 +1,24 @@
-# Semi-Autonomous Mobile Robot Navigation in Populated Enviroments
-Master thesis of Kevin Denis, under supervision of Professor Bruyninckx and Professor Demeester, mentored by Johan Philips. 
+# Path planning algorithm for semi-autonomous mobile robots with fast and accurate collision checking
+Master thesis of Kevin Denis, under supervision of Professor Demeester and Professor Bruyninckx, mentored by Johan Philips. 
 
-## Doelstelling
-De doelstelling van deze masterproef is om een lokale padplanner te ontwikkelen die paden genereert in een dynamische omgeving
-De padplanner moet de dynamiek van zijn omgeving kunnen schatten om botsingsvrije pad op te kunnen stellen. 
-Deze complexe lokale paden bestaan uit derde en vierde orde Bézierkrommes. 
-Het voorgesteld algoritme is een uitbreiding van een al bestaande padplanner die enkel circulaire paden genereert.
-Deze schiet tekort in sommige situaties, b.v.b. wanneer de rolstoel naast een deur is. 
-Dit algoritme heeft als hoofddoel om toegepast te kunnen worden op een semi-autonome rolstoelen, welke bijkomende vereisten met zich meebrengt. 
-Er moet niet één mogelijk pad uit dit algoritme komen maar meerdere. 
-Dit, omdat deze gegenereerde paden als hypothesen gebruikt moeten worden voor de navigatie-intentie van de gebruiker. 
-Het algoritme moet snel werken, (doel : 5 Hz) zodat de gebruiker niet merkt dat er vertraging is tussen zijn commando en het uitvoeren daarvan.
-Uiteindelijk moet het algoritme op een multi-resolutie niveau werken, 
-deze moet op korte afstand de invloed van het draaien van het zwenkwiel in rekening brengen
-en de dynamische randvoorwaarden van van de rolstoel zelf (maximale versnelling/vertraging, maximale kromming van pad, enz.).
-
-## Objectieven (NL)
-1. Ontwerpen van een lokale padplanner gebaseerd op Bézierkromme, geformuleerd als een COP.
-2. Deze padplanner moet dynamische obstakels kunnen ontwijken.
-3. Deze padplanner moet de dynamische beperkingen van de rolstoel in rekening brengen.
-4. Deze padplanner moet snel genoeg uitgevoerd worden zodat de gebruiken geen last heeft van vertraging.
-
-
-## Objectives (EN)
-1. Develop a local path planner based on splines formulated as a constraint optimization problem
-2. This path planner should be able to include dynamic obstacle avoidance
-3. Take into account the dynamics of the wheelchair
-4. Fast enough so that the user doesn't feel the latency (goal : 5 Hz)
+## Goals
+The goal of this master thesis is to design a local path planner which generates collision-free paths in a fast and accurate way.
+This proposed method is a contribution to the Local Path Template developed by Prof. Demeester.
+The goal is to overcome one of the shortcomings of the current version, the difficulty to plan feasible paths in narrow opening, 
+due to the lack of flexibility of the employed curve geometry. 
+In its current design, only circular curves are used as basis for the trajectories.
+This thesis will expand the set of feasible motions by using a more complex curve geometry, 
+thereby offering a higher flexibility.
+By using a fixed set of trajectories, the occupancy grid of each path can be stored in a look-up table.
+The online phase will consist in matching obstacles in the environment with this look-up table, and adjust the length of each path to be collision-free.
+The case study for this Local Path Planner is Navigation Assistance of electrical powered wheelchair.
+To provide an improved assistance, the intention of the driver has to be evaluated.
+The collision-free paths will model the user intention.
 
 ## Git organization
 
 ### src (Source code)
-Here is all the source code used for this thesis.
+Here, all the source code used for this thesis is presented.
 
 ### adm (Administration)
 Here, all the administrative mather for this thesis is stored (e.g. logs, meeting rapport, etc.).
