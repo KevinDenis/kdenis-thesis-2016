@@ -64,15 +64,15 @@ for ll=1:length(x_sift_vec)
     x_shift=x_sift_vec(ll);
     y_shift=y_sift_vec(ll);
     for ii=kk
+        counter=counter+1;
+        PathOccXY_ii = GlobalStateLattice(ii).PathOccXY +  repmat([x_shift y_shift],1);
         GlobalStateLattice(ii).x0=GlobalStateLattice(ii).x0+x_shift;
         GlobalStateLattice(ii).y0=GlobalStateLattice(ii).y0+y_shift;
         GlobalStateLattice(ii).x1=GlobalStateLattice(ii).x1+x_shift;
         GlobalStateLattice(ii).y1=GlobalStateLattice(ii).y1+y_shift;
         GlobalStateLattice(ii).X=GlobalStateLattice(ii).X+x_shift;
         GlobalStateLattice(ii).Y=GlobalStateLattice(ii).Y+y_shift;
-        GlobalStateLattice(ii).PathOccXY(:,1)=GlobalStateLattice(ii).PathOccXY(:,1)+x_shift;
-        GlobalStateLattice(ii).PathOccXY(:,2)=GlobalStateLattice(ii).PathOccXY(:,2)+y_shift;
-        counter=counter+1;
+        GlobalStateLattice(ii).PathOccXY=PathOccXY_ii;
         GlobalStateLattice(ii).ID=counter;
         progressbar(counter/lengthGSL)
     end
@@ -80,8 +80,6 @@ for ll=1:length(x_sift_vec)
 end
 
 
-
-%{
 progressbar('Calculating Collision Free Paths')
 
 n=length(GlobalStateLattice);

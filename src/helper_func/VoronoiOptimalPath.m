@@ -85,7 +85,7 @@ dest_idx = findVector(xy_all,xy_dest);
 xy_opt_path = xy_all(path,:); % select all collums from choses indexes
 
 xy_opt_path=LinInterpToRes(xy_opt_path,0.01);
-xy_opt_path=KeepToRes(xy_opt_path,0.5);
+xy_opt_path=KeepToRes(xy_opt_path,1);
 xy_opt_path=unique(round(round(xy_opt_path/0.25)*0.25,2),'rows','stable');
 % % plot voronoi diagram optimal path
 figure(1)

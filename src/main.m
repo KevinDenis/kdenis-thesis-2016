@@ -75,9 +75,9 @@
 initWorkspace
 
 %% User settings
-usePrecomputedData = 1; % use precomputed data y/n --> 1/0
+usePrecomputedData = 0; % use precomputed data y/n --> 1/0
 saveCalculatedData = 0; % save calculated data y/n --> 1/0
-selectCurve        = 1; % Cloth = 1, Circular = 2, Bézier = 3; very slow calculation for Bézier Curve due to COP calculations ! % default use of precomputed data
+selectCurve        = 2; % Cloth = 1, Circular = 2, Bézier = 3; very slow calculation for Bézier Curve due to COP calculations ! % default use of precomputed data
 selectMap          = 1; % RobotLab_Elevator=1, RobotLab=2, RobotLab_ZoomEntrance=3, Elevator=4
 seeLPP             = 0; % simumate the plan recognition algorithm
 
@@ -109,7 +109,7 @@ if usePrecomputedData
     fprintf('... done \n');
 else
     LSLset=getLocalStateLatticeSettings();
-    [grid_XY,~,~,~,~]=BuildMultiGrid(LSLset);
+    [grid_XY,~,~,~,~]=BuildMultiSizeGrid(LSLset);
     disp(['calculating data for ',stringSelectedCurve{selectCurve}, ' curve']);
     switch selectCurve
         case 1 % use clothoid curve as motion primitive
