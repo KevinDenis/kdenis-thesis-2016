@@ -2,6 +2,7 @@
 %                                                                         %
 %                            Local Path Planning                          %
 %                            -------------------                          %
+
 %                                                                         %
 % Overview :                                                              %
 %   * This function will mimic the plan recognition algorithm.            %

@@ -4,21 +4,28 @@
 %                          --------------------                           %
 %                        (Path and Obstacle Based)                        %
 %                                                                         %
+% Calculates the occupancy of the wheelchair going over each set of paths %
+% of the Local State Lattice. This can take up to 5min.                   %
+% Path based lookup table will be converted to obstacle based lookup table%
+% occupancy grid (quite efficiently, ~10sec)                              % 
+%                                                                         %
 % Overview :                                                              %
-% * First, the traditional "Path Based" Occupancy grid is calculated,     %
-%   since this is the most logical way for generating an occupancy grid   %
-%   of each path, by letting the shape of the robot move over the paths   %
-%   calculated in the previous step.                                      %
-%   This part updates the State Latice Structure.                         %
-% * Secondly, the Obstacke Based Occupancy grid is generated using the    %
-%   previously calculated data.  A clever trick is used in order to       %
-%   generate his obstacle based occupancy grid in an efficient way.       %
-%   This saves a lot of computing time, compared to a naive search based  %
-%   method. Clever trick exmplained below, in "Obstacle Based Approach".  %
-%   This part of the code will create a new structure, ObstacleTable.     %
-%   A Matrix form of this structure will also be kept, XY_ObsTable        %
-%   ObstacleTable contains all paths where the robot occupies a certain   %
-%   x-y position and at what idx ("time") this happens.                   %
+%   * First, the traditional "Path Based" lookup table is calculated, by  %
+% letting the shape of the robot move over each paths and storing each    %
+% time a grid is visited for the first time along with the                %
+% "path Idx"/"time"/"length". This, to know what space the robot occupies %
+% atevery pose along the path                                             %
+% calculated in the previous step. This part updates the LSL Structure    %
+%                                                                         %
+%   * Secondly, the Obstacke Based Occupancy grid is generated using the  %
+% previously calculated data.  A clever trick is used in order to generate%
+% the obstacle based lookup table in an efficient way.                    %
+% Clever trick explained below, in "Obstacle Based Approach".             %
+% This part of the code will create a new structure, ObstacleTable.       %
+% A Matrix form of this structure will also be kept, XY_ObsTable          %
+% ObstacleTable contains all paths where the robot occupies a certain     %
+% certain cell, and at which position along that path ("time"/"idx')      %
+% this happens.                                                           %
 %                                                                         %
 % Kevin DENIS, KU Leuven, 2016-17                                         %
 % Master Thesis: Path planning algorithm for semi-autonomous              %

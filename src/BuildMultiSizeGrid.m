@@ -3,8 +3,10 @@
 %                           Build Multi Grid                              %
 %                           ----------------                              %
 %                                                                         %
+% Creates a multi-size grid based on LSLsettings (LSLset structure)       %
+%                                                                         %
 % Overview :                                                              %
-%   * Builds a multi size grid based on the LSLset structure              %
+%   * Builds a multi-size grid based on the LSLset structure              %
 %   * 3 grid sizes are used, fine close to the origin and coarse far away %
 %   * A end pose in the coarse grid represents thus a larger group of     %
 % possible end poses compared to the fine grid. This emphasizes the fact  %

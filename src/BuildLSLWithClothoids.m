@@ -4,7 +4,7 @@
 %             ---------------------------------------------------         %
 %                                                                         %
 % Overview :                                                              %
-%   * Discrete end poses defined by the multi size grid are connected with%
+%   * Discrete end poses defined by the multi-size grid are connected with%
 % a clothoid. If this clothoid is compliant with the constraints, it is   %
 % added to the Local State Lattice Structure containing all feasible paths%
 % starting from the robot actual position0.                               %
@@ -20,7 +20,7 @@
 %                           -----------------                             %
 % Code to generate clothoids is not written by Kevin DENIS, but originates%
 % from : https://github.com/ebertolazzi/G1fitting                         %
-% mex files for fast computation are pre-compiled for Linux and Windows   %
+% mex files for fast computations are pre-compiled for Linux and Windows  %
 %                                                                         %
 % Kevin DENIS, KU Leuven, 2016-17                                         %
 % Master Thesis: Path planning algorithm for semi-autonomous              %

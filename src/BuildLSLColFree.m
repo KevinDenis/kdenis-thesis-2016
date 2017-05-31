@@ -1,23 +1,29 @@
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%=========================================================================%
 %                                                                         %
 %                 Build Local State Lattice Collision Free                %
 %                 ----------------------------------------                %
+% Given a map of the environment and a user-selected robot pose, paths    %
+% lengths are adjusted to be collision-free. This is also plotted. If the %
+% user desires to check whether all plotted paths are collision free,     %
+% please uncomment plotRobotPath(LSL_W) at the bottom of the function, in %
+% the plotting section. This will plot the robot shape over all           %
+% collision-free paths.                                                   % 
 %                                                                         %
 % Overview :                                                              %
-%   * The user selects the start position of the robot followed by        %
-%     it's ordientation                                                   %
+%   *  The user selects the start position of the robot followed by its   %
+% orientation                                                             %
 %   * Given the user-selected map, and the user-selected robot pose, the  %
-%   map is translated in the robot coordinate frame {R}. This because the %
-%   Local Path Template / ObstacleTable / Local State Lattice is          %
-%   formulated according to this Local Reference Frame {R}, which asumes  %
-%   that the robot is at the orogin [0 0 0°].                             %
+% map is translated in the robot coordinate frame {R}. This because the   %
+% Local Path Template / ObstacleTable / Local State Lattice is formulated %
+% according to this Local Reference Frame {R}, which assumes that the     %
+% robotis at the orogin [0 0 0°].                                         %
 %   * Clossiion free trajectories are calculated efficiently and accuratly%
-%   by using the pre-cumputed obstacle table, which indicates for each    %
-%   dircrete grid which paths goes through it at which length. The online %
-%   fase only has to mach occupied cells with the obstacle table, and     %
-%   addjust each path length(only if this results in a smaller path       %
-%   * Once evevry path is update, the paths are translated in the World   %
-%   Coordinates {W} for a better readability for the user (LSL_W)         %
+% by using the pre-cumputed obstacle table, which indicates for each      %
+% discrete grid which paths goes through it at which length. The online   %
+% fase only has to mach occupied cells with the obstacle table, and       %
+% addjust each path length(only if this results in a smaller path         %
+%   * Once evevry path is updated, the paths are translated in the World  %
+% Coordinates {W} for a better readability for the user (LSL_W)           %
 %                                                                         %
 % Kevin DENIS, KU Leuven, 2016-17                                         %
 % Master Thesis: Path planning algorithm for semi-autonomous              %
