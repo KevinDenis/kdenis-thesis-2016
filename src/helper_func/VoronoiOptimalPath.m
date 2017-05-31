@@ -18,8 +18,7 @@
 %                                                                         %
 %=========================================================================%
 
-
-function xy_opt_path= VoronoiOptimalPath(xy_start, xy_dest)
+function xy_opt_path= VoronoiOptimalPath(xy_start, xy_dest,pathRes,maxNodeDist)
 load('XY_corners_CW.mat')
 obs=LinInterpToRes(XY_corners_CW,0.1);
 x_obs=obs(:,1);
@@ -68,10 +67,11 @@ xy_all = unique([vx(:) vy(:)], 'rows');
 dv = [vx(1,:); vy(1,:)] - [vx(2,:); vy(2,:)];
 edge_dist = sqrt(sum(dv.^2));
 
-xy_s = [vx(1,:).' vy(1,:).'];
-ii = findVector(xy_all,xy_s);
-xy_d = [vx(2,:).' vy(2,:).'];
-jj = findVector(xy_all,xy_d);
+xy_0 = [vx(1,:).' vy(1,:).'];
+xy_1 = [vx(2,:).' vy(2,:).'];
+
+[~,ii] = ismember(xy_0,xy_all,'rows');
+[~,jj] = ismember(xy_1,xy_all,'rows');
 
 G = sparse([ii jj],[jj ii],[edge_dist;edge_dist],length(xy_all),length(xy_all));
 
@@ -85,8 +85,8 @@ dest_idx = findVector(xy_all,xy_dest);
 xy_opt_path = xy_all(path,:); % select all collums from choses indexes
 
 xy_opt_path=LinInterpToRes(xy_opt_path,0.01);
-xy_opt_path=KeepToRes(xy_opt_path,1);
-xy_opt_path=unique(round(round(xy_opt_path/0.25)*0.25,2),'rows','stable');
+xy_opt_path=KeepToRes(xy_opt_path,maxNodeDist);
+xy_opt_path=unique(round(round(xy_opt_path/pathRes)*pathRes,2),'rows','stable');
 % % plot voronoi diagram optimal path
 figure(1)
 plot(x_obs,y_obs, 'k'); hold on;

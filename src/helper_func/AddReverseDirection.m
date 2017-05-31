@@ -16,6 +16,7 @@ for ii=1:n
     LSL_Rev(ii).X   =-LSL_Rev(ii).X;
     LSL_Rev(ii).TH  = wrap2Pi(-LSL_Rev(ii).TH);
     LSL_Rev(ii).ID  = ID_ii;
+    LSL_Rev(ii).pathCost=5*LSL_Rev(ii).pathCost;
 end
 LSL_FwdRev=[LSL_Fwd;LSL_Rev];
 end
