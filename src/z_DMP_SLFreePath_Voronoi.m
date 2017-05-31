@@ -30,7 +30,7 @@
 
 %% 2D planner
 initWorkspace
-load('SL_DMP.mat')
+load('LSL_DMP.mat')
 xy_start=[5.5 8];
 xy_end=[19.75 16.25];
 xyth_start = [xy_start pi/2];
@@ -79,6 +79,9 @@ for ll=1:length(x_sift_vec)
     kk=kk+length(StateLattice);
 end
 
+
+
+%{
 progressbar('Calculating Collision Free Paths')
 
 n=length(GlobalStateLattice);
