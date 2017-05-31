@@ -56,7 +56,7 @@ gridRes=0.02;
 %% Path based approach
 progressbar('Calculating Occupancy Grid [Path Based]')
 
-n=length(LSL);  maxSize=1;
+n=length(LSL);
 ObsTable=zeros(1,4);
 idxTable=0;
 for nn=1:n
