@@ -46,7 +46,7 @@
 %                                                                         %
 %=========================================================================%
 
-function [StateLattice,ObstacleTable,XY_ObsTable]=BuildOccGridFromLSL(StateLattice)
+function [LSL,ObstacleTable,XY_ObsTable]=BuildOccGridFromLSL(LSL)
 tic
 gridRes=0.02;
 % Get Occupancy Grid of Full and Shell Robot
@@ -56,15 +56,15 @@ gridRes=0.02;
 %% Path based approach
 progressbar('Calculating Occupancy Grid [Path Based]')
 
-n=length(StateLattice); 
+n=length(LSL);  maxSize=1;
 ObsTable=zeros(1,4);
 idxTable=0;
 for nn=1:n
 %     tic
-    X=StateLattice(nn).X;
-    Y=StateLattice(nn).Y;
-    TH=StateLattice(nn).TH;
-    PathOccXY=zeros(1,3);
+    X=LSL(nn).X;
+    Y=LSL(nn).Y;
+    TH=LSL(nn).TH;
+    PathOccXY=zeros(3e5,3);
     idxOccXY=0;
     for idxPath=1:1:length(X)
         if idxPath==1 % use full occ grid (just once)
@@ -79,16 +79,19 @@ for nn=1:n
         PathOccXY(idxOccXY,:)=[PathOccXY_kk repelem(idxPath,size(PathOccXY_kk,1),1)];
         
     end
+%     maxSize=max(size(PathOccXY,1),maxSize);
+    PathOccXY(idxOccXY+1:end,:)=[];
     [~,idxUnique,~] =unique(PathOccXY(:,1:2),'rows','stable'); % keep unique x-y set, but keep sorted by "time" (-stable option) (3rd colomn)
     PathOccXY=PathOccXY(idxUnique,:);
     
     idxTable=idxTable(end)+(1:size(PathOccXY,1));
     ObsTable(idxTable,[1 2 4 3])=[PathOccXY repelem(nn,length(idxTable),1)];   % [x y (path)ID blockedIdx]
     
-    StateLattice(nn).PathOccXY=PathOccXY;
+    LSL(nn).PathOccXY=PathOccXY;
     progressbar(nn/n)
 %     toc
 end
+disp(maxSize)
 disp(['Calculation of Path Based Occupancy Grid took ', num2str(toc,5),' sec'])
 
 %% Obstacle Based Approach
