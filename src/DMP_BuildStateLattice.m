@@ -32,6 +32,7 @@
 %% Statup
 initWorkspace
 load('LSLset_DMP.mat')
+% LSLset=getLocalStateLatticeSettings()
 grid_XY=BuildMultiSizeGrid(LSLset);
 showPlot=true;
 robotPose=[0 0 0];
@@ -65,8 +66,6 @@ for ii=1:n
     end
 end
 
-
-
 %% State Lattice Set by generating Motion Primitive at State Lattice Positions
 StateLattice_45deg=MotionPrem_45deg;
 n=length(MotionPrem_45deg);
@@ -85,8 +84,6 @@ for ii=1:n
     end
 end
 
-
-
 %% State Lattice Set by generating Motion Primitive at State Lattice Positions
 StateLattice_45degMin=MotionPrem_45degMin;
 n=length(MotionPrem_45degMin);
@@ -104,7 +101,6 @@ for ii=1:n
         StateLattice_45degMin(idxSL)=MotionPremRotTrans;
     end
 end
-
 
 StateLattice=[StateLattice_45degMin;StateLattice_0deg;StateLattice_45deg];
 

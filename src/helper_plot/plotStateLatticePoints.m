@@ -8,7 +8,7 @@ nn=1;
 for ii=1:length(grid_XY)
 x1_ii=grid_XY(ii,1);
 y1_ii=grid_XY(ii,2);
-if rem(x1_ii,LSLset.dxSL) == 0 && rem(y1_ii,LSLset.dxSL) == 0 && ~(x1_ii ==0 && y1_ii ==0)
+if rem(x1_ii,LSLset.dxEP) == 0 && rem(y1_ii,LSLset.dxEP) == 0 && ~(x1_ii ==0 && y1_ii ==0)
     gridSL_XY(nn,:)=grid_XY(ii,:);
     nn=nn+1;
 end

@@ -41,7 +41,6 @@
 
 
 %% Statup
-initWorkspace
 gridRes=0.02;
 
 %% Get Occupancy Grid of Full and Shell Robot

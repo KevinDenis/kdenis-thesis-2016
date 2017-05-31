@@ -31,7 +31,7 @@
 %% 2D planner
 initWorkspace
 pathRes = 0.25;
-maxNodeDist = 0.75;
+maxNodeDist = .5;
 load('LSL_DMP.mat')
 xy_start=[5.5 8];
 xy_end=[19.75 16.25];
@@ -40,7 +40,7 @@ xyth_end = [xy_end pi];
 voronoi_path= VoronoiOptimalPath(xy_start, xy_end,pathRes,maxNodeDist);
 [map,LabGridEdges,XY_occ_lab] = getMapEdgeXYOccFormBmp('RobotLabo_Lift_Black.bmp',0.02);
 LabGrid = map;
-
+map=LabGridEdges;
 %% State Lattice Creation on 2D paths & calculating free paths
 x_sift_vec=voronoi_path(:,1);
 y_sift_vec=voronoi_path(:,2);
@@ -157,7 +157,7 @@ OptPath=SL(optimal_edges);
 fprintf(' done ! (took %2.3f sec) \n',toc)
 % plot optimal path
     figure(1)
-    show(LabGrid)
+    show(LabGridEdges)
     title('Local Path Planning')
     hold on
     plotRobotPath(OptPath)
