@@ -1,20 +1,72 @@
+%=========================================================================%
+%                                                                         %
+%                       Interactive Tool : Path Viewer                    %
+%                       ------------------------------                    %
+%                                                                         %
+% WIP                                                                     %
+%                                                                         %
+% User settings :                                                         %
+%   * select curve geometry {[1],2,3} to select                           %
+%     {[Clothoid], Circular, Bézier}. (int value selectCurve)             %
+%   * see Robot Shape on paths y/n (bool value seeShape)                  %
+%                                                                         %
+% Overview :                                                              %
+%                                                                         %
+%   * WIP                                                                 %
+%                                                                         %
+% Kevin DENIS, KU Leuven, 2016-17                                         %
+% Master Thesis: Path planning algorithm for semi-autonomous              %
+%                mobile robots with fast and accurate collision checking  %
+%                                                                         %
+%=========================================================================%
+
 %% Init()
-% initWorkspace
-% load('SL_cloth.mat')
-robotPose=[0 0 0];
+initWorkspace
+
+%% User settings
+selectCurve = 1; % Cloth = 1, Circular = 2, Bézier = 3;
+seeShape    = 0; % y/n --> 1/0
+stringSelectedCurve={'clothoid';'circular';'bézier'};
+
+%% Main Program
+load('LSLset.mat') 
+load('grid_XY.mat')
+fprintf(['loading data for ',stringSelectedCurve{selectCurve}, ' curve']);
+switch selectCurve
+    case 1 % use clothoid curve as motion primitive
+        load('LSL_cloth.mat')
+        load('ObstacleTable_cloth.mat')
+        load('XY_ObsTable_cloth.mat') % matrix version of [ObstacleTable.X ObstacleTable.Y], used for faster search
+    case 2 % use circular arcs as motion primitive
+        load('LSL_circ.mat')
+        load('ObstacleTable_circ.mat')
+        load('XY_ObsTable_circ.mat') % matrix version of [ObstacleTable.X ObstacleTable.Y], used for faster search
+    case 3 % use Bézier Curve as motion primitive
+        load('LSL_bezier.mat');
+    otherwise
+        disp('Please use selectCurve = {[1],2,3} to select {Clothoid, Circular, Bézier} based Motion Primitive')
+        disp('default value 1 chosen')
+        load('LSL_cloth.mat')
+        load('ObstacleTable_cloth.mat')
+        load('XY_ObsTable_cloth.mat') % matrix version of [ObstacleTable.X ObstacleTable.Y], used for faster search
+end
+fprintf('... done \n');
+
+
 XY_ObsGrid=[];
 LSL=FreeAllPaths(LSL);
-UpdatePlot(XY_ObsGrid,LSL)
+UpdatePlot(XY_ObsGrid,LSL,seeShape)
 
 %% Main()
 while 1
     XY_ObsGrid=UpdateEnviroment(XY_ObsGrid);
     LSL=UpdateStateLattice(XY_ObsGrid,LSL,ObstacleTable,XY_ObsTable);
-    UpdatePlot(XY_ObsGrid,LSL)
+    UpdatePlot(XY_ObsGrid,LSL,seeShape)
 end
 
 %% Used Functions
 function StateLattice=UpdateStateLattice(XY_ObsGrid,StateLattice,ObstacleTable,XY_Table)
+tic
 stringaffected=[];
 xy_obs_end=XY_ObsGrid(end,:);
 idxRow=findrow_mex(XY_Table,xy_obs_end);
@@ -32,6 +84,7 @@ if ~isnan(idxRow)
     disp(dispText)
 end
 StateLattice=CleanupLooseStarts(StateLattice);
+disp(['Adjustment of paths length to generate collision-free trajectories took ', num2str(toc,5),' sec'])
 end
 
 function XY_ObsGrid=UpdateEnviroment(XY_ObsGrid)
@@ -42,7 +95,7 @@ y_obs=round(round(y_obs/dx)*dx,2);
 XY_ObsGrid=[XY_ObsGrid;x_obs y_obs];
 end
 
-function UpdatePlot(XY_ObsGrid,StateLattice)
+function UpdatePlot(XY_ObsGrid,StateLattice,seeShape)
 SL_Plot=StateLattice;
 for ii=1:length(StateLattice)
     if ~SL_Plot(ii).free
@@ -62,7 +115,7 @@ xlabel('x [m]')
 ylabel('y [m]')
 
 plotPath(SL_Plot)
-plotRobotPath(SL_Plot)
+if seeShape; plotRobotPath(SL_Plot); end
 if ~isempty(XY_ObsGrid); plot(XY_ObsGrid(:,1),XY_ObsGrid(:,2),'r*','LineWidth',5); end
 axis equal
 axis([-6 6 -4 4])
