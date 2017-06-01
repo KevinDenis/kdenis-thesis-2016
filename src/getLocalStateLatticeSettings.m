@@ -59,18 +59,7 @@ LSLset.y3_max=3;
 
 % Other test settings used for the discrete motion planning example
 %{
-LSLset.xmax=2;
-LSLset.ymax=1;
-LSLset.dth=pi/4;
-LSLset.dx1=0.25;
-LSLset.x1_max=0.5;
 
-LSLset.dx2=0.25;
-LSLset.x2_max=1;
-
-LSLset.dx3=0.25;
-LSLset.x3_max=2;
-LSLset.y3_max=2;
 %}
 
 

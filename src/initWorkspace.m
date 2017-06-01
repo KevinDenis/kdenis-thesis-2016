@@ -1,4 +1,4 @@
-clearvars -except grid_XY XY_ObsTable LSLset LSL LSL_W ROI0 ROI1 idxIn0 idxIn1 robotPose LabGrid ObstacleTable XY_occ_lab_R path
+clearvars -except grid_XY XY_ObsTable LSLset LSL LSL_W ROI0 ROI1 idxIn0 idxIn1 robotPose LabGrid ObstacleTable XY_occ_lab_R path StateLattice
 close all
 clc
 addpath('helper_external');

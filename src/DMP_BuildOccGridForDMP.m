@@ -1,44 +1,24 @@
 %=========================================================================%
 %                                                                         %
-%                          Build Occupancy Grid                           %
-%                          --------------------                           %
-%                        (Path and Obstacle Based)                        %
+%              Application of LPT on Discrete Motion Planning             %
+%              ----------------------------------------------             %
+%                       Part 2. Build Occupancy Grid                      %
 %                                                                         %
 % Overview :                                                              %
-% * First, the traditional "Path Based" Occupancy grid is calculated,     % 
-%   since this is the most logical way for generating an occupancy grid   %
-%   of each path, by letting the shape of the robot move over the paths   %
-%   calculated in the previous step.                                      %
-%   This part updates the State Latice Structure.                         %
-% * Secondly, the Obstacke Based Occupancy grid is generated using the    %
-%   previously calculated data.  A clever trick is used in order to       %
-%   generate his obstacle based occupancy grid in an efficient way.       %
-%   This saves a lot of computing time, compared to a naive search based  %
-%   method. Clever trick exmplained below, in "Obstacle Based Approach".  %
-%   This part of the code will create a new structure, ObstacleTable.     %
-%   A Matrix form of this structure will also be kept, XY_ObsTable        %
-%   ObstacleTable contains all paths where the robot occupies a certain   %
-%   x-y position and at what idx ("time") this happens.                   %
+%   * This code differces from BuildOccGridFromLSL because here paths     %
+% length are not adjusted if they cause a collision, their are simply     %
+% removed from the set (marked as blocked on the online-phase).           %
+%   * This makes the creation of the StateLattice Structure simpler, since%
+% calculating at which time/length/idx a certain cel is visited for the   %
+% first time is not nececeaaru anymore. Just knowing which cells are      %
+% occupied by taking a certain path is needed.                            %
+%   * This updates the State Latice Structure.                            %
 %                                                                         %
 % Kevin DENIS, KU Leuven, 2016-17                                         %
 % Master Thesis: Path planning algorithm for semi-autonomous              %
 %                mobile robots with fast and accurate collision checking  % 
 %                                                                         %
 %=========================================================================%
-
-%=========================================================================%
-%                                                                         %
-%                        State Latice Structure                           %
-%                        ----------------------                           %
-%             [ x0 y0 th0 x1 y1 th1 X Y TH S K k dk Ltot                  %
-%              intK PathOccXY pathCost free idxBlocked ID]                %
-%                                                                         %
-%                        Obstacle Table Structure                         %
-%                        ------------------------                         %
-%                     [ x y (path)ID (path) blockedIdx]                   %
-%                                                                         %
-%=========================================================================%
-
 
 %% Statup
 gridRes=0.02;
@@ -56,8 +36,7 @@ PathOccGrid=copy(PathOccGridEmpty);
 ii_all_Path=ii_PathOccGrid(:);
 jj_all_Path=jj_Path(:);
 %% Path based approach
-progressbar('Calculating Occupancy Grid [Path Based]')
-
+progressbar('Calculating Occupancy Grid')
 
 n=length(StateLattice); 
 tic
@@ -72,9 +51,7 @@ for nn=1:n
         else % use shell grid (for the rest, faster ! but be sure that fine enough movement)
             XY_occ_kk=XY_occ_shell;
         end
-        
         XY_occ_rot_trans=RotTransXY(XY_occ_kk ,TH(idxPath),X(idxPath),Y(idxPath));
-
         setOccupancy(PathOccGrid,XY_occ_rot_trans,ones(size(XY_occ_rot_trans,1),1))
     end
 
@@ -82,7 +59,6 @@ for nn=1:n
     ii_occ_Path=ii_all_Path(occval_Path==1);
     jj_occ_Path=jj_all_Path(occval_Path==1);
     PathOccXY=sortrows(grid2world(PathOccGrid,[ii_occ_Path jj_occ_Path]));
-
 %     PathOccXY=unique(PathOccXY,'rows'); 
     StateLattice(nn).PathOccXY=PathOccXY; %#ok<SAGROW> % False Positive, is it not growing !
     progressbar(nn/n)

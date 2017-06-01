@@ -1,7 +1,8 @@
 %=========================================================================%
 %                                                                         %
-%                    Build State Lattice With Grid                        %
-%                    -----------------------------                        %
+%              Application of LPT on Discrete Motion Planning             %
+%              ----------------------------------------------             %
+%                       Part 1. Create State Lattice                      %
 %                                                                         %
 %                                                                         %
 % Overview :                                                              %
@@ -15,24 +16,26 @@
 %                                                                         %
 %=========================================================================%
 
-%=========================================================================%
-%                                                                         %
-%                        State Latice Structure                           %
-%                        ----------------------                           %
-%             [ x0 y0 th0 x1 y1 th1 X Y TH S K k dk Ltot                  %
-%              intK PathOccXY pathCost free idxBlocked ID]                %
-%                                                                         %
-%                        Obstacle Table Structure                         %
-%                        ------------------------                         %
-%                     [ x y (path)ID (path) blockedIdx]                   %
-%                                                                         %
-%=========================================================================%
-
-
 %% Statup
 initWorkspace
-load('LSLset_DMP.mat')
-% LSLset=getLocalStateLatticeSettings()
+LSLset=getLocalStateLatticeSettings();
+
+LSLset.xmax=2;
+LSLset.ymax=1;
+LSLset.dth = pi/4;
+LSLset.dx1=0.25;
+LSLset.x1_max=0.5;
+
+LSLset.dx2=0.25;
+LSLset.x2_max=1;
+
+LSLset.dx3=0.25;
+LSLset.x3_max=2;
+LSLset.y3_max=2;
+
+res=LSLset.res;
+LSLset.ROI=[res LSLset.ymax; LSLset.xmax LSLset.ymax; LSLset.xmax -LSLset.ymax;res -LSLset.ymax;res LSLset.ymax];
+
 grid_XY=BuildMultiSizeGrid(LSLset);
 showPlot=true;
 robotPose=[0 0 0];
@@ -133,8 +136,7 @@ if showPlot
     plotGrid(grid_XY,robotPose)
     plotPath(StateLattice)
     plotSimpleRobot(robotPose)
-    plotStateLatticePoints(MotionPrem_0deg,LSLset)
-    l=legend('Discrete grids','Clothoids','Circular arcs, straight lines','Reachable grids','Robot pose','State Lattice Positions','Location','SE');
+    l=legend('Discrete grids','Clothoids','Robot pose','Location','SE');
     set(l,'FontSize',16);
     set(gca,'FontSize',14)
 end
