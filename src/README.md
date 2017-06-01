@@ -1,6 +1,15 @@
 ﻿# Source Code
 this file contains the comments of the main files which gives an overview of the developed local path planner.
 
+## Directory Organisation
+* ROOT : containts all the most important scripts and functions. (except every file named "klad")
+* data_img : containts all the used maps and robot's footprint / geometry.
+* data_mat : containts all the precomputed data (paths and corresponding lookup tables) for fast use of the local path planner in the "main" example. Also for the plot scripts.
+* helper_external : contraints all the files which are *NOT* written by K.DENIS, but found on the web (mostly matlab file exchange https://nl.mathworks.com/matlabcentral/fileexchange/ or stackoverflow https://stackoverflow.com/questions/tagged/matlab)
+* helper_func : contraints all the sub-functions needed for the main functions from the root.
+* helper_plot : contraints all functions needed for plotting scripts
+* scripts_plot : contraints all the scripts which were used to create figures
+
 ## main.m
 This file builds the local path template using a Local State Lattice and an obstacle based look-up table for a fast obstacle checking.
 Several plots are shown to the user to evaluate and to inspect the obtained trajectories.
