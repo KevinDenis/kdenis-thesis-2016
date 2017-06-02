@@ -44,41 +44,33 @@ vy_end=vy(2,:);
 vx(:,~in)=[];
 vy(:,~in)=[];
 
-
 % add starting point and find closest Voronoi Node
 vx_all = vx(:);
 vy_all = vy(:);
-
-dr = kron(ones(length(vx_all),1),xy_start) - [vx_all vy_all];
-[~, min_id] = min(sum(dr.^2,2));
-
-vx = [vx [xy_start(1); vx_all(min_id)]];
-vy = [vy [xy_start(2); vy_all(min_id)]];
+dr = DNorm2([vx_all vy_all]-repmat(xy_start,size(vx_all)),2); % distance start node to all other nodes
+[~, idx_start] = min(dr); % pick closest node to start node
+vx = [vx [xy_start(1); vx_all(idx_start)]]; % make an edge going from start node to closest node
+vy = [vy [xy_start(2); vy_all(idx_start)]]; % make an edge going from start node to closest node
 
 % add destination point and find closest Voronoi Node
-dr = kron(ones(length(vx_all),1),xy_dest) - [vx_all vy_all];
-[~, min_id] = min(sum(dr.^2,2));
-
-vx = [vx [xy_dest(1); vx_all(min_id)]];
-vy = [vy [xy_dest(2); vy_all(min_id)]];
+dr = DNorm2( [vx_all vy_all] - repmat(xy_dest,size(vx_all)),2); % distance end node to all other nodes
+[~, idx_end] = min(dr); % pick closest node to end node
+vx = [vx [xy_dest(1); vx_all(idx_end)]]; % make an edge going from closest node to end nodes
+vy = [vy [xy_dest(2); vy_all(idx_end)]]; % make an edge going from closest node to end nodes
 
 % construct of graph
 xy_all = unique([vx(:) vy(:)], 'rows');
 dv = [vx(1,:); vy(1,:)] - [vx(2,:); vy(2,:)];
-edge_dist = sqrt(sum(dv.^2));
-
+path_cost = sqrt(sum(dv.^2)); % path cost = dist. Remeted twice because start --> end == end --> start cost (see further)
 xy_0 = [vx(1,:).' vy(1,:).'];
 xy_1 = [vx(2,:).' vy(2,:).'];
-
 [~,ii] = ismember(xy_0,xy_all,'rows');
 [~,jj] = ismember(xy_1,xy_all,'rows');
-
-G = sparse([ii jj],[jj ii],[edge_dist;edge_dist],length(xy_all),length(xy_all));
+G = sparse([ii jj],[jj ii],[path_cost;path_cost],length(xy_all),length(xy_all));
 
 % starting index and destination index
-st_idx = findVector(xy_all,xy_start);
-
-dest_idx = findVector(xy_all,xy_dest);
+st_idx = findrow_mex(xy_all,xy_start);
+dest_idx = findrow_mex(xy_all,xy_dest);
 
 % Dijkstra's algoritm to find shortes path
 [~,path,~] = graphshortestpath(G,st_idx,dest_idx);
