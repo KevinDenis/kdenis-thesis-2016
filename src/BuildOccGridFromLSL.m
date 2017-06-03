@@ -47,6 +47,7 @@
 %=========================================================================%
 
 function [LSL,ObstacleTable,XY_ObsTable]=BuildOccGridFromLSL(LSL)
+
 tic
 gridRes=0.02;
 % Get Occupancy Grid of Full and Shell Robot
@@ -54,7 +55,7 @@ gridRes=0.02;
 [XY_occ_shell]= getOccXYFromBmpRobot('RobotShell_1cm.bmp',gridRes/2);
 
 %% Path based approach
-progressbar('Calculating Occupancy Grid [Path Based]')
+progressbar('Calculating Lookup Table [Path Based]')
 
 n=length(LSL);
 ObsTable=zeros(1,4);
@@ -94,7 +95,7 @@ end
 disp(maxSize)
 disp(['Calculation of Path Based Occupancy Grid took ', num2str(toc,5),' sec'])
 
-%% Obstacle Based Approach
+%% Obstacle Based Lookup-table
 tic
 XY_ObsTable=ObsTable(:,1:2);
 [XY_ObsTable_S,IdxSorted]=sortrows(XY_ObsTable); % sorted is needed for the loop (see later)
@@ -120,7 +121,7 @@ ObsTable_S=ObsTable(IdxSorted,:);
 n=length(idxUnique); 
 ObstacleTable(1,1)=struct('x',[],'y',[],'ID',[],'Idx',[]); % Empty clean ObstacleTable, since it is not cleaned by initWorkspace
 ObstacleTable(1:n,1)=struct('x',[],'y',[],'ID',[],'Idx',[]);
-progressbar('Calculating Occupancy Grid [Obstacle Based]')
+progressbar('Calculating Lookup Table [Obstacle Based]')
 for ii=1:n
     ObstacleTable(ii).x=XY_ObsTable_U(ii,1);
     ObstacleTable(ii).y=XY_ObsTable_U(ii,2);
@@ -138,4 +139,6 @@ for ii=1:n
     progressbar(ii/n)
 end
 XY_ObsTable = XY_ObsTable_U; % Keep XY_ObsTable to perform fast matrix searches. It has the same x y idx pair as ObstacleTable (very important !)
-disp(['Calculation of Obstacle Based Occupancy Grid took ', num2str(toc,5),' sec'])
+disp(['Rearranging Path Based Lookup Table To Obstacle Based Lookup-table took ', num2str(toc,5),' sec'])
+
+end
