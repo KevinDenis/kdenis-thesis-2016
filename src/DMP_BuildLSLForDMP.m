@@ -16,34 +16,13 @@
 %                                                                         %
 %=========================================================================%
 
-%% Statup
-initWorkspace
-LSLset=getLocalStateLatticeSettings();
-
-LSLset.xmax=2;
-LSLset.ymax=1;
-LSLset.dth = pi/4;
-LSLset.dx1=0.25;
-LSLset.x1_max=0.5;
-
-LSLset.dx2=0.25;
-LSLset.x2_max=1;
-
-LSLset.dx3=0.25;
-LSLset.x3_max=2;
-LSLset.y3_max=2;
-
-res=LSLset.res;
-LSLset.ROI=[res LSLset.ymax; LSLset.xmax LSLset.ymax; LSLset.xmax -LSLset.ymax;res -LSLset.ymax;res LSLset.ymax];
-
+function StateLattice=DMP_BuildLSLForDMP(LSLset,showPlot)
 grid_XY=BuildMultiSizeGrid(LSLset);
-showPlot=true;
 robotPose=[0 0 0];
 LSLset_mod=LSLset;
-
 dth_rot=pi/4;
 
-%% Motion Primitive from [0 0 0]
+% Motion Primitive from [0 0 0]
 [MotionPrem_0deg] = getClothoidFromGrid(grid_XY,LSLset);
 LSLset_mod.th0=pi/4;
 MotionPrem_45deg=getClothoidFromGrid(grid_XY,LSLset_mod);
@@ -51,7 +30,7 @@ LSLset_mod.th0=-pi/4;
 MotionPrem_45degMin=getClothoidFromGrid(grid_XY,LSLset_mod);
 
 
-%% State Lattice Set by generating Motion Primitive at State Lattice Positions
+% State Lattice Set by generating Motion Primitive at State Lattice Positions
 StateLattice_0deg=MotionPrem_0deg;
 n=length(MotionPrem_0deg);
 idxSL=n;
@@ -69,7 +48,7 @@ for ii=1:n
     end
 end
 
-%% State Lattice Set by generating Motion Primitive at State Lattice Positions
+% State Lattice Set by generating Motion Primitive at State Lattice Positions
 StateLattice_45deg=MotionPrem_45deg;
 n=length(MotionPrem_45deg);
 idxSL=n;
@@ -87,7 +66,7 @@ for ii=1:n
     end
 end
 
-%% State Lattice Set by generating Motion Primitive at State Lattice Positions
+% State Lattice Set by generating Motion Primitive at State Lattice Positions
 StateLattice_45degMin=MotionPrem_45degMin;
 n=length(MotionPrem_45degMin);
 idxSL=n;
