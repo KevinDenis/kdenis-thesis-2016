@@ -44,14 +44,22 @@ for ii=2:size(vertices,1)
     end
 end
 
-Path_Cleaned=Path;
-if (toDelete(1) ~= 0); Path_Cleaned(toDelete)=[]; end
+if (toDelete(1) ~= 0); Path(toDelete)=[]; end
+
+vertices=[[Path.x0].',[Path.y0].',[Path.th0].' [Path.x1].',[Path.y1].',[Path.th1].'];
+toDelete = all(vertices(:,1:3) == vertices(:,4:6),2);
+Path(toDelete)=[];
 
 % assign unique path ID
+Path_Cleaned=Path;
 for ii=1:length(Path_Cleaned)
     Path_Cleaned(ii).ID=ii;
 end
+
 end
+
+
+
 
 %% NOT IMPLEMENTED JET
 function keepLongestPaths()
