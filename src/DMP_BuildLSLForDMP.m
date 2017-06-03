@@ -17,6 +17,7 @@
 %=========================================================================%
 
 function StateLattice=DMP_BuildLSLForDMP(LSLset,showPlot)
+showPlot=true;
 grid_XY=BuildMultiSizeGrid(LSLset);
 robotPose=[0 0 0];
 LSLset_mod=LSLset;
@@ -105,7 +106,7 @@ StateLattice = FreeAllPaths(StateLattice);
 
 %% Plot
 if showPlot
-    figure()
+    figure(1)
     title('')
     hold on
     grid on

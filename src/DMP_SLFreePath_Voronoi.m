@@ -25,19 +25,37 @@
 %                                                                         %
 %=========================================================================%
 
-initWorkspace
+function DMP_SLFreePath_Voronoi(LSL,defaultStartEnd)
 
 %% 2D planner
 pathRes = 0.25;
 maxNodeDist = 0.5;
+[map,LabGridEdges,~] = getMapEdgeXYOccFormBmp('RobotLabo_Lift_Black.bmp',0.02);
 % load('LSL_DMP.mat')
-xy_start=[5.5 8];
-xy_end=[19.75 16.25];
-xyth_start = [xy_start pi/2];
-xyth_end = [xy_end pi];
+
+if defaultStartEnd
+    xy_start=[5.5 8];
+    xy_end=[19.75 16.25];
+    xyth_start = [xy_start pi/2];
+    xyth_end = [xy_end pi];
+else
+    % WIP
+    figureFullScreen()
+    hold on
+    show(LabGrid)
+    title('Select begin position (1st click) and orientation (2nd click)')
+    set(gca,'FontSize',14)
+    set(gca, 'box', 'off')
+    [xStart,yStart]=ginput(1);
+    scatter(xStart,yStart,'*r')
+    [xOrient,yOrient]=ginput(1);
+    plot([xStart xOrient],[yStart yOrient],'*-r')
+    thStart=atan2(yOrient-yStart,xOrient-xStart);
+    robotPose=[xStart yStart thStart];
+    disp(['Use defined robot pose : [', num2str(robotPose(1),3),' ',num2str(robotPose(2),3),' ',num2str(robotPose(3)*180/pi,3),'°]' ])
+    close all   
+end
 voronoi_path= VoronoiOptimalPath(xy_start, xy_end,pathRes,maxNodeDist);
-[map,LabGridEdges,XY_occ_lab] = getMapEdgeXYOccFormBmp('RobotLabo_Lift_Black.bmp',0.02);
-LabGrid = map;
 
 %% State Lattice Creation on 2D paths & calculating free paths
 x_sift_vec=voronoi_path(:,1);
@@ -131,7 +149,7 @@ st_idx   = findrow_mex(xyth_all,xyth_start); % fast single row search
 dest_idx = findrow_mex(xyth_all,xyth_end); % fast single row search
 
 % Dijkstra's algorithm to find shortes path
-[dist,opt_vertices,pred]=graphshortestpath(G,st_idx,dest_idx);
+[~,opt_vertices,~]=graphshortestpath(G,st_idx,dest_idx);
 xyth_opt_vertices = xyth_all(opt_vertices,:);
 xyth_opt_vertices_01 = [xyth_opt_vertices(1:end-1,:) xyth_opt_vertices(2:end,:)];
 [~,idx_optimal_edges] =  ismember(xyth_opt_vertices_01,xyth_01,'rows');

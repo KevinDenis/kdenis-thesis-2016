@@ -20,30 +20,30 @@
 %                                                                         %
 %=========================================================================%
 
-%% Statup
+function LSL=DMP_BuildOccGridForDMP(LSL)
+
 gridRes=0.02;
 
-%% Get Occupancy Grid of Full and Shell Robot
-% Import Data from bitmap picture
+% Get Occupancy Grid of Full and Shell Robot Import Data from bitmap picture
 [XY_occ_full] = getOccXYFromBmpRobot('RobotFull_1cm.bmp',gridRes/2);
 [XY_occ_shell]= getOccXYFromBmpRobot('RobotShell_1cm.bmp',gridRes/2);
 
-%% Create empty pathh occ grid
+% Create empty pathh occ grid
 PathOccGridEmpty=robotics.BinaryOccupancyGrid(12,12,1/gridRes);
 PathOccGridEmpty.GridLocationInWorld=[-6-gridRes/2 -6-gridRes/2];
 PathOccGrid=copy(PathOccGridEmpty);
 [ii_PathOccGrid,jj_Path]=meshgrid(1:PathOccGrid.GridSize(1),1:PathOccGrid.GridSize(2));
 ii_all_Path=ii_PathOccGrid(:);
 jj_all_Path=jj_Path(:);
-%% Path based approach
-progressbar('Calculating Occupancy Grid')
 
-n=length(StateLattice); 
+% Moving the robot's footprint over each path
+progressbar('Calculating Occupancy Grid')
+n=length(LSL); 
 tic
 for nn=1:n
-    X=StateLattice(nn).X;
-    Y=StateLattice(nn).Y;
-    TH=StateLattice(nn).TH;
+    X=LSL(nn).X;
+    Y=LSL(nn).Y;
+    TH=LSL(nn).TH;
     PathOccGrid=copy(PathOccGridEmpty); % just assigning doesn't work
     for idxPath=1:1:length(X)
         if idxPath==1 % use full occ grid (just once)
@@ -54,13 +54,12 @@ for nn=1:n
         XY_occ_rot_trans=RotTransXY(XY_occ_kk ,TH(idxPath),X(idxPath),Y(idxPath));
         setOccupancy(PathOccGrid,XY_occ_rot_trans,ones(size(XY_occ_rot_trans,1),1))
     end
-
     occval_Path =getOccupancy(PathOccGrid,[ii_all_Path jj_all_Path], 'grid');
     ii_occ_Path=ii_all_Path(occval_Path==1);
     jj_occ_Path=jj_all_Path(occval_Path==1);
     PathOccXY=sortrows(grid2world(PathOccGrid,[ii_occ_Path jj_occ_Path]));
-%     PathOccXY=unique(PathOccXY,'rows'); 
-    StateLattice(nn).PathOccXY=PathOccXY; %#ok<SAGROW> % False Positive, is it not growing !
+    LSL(nn).PathOccXY=PathOccXY;
     progressbar(nn/n)
 end
 toc
+end
