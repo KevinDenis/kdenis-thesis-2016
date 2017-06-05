@@ -55,14 +55,6 @@ LSLset.dx3=0.5;
 LSLset.x3_max=4;
 LSLset.y3_max=3;
 
-
-
-% Other test settings used for the discrete motion planning example
-%{
-
-%}
-
-
 LSLset.dxEP=0.5;
 LSLset.ROI=[res LSLset.ymax; LSLset.xmax LSLset.ymax; LSLset.xmax -LSLset.ymax;res -LSLset.ymax;res LSLset.ymax];
 end
