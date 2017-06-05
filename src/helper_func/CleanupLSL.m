@@ -109,8 +109,8 @@ end
 toc
 end
 
-function StateLattice=removeTurnOnTheSpot(StateLattice)
-vertices=[[StateLattice.x0].',[StateLattice.y0].',[StateLattice.x1].',[StateLattice.y1].'];
+function LSL=removeTurnOnTheSpot(LSL)
+vertices = getStartEndVerticesPath(LSL);
 idx=ismember(vertices,[0 0 0 0],'rows');
-StateLattice(idx)=[];
+LSL(idx)=[];
 end

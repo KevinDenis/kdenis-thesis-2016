@@ -9,7 +9,7 @@ load('LSL_cloth.mat')
 [XY_occ_full] = getOccXYFromBmpRobot('RobotFull_1cm.bmp',gridRes/2);
 [XY_occ_shell]= getOccXYFromBmpRobot('RobotShell_1cm.bmp',gridRes/2);
 
-vertices=[[LSL.x0].',[LSL.y0].',[LSL.th0].',[LSL.x1].',[LSL.y1].',[LSL.th1].'];
+vertices = getStartEndVerticesPath(LSL);
 
 poseStart=[0 0 0];
 poseEnd=[0.5 0.1 pi/8];
@@ -58,8 +58,6 @@ saveCurrentFigure('OGRobotStart');
 pause()
 saveCurrentFigure('OGRobotStart');
 close all
-
-
 
 fig=figureFullScreen(1);
 fig.Renderer='Painters';

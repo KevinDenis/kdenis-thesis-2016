@@ -54,8 +54,7 @@ set(gca, 'box', 'off')
 
 [x_path,y_path]=ginput(1);
 goalIdx=getIdxClossestPath(LSL_W,x_path,y_path);
-
-vertices = [[LSL_W.x0].', [LSL_W.y0].',[LSL_W.th0].',[LSL_W.x1].',[LSL_W.y1].',[LSL_W.th1].'];
+vertices = getStartEndVerticesPath(LSL_W);
 if ~IsNear(vertices(goalIdx,1:3),robotPose,1e-3)
     idxStart=findrow_mex(vertices(:,4:6),vertices(goalIdx,1:3));
     goalIdx=[idxStart;goalIdx];

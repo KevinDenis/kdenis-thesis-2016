@@ -3,8 +3,7 @@ function [Path] = CleanupLooseStarts(Path)
 %   Detailed explanation goes here
 %   Note :
 %   * This relies on the fact that a cloth connection is max 2
-
-vertices=[[Path.x0].',[Path.y0].',[Path.th0].' [Path.x1].',[Path.y1].',[Path.th1].'];
+vertices = getStartEndVerticesPath(Path);
 for ii=1:size(vertices,1)
     voxel_ii=vertices(ii,:);
     idxOriginToStart=findVector(vertices,[0 0 0 voxel_ii(1:3)]);

@@ -1,21 +1,17 @@
-
-
-
 initWorkspace
 co=get(groot,'DefaultAxesColorOrder');
 gridRes=0.02;
-load('SL_cloth.mat')
+load('LSL_cloth.mat')
 [XY_occ_full] = getOccXYFromBmpRobot('RobotFull_1cm.bmp',gridRes/2);
 [XY_occ_shell]= getOccXYFromBmpRobot('RobotShell_1cm.bmp',gridRes/2);
 
-vertices=[[StateLattice.x0].',[StateLattice.y0].',[StateLattice.th0].',[StateLattice.x1].',[StateLattice.y1].',[StateLattice.th1].'];
+vertices = getStartEndVerticesPath(LSL);
 
 poseStart=[0 0 0];
 poseEnd=[0.5 0.1 pi/8];
 poseStartEnd=[poseStart poseEnd];
 
 idxStartEnd=findrow_mex(vertices,poseStartEnd);
-
 
 %% Create empty pathh occ grid
 PathOccGridEmpty=robotics.OccupancyGrid(1.8,1.6,1/gridRes);
@@ -24,7 +20,6 @@ PathOccGridEmpty.GridLocationInWorld=[-0.9 -0.8];
 ii_all_Path=ii_Path(:);
 jj_all_Path=jj_Path(:);
 setOccupancy(PathOccGridEmpty,[ii_all_Path jj_all_Path],zeros(size(ii_all_Path)),'grid')
-
 
 %% show full and shell
 FullShellRobot=robotics.OccupancyGrid(1.7,1.6,1/gridRes);
@@ -58,16 +53,14 @@ pause()
 saveCurrentFigure('OGRobotStart');
 close all
 
-
-
 fig=figureFullScreen(1);
 fig.Renderer='Painters';
 subplot(1,2,2)
 hold on
 for nn=idxStartEnd
-    X=StateLattice(nn).X;
-    Y=StateLattice(nn).Y;
-    TH=StateLattice(nn).TH;
+    X=LSL(nn).X;
+    Y=LSL(nn).Y;
+    TH=LSL(nn).TH;
     PathOccGrid=copy(PathOccGridEmpty); % just assigning doesn't work
     for idxPath=1:1:18
         if idxPath==1 % use full occ grid (just once)
@@ -103,7 +96,7 @@ for nn=idxStartEnd
             plot(X,Y,'--','Color',co(1,:),'Linewidth',2);
             text(-0.25,0.70,'Path\_Start  : [0    0      0°   ]','FontSize',24)
             text(-0.25,0.60,'Path\_Dest  : [0.5 0.1 22.5°]','FontSize',24)
-            text(-0.25,0.50,['Path\_ID  : ',num2str(StateLattice(nn).ID)],'FontSize',24)
+            text(-0.25,0.50,['Path\_ID  : ',num2str(LSL(nn).ID)],'FontSize',24)
             text(-0.25,0.40,['Path\_Idx : ',num2str(idxPath)],'FontSize',24)
             l=legend('Previously visited cells','Newly visited cells','Travelled path','Total path','Location','SE');
             set(l,'FontSize',26);
@@ -117,5 +110,4 @@ for nn=idxStartEnd
         end
     end
 end
-saveCurrentFigure('OGRobotPath');
-
+% saveCurrentFigure('OGRobotPath');
