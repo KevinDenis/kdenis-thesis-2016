@@ -33,10 +33,6 @@ idxInROI=InPolygon(grid_XY(:,1),grid_XY(:,2),ROI_Rot_Trans(:,1),ROI_Rot_Trans(:,
 grid_XY_ROI=grid_XY(idxInROI,:);
 
 grid_XYTH1=addTHtoGridXY(grid_XY_ROI,TH_rot);
-dX=grid_XYTH1(:,1)-x0;
-dY=grid_XYTH1(:,2)-y0;
-
-grid_XYTH1=grid_XYTH1(abs(dX)+abs(dY)>0,:);
 
 % Initializes the structure for the Motion Primitives (same as LSL)
 MP(1:2,1)=struct('x0',0,'y0',0,'th0',0,...
