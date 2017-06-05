@@ -19,6 +19,8 @@
 %=========================================================================%
 
 function xy_opt_path= VoronoiOptimalPath(xy_start, xy_dest,pathRes,maxNodeDist,showPlot)
+tic
+fprintf('Calculating shortest path based on voronoi diagram ... ');
 load('XY_corners_CW.mat')
 obs=LinInterpToRes(XY_corners_CW,0.1);
 x_obs=obs(:,1);
@@ -60,8 +62,7 @@ vy = [vy [xy_dest(2); vy_all(idx_end)]]; % make an edge going from closest node 
 
 % construct of graph
 xy_all = unique([vx(:) vy(:)], 'rows');
-dv = [vx(1,:); vy(1,:)] - [vx(2,:); vy(2,:)];
-path_cost = sqrt(sum(dv.^2)); % path cost = dist. Repeated twice because start --> end == end --> start cost (see further)
+path_cost = DNorm2( [vx(1,:); vy(1,:)]  - [vx(2,:); vy(2,:)]); % path cost = dist. Repeated twice because start --> end == end --> start cost (see further)
 xy_0 = [vx(1,:).' vy(1,:).'];
 xy_1 = [vx(2,:).' vy(2,:).'];
 [~,ii] = ismember(xy_0,xy_all,'rows');
@@ -80,12 +81,25 @@ xy_opt_path=LinInterpToRes(xy_opt_path,0.01);
 xy_opt_path=KeepToRes(xy_opt_path,maxNodeDist);
 xy_opt_path=unique(round(round(xy_opt_path/pathRes)*pathRes,2),'rows','stable');
 % % plot voronoi diagram optimal path
+vx_plot=[vx;nan(1,size(vx,2))];
+vx_plot=vx_plot(:);
+vy_plot=[vy;nan(1,size(vy,2))];
+vy_plot=vy_plot(:);
+fprintf(' done ! (took %2.3f sec) \n',toc)
 if showPlot
     figure()
-    plot(x_obs,y_obs, 'k'); hold on;
-    plot(vx,vy,'b.-'); hold on;
+    hold on;
+    plot(XY_corners_CW(:,1),XY_corners_CW(:,2), 'k');
+    plot(vx_plot,vy_plot,'b.-');
     plot(xy_opt_path(:,1),xy_opt_path(:,2), 'go-','LineWidth',2);
     hold off;
+    l=legend('Obstacle','Voronoi Diagram','Optimal Path','Location','SE');
+    xlabel('x [m]')
+    ylabel('y [m]')
+    set(gca,'FontSize',14)
+    set(l,'FontSize',16);
+    set(gca,'FontSize',14)
+    set(gca, 'box', 'off')
 end
 end
 

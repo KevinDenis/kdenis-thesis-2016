@@ -55,7 +55,7 @@ initWorkspace
 defaultStartEnd     = 1;
 showLSL             = 1;
 showVoronoiPath     = 1;
-usePrecomputedData  = 0; % use precomputed data y/n --> 1/0
+usePrecomputedData  = 1; % use precomputed data y/n --> 1/0
 
 if usePrecomputedData
     LSLset=DMP_getLocalStateLatticeSettings();
@@ -88,10 +88,7 @@ else
     LSL=DMP_BuildOccGridForDMP(LSL);
     fprintf('Calculations for LSL and OG done ! \n');
 end
-tic
-fprintf('Calculating shortest path based on voronoi diagram ... ');
 [voronoi_path, xyth_start, xyth_dest]=DMP_Voronoi_2Dpath(defaultStartEnd,showVoronoiPath);
-fprintf(' done ! (took %2.3f sec) \n',toc)
 DMP_OptPath(LSL,voronoi_path,xyth_start,xyth_dest);
 
 function [LSLset] = DMP_getLocalStateLatticeSettings()
@@ -196,7 +193,6 @@ LSL_180deg=RotTransMotionPrem(LSL,pi,0,0);
 
 LSL=[LSL;LSL_90deg;LSL_90degMin;LSL_180deg];
 
-
 SL_ToS=[];
 for th0=(-3/4*pi:pi/4:pi) 
     SL_ToS = [SL_ToS;getMotionPremTurnOnSpot(LSL,th0)];
@@ -274,33 +270,66 @@ end
 
 
 function [voronoi_path, xyth_start, xyth_dest]=DMP_Voronoi_2Dpath(defaultStartEnd,showPlot)
-
+[~,LabGridEdges,~] = getMapEdgeXYOccFormBmp('RobotLabo_Lift_Black.bmp',0.02);
+figureFullScreen()
 if defaultStartEnd
     xy_start=[5.5 8];
-    xy_end=[19.75 16.25];
+    xy_dest=[19.75 16.25];
     xyth_start = [xy_start pi/2];
-    xyth_dest = [xy_end pi];
+    xyth_dest = [xy_dest pi];
 else
-    % WIP
-    figureFullScreen()
     hold on
-    show(LabGrid)
-    title('Select begin position (1st click) and orientation (2nd click)')
+    show(LabGridEdges)
+    title('Select start position (1st click) and orientation (2nd click)')
+    xlabel('x [m]')
+    ylabel('y [m]')
     set(gca,'FontSize',14)
     set(gca, 'box', 'off')
+    % select start pose
     [xStart,yStart]=ginput(1);
     scatter(xStart,yStart,'*r')
-    [xOrient,yOrient]=ginput(1);
-    plot([xStart xOrient],[yStart yOrient],'*-r')
-    thStart=atan2(yOrient-yStart,xOrient-xStart);
-    robotPose=[xStart yStart thStart];
-    disp(['Use defined robot pose : [', num2str(robotPose(1),3),' ',num2str(robotPose(2),3),' ',num2str(robotPose(3)*180/pi,3),'°]' ])
+    [xOrientStart,yOrientStart]=ginput(1);
+    plot([xStart xOrientStart],[yStart yOrientStart],'*-r')
+    thStart=atan2(yOrientStart-yStart,xOrientStart-xStart);
+    xyth_start=[xStart yStart thStart];
+    plotRoboticWheelchair(xyth_start);
+    title('Select end position (1st click) and orientation (2nd click)')
+    [xEnd,yEnd]=ginput(1);
+    scatter(xEnd,yEnd,'*r')
+    [xOrientEnd,yOrientEnd]=ginput(1);
+    plot([xEnd xOrientEnd],[yEnd yOrientEnd],'*-r')
+    thStart=atan2(yOrientEnd-yEnd,xOrientEnd-xEnd);
+    xyth_dest=[xEnd yEnd thStart];
+    plotRoboticWheelchair(xyth_dest);
+    drawnow
     hold off
 end
 
 pathRes = 0.25;
 maxNodeDist = 0.5;
-voronoi_path= VoronoiOptimalPath(xy_start, xy_end,pathRes,maxNodeDist,showPlot);
+xyth_start(1:2)=round(round(xyth_start(1:2)/pathRes)*pathRes,2);
+xyth_start(3)=round(xyth_start(3)/pi*4)*pi/4;
+xy_start = xyth_start(1:2);
+xyth_dest(1:2)=round(round(xyth_dest(1:2)/pathRes)*pathRes,2);
+xyth_dest(3)=round(xyth_dest(3)/pi*4)*pi/4;
+xy_dest = xyth_dest(1:2);
+fprintf('Start pose after discretization : [%2.2f, %2.2f, %2.2f°] \n', xyth_start(1),xyth_start(2),xyth_start(3)*180/pi);
+fprintf('End pose after discretization : [%2.2f, %2.2f, %2.2f°] \n', xyth_dest(1),xyth_dest(2),xyth_dest(3)*180/pi);
+
+clf
+
+hold on
+show(LabGridEdges)
+title('Start end Pose after discritization')
+plotRoboticWheelchair(xyth_start);
+plotRoboticWheelchair(xyth_dest);
+hold off
+xlabel('x [m]')
+ylabel('y [m]')
+set(gca,'FontSize',14)
+set(gca, 'box', 'off')
+drawnow
+voronoi_path= VoronoiOptimalPath(xy_start, xy_dest,pathRes,maxNodeDist,showPlot);
 end
 
 function DMP_OptPath(LSL,voronoi_path,xyth_start, xyth_dest)
@@ -365,17 +394,8 @@ for ii=1:n
     end
     progressbar(ii/n)
 end
-fprintf(' done ! (took %2.3f sec) \n',toc)
-
 GSL_free=GSL([GSL.free].');
-% figure()
-% show(LabGridEdges);
-% title('')
-% hold on
-% grid on
-% xlabel('x [m]')
-% ylabel('y [m]')
-% plotPath(GSL_free)
+fprintf(' done ! (took %2.3f sec) \n',toc)
 
 %% Graph theory with Dijkstra's algorithm
 tic
@@ -393,7 +413,7 @@ xyth_1 = [vx(:,2) vy(:,2) vth(:,2)]; % all end vertices for edge
 xyth_01= [xyth_0 xyth_1]; % start end vertices for all edges
 [~,ii] = ismember(xyth_0,xyth_all,'rows'); % search idx of start idx vertix in all vertices
 [~,jj] = ismember(xyth_1,xyth_all,'rows'); % search idx of end idx vertix in all vertices
-pathCost=[GSL_free.pathCost].';
+pathCost=[GSL_free.pathCost].'; % since edges have the same order as the GSL, just collect all the pathCost this way
 G = sparse(ii,jj,pathCost,length(xyth_all),length(xyth_all)); % create sparse matix, needed for graphshortestpath (uses Dijkstra's algorithm)
 st_idx   = findrow_mex(xyth_all,xyth_start); % fast single row search
 dest_idx = findrow_mex(xyth_all,xyth_dest); % fast single row search
@@ -409,9 +429,14 @@ fprintf(' done ! (took %2.3f sec) \n',toc)
 % plot optimal path
 figureFullScreen()
 show(LabGridEdges)
-title('Local Path Planning')
+title('Discrete Motion Planning')
 hold on
 plotRobotPath(OptPath)
 hold off
+xlabel('x [m]')
+ylabel('y [m]')
+set(gca,'FontSize',14)
+set(gca,'FontSize',14)
+set(gca, 'box', 'off')
 
 end
