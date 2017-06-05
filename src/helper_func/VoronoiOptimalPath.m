@@ -18,7 +18,7 @@
 %                                                                         %
 %=========================================================================%
 
-function xy_opt_path= VoronoiOptimalPath(xy_start, xy_dest,pathRes,maxNodeDist)
+function xy_opt_path= VoronoiOptimalPath(xy_start, xy_dest,pathRes,maxNodeDist,showPlot)
 load('XY_corners_CW.mat')
 obs=LinInterpToRes(XY_corners_CW,0.1);
 x_obs=obs(:,1);
@@ -61,7 +61,7 @@ vy = [vy [xy_dest(2); vy_all(idx_end)]]; % make an edge going from closest node 
 % construct of graph
 xy_all = unique([vx(:) vy(:)], 'rows');
 dv = [vx(1,:); vy(1,:)] - [vx(2,:); vy(2,:)];
-path_cost = sqrt(sum(dv.^2)); % path cost = dist. Remeted twice because start --> end == end --> start cost (see further)
+path_cost = sqrt(sum(dv.^2)); % path cost = dist. Repeated twice because start --> end == end --> start cost (see further)
 xy_0 = [vx(1,:).' vy(1,:).'];
 xy_1 = [vx(2,:).' vy(2,:).'];
 [~,ii] = ismember(xy_0,xy_all,'rows');
@@ -80,11 +80,12 @@ xy_opt_path=LinInterpToRes(xy_opt_path,0.01);
 xy_opt_path=KeepToRes(xy_opt_path,maxNodeDist);
 xy_opt_path=unique(round(round(xy_opt_path/pathRes)*pathRes,2),'rows','stable');
 % % plot voronoi diagram optimal path
-figure(1)
-plot(x_obs,y_obs, 'k'); hold on;
-plot(vx,vy,'b.-'); hold on;
-plot(xy_opt_path(:,1),xy_opt_path(:,2), 'go-','LineWidth',2);
-hold off;
-
+if showPlot
+    figure()
+    plot(x_obs,y_obs, 'k'); hold on;
+    plot(vx,vy,'b.-'); hold on;
+    plot(xy_opt_path(:,1),xy_opt_path(:,2), 'go-','LineWidth',2);
+    hold off;
+end
 end
 
