@@ -6,10 +6,11 @@ function [ lambda ] = wrap2Pi( lambda )
 %   -pi.  (In general, odd, positive multiples of pi map to pi and odd,
 %   negative multiples of pi map to -pi.)
 %
+%   Small modification by K.Denis : -pi becomes pi
+%
 %   See also wrapTo2Pi, wrapTo180, wrapTo360.
 
 % Copyright 2007-2008 The MathWorks, Inc.
-% Small modification by K.Denis : -pi becomes pi
 
 q = (lambda < -pi) | (pi < lambda);
 lambda(q) = wrapTo2Pi(lambda(q) + pi) - pi;
