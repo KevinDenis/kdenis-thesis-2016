@@ -14,41 +14,38 @@ function [Path_Cleaned] = CleanupLSL(Path)
 %   Only keep path 3
 %   Slow implementation atm, but is not beeing used.
 
-vertices=[[Path.x0].',[Path.y0].',[Path.th0].' [Path.x1].',[Path.y1].',[Path.th1].'];
-[~,idx,~]=unique(vertices,'rows','stable');
-Path=Path(idx);
-vertices=vertices(idx,:);
+%% A path must lead to a different lattice
+vertices = getStartEndVerticesPath(Path);
+toDelete = all(vertices(:,1:3) == vertices(:,4:6),2);
+Path(toDelete)=[];
 
+%% A path must have a unique start and end destination
+vertices = getStartEndVerticesPath(Path);
+[vertices,idxUnique,~]=unique(vertices,'rows','stable');
+Path=Path(idxUnique);
 
-%% 
+%% A edge which has a start vertex and end vertex which is reached by a same previous start vertex should be deleted
 toDelete=zeros(1);
 nn=1;
 for ii=2:size(vertices,1)
-    % gather all voxels before current voxel
-    prevVerticesSet=vertices(1:ii-1,:); 
-    prevStartVerticesSet=vertices(1:ii-1,1:3);
-    prevEndVerticesSet=vertices(1:ii-1,4:6);
+    % gather all vertices before current vertex
+    vertices_prev=vertices(1:ii-1,:);
+
     % gather current voxel
-    vertices_ii=vertices(ii,:);    
-    startVoxel_ii=vertices_ii(1:3);
-    endVoxel_ii=vertices_ii(4:6);
+    vertex_ii=vertices(ii,:);
     
-    idxEndPrevVox=findVectorRev(prevEndVerticesSet,endVoxel_ii);
-    if ~isnan(idxEndPrevVox)
-        prevEndVoxels_start=prevStartVerticesSet(idxEndPrevVox,:);
-        idxStartOldToStartNew=findVector(prevVerticesSet,[prevEndVoxels_start startVoxel_ii]);
-        if ~isnan(idxStartOldToStartNew)
-            toDelete(nn)=ii;
+    idxEnd=findrow_mex(vertices_prev(:,4:6),vertex_ii(4:6));
+    if ~isnan(idxEnd) % this destination has allready been reached !
+        startVertexPrev=vertices_prev(idxEnd,1:3); % start (previous) vertex connecting the current desination
+        idxStartOldToStartNew=findrow_mex(vertices_prev,[startVertexPrev vertex_ii(1:3)]);
+        if ~isnan(idxStartOldToStartNew) % there is a connection between start and current start
+            toDelete(nn)=ii; % this current path doesn't contribute to the set and therefore be deleted
             nn=nn+1;
         end
     end
 end
 
 if (toDelete(1) ~= 0); Path(toDelete)=[]; end
-
-vertices=[[Path.x0].',[Path.y0].',[Path.th0].' [Path.x1].',[Path.y1].',[Path.th1].'];
-toDelete = all(vertices(:,1:3) == vertices(:,4:6),2);
-Path(toDelete)=[];
 
 % assign unique path ID
 Path_Cleaned=Path;
@@ -60,8 +57,9 @@ end
 
 
 
-
-%% NOT IMPLEMENTED JET
+%% NOT IMPLEMENTED JET. A path contained by any other path should be deleted 
+% VERY SLOW, because of brutal fource implemetation.
+% a much smarted implementation could be used by ONLY using dk k L, etc
 function keepLongestPaths()
 StateLattice_fwd = getForwardMotionFromStateLattice(StateLattice);
 StateLattice_fwd=removeTurnOnTheSpot(StateLattice_fwd);
