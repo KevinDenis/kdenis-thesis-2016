@@ -87,7 +87,7 @@ stringSelectedCurve={'clothoid';'circular';'bézier'};
 if usePrecomputedData
     load('LSLset.mat') 
     load('grid_XY.mat')
-    fprintf(['loading data for ',stringSelectedCurve{selectCurve}, ' curve']);
+    fprintf(['loading data for ',stringSelectedCurve{selectCurve}, ' curve ...']);
     switch selectCurve
         case 1 % use clothoid curve as motion primitive
             load('LSL_cloth.mat')
@@ -106,11 +106,11 @@ if usePrecomputedData
             load('ObstacleTable_cloth.mat')
             load('XY_ObsTable_cloth.mat') % matrix version of [ObstacleTable.X ObstacleTable.Y], used for faster search
     end
-    fprintf('... done \n');
+    fprintf('done! \n');
 else
     LSLset=getLocalStateLatticeSettings();
     [grid_XY,~,~,~,~]=BuildMultiSizeGrid(LSLset);
-    disp(['calculating data for ',stringSelectedCurve{selectCurve}, ' curve']);
+    disp(['Calculating data for ',stringSelectedCurve{selectCurve}, ' curve']);
     switch selectCurve
         case 1 % use clothoid curve as motion primitive
             [LSL,MotionPrem]=BuildLSLWithClothoids(grid_XY,LSLset);
@@ -122,12 +122,12 @@ else
             load('LSL_bezier.mat');
             %LSL=BuildLSLWithBezierCurve(grid_XY,LSLset);
         otherwise
-            disp('Wrong input. Please use selectCurve = {[1],2,3} to select {[Clothoid], Circular, Bézier} based Motion Primitive')
-            disp('default value 1 chosen')
+            fprintf('Wrong input. Please use selectCurve = {[1],2,3} to select {[Clothoid], Circular, Bézier} based Motion Primitive \n')
+            fprintf('default value 1 chosen \n')
             [LSL,MotionPrem]=BuildLSLWithClothoids(grid_XY,LSLset);
     end
     [LSL,ObstacleTable,XY_ObsTable]=BuildOccGridFromLSL(LSL);
-    disp('... done');
+    fprintf(['Calculations for ', stringSelectedCurve{selectCurve}, ' curve  done ! \n']);
 end
 switch selectMap
     case 1 % use RobotLab_Elevator map
@@ -139,8 +139,8 @@ switch selectMap
     case 4 % use Elevator map
         map = 'LiftEdges.bmp';
     otherwise
-        disp('Wrong input. Please use selectMap = {[1],2,3,4} to select {[RobotLab_Elevator], RobotLab, RobotLab_ZoomEntrance, Elevator}')
-        disp('default value 1 chosen')
+        fprintf('Wrong input. Please use selectMap = {[1],2,3,4} to select {[RobotLab_Elevator], RobotLab, RobotLab_ZoomEntrance, Elevator} \n')
+        fprintf('default value 1 chosen \n')
         map = 'RobotLaboLiftEdges.bmp';
 end
 % robotPose=[2.1879,5.3363,0.8380];
@@ -167,5 +167,5 @@ if saveCalculatedData && ~usePrecomputedData
             save('data_mat/ObstacleTable_bezier.mat','ObstacleTable')
             save('data_mat/XY_ObsTable_bezier.mat','XY_ObsTable')
     end    
-    disp('... done');
+    fprintf('... done \n');
 end
