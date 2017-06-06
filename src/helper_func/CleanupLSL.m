@@ -109,8 +109,3 @@ end
 toc
 end
 
-function LSL=removeTurnOnTheSpot(LSL)
-vertices = getStartEndVerticesPath(LSL);
-idx=ismember(vertices,[0 0 0 0],'rows');
-LSL(idx)=[];
-end
