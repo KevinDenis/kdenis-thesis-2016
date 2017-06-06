@@ -32,7 +32,6 @@
 %                                                                         %
 %=========================================================================%
 
-
 function [LSL]=BuildLSLWithCircles(LSLset)
 res=LSLset.res;
 n=500; % there are 200 paths in total, forward and backward.
@@ -98,8 +97,8 @@ for ii=1:length(v)
     LSL(ii).pathCost=3*Ltot+intK;
     LSL(ii).free=true;
 end
-% LSL =  AddReverseDirection(LSL);
-% LSL = [getMotionPremTurnOnSpot(LSL,0);LSL];
+LSL =  AddReverseDirection(LSL);
+LSL = [getMotionPremTurnOnSpot(LSL,0);LSL];
 LSL = CleanupLSL(LSL);
 LSL = FreeAllPaths(LSL);
 end
