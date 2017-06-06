@@ -76,8 +76,8 @@ initWorkspace
 
 %% User settings
 usePrecomputedData = 0; % use precomputed data y/n --> 1/0
-saveCalculatedData = 0; % save calculated data y/n --> 1/0
-selectCurve        = 2; % Cloth = 1, Circular = 2, Bézier = 3; very slow calculation for Bézier Curve due to COP calculations ! % default use of precomputed data
+saveCalculatedData = 1; % save calculated data y/n --> 1/0
+selectCurve        = 1; % Cloth = 1, Circular = 2, Bézier = 3; very slow calculation for Bézier Curve due to COP calculations ! % default use of precomputed data
 selectMap          = 1; % RobotLab_Elevator=1, RobotLab=2, RobotLab_ZoomEntrance=3, Elevator=4
 seeLPP             = 0; % simumate the plan recognition algorithm
 
@@ -88,6 +88,7 @@ if usePrecomputedData
     load('LSLset.mat') 
     load('grid_XY.mat')
     fprintf(['loading data for ',stringSelectedCurve{selectCurve}, ' curve ...']);
+    tic
     switch selectCurve
         case 1 % use clothoid curve as motion primitive
             load('LSL_cloth.mat')
@@ -106,7 +107,7 @@ if usePrecomputedData
             load('ObstacleTable_cloth.mat')
             load('XY_ObsTable_cloth.mat') % matrix version of [ObstacleTable.X ObstacleTable.Y], used for faster search
     end
-    fprintf('done! \n');
+    fprintf(' done ! (took %2.3f sec) \n',toc)
 else
     LSLset=getLocalStateLatticeSettings();
     [grid_XY,~,~,~,~]=BuildMultiSizeGrid(LSLset);
@@ -126,7 +127,7 @@ else
             fprintf('default value 1 chosen \n')
             [LSL,MotionPrem]=BuildLSLWithClothoids(grid_XY,LSLset);
     end
-    [LSL,ObstacleTable,XY_ObsTable]=BuildOccGridFromLSL(LSL);
+%     [LSL,ObstacleTable,XY_ObsTable]=BuildOccGridFromLSL(LSL);
     fprintf(['Calculations for ', stringSelectedCurve{selectCurve}, ' curve  done ! \n']);
 end
 switch selectMap
@@ -144,13 +145,14 @@ switch selectMap
         map = 'RobotLaboLiftEdges.bmp';
 end
 % robotPose=[2.1879,5.3363,0.8380];
-[LSL_W,robotPose,LabGrid]=BuildLSLColFree(LSL,ObstacleTable,XY_ObsTable,grid_XY,map);
+% [LSL_W,robotPose,LabGrid]=BuildLSLColFree(LSL,ObstacleTable,XY_ObsTable,grid_XY,map);
 % LSL_W is in the World coordinates, dependant on the user-selected robot pose
 if seeLPP; LocalPathPlanning(LSL_W,LabGrid,robotPose); end
 
 %% Saving calculated data if desired by user
 if saveCalculatedData && ~usePrecomputedData
-    disp(['saving data for ',stringSelectedCurve{selectCurve}, ' curve']);
+    fprintf(['saving data for ',stringSelectedCurve{selectCurve}, ' curve ... ']);
+    tic
     save('data_mat/LSLset.mat','LSLset')
     save('data_mat/grid_XY.mat','grid_XY')
     switch selectCurve
@@ -167,5 +169,5 @@ if saveCalculatedData && ~usePrecomputedData
             save('data_mat/ObstacleTable_bezier.mat','ObstacleTable')
             save('data_mat/XY_ObsTable_bezier.mat','XY_ObsTable')
     end    
-    fprintf('... done \n');
+    fprintf(' done ! (took %2.3f sec) \n',toc)
 end

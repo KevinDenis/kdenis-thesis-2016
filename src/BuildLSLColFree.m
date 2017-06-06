@@ -64,7 +64,7 @@ if nargin == 5
     plot([xStart xOrient],[yStart yOrient],'*-r')
     thStart=atan2(yOrient-yStart,xOrient-xStart);
     robotPose=[xStart yStart thStart];
-    disp(['Use defined robot pose : [', num2str(robotPose(1),3),' ',num2str(robotPose(2),3),' ',num2str(robotPose(3)*180/pi,3),'°]' ])
+    fprintf('Use defined robot pose [%2.2f, %2.2f, %2.2f°] \n', robotPose(1),robotPose(2),robotPose(3)*180/pi);
     close all
 else
     robotPose=(varargin{1});
