@@ -19,7 +19,7 @@ if nargin == 0
 else
     outfilename=[outfilename,(varargin{1})];
 end
-% saveas(gcf,outfilename,'fig')
+saveas(gcf,outfilename,'fig')
 tightfig;
 saveas(gcf,outfilename,'pdf')
 end
