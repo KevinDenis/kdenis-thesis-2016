@@ -1,6 +1,4 @@
-clear
-close all
-clc
+initPlotScripts
 
 x0=0;
 y0=0;

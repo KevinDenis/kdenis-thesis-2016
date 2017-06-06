@@ -2,7 +2,7 @@
 % !!!!!!!!!!!!!!!!!!!!!!!! MAN CROP NEEDED !!!!!!!!!!!!!!!!!!!!!!!!
 
 
-initWorkspace
+initPlotScripts
 co=get(groot,'DefaultAxesColorOrder');
 gridRes=0.02;
 load('LSL_cloth.mat')
@@ -69,7 +69,6 @@ for nn=idxStartEnd
     TH=LSL(nn).TH;
     PathOccGrid=copy(PathOccGridEmpty); % just assigning doesn't work
     for idxPath=1:1:18
-        tic
         if idxPath==1 % use full occ grid (just once)
             XY_occ_kk=XY_occ_full;
         else % use shell grid (for the rest, faster ! but be sure that fine enough movement)
@@ -115,7 +114,6 @@ for nn=idxStartEnd
         if ~isempty(ii_occ_PathOcc)
             setOccupancy(PathOccGrid,[ii_occ_PathOcc jj_occ_PathOcc],ones(size(ii_occ_PathOcc,1),1),'grid')   
         end
-        toc
     end
 end
 % saveCurrentFigure('OGRobotPath');

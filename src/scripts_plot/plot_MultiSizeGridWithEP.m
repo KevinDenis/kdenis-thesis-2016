@@ -1,13 +1,12 @@
-initWorkspace
+initPlotScripts
 close all
 co=get(groot,'DefaultAxesColorOrder');
 
-load('grid_XY.mat')
-load('ROI0.mat')
-load('idxIn0.mat')
-load('LSLset.mat')
 load('LSL_cloth.mat')
 
+[LSLset] = getLocalStateLatticeSettings();
+
+[grid_XY,ROI0,idxIn0,~,~]=BuildMultiSizeGrid(LSLset);
 
 [LSL] = getForwardMotionFromStateLattice(LSL);
 [MP] = getMotionPrimitiveFromStateLattice(LSL);
@@ -36,7 +35,7 @@ hold on
 axis equal
 plotGrid(grid_XY,[0 0 0])
 plotStateLatticePoints(MP,LSLset)
-plot(ROI1(:,1),ROI1(:,2),'-','Linewidth',2,'Color',co(2,:))
+plot(ROI1(:,1),ROI1(:,2),'-','Linewidth',3,'Color',co(2,:))
 plot(grid_XY(idxIn1,1),grid_XY(idxIn1,2),'o','Color',co(2,:),'MarkerSize',10)
 plotPath(MP(idxEPExample),co(1,:),3)
 plotPath(LSL(idxEPExample_post),co(1,:),1)
@@ -47,4 +46,4 @@ set(gca,'FontSize',28)
 
 axis([-2.0 3.67 -0.05 3.49])
 
-saveCurrentFigure('MultiGirdWithEPROI');
+% saveCurrentFigure('MultiGirdWithEPROI');

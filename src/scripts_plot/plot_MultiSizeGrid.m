@@ -1,10 +1,8 @@
-initWorkspace
+initPlotScripts
 close all
 co=get(groot,'DefaultAxesColorOrder');
 
-load('grid_XY.mat')
-load('ROI0.mat')
-load('idxIn0.mat')
+[LSLset] = getLocalStateLatticeSettings();
 
 figureFullScreen()
 title('')
@@ -22,4 +20,4 @@ set(gca,'FontSize',28)
 
 axis([-4.5 4.5 -3.5 3.5])
 
-saveCurrentFigure('MultiGirdWithROI');
+% saveCurrentFigure('MultiGirdWithROI');

@@ -1,26 +1,26 @@
-initWorkspace
+initPlotScripts
 load('grid_XY.mat')
 co=get(groot,'DefaultAxesColorOrder');
 %#ok<*UNRCH>
 
 robotPose = [0 0 0];
 
-load('SL_bezier.mat')
-SL_bezier=StateLattice;
-SL_bezier=getMotionPrimitiveFromStateLattice(SL_bezier);
-SL_bezier = CleanupStateLattice(SL_bezier);
-load('SL_cloth.mat')
-SL_cloth=StateLattice;
-SL_cloth=getForwardMotionFromStateLattice(SL_cloth);
-SL_cloth=getMotionPrimitiveFromStateLattice(SL_cloth);
-SL_cloth = CleanupStateLattice(SL_cloth);
+load('LSL_bezier.mat')
+LSL_bezier=LSL;
+LSL_bezier=getMotionPrimitiveFromStateLattice(LSL_bezier);
+LSL_bezier = CleanupLSL(LSL_bezier);
+load('LSL_cloth.mat')
+LSL_cloth=LSL;
+LSL_cloth=getForwardMotionFromStateLattice(LSL_cloth);
+LSL_cloth=getMotionPrimitiveFromStateLattice(LSL_cloth);
+LSL_cloth = CleanupLSL(LSL_cloth);
 
 
-voxel_cloth=[[SL_cloth.x0].',[SL_cloth.y0].',[SL_cloth.th0].',[SL_cloth.x1].',[SL_cloth.y1].',[SL_cloth.th1].'];
-voxel_bezier=[[SL_bezier.x0].',[SL_bezier.y0].',[SL_bezier.th0].',[SL_bezier.x1].',[SL_bezier.y1].',[SL_bezier.th1].'];
+vertices_cloth=getStartEndVerticesPath(LSL_cloth);
+vertices_bezier=getStartEndVerticesPath(LSL_bezier);
 
-uniqueCloth=~ismember(voxel_cloth,voxel_bezier,'rows');
-uniqueBezier=~ismember(voxel_bezier,voxel_cloth,'rows');
+uniqueCloth=~ismember(vertices_cloth,vertices_bezier,'rows');
+uniqueBezier=~ismember(vertices_bezier,vertices_cloth,'rows');
 
 fig=figureFullScreen();
 fig.Renderer='Painters';
@@ -30,12 +30,12 @@ grid on
 xlabel('x [m]')
 ylabel('y [m]')
 plotGrid(grid_XY,robotPose)
-plotPath(SL_bezier(uniqueBezier))
-plotPath(SL_cloth(uniqueCloth),co(2,:),3)
+plotPath(LSL_bezier(uniqueBezier))
+plotPath(LSL_cloth(uniqueCloth),co(2,:),3)
 plotSimpleRobot(robotPose)
 l=legend('Discrete grids','Unique Bézier','Unique Clothoid','Robot pose','Location','SE');
 set(l,'FontSize',26);
 set(gca,'FontSize',24)
 axis equal
 axis([-1.1 3.1 -1.6 1.6])
-saveCurrentFigure('MPDifference');
+% saveCurrentFigure('MPDifference');

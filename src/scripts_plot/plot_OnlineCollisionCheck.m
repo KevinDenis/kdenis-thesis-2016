@@ -1,15 +1,13 @@
 %% Init()
-initWorkspace
-% load('SL_cloth.mat')
-% load('ObstacleTable_cloth.mat')
-% load('XY_ObsTable_cloth.mat')
-% load('SL_cloth.mat')
-% load('SL_cloth.mat')
+initPlotScripts
+load('LSL_cloth.mat')
+load('ObstacleTable_cloth.mat')
+load('XY_ObsTable_cloth.mat')
 
 
 robotPose=[0 0 0];
 XY_ObsGrid=[];
-StateLattice=FreeAllPaths(StateLattice);
+LSL=FreeAllPaths(LSL);
 % UpdatePlot(XY_ObsGrid,StateLattice)
 
 XY_ObsGrid=[-1.60 0.2;
@@ -22,13 +20,13 @@ XY_ObsGrid=[-1.60 0.2;
 affected_paths=[];
 for ii = 1:size(XY_ObsGrid,1)
     XY_ObsGrid_ii=XY_ObsGrid(1:ii,:);
-    [StateLattice,affected_paths_ii]=UpdateStateLattice(XY_ObsGrid_ii,StateLattice,ObstacleTable,XY_ObsTable);
+    [LSL,affected_paths_ii]=UpdateStateLattice(XY_ObsGrid_ii,LSL,ObstacleTable,XY_ObsTable);
     affected_paths=[affected_paths;affected_paths_ii];
 end
 
-UpdatePlot(XY_ObsGrid_ii,StateLattice,affected_paths)
+UpdatePlot(XY_ObsGrid_ii,LSL,affected_paths)
 
-saveCurrentFigure('LPT_LT');
+% saveCurrentFigure('LPT_LT');
 
 %% Used Functions
 function [StateLattice,affected_paths]=UpdateStateLattice(XY_ObsGrid,StateLattice,ObstacleTable,XY_Table)
@@ -86,12 +84,8 @@ plotPath(StateLattice)
   % 462
 % plotRobotPath(StateLattice([306 466]));
 
-plotRobotAtOrigin()
+plotRoboticWheelchair([0 0 0])
 if ~isempty(XY_ObsGrid); plot(XY_ObsGrid(:,1),XY_ObsGrid(:,2),'o','Color',co(2,:),'MarkerFaceColor',co(2,:),'LineWidth',7); end
-
-
-
-
 % 'Adjusted path length'
 l=legend('Collision-free paths','Wheelchair footprint','Obstacles','Location','SW');
 set(l,'FontSize',26);
@@ -101,8 +95,4 @@ axis([-4.5 4.5 -3.5 4])
 % annotation('arrow',[0.65 0.743],[0.86,0.815])
 annotation('arrow',[0.68 0.785],[0.91,0.865])
 % quiver(p1(1),p1(2),dp(1),dp(2),0,'Color',[0 0 0],'LineWidth',1.5)
-
-
 end
-
-

@@ -1,3 +1,5 @@
+initPlotScripts
+% WIP
 robotPose=[4.3918    2.0509    pi];
 saveCurrentFigure('EnterRobotLabCloth')
 close all

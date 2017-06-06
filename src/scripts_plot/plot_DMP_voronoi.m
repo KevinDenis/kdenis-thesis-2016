@@ -1,14 +1,15 @@
-initWorkspace
+initPlotScripts
+
+%% WIP
+
+
 load('OptPath_voronoi.mat')
 
 figure()
 
-
 path= VoronoiOptimalPath(startLocation, endLocation);
 
-
 plotRobotPath(OptPath)
-
 
 figure()
 title('Local Path Planning')

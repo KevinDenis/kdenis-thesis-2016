@@ -1,4 +1,4 @@
-initWorkspace
+initPlotScripts
 co=get(groot,'DefaultAxesColorOrder');
 gridRes=0.02;
 load('LSL_cloth.mat')

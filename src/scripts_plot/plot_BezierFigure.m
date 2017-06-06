@@ -1,4 +1,4 @@
-initWorkspace
+initPlotScripts
 
 co=get(groot,'DefaultAxesColorOrder');
 

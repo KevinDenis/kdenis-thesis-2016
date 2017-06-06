@@ -1,4 +1,4 @@
-initWorkspace
+initPlotScripts
 co=get(groot,'DefaultAxesColorOrder');
 
 %#ok<*UNRCH>
@@ -6,23 +6,22 @@ co=get(groot,'DefaultAxesColorOrder');
 robotPose = [0 0 0];
 
 plotClothCurve=false; % bézier : false,  cloth:true
-load('grid_XY.mat')
-load('ROI0.mat')
-load('idxIn0.mat')
+[LSLset] = getLocalStateLatticeSettings();
+[grid_XY,ROI0,idxIn0,~,~]=BuildMultiSizeGrid(LSLset);
 
 if plotClothCurve
-    load('SL_cloth.mat')
+    load('LSL_cloth.mat')
     StringCurve='Clothoids';
     StringFileName='MPClothoid';
     
 else
-    load('SL_bezier.mat')
+    load('LSL_bezier.mat')
     StringCurve='Bézier Curve';
     StringFileName='MPBezierCurve';
 end
 
-MotionPrimitive=getMotionPrimitiveFromStateLattice(StateLattice);
-MotionPrimitive=getForwardMotionFromStateLattice(MotionPrimitive);
+MP=getMotionPrimitiveFromStateLattice(LSL);
+MP=getForwardMotionFromStateLattice(MP);
 
 fig=figureFullScreen();
 fig.Renderer='Painters';
@@ -34,7 +33,7 @@ ylabel('y [m]')
 plotGrid(grid_XY,robotPose)
 plot(ROI0(:,1),ROI0(:,2),'-','Linewidth',2,'Color',co(2,:))
 plot(grid_XY(idxIn0,1),grid_XY(idxIn0,2),'o','Color',co(2,:),'MarkerSize',10)
-plotPath(MotionPrimitive)
+plotPath(MP)
 plotSimpleRobot(robotPose)
 l=legend('Discrete grids','ROI','Grids In ROI',StringCurve,'Reachable grids','Robot pose','Location','SE');
 set(l,'FontSize',26);
@@ -42,7 +41,7 @@ set(gca,'FontSize',24)
 axis equal
 axis([-1.5 3.5 -2 2])
 
-saveCurrentFigure(StringFileName);
+% saveCurrentFigure(StringFileName);
 
 %% Plot
 % if showPlot  
