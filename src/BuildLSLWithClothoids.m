@@ -63,8 +63,8 @@ for ii=1:n
         LSL(idxSL)=MP_EP;
     end
 end
-LSL = AddReverseDirection(LSL);
 LSL = [getMotionPremTurnOnSpot(LSL,0);LSL];
+LSL = AddReverseDirection(LSL);
 LSL = CleanupLSL(LSL);
 LSL = FreeAllPaths(LSL);
 end
