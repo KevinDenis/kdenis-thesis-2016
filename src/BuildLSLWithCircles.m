@@ -46,8 +46,6 @@ idxKeep=abs(k)<=1;
 k=k(idxKeep);
 v=v(idxKeep);
 w=w(idxKeep);
-
-clearvars StateLattice
                       
 LSL(1:length(v),1)=struct('x0',0,'y0',0,'th0',0,...
                          'x1',[],'y1',[],'th1',[],...
