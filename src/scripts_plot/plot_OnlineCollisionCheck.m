@@ -26,7 +26,7 @@ end
 
 UpdatePlot(XY_ObsGrid_ii,LSL,affected_paths)
 
-% saveCurrentFigure('LPT_LT');
+saveCurrentFigure('LPT_LT');
 
 %% Used Functions
 function [StateLattice,affected_paths]=UpdateStateLattice(XY_ObsGrid,StateLattice,ObstacleTable,XY_Table)

@@ -14,7 +14,6 @@ load('LSL_cloth.mat')
 vertices_MP = getStartEndVerticesPath(MP);
 vertices_LSL=getStartEndVerticesPath(LSL);
 
-
 idxEPExample=findrow_mex(vertices_MP(:,1:5),[0 0 0 1.5 1]); % find example idx
 
 endPose=vertices_MP(idxEPExample,4:6);
@@ -39,11 +38,13 @@ plot(ROI1(:,1),ROI1(:,2),'-','Linewidth',3,'Color',co(2,:))
 plot(grid_XY(idxIn1,1),grid_XY(idxIn1,2),'o','Color',co(2,:),'MarkerSize',10)
 plotPath(MP(idxEPExample),co(1,:),3)
 plotPath(LSL(idxEPExample_post),co(1,:),1)
-plotSimpleRobot(endPose)
-l=legend('Discrete grids','Expantion Position','ROI at EP','Grids In ROI','Clothoid leading to EP','Clothoids originating from EP','Reachable grids','Robot pose at EP','Location','SW');
+plotRoboticWheelchair(endPose)
+l=legend('Discrete grids','Expantion Position','ROI at EP','Grids In ROI', ...
+'Clothoid leading to EP','Clothoids originating from EP',...
+'Robot pose at EP','Location','SW');
 set(l,'FontSize',30);
 set(gca,'FontSize',28)
 
 axis([-2.0 3.67 -0.05 3.49])
 
-% saveCurrentFigure('MultiGirdWithEPROI');
+saveCurrentFigure('MultiGirdWithEPROI');

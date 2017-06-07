@@ -34,13 +34,14 @@ xlabel('x [m]')
 ylabel('y [m]')
 plotGrid(grid_XY,robotPose)
 plotPath(LSL_red)
-plotSimpleRobot(robotPose)
+plotRoboticWheelchair(robotPose)
 plotStateLatticePoints(MP,LSLset)
-axis equal
-l=legend('Discrete grids',StringCurve,'Reachable grids','Robot pose','Expention Position','Location','SW');
+plotReachableEndPoses(LSL_red,robotPose);
+
+l=legend('Discrete grids',StringCurve,'Robot pose','Expansion Position','Reachable end pose','Location','SW');
 set(l,'FontSize',26);
 set(gca,'FontSize',24)
-
+axis equal
 axis([-2 4.1 -3.1 3.1])
 
-% saveCurrentFigure(StringFileName);
+saveCurrentFigure(StringFileName);

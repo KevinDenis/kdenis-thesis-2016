@@ -32,10 +32,10 @@ ylabel('y [m]')
 plotGrid(grid_XY,robotPose)
 plotPath(LSL_bezier(uniqueBezier))
 plotPath(LSL_cloth(uniqueCloth),co(2,:),3)
-plotSimpleRobot(robotPose)
+plotRoboticWheelchair([0 0 0])
 l=legend('Discrete grids','Unique Bézier','Unique Clothoid','Robot pose','Location','SE');
 set(l,'FontSize',26);
 set(gca,'FontSize',24)
 axis equal
 axis([-1.1 3.1 -1.6 1.6])
-% saveCurrentFigure('MPDifference');
+saveCurrentFigure('MPDifference');
