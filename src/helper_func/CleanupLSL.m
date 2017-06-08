@@ -31,7 +31,7 @@ for ii=2:size(vertices,1)
     % gather all vertices before current vertex
     vertices_prev=vertices(1:ii-1,:);
 
-    % gather current voxel
+    % gather current vertex
     vertex_ii=vertices(ii,:);
     
     idxEnd=findrow_mex(vertices_prev(:,4:6),vertex_ii(4:6));
@@ -55,52 +55,33 @@ end
 
 end
 
-
-
 %% NOT IMPLEMENTED JET. A path contained by any other path should be deleted 
-% VERY SLOW, because of brutal fource implemetation.
-% a much smarted implementation could be used by ONLY using dk k L, etc
 function keepLongestPaths()
-StateLattice_fwd = getForwardMotionFromStateLattice(StateLattice);
-StateLattice_fwd=removeTurnOnTheSpot(StateLattice_fwd);
-
-dk_all=[StateLattice_fwd.dk];
-
-
 tic
+LSL_fwd = getForwardMotionFromStateLattice(LSL);
+LSL_fwd=removeToSFromLSL(LSL_fwd);
+dk_all=[LSL_fwd.dk];
 idxRemove=zeros(1);
 nn=1;
-for ii=1:length(StateLattice_fwd)
-    dk_ii=StateLattice_fwd(ii).dk;
-    X_ii=StateLattice_fwd(ii).X;
-    Y_ii=StateLattice_fwd(ii).Y;
-    idxDK=find(ismembertol(dk_all,dk_ii,1e-6)==1);
+for ii=1:length(LSL_fwd)
+    dk_ii=LSL_fwd(ii).dk;
+    X_ii=LSL_fwd(ii).X;
+    Y_ii=LSL_fwd(ii).Y;
+    idxDK=find(ismembertol(dk_all,dk_ii,1e-3)==1);
     for jj=1:length(idxDK)
-        X_jj=[StateLattice_fwd(idxDK(jj)).X];
+        X_jj=[LSL_fwd(idxDK(jj)).X];
         if ~IsNear(X_jj(1),X_jj(end),1e-3)
-            Y_jj=[StateLattice_fwd(idxDK(jj)).Y];
-            Y2 = interp1(X_jj,Y_jj,X_ii,'linear',inf);
+            Y_jj=[LSL_fwd(idxDK(jj)).Y];
+            Y2 = qinterp1(X_jj,Y_jj,X_ii);
             distError = Y_ii-Y2;
         else
-            Y_jj=[StateLattice_fwd(idxDK(jj)).Y];
-            X2 = interp1(Y_jj,X_jj,Y_ii,'linear',inf);
+            Y_jj=[LSL_fwd(idxDK(jj)).Y];
+            X2 = qinterp1(Y_jj,X_jj,Y_ii);
             distError = X_ii-X2;
         end
-
-        if abs(DNorm2(distError)) < 1e-5 && ii~=idxDK(jj)
-            disp('=========================')
-            disp(ii)
-            disp(jj)
-            disp(' ')
+        if abs(DNorm2(distError)) < 1e-3 && ii~=idxDK(jj)
             idxRemove(nn)=ii;
             nn=nn+1;
-            figure(1)
-            hold on
-            plot(X_jj,Y_jj)
-            plot(X_ii,Y_ii)
-            hold off
-            pause()
-            clf
             break
         end
 
@@ -108,4 +89,3 @@ for ii=1:length(StateLattice_fwd)
 end
 toc
 end
-
