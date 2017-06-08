@@ -26,7 +26,9 @@ initWorkspace
 %% User settings
 selectCurve = 1; % Cloth = 1, Circular = 2, Bézier = 3;
 seeShape    = 0; % y/n --> 1/0
+showObstacleInfluance = 0; % y/n --> 1/0. Hard code commented out
 stringSelectedCurve={'clothoid';'circular';'bézier'};
+
 
 %% Main Program
 load('LSLset.mat') 
@@ -60,31 +62,33 @@ UpdatePlot(XY_ObsGrid,LSL,seeShape)
 %% Main()
 while 1
     XY_ObsGrid=UpdateEnviroment(XY_ObsGrid);
-    LSL=UpdateStateLattice(XY_ObsGrid,LSL,ObstacleTable,XY_ObsTable);
+    LSL=UpdateStateLattice(XY_ObsGrid,LSL,ObstacleTable,XY_ObsTable,showObstacleInfluance);
     UpdatePlot(XY_ObsGrid,LSL,seeShape)
 end
 
 %% Used Functions
-function StateLattice=UpdateStateLattice(XY_ObsGrid,StateLattice,ObstacleTable,XY_Table)
+function LSL=UpdateStateLattice(XY_ObsGrid,LSL,ObstacleTable,XY_Table,showObstacleInfluance)
+
+% stringaffected=[];
 tic
-stringaffected=[];
 xy_obs_end=XY_ObsGrid(end,:);
 idxRow=findrow_mex(XY_Table,xy_obs_end);
+IDOccPaths=0;
 if ~isnan(idxRow)
     IDOccPaths = [ObstacleTable(idxRow).ID];
     IdxOccPaths = [ObstacleTable(idxRow).Idx];
     for jj=1:length(IDOccPaths)
-        StateLattice(IDOccPaths(jj)).free=false;
-        if isempty(StateLattice(IDOccPaths(jj)).idxBlocked) || StateLattice(IDOccPaths(jj)).idxBlocked > IdxOccPaths(jj)
-            StateLattice(IDOccPaths(jj)).idxBlocked=IdxOccPaths(jj);
-            stringaffected=[stringaffected,num2str(IDOccPaths(jj)),'(',num2str(IdxOccPaths(jj)),') '];
+        LSL(IDOccPaths(jj)).free=false;
+        if isempty(LSL(IDOccPaths(jj)).idxBlocked) || LSL(IDOccPaths(jj)).idxBlocked > IdxOccPaths(jj)
+            LSL(IDOccPaths(jj)).idxBlocked=IdxOccPaths(jj);
+%             stringaffected=[stringaffected,num2str(IDOccPaths(jj)),'(',num2str(IdxOccPaths(jj)),') '];
         end
     end
-    dispText=['obstacle ',num2str(size(XY_ObsGrid,1)), ' affects pathID(pathIdx) ', stringaffected];
-    disp(dispText)
+%     dispText=['obstacle ',num2str(size(XY_ObsGrid,1)), ' affects pathID(pathIdx) ', stringaffected];
+%     if showObstacleInfluance; disp(dispText); end
 end
-StateLattice=CleanupLooseStarts(StateLattice);
-disp(['Adjustment of paths length to generate collision-free trajectories took ', num2str(toc,5),' sec'])
+fprintf('Length adjustment %d paths took %2.3f msec\n',length(IDOccPaths),toc*1000)
+LSL=CleanupLooseStarts(LSL);
 end
 
 function XY_ObsGrid=UpdateEnviroment(XY_ObsGrid)
