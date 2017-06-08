@@ -1,57 +1,53 @@
 initWorkspace
-load('SL_bezier.mat')
-length(StateLattice)
+load('LSL_bezier.mat')
+length(LSL)
 
-n=length(StateLattice);
+n=length(LSL);
 for ii=1:n
-    if StateLattice(ii).dk ~=0 % assignet if pure line
-        K_ii=StateLattice(ii).K;
+    if LSL(ii).dk ~=0 % assignet if pure line
+        K_ii=LSL(ii).K;
         dk_ii=DGradient(K_ii);
-        StateLattice(ii).dk = mean(dk_ii);
+        LSL(ii).dk = mean(dk_ii);
     end
 end
 
 
-voxel=[[StateLattice.x0].',[StateLattice.y0].',abs([StateLattice.th0].'), ...
-       [StateLattice.x1].',[StateLattice.y1].',abs([StateLattice.th1].')];
+vertices=getStartEndVerticesPath(LSL);
+idxOrigin=ismember(vertices(:,2:3), [0 0],'rows');
 
-idxOrigin=ismember(voxel(:,2:3), [0 0],'rows');
+vertexOrigin=vertices(idxOrigin,:);
 
-voxelOrigin=voxel(idxOrigin,:);
+idxOriginQ1=vertexOrigin(:,5)>=0;
 
-idxOriginQ1=voxelOrigin(:,5)>=0;
+vertexOrigin_Q1=vertexOrigin(idxOriginQ1,:);
 
-voxelOrigin_Q1=voxelOrigin(idxOriginQ1,:);
-% voxelOrigin_Y0=voxelOrigin(voxelOrigin(:,5)==0,:);
-
-
-idxExcists=ismember(voxel(:,1:3),[0 0 0; voxelOrigin_Q1(:,4:6)],'rows');
+idxExcists=ismember(vertices(:,1:3),[0 0 0; vertexOrigin_Q1(:,4:6)],'rows');
 idxOriginQ1=[idxOriginQ1;ones(length(idxExcists)-length(idxOriginQ1),1)];
 selectSL=all([idxExcists,idxOriginQ1],2);
 % find all the Q1 paths
 
-StateLatticeQ1=StateLattice(selectSL);
-StateLatticeQ4=StateLattice(selectSL);
-n=length(StateLatticeQ1);
+LSL_Q1=LSL(selectSL);
+LSL_Q4=LSL(selectSL);
+n=length(LSL_Q1);
 
 for ii=1:n
-    StateLatticeQ4(ii).th0    = -wrap2Pi(StateLatticeQ1(ii).th0);
-    StateLatticeQ4(ii).y1     =-StateLatticeQ1(ii).y1;
-    StateLatticeQ4(ii).th1    = -wrap2Pi(StateLatticeQ1(ii).th1);
-    StateLatticeQ4(ii).k      =-StateLatticeQ1(ii).k;
-    StateLatticeQ4(ii).dk     =-StateLatticeQ1(ii).dk;
-    StateLatticeQ4(ii).Y      =-StateLatticeQ1(ii).Y;
-    StateLatticeQ4(ii).TH     =-wrap2Pi(StateLatticeQ1(ii).TH);
+    LSL_Q4(ii).th0    = -wrap2Pi(LSL_Q1(ii).th0);
+    LSL_Q4(ii).y1     =-LSL_Q1(ii).y1;
+    LSL_Q4(ii).th1    = -wrap2Pi(LSL_Q1(ii).th1);
+    LSL_Q4(ii).k      =-LSL_Q1(ii).k;
+    LSL_Q4(ii).dk     =-LSL_Q1(ii).dk;
+    LSL_Q4(ii).Y      =-LSL_Q1(ii).Y;
+    LSL_Q4(ii).TH     =-wrap2Pi(LSL_Q1(ii).TH);
 end
 
-StateLattice=[StateLatticeQ1;StateLatticeQ4];
-length(StateLattice)
-StateLattice = CleanupStateLattice(StateLattice);
-length(StateLattice)
+LSL=[LSL_Q1;LSL_Q4];
+length(LSL)
+LSL = CleanupLSL(LSL);
+length(LSL)
 
-n=length(StateLattice);
+n=length(LSL);
 for ii=1:n
-    S_ii=StateLattice(ii).S;
+    S_ii=LSL(ii).S;
     jj_keep=[];
     next_ds=0;
     for jj=2:length(S_ii)-1
@@ -61,14 +57,14 @@ for ii=1:n
         end
     end
     jj_keep=unique([jj_keep;length(S_ii)]);
-    StateLattice(ii).X=StateLattice(ii).X(jj_keep);
-    StateLattice(ii).Y=StateLattice(ii).Y(jj_keep);
-    StateLattice(ii).TH=StateLattice(ii).TH(jj_keep);
-    StateLattice(ii).S=StateLattice(ii).S(jj_keep);
-    StateLattice(ii).K=StateLattice(ii).K(jj_keep);
+    LSL(ii).X=LSL(ii).X(jj_keep);
+    LSL(ii).Y=LSL(ii).Y(jj_keep);
+    LSL(ii).TH=LSL(ii).TH(jj_keep);
+    LSL(ii).S=LSL(ii).S(jj_keep);
+    LSL(ii).K=LSL(ii).K(jj_keep);
 end
 
-StateLattice = FreeAllPaths(StateLattice);
+LSL = FreeAllPaths(LSL);
 
 figure()
 title('')
@@ -77,5 +73,5 @@ grid on
 xlabel('x [m]')
 ylabel('y [m]')
 axis equal
-plotPath(StateLattice)
-length(StateLattice)
+plotPath(LSL)
+length(LSL)
