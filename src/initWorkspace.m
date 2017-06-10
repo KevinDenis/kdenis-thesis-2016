@@ -2,6 +2,7 @@ clearvars -except grid_XY XY_ObsTable LSLset LSL LSL_W ROI0 ROI1 idxIn0 idxIn1 r
 close all
 clc
 addpath('helper_external');
+addpath('helper_external/export_fig');
 addpath('helper_external/ClothoidG1fitting');
 addpath('helper_func/BezierCurve');
 addpath('helper_func');
