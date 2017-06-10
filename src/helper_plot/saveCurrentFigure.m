@@ -19,9 +19,11 @@ if nargin == 0
 else
     outfilename=[outfilename,(varargin{1})];
 end
-saveas(gcf,outfilename,'fig')
-tightfig;
-saveas(gcf,outfilename,'pdf')
+%saveas(gcf,outfilename,'fig')
+%tightfig;
+%saveas(gcf,outfilename,'pdf')
+set(gcf, 'Color', 'w');
+export_fig([outfilename,'.pdf'])
 end
 
 function hfig = tightfig(hfig)
