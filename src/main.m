@@ -127,7 +127,7 @@ else
             fprintf('default value 1 chosen \n')
             [LSL,MotionPrem]=BuildLSLWithClothoids(grid_XY,LSLset);
     end
-%     [LSL,ObstacleTable,XY_ObsTable]=BuildOccGridFromLSL(LSL);
+    [LSL,ObstacleTable,XY_ObsTable]=BuildOccGridFromLSL(LSL);
     fprintf(['Calculations for ', stringSelectedCurve{selectCurve}, ' curve  done ! \n']);
 end
 switch selectMap
