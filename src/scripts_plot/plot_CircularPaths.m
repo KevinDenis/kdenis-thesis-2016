@@ -6,8 +6,6 @@ v=sin(th);
 w=cos(th);
 k=w./v;
 
-
-            
 LSL(1:length(v),1)=struct('x0',0,'y0',0,'th0',0,...
                          'x1',[],'y1',[],'th1',[],...
                          'X',[],'Y',[],'TH',[],...
@@ -56,7 +54,6 @@ end
 
 fig=figureFullScreen();
 subplot(1,2,1)
-fig.Renderer='Painters';
 title('')
 hold on
 grid on
@@ -70,14 +67,13 @@ set(gca,'FontSize',24)
 axis(1.1*[-1 1 -1 1])
 
 subplot(1,2,2)
-fig.Renderer='Painters';
 title('')
 hold on
 grid on
 xlabel('x [m]')
 ylabel('y [m]')
 plotPath(LSL,co(1,:),2)
-plotSimpleRobot(robotPose)
+plotRoboticWheelchair(robotPose)
 axis equal
 l=legend('Circular Paths','Robot pose','Location','SE');
 set(l,'FontSize',26);

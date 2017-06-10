@@ -34,8 +34,7 @@ setOccupancy(FullShellRobot,XY_occ_shell,ones(size(XY_occ_shell,1),1))
 gray=[0.7 0.7 0.7];
 black=[0 0 0];
 
-fig=figureFullScreen(1);
-fig.Renderer='Painters';
+figureFullScreen(1);
 subplot(1,2,1)
 show(FullShellRobot)
 title('')
@@ -53,8 +52,7 @@ pause()
 saveCurrentFigure('OGRobotStart');
 close all
 
-fig=figureFullScreen(1);
-fig.Renderer='Painters';
+figureFullScreen(1);
 subplot(1,2,2)
 hold on
 for nn=idxStartEnd

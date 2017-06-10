@@ -23,8 +23,7 @@ end
 MP=getMotionPrimitiveFromStateLattice(LSL);
 MP=getForwardMotionFromStateLattice(MP);
 
-fig=figureFullScreen();
-fig.Renderer='Painters';
+figureFullScreen()
 title('')
 hold on
 grid on

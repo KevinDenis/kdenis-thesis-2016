@@ -26,7 +26,6 @@ ROI1=RotTransXY(ROI0,endPose(3),endPose(1),endPose(2));
 idxIn1=InPolygon(grid_XY(:,1),grid_XY(:,2),ROI1(:,1),ROI1(:,2));
 
 figureFullScreen()
-% figure()
 title('')
 xlabel('x [m]')
 ylabel('y [m]')

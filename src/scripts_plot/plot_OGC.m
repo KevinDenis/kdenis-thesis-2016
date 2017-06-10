@@ -1,7 +1,3 @@
-
-% !!!!!!!!!!!!!!!!!!!!!!!! MAN CROP NEEDED !!!!!!!!!!!!!!!!!!!!!!!!
-
-
 initPlotScripts
 co=get(groot,'DefaultAxesColorOrder');
 gridRes=0.02;
@@ -40,8 +36,7 @@ setOccupancy(FullShellRobot,XY_occ_shell,ones(size(XY_occ_shell,1),1))
 gray=[0.7 0.7 0.7];
 black=[0 0 0];
 
-fig=figureFullScreen(1);
-fig.Renderer='Painters';
+figureFullScreen()
 subplot(1,2,1)
 show(FullShellRobot)
 title('')
@@ -55,14 +50,7 @@ set(l,'FontSize',26);
 set(gca,'FontSize',24)
 set(gca, 'box', 'off')
 saveCurrentFigure('OGRobotStart');
-pause()
-saveCurrentFigure('OGRobotStart');
-close all
 
-fig=figureFullScreen(1);
-fig.Renderer='Painters';
-subplot(1,2,2)
-hold on
 for nn=idxStartEnd
     X=LSL(nn).X;
     Y=LSL(nn).Y;
@@ -91,7 +79,10 @@ for nn=idxStartEnd
         setOccupancy(PathOccGrid,XY_unique,1*ones(size(XY_unique,1),1))
 
         if idxPath == 18
+            figureFullScreen()
+            subplot(1,2,1)
             show(PathOccGrid)
+            hold on
             title('')
             hold on
             xlabel('x [m]')
@@ -107,8 +98,8 @@ for nn=idxStartEnd
             l=legend('Previously visited cells','Newly visited cells','Travelled path','Total path','Location','SE');
             set(l,'FontSize',26);
             set(gca,'FontSize',24)
-            set(gca,'FontSize',24)
-            drawnow
+            set(gca, 'box', 'off')
+            saveCurrentFigure('OGRobotPath');
         end
         setOccupancy(PathOccGrid,XY_occ_rot_trans,ones(size(XY_occ_rot_trans,1),1))
         if ~isempty(ii_occ_PathOcc)
@@ -116,4 +107,3 @@ for nn=idxStartEnd
         end
     end
 end
-% saveCurrentFigure('OGRobotPath');

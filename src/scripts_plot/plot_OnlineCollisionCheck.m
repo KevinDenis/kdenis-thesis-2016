@@ -56,18 +56,13 @@ end
 function UpdatePlot(XY_ObsGrid,StateLattice,affected_paths)
 co=get(groot,'DefaultAxesColorOrder');
 
-fig=figureFullScreen();
-fig.Renderer='Painters';
+figureFullScreen()
 title('')
 hold on
 grid on
 xlabel('x [m]')
 ylabel('y [m]')
-
-
-
 text(0.5,3.5,['obstacle affects : 763(202) 764(192) 779(226)' newline 'pathID(pathIdx)'],'FontSize',20)
-
 p1 = [2 3.5];                         % First Point
 p2 = XY_ObsGrid(2,:);                         % Second Point
 dp = p2-p1;                         % Difference
@@ -92,7 +87,6 @@ set(l,'FontSize',26);
 set(gca,'FontSize',24)
 axis equal
 axis([-4.5 4.5 -3.5 4])
-% annotation('arrow',[0.65 0.743],[0.86,0.815])
-annotation('arrow',[0.68 0.785],[0.91,0.865])
+annotation('arrow',[0.65 0.743],[0.86,0.815])
 % quiver(p1(1),p1(2),dp(1),dp(2),0,'Color',[0 0 0],'LineWidth',1.5)
 end

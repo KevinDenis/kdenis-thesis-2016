@@ -23,7 +23,6 @@ uniqueCloth=~ismember(vertices_cloth,vertices_bezier,'rows');
 uniqueBezier=~ismember(vertices_bezier,vertices_cloth,'rows');
 
 fig=figureFullScreen();
-fig.Renderer='Painters';
 title('')
 hold on
 grid on

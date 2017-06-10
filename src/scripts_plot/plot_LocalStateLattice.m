@@ -25,8 +25,7 @@ LSL=getForwardMotionFromStateLattice(LSL);
 
 [LSL_red] =LSL;
 
-fig=figureFullScreen();
-fig.Renderer='Painters';
+figureFullScreen()
 title('')
 hold on
 grid on
