@@ -118,11 +118,8 @@ Application of LPT on Discrete Motion Planning
 
 
 ### Part 1. Create State Lattice
-  *
-  *
-  *
 
- ### Part 2. Build Occupancy Grid
+### Part 2. Build Occupancy Grid
   * This code differces from BuildOccGridFromLSL because here paths
 length are not adjusted if they cause a collision, their are simply
 removed from the set (marked as blocked on the online-phase).
