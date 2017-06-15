@@ -1,24 +1,23 @@
-%=========================================================================%
-%                                                                         %
-%                       Interactive Tool : Path Viewer                    %
-%                       ------------------------------                    %
-%                                                                         %
-% WIP                                                                     %
-%                                                                         %
-% User settings :                                                         %
-%   * select curve geometry {[1],2,3} to select                           %
-%     {[Clothoid], Circular, Bézier}. (int value selectCurve)             %
-%   * see Robot Shape on paths y/n (bool value seeShape)                  %
-%                                                                         %
-% Overview :                                                              %
-%                                                                         %
-%   * WIP                                                                 %
-%                                                                         %
-% Kevin DENIS, KU Leuven, 2016-17                                         %
-% Master Thesis: Path planning algorithm for semi-autonomous              %
-%                mobile robots with fast and accurate collision checking  %
-%                                                                         %
-%=========================================================================%
+%==========================================================================
+%
+%                       Interactive Tool : Path Viewer
+%                       ------------------------------
+%
+% Interactive path viewing tool
+%
+% User settings :
+%   * select curve geometry {[1],2,3} to select
+%     {[Clothoid], Circular, Bézier}. (int value selectCurve)
+%   * see Robot Shape on paths y/n (bool value seeShape)
+%
+% Overview :
+%   * WIP
+%
+% Kevin DENIS, KU Leuven, 2016-17
+% Master Thesis: Path planning algorithm for semi-autonomous
+%                mobile robots with fast and accurate collision checking
+%
+%==========================================================================
 
 %% Init()
 initWorkspace
@@ -31,7 +30,7 @@ stringSelectedCurve={'clothoid';'circular';'bézier'};
 
 
 %% Main Program
-load('LSLset.mat') 
+load('LSLset.mat')
 load('grid_XY.mat')
 fprintf(['loading data for ',stringSelectedCurve{selectCurve}, ' curve']);
 switch selectCurve
@@ -81,11 +80,11 @@ if ~isnan(idxRow)
         LSL(IDOccPaths(jj)).free=false;
         if isempty(LSL(IDOccPaths(jj)).idxBlocked) || LSL(IDOccPaths(jj)).idxBlocked > IdxOccPaths(jj)
             LSL(IDOccPaths(jj)).idxBlocked=IdxOccPaths(jj);
-%             stringaffected=[stringaffected,num2str(IDOccPaths(jj)),'(',num2str(IdxOccPaths(jj)),') '];
+            %             stringaffected=[stringaffected,num2str(IDOccPaths(jj)),'(',num2str(IdxOccPaths(jj)),') '];
         end
     end
-%     dispText=['obstacle ',num2str(size(XY_ObsGrid,1)), ' affects pathID(pathIdx) ', stringaffected];
-%     if showObstacleInfluance; disp(dispText); end
+    %     dispText=['obstacle ',num2str(size(XY_ObsGrid,1)), ' affects pathID(pathIdx) ', stringaffected];
+    %     if showObstacleInfluance; disp(dispText); end
 end
 fprintf('Length adjustment %d paths took %2.3f msec\n',length(IDOccPaths),toc*1000)
 LSL=CleanupLooseStarts(LSL);

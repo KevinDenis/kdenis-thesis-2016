@@ -1,44 +1,43 @@
-%=========================================================================%
-%                                                                         %
-%                           Build Multi Grid                              %
-%                           ----------------                              %
-%                                                                         %
-% Creates a multi-size grid based on LSLsettings (LSLset structure)       %
-%                                                                         %
-% Overview :                                                              %
-%   * Builds a multi-size grid based on the LSLset structure              %
-%   * 3 grid sizes are used, fine close to the origin and coarse far away %
-%   * A end pose in the coarse grid represents thus a larger group of     %
-% possible end poses compared to the fine grid. This emphasizes the fact  %
-% that it is not useful to keep a large set of (relatively) similar paths %
-% with a end pose that is far from the origin.                            %
-%   * each grid size within the Region of Interest (see next step) will be%
-% connected with the selected curve geometry. If this curve is feasible, %
-% it will be added to the set of paths of the Local State Lattice.        %
-%                                                                         %
-% grid 1 : 0.10x0.10 --> 1.0m x 1.0m  (Fine grid)                         %
-% grid 2 : 0.25x0.25 --> 2.0m x 2.0m  (Medium grid)                       %
-% grid 3 : 0.50x0.50 --> 6.0m x 6.0m  (Coarse grid)                       %
-%                                                                         %
-% Kevin DENIS, KU Leuven, 2016-17                                         %
-% Master Thesis: Path planning algorithm for semi-autonomous              %
-%                mobile robots with fast and accurate collision checking  %
-%                                                                         %
-%=========================================================================%
+%==========================================================================
+%
+%                           Build Multi Grid
+%                           ----------------
+%
+% Creates a multi-size grid based on LSLsettings (LSLset structure)
+%
+% Overview :
+%   * Builds a multi-size grid based on the LSLset structure
+%   * 3 grid sizes are used, fine close to the origin and coarse far away
+%   * A end pose in the coarse grid represents thus a larger group of
+% possible end poses compared to the fine grid. This emphasizes the fact
+% that it is not useful to keep a large set of (relatively) similar paths
+% with a end pose that is far from the origin.
+%   * each grid size within the Region of Interest (see next step) will be
+% connected with the selected curve geometry. If this curve is feasible,
+% it will be added to the set of paths of the Local State Lattice.
+%
+% grid 1 : 0.10x0.10 --> 1.0m x 1.0m  (Fine grid)
+% grid 2 : 0.25x0.25 --> 2.0m x 2.0m  (Medium grid)
+% grid 3 : 0.50x0.50 --> 6.0m x 6.0m  (Coarse grid)
+%
+% Kevin DENIS, KU Leuven, 2016-17
+% Master Thesis: Path planning algorithm for semi-autonomous
+%                mobile robots with fast and accurate collision checking
+%
+%==========================================================================
 
-
-%=========================================================================%
-%                                                                         %
-%                 Local State Lattice Structure (LSL)                     %
-%                 -----------------------------------                     %
-%             [ x0 y0 th0 x1 y1 th1 X Y TH S K k dk Ltot                  %
-%              intK PathOccXY pathCost free idxBlocked ID]                %
-%                                                                         %
-%                        Obstacle Table Structure                         %
-%                        ------------------------                         %
-%                     [ x y (path)ID (path)blockedIdx]                    %
-%                                                                         %
-%=========================================================================%
+%==========================================================================
+%
+%                 Local State Lattice Structure (LSL)
+%                 -----------------------------------
+%             [ x0 y0 th0 x1 y1 th1 X Y TH S K k dk Ltot
+%              intK PathOccXY pathCost free idxBlocked ID]
+%
+%                        Obstacle Table Structure
+%                        ------------------------
+%                     [ x y (path)ID (path)blockedIdx]
+%
+%==========================================================================
 
 function [grid_XY,ROI0,idxIn0,ROI1,idxIn1]=BuildMultiSizeGrid(LSLset)
 

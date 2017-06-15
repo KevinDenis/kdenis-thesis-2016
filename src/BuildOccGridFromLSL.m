@@ -1,50 +1,50 @@
-%=========================================================================%
-%                                                                         %
-%                          Build Occupancy Grid                           %
-%                          --------------------                           %
-%                        (Path and Obstacle Based)                        %
-%                                                                         %
-% Calculates the occupancy of the wheelchair going over each set of paths %
-% of the Local State Lattice. This can take up to 5min.                   %
-% Path based lookup table will be converted to obstacle based lookup table%
-% occupancy grid (quite efficiently, ~10sec)                              % 
-%                                                                         %
-% Overview :                                                              %
-%   * First, the traditional "Path Based" lookup table is calculated, by  %
-% letting the shape of the robot move over each paths and storing each    %
-% time a grid is visited for the first time along with the                %
-% "path Idx"/"time"/"length". This, to know what space the robot occupies %
-% atevery pose along the path                                             %
-% calculated in the previous step. This part updates the LSL Structure    %
-%                                                                         %
-%   * Secondly, the Obstacke Based Occupancy grid is generated using the  %
-% previously calculated data.  A clever trick is used in order to generate%
-% the obstacle based lookup table in an efficient way.                    %
-% Clever trick explained below, in "Obstacle Based Approach".             %
-% This part of the code will create a new structure, ObstacleTable.       %
-% A Matrix form of this structure will also be kept, XY_ObsTable          %
-% ObstacleTable contains all paths where the robot occupies a certain     %
-% certain cell, and at which position along that path ("time"/"idx')      %
-% this happens.                                                           %
-%                                                                         %
-% Kevin DENIS, KU Leuven, 2016-17                                         %
-% Master Thesis: Path planning algorithm for semi-autonomous              %
-%                mobile robots with fast and accurate collision checking  % 
-%                                                                         %
-%=========================================================================%
+%==========================================================================
+%
+%                          Build Occupancy Grid
+%                          --------------------
+%                        (Path and Obstacle Based)
+%
+% Calculates the occupancy of the wheelchair going over each set of paths
+% of the Local State Lattice. This can take up to 5min.
+% Path based lookup table will be converted to obstacle based lookup table
+% occupancy grid (quite efficiently, ~10sec)
+%
+% Overview :
+%   * First, the traditional "Path Based" lookup table is calculated, by
+% letting the shape of the robot move over each paths and storing each
+% time a grid is visited for the first time along with the
+% "path Idx"/"time"/"length". This, to know what space the robot occupies
+% atevery pose along the path
+% calculated in the previous step. This part updates the LSL Structure
+%
+%   * Secondly, the Obstacke Based Occupancy grid is generated using the
+% previously calculated data.  A clever trick is used in order to generate
+% the obstacle based lookup table in an efficient way.
+% Clever trick explained below, in "Obstacle Based Approach".
+% This part of the code will create a new structure, ObstacleTable.
+% A Matrix form of this structure will also be kept, XY_ObsTable
+% ObstacleTable contains all paths where the robot occupies a certain
+% certain cell, and at which position along that path ("time"/"idx')
+% this happens.
+%
+% Kevin DENIS, KU Leuven, 2016-17
+% Master Thesis: Path planning algorithm for semi-autonomous
+%                mobile robots with fast and accurate collision checking
+%
+%==========================================================================
 
-%=========================================================================%
-%                                                                         %
-%                 Local State Lattice Structure (LSL)                     %
-%                 -----------------------------------                     %
-%             [ x0 y0 th0 x1 y1 th1 X Y TH S K k dk Ltot                  %
-%              intK PathOccXY pathCost free idxBlocked ID]                %
-%                                                                         %
-%                        Obstacle Table Structure                         %
-%                        ------------------------                         %
-%                     [ x y (path)ID (path)blockedIdx]                    %
-%                                                                         %
-%=========================================================================%
+%==========================================================================
+%
+%                 Local State Lattice Structure (LSL)
+%                 -----------------------------------
+%             [ x0 y0 th0 x1 y1 th1 X Y TH S K k dk Ltot
+%              intK PathOccXY pathCost free idxBlocked ID]
+%
+%                        Obstacle Table Structure
+%                        ------------------------
+%                     [ x y (path)ID (path)blockedIdx]
+%
+%==========================================================================
 
 function [LSL,ObstacleTable,XY_ObsTable]=BuildOccGridFromLSL(LSL)
 tic
@@ -61,7 +61,7 @@ n=length(LSL);
 ObsTable=zeros(1,4);
 idxTable=0;
 for nn=1:n
-%     tic
+    %     tic
     X=LSL(nn).X;
     Y=LSL(nn).Y;
     TH=LSL(nn).TH;
@@ -80,7 +80,7 @@ for nn=1:n
         PathOccXY(idxOccXY,:)=[PathOccXY_kk repelem(idxPath,size(PathOccXY_kk,1),1)];
         
     end
-%     maxSize=max(size(PathOccXY,1),maxSize);
+    %     maxSize=max(size(PathOccXY,1),maxSize);
     PathOccXY(idxOccXY+1:end,:)=[];
     [~,idxUnique,~] =unique(PathOccXY(:,1:2),'rows','stable'); % keep unique x-y set, but keep sorted by "time" (-stable option) (3rd colomn)
     PathOccXY=PathOccXY(idxUnique,:);
@@ -90,7 +90,7 @@ for nn=1:n
     
     LSL(nn).PathOccXY=PathOccXY;
     progressbar(nn/n)
-%     toc
+    %     toc
 end
 
 fprintf(' done ! (took %2.3f sec) \n',toc)
@@ -103,8 +103,8 @@ XY_ObsTable=ObsTable(:,1:2);
 [XY_ObsTable_S,IdxSorted]=sortrows(XY_ObsTable); % sorted is needed for the loop (see later)
 ObsTable_S=ObsTable(IdxSorted,:);
 
-[XY_ObsTable_U,idxUnique,~] = unique(XY_ObsTable_S,'rows','stable'); 
-% stable not needed since allready sorted beforehad, 
+[XY_ObsTable_U,idxUnique,~] = unique(XY_ObsTable_S,'rows','stable');
+% stable not needed since allready sorted beforehad,
 % but still used to be sure unique doesn't change the row sequence
 % idxUnique holds all the unique rows idx of XY_Table_S.
 % Thus it hols all unique XY paires.
@@ -120,7 +120,7 @@ ObsTable_S=ObsTable(IdxSorted,:);
 %                  idxUnique = [1 2 3 5];
 %                                   I can "merge" 3:4.
 
-n=length(idxUnique); 
+n=length(idxUnique);
 ObstacleTable(1,1)=struct('x',[],'y',[],'ID',[],'Idx',[]); % Empty clean ObstacleTable, since it is not cleaned by initWorkspace
 ObstacleTable(1:n,1)=struct('x',[],'y',[],'ID',[],'Idx',[]);
 progressbar('Calculating Lookup Table [Obstacle Based]')

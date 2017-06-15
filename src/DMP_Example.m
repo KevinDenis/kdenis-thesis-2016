@@ -1,52 +1,49 @@
-%=========================================================================%
-%                                                                         %
-%              Application of LPT on Discrete Motion Planning             %
-%              ==============================================             %
-%                                                                         %
-%                       Part 1. Create State Lattice                      %
-%                       ----------------------------                      %
-% Overview :                                                              %
-%   *                                                                     %
-%   *                                                                     %
-%   *                                                                     %
-%                                                                         %
-%                       Part 2. Build Occupancy Grid                      %
-%                       ----------------------------                      %
-%                                                                         %
-% Overview :                                                              %
-%   * This code differces from BuildOccGridFromLSL because here paths     %
-% length are not adjusted if they cause a collision, their are simply     %
-% removed from the set (marked as blocked on the online-phase).           %
-%   * This makes the creation of the StateLattice Structure simpler, since%
-% calculating at which time/length/idx a certain cel is visited for the   %
-% first time is not nececeaaru anymore. Just knowing which cells are      %
-% occupied by taking a certain path is needed.                            %
-%   * This updates the State Latice Structure.                            %
-%                                                                         %
-%                          Part 3. Path Planning                          %
-%                          ---------------------                          %
-%                                                                         %
-% Overview :                                                              %
-%   * Plan a path from the centre of the robot lab to the elevator        %
-% The wheelchair has to enter the elevator "backwards", but should plan to%
-% Drive the least amount of time in reverse, this is not comfortable for  %
-% the driver.                                                             %
-%   * First, a 2D planner is used, based on the Voronoi diagram of the map%
-% This maximises the distance to each obstacle, therefore the map is not  %
-% inflated before the use of this 2D planner.                             %
-%   * Then, at certain distances of on that path (maxNodeDist), a State   %
-% Lattice is drawn, indicating feasible connections in the surrounding of %
-% that position.                                                          %
-%   * Obstacle free paths (this time, not length adjusted, just removed)  %
-% are calculated and then Dijkstra's algorithm is used to find a feasible %
-% path from start to end pose.                                            %
-%                                                                         %
-%                                                                         %
-% Kevin DENIS, KU Leuven, 2016-17                                         %
-% Master Thesis: Path planning algorithm for semi-autonomous              %
-%                mobile robots with fast and accurate collision checking  % 
-%                                                                         %
-%=========================================================================%
+%==========================================================================
+%
+%              Application of LPT on Discrete Motion Planning
+%              ==============================================
+%
+%                       Part 1. Create State Lattice
+%                       ----------------------------
+%   *
+%   *
+%   *
+%
+%                       Part 2. Build Occupancy Grid
+%                       ----------------------------
+%
+%   * This code differces from BuildOccGridFromLSL because here paths
+% length are not adjusted if they cause a collision, their are simply
+% removed from the set (marked as blocked on the online-phase).
+%   * This makes the creation of the StateLattice Structure simpler, since
+% calculating at which time/length/idx a certain cel is visited for the
+% first time is not nececeaaru anymore. Just knowing which cells are
+% occupied by taking a certain path is needed.
+%   * This updates the State Latice Structure.
+%
+%                          Part 3. Path Planning
+%                          ---------------------
+%
+%   * Plan a path from the centre of the robot lab to the elevator
+% The wheelchair has to enter the elevator "backwards", but should plan to
+% Drive the least amount of time in reverse, this is not comfortable for
+% the driver.
+%   * First, a 2D planner is used, based on the Voronoi diagram of the map
+% This maximises the distance to each obstacle, therefore the map is not
+% inflated before the use of this 2D planner.
+%   * Then, at certain distances of on that path (maxNodeDist), a State
+% Lattice is drawn, indicating feasible connections in the surrounding of
+% that position.
+%   * Obstacle free paths (this time, not length adjusted, just removed)
+% are calculated and then Dijkstra's algorithm is used to find a feasible
+% path from start to end pose.
+%
+%
+% Kevin DENIS, KU Leuven, 2016-17
+% Master Thesis: Path planning algorithm for semi-autonomous
+%                mobile robots with fast and accurate collision checking
+%
+%==========================================================================
 
 %#ok<*UNRCH> % MATLAB, don't display warning for unreachable statements
 initWorkspace
@@ -93,7 +90,7 @@ DMP_OptPath(LSL,voronoi_path,xyth_start,xyth_dest);
 
 function [LSLset] = DMP_getLocalStateLatticeSettings()
 res=1e-2; % extra safty factor of 2
-LSLset.x0=0; 
+LSLset.x0=0;
 LSLset.y0=0;
 LSLset.th0=0;
 LSLset.xmax=2;
@@ -194,7 +191,7 @@ LSL_180deg=RotTransMotionPrem(LSL,pi,0,0);
 LSL=[LSL;LSL_90deg;LSL_90degMin;LSL_180deg];
 
 SL_ToS=[];
-for th0=(-3/4*pi:pi/4:pi) 
+for th0=(-3/4*pi:pi/4:pi)
     SL_ToS = [SL_ToS;getMotionPremTurnOnSpot(LSL,th0)];
 end
 
@@ -242,7 +239,7 @@ jj_all_Path=jj_Path(:);
 
 % Moving the robot's footprint over each path
 progressbar('Calculating Occupancy Grid')
-n=length(LSL); 
+n=length(LSL);
 tic
 for nn=1:n
     X=LSL(nn).X;
@@ -347,8 +344,8 @@ GSL(lengthGSL,1)=LSL(end);
 GSL=GSL.';
 kk=1:lengthLSL;
 for ii=1:growthFactor
-	GSL(kk)=LSL;
-	kk=kk+lengthLSL;
+    GSL(kk)=LSL;
+    kk=kk+lengthLSL;
 end
 
 tic
@@ -380,13 +377,13 @@ fprintf('Calculating Collision Free Paths ...')
 n=length(GSL);
 for ii=1:n
     PathOccXY_ii=GSL(ii).PathOccXY;
-%     PathOccXY_ii=PathOccXY_ii(:,1:2);
+    %     PathOccXY_ii=PathOccXY_ii(:,1:2);
     % check whether path is outside world limits, blocked if true
     if any(PathOccXY_ii(:,1)<(map.XWorldLimits(1))+0.5) || ...
-       any(PathOccXY_ii(:,1)>(map.XWorldLimits(2))-0.5) || ...
-       any(PathOccXY_ii(:,2)<(map.YWorldLimits(1))+0.5) || ...
-       any(PathOccXY_ii(:,2)>(map.YWorldLimits(2))-0.5)
-       GSL(ii).free=false;
+            any(PathOccXY_ii(:,1)>(map.XWorldLimits(2))-0.5) || ...
+            any(PathOccXY_ii(:,2)<(map.YWorldLimits(1))+0.5) || ...
+            any(PathOccXY_ii(:,2)>(map.YWorldLimits(2))-0.5)
+        GSL(ii).free=false;
     else
         if any(getOccupancy(map,PathOccXY_ii))
             GSL(ii).free=false; % actual collision checking. No lookup table used, this would ask to big matrices

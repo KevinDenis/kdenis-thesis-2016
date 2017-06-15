@@ -1,36 +1,35 @@
-%=========================================================================%
-%                                                                         %
-%              Build Local State Lattice With Grid using circles          %
-%              -------------------------------------------------          %
-%                                                                         %
-% Overview :                                                              %
-%   * Discrete set of paths are calculated by integrating achievable      %
-%   velocities defined by v,w paires. This is a "forward" approach of     %
-%   creating the LSL. Bézier and Clothoid LSL building uses the inverse   %
-%   approach (first discrete end poses are defined, then feasible         %
-%   trajectories are calculated. Trajactories are automatically feasible  %
-%   when integrating feasible velocities                                  %
-%   * LSLset.res determines the integration step (resolution of the path) %
-%                                                                         %
-% Kevin DENIS, KU Leuven, 2016-17                                         %
-% Master Thesis: Path planning algorithm for semi-autonomous              %
-%                mobile robots with fast and accurate collision checking  %
-%                                                                         %
-%=========================================================================%
+%==========================================================================
+%
+%              Build Local State Lattice With Grid using circles
+%              -------------------------------------------------
+%
+% Overview :
+%   * Discrete set of paths are calculated by integrating achievable
+% velocities defined by v,w paires. This is a "forward" approach of
+% creating the LSL. Bézier and Clothoid LSL building uses the inverse
+% approach (first discrete end poses are defined, then feasible
+% trajectories are calculated. Trajactories are automatically feasible
+% when integrating feasible velocities
+%   * LSLset.res determines the integration step (resolution of the path)
+%
+% Kevin DENIS, KU Leuven, 2016-17
+% Master Thesis: Path planning algorithm for semi-autonomous
+%                mobile robots with fast and accurate collision checking
+%
+%==========================================================================
 
-
-%=========================================================================%
-%                                                                         %
-%                 Local State Lattice Structure (LSL)                     %
-%                 -----------------------------------                     %
-%             [ x0 y0 th0 x1 y1 th1 X Y TH S K k dk Ltot                  %
-%              intK PathOccXY pathCost free idxBlocked ID]                %
-%                                                                         %
-%                        Obstacle Table Structure                         %
-%                        ------------------------                         %
-%                     [ x y (path)ID (path)blockedIdx]                    %
-%                                                                         %
-%=========================================================================%
+%==========================================================================
+%
+%                 Local State Lattice Structure (LSL)
+%                 -----------------------------------
+%             [ x0 y0 th0 x1 y1 th1 X Y TH S K k dk Ltot
+%              intK PathOccXY pathCost free idxBlocked ID]
+%
+%                        Obstacle Table Structure
+%                        ------------------------
+%                     [ x y (path)ID (path)blockedIdx]
+%
+%==========================================================================
 
 function [LSL]=BuildLSLWithCircles(LSLset)
 res=LSLset.res;
@@ -46,15 +45,15 @@ idxKeep=abs(k)<=1;
 k=k(idxKeep);
 v=v(idxKeep);
 w=w(idxKeep);
-                      
+
 LSL(1:length(v),1)=struct('x0',0,'y0',0,'th0',0,...
-                         'x1',[],'y1',[],'th1',[],...
-                         'X',[],'Y',[],'TH',[],...
-                         'S',[],'K',[], ... 
-                         'k',0,'dk',0,'Ltot',0,'intK',0,...
-                         'PathOccXY',[], 'pathCost',[], ...
-                          'free',true,'idxBlocked',[],'ID',[]);
-                      
+    'x1',[],'y1',[],'th1',[],...
+    'X',[],'Y',[],'TH',[],...
+    'S',[],'K',[], ...
+    'k',0,'dk',0,'Ltot',0,'intK',0,...
+    'PathOccXY',[], 'pathCost',[], ...
+    'free',true,'idxBlocked',[],'ID',[]);
+
 for ii=1:length(v)
     v_ii=v(ii);
     w_ii=w(ii);
@@ -84,7 +83,7 @@ for ii=1:length(v)
     LSL(ii).y1 = Y(end);
     LSL(ii).th1= TH(end);
     LSL(ii).X  = X;
-    LSL(ii).Y  = Y;           
+    LSL(ii).Y  = Y;
     LSL(ii).TH = TH;
     LSL(ii).S = S;
     LSL(ii).K = K;

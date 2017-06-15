@@ -1,45 +1,45 @@
-%=========================================================================%
-%                                                                         %
-%             Build Local State Lattice With Grid using Clothoids         %
-%             ---------------------------------------------------         %
-%                                                                         %
-% Overview :                                                              %
-%   * Discrete end poses defined by the multi-size grid are connected with%
-% a clothoid. If this clothoid is compliant with the constraints, it is   %
-% added to the Local State Lattice Structure containing all feasible paths%
-% starting from the robot actual position0.                               %
-%   * First, every CEP defined by the ROI at the origin [0 0 0°]          %
-%   * Then this step is repeated at every feasible Expansion Position (EP)%
-% defined by dxEP. At these discrete poses, the first step is repeated,   %
-% connecting feasible paths with this EP, creating a larger variety of    %
-% paths.                                                                  %
-% * Paths within the local state lattice set are therefore defined        %
-% by 1 or 2 clothoids.                                                    %
-%                                                                         %
-%                           !!! IMPORTANT !!!                             %
-%                           -----------------                             %
-% Code to generate clothoids is not written by Kevin DENIS, but originates%
-% from : https://github.com/ebertolazzi/G1fitting                         %
-% mex files for fast computations are pre-compiled for Linux and Windows  %
-%                                                                         %
-% Kevin DENIS, KU Leuven, 2016-17                                         %
-% Master Thesis: Path planning algorithm for semi-autonomous              %
-%                mobile robots with fast and accurate collision checking  %
-%                                                                         %
-%=========================================================================%
+%==========================================================================
+%
+%             Build Local State Lattice With Grid using Clothoids
+%             ---------------------------------------------------
+%
+% Overview :
+%   * Discrete end poses defined by the multi-size grid are connected with
+% a clothoid. If this clothoid is compliant with the constraints, it is
+% added to the Local State Lattice Structure containing all feasible paths
+% starting from the robot actual position0.
+%   * First, every CEP defined by the ROI at the origin [0 0 0°]
+%   * Then this step is repeated at every feasible Expansion Position (EP)
+% defined by dxEP. At these discrete poses, the first step is repeated,
+% connecting feasible paths with this EP, creating a larger variety of
+% paths.
+% * Paths within the local state lattice set are therefore defined
+% by 1 or 2 clothoids.
+%
+%                           !!! IMPORTANT !!!
+%                           -----------------
+% Code to generate clothoids is not written by Kevin DENIS, but originates
+% from : https://github.com/ebertolazzi/G1fitting
+% mex files for fast computations are pre-compiled for Linux and Windows.
+%
+% Kevin DENIS, KU Leuven, 2016-17
+% Master Thesis: Path planning algorithm for semi-autonomous
+%                mobile robots with fast and accurate collision checking
+%
+%==========================================================================
 
-%=========================================================================%
-%                                                                         %
-%                 Local State Lattice Structure (LSL)                     %
-%                 -----------------------------------                     %
-%             [ x0 y0 th0 x1 y1 th1 X Y TH S K k dk Ltot                  %
-%              intK PathOccXY pathCost free idxBlocked ID]                %
-%                                                                         %
-%                        Obstacle Table Structure                         %
-%                        ------------------------                         %
-%                     [ x y (path)ID (path)blockedIdx]                    %
-%                                                                         %
-%=========================================================================%
+%==========================================================================
+%
+%                 Local State Lattice Structure (LSL)
+%                 -----------------------------------
+%             [ x0 y0 th0 x1 y1 th1 X Y TH S K k dk Ltot
+%              intK PathOccXY pathCost free idxBlocked ID]
+%
+%                        Obstacle Table Structure
+%                        ------------------------
+%                     [ x y (path)ID (path)blockedIdx]
+%
+%==========================================================================
 
 function [LSL,MP]=BuildLSLWithClothoids(grid_XY,LSLset)
 %% Motion Primitive from [0 0 0]
