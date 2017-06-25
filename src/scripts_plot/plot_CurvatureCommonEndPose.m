@@ -1,7 +1,7 @@
 initPlotScripts
 co=get(groot,'DefaultAxesColorOrder');
 
-load('LSL_bezier.mat')
+load('LSL_bezier_backup.mat')
 LSL_bezier=LSL;
 LSL_bezier=getMotionPrimitiveFromStateLattice(LSL_bezier);
 LSL_bezier = CleanupLSL(LSL_bezier);
@@ -41,7 +41,7 @@ grid on
 grid minor
 plot(S_bezier,K_bezier,'LineWidth',2)
 plot(S_cloth, K_cloth,'LineWidth',2)
-l=legend('Curvature Bézier Curve','Curvature clothoid','Location','SW');
+l=legend('Curvature Bézier Curve','Curvature Clothoid','Location','SW');
 set(l,'FontSize',26);
 set(gca,'FontSize',24)
 axis([0 2.5 -0.4 1])
@@ -55,11 +55,11 @@ grid on
 grid minor
 plot(S_bezier_mod,K_bezier_mod,'LineWidth',2)
 plot(S_cloth, K_cloth,'LineWidth',2)
-l=legend('Curvature Bézier Curve (mod obj function)','Curvature clothoid','Location','SW');
+l=legend('Curvature Bézier Curve (mod obj function)','Curvature Clothoid','Location','SW');
 set(l,'FontSize',26);
 set(gca,'FontSize',24)
 axis([0 2.5 -0.4 1])
 xlabel('s [m]')
 ylabel('\kappa [m^{-1}]')
 
-% saveCurrentFigure('MPCurvatureComp');
+saveCurrentFigure('MPCurvatureComp');

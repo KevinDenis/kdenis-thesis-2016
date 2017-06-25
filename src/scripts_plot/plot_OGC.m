@@ -91,10 +91,10 @@ for nn=idxStartEnd
             plot(0.63,0.35,'s','MarkerEdgeColor',black,'MarkerFaceColor',black,'MarkerSize',8)
             plot(X(1:idxPath),Y(1:idxPath),'Color',co(1,:),'Linewidth',3);
             plot(X,Y,'--','Color',co(1,:),'Linewidth',2);
-            text(-0.25,0.70,'Path\_Start  : [0    0      0°   ]','FontSize',24)
-            text(-0.25,0.60,'Path\_Dest  : [0.5 0.1 22.5°]','FontSize',24)
-            text(-0.25,0.50,['Path\_ID  : ',num2str(LSL(nn).ID)],'FontSize',24)
-            text(-0.25,0.40,['Path\_Idx : ',num2str(idxPath)],'FontSize',24)
+            text(-0.25,0.70,'$\mathcal{P}.\boldmath{p_0} : [0,0,0^{\circ}]$','FontSize',24,'Interpreter','LaTex')
+            text(-0.25,0.60,'$\mathcal{P}.\boldmath{p_1} : [0.5, 0.1, 22.5^{\circ}]$','FontSize',24,'Interpreter','LaTex')
+            text(-0.25,0.50,'$\mathcal{P}.pathID : 14$','FontSize',24,'Interpreter','LaTex')
+            text(-0.25,0.40,'$\mathcal{P}.pathIdx : 18$','FontSize',24,'Interpreter','LaTex')
             l=legend('Previously visited cells','Newly visited cells','Travelled path','Total path','Location','SE');
             set(l,'FontSize',26);
             set(gca,'FontSize',24)

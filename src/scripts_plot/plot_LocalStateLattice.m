@@ -9,7 +9,7 @@ robotPose = [0 0 0];
 plotClothCurve=true; % bézier : false,  cloth:true
 if plotClothCurve
     load('LSL_cloth.mat')
-    StringCurve='Clothoids';
+    StringCurve='Clothoid';
     StringFileName='LSLClothoid';
     
 else
