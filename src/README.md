@@ -73,7 +73,8 @@ grid 3 : 0.50x0.50 --> 6.0m x 6.0m  (Coarse grid)
 Build Local State Lattice based on clothoids
 
 ### Overview
-* Discrete end poses defined by the multi-size grid is connected with a clothoid. If this clothoid is compliant with the constraints, it is added to the Local State Lattice Structure containing all feasible paths starting from the robot actual position0. 
+* Discrete end poses defined by the multi-size grid is connected with a clothoid. 
+If this clothoid is compliant with the constraints, it is added to the Local State Lattice Structure containing all feasible paths starting from the robot actual position0. 
 * First, every CEP defined by the ROI at the origin [0 0 0°] 
 * Then this step is repeated at every feasible Expansion Position (EP) defined by dxEP. At these discrete poses, the first step is repeated, connecting feasible paths with this EP, creating a larger variety of paths. 
 * Paths within the local state lattice set are therefore defined by 1 or 2 clothoids.
@@ -110,7 +111,10 @@ Given a map of the environment and a user-selected robot pose, paths lengths are
 ## LocalPathPlanning.m 
 OPTIONAL, set seeLPP to true to see the robot shape move over a selected path by the user. This mimics the role of the plan recognition algorithm. This can also be used to ensure that the path taken is obstacle free, by visual inspection.
 ### Overview 
- * This function will mimic the plan recognition algorithm. The user selects a path by clicking on it. The closest path to this input will be chosen. If this path is not directly connected to the robot pose, the path connecting the robot pose and the destination is searched. Since one path is composed at most by 2 subsequent curves, this process is only done once 
+ * This function will mimic the plan recognition algorithm. The user selects a path by clicking on it. 
+The closest path to this input will be chosen. If this path is not directly connected to the robot pose, 
+the path connecting the robot pose and the destination is searched. 
+Since one path is composed at most by 2 subsequent curves, this process is only done once. 
  * In a previous version of this code, Dijkstra’s algorithm was used to do this. This was a bit "overkill" since in this case "a" solution is also the "optimal" solution. Only one path leads to a certain intermediate destination (the expansion position), where the second curve originates. This has been commented out at the end of this function 
  
 ## DMP_example.m
