@@ -68,7 +68,7 @@ pathInGoal_cloth=false(length(grid_XYTH),1);
 pathInGoal_circ=false(length(grid_XYTH),1);
 n=length(grid_XYTH);
 ppm = ParforProgressStarter2('Calculating...', n, 0.1, 0, 1, 1);
-for ii=1:n
+parfor ii=1:n
 % 1700
     [LSL_W_cloth,~,~]=BuildLSLColFree(LSL_cloth,ObstacleTable_cloth,XY_ObsTable_cloth,grid_XY,map,grid_XYTH(ii,:));
     [LSL_W_circ,~,~]=BuildLSLColFree(LSL_circ,ObstacleTable_circ,XY_ObsTable_circ,grid_XY,map,grid_XYTH(ii,:));    
