@@ -3,13 +3,12 @@ co=get(groot,'DefaultAxesColorOrder');
 
 %% Init workspace for benchmark. 
 % Additional Data
-load('Benchmark1_medium.mat')
+ResTestGrid = 1;
+stringResTestGrid={'coarse';'normal';'fine'};
+load(['Benchmark1_',stringResTestGrid{ResTestGrid},'.mat'])
 load('RobotLaboEntrance_Corners_XY_CCW.mat')
 Map_XY_CCW=RobotLaboEntrance_Corners_XY_CCW;
 map = 'RobotLaboEntranceEdges.bmp';
-
-grid_res = 0.05;
-angle_res = pi/16;
 
 RobotHull=[-0.80  0.20;
            -0.46  0.30;
@@ -77,6 +76,9 @@ C = discretize(grid_Mean,7);
 
 %% Plots
 figure()
+plotRobotPose(grid_XYTH,'k')
+
+figure()
 hold on
 plot(Map_XY_CCW(:,1),Map_XY_CCW(:,2),'k','LineWidth',3)
 plot(TestRegion(:,1),TestRegion(:,2),'r-')
@@ -102,9 +104,6 @@ colormap([Color1;Color2;Color3;Color4;Color5;Color6;Color7])
 colorbar
 % axis([3 6 0 4])
 axis normal
-
-figure()
-plotRobotPose(grid_XYTH,'k')
 
 %% FUNCTIONS
 function [X_Patch,Y_Patch]=getGrid(X,Y,dx)

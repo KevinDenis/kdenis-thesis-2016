@@ -1,5 +1,9 @@
 initWorkspace
-%% Init workspace for benchmark. 
+%% Init workspace for benchmark.
+% User Input
+ResTestGrid = 1;
+stringResTestGrid={'coarse';'normal';'fine'};
+saveFileName=['Benchmark1_',stringResTestGrid{ResTestGrid},'.mat'];
 % Will load data unless it is allready in workspace
 if ~exist('LSLset', 'var'); load('LSLset.mat'); end
 if ~exist('grid_XY', 'var'); load('grid_XY.mat'); end
@@ -12,37 +16,54 @@ if ~exist('XY_ObsTable_circ', 'var'); load('XY_ObsTable_circ.mat'); XY_ObsTable_
 
 % Additional Data
 map = 'RobotLaboEntranceEdges.bmp';
+load('RobotLaboEntrance_Corners_XY_CCW.mat')
+Map_XY_CCW=RobotLaboEntrance_Corners_XY_CCW;
+SimpleLabCoordinates = Map_XY_CCW;
+SimpleLabCoordinates(9,1)=8;
+SimpleLabCoordinates(10,:)=[];
+SimpleLabCoordinates(10,1)=8;
+SimpleLabCoordinates=[SimpleLabCoordinates;[0.01,0.01;2.11,0.01]];
 
 RobotHull=[-0.80  0.20;
-           -0.46  0.30;
-            0.50  0.30;
-            0.50 -0.30;
-           -0.46 -0.30;
-           -0.80 -0.20;
-           -0.80  0.20];
-TestRegion = [
-              3.0, 0.5;
-              3.0, 3.5;
-              5.0, 3.5;
-              5.0, 2.8;
-              5.5, 2.8;
-              5.5, 1.4;
-              5.0, 1.4;
-              5.0, 0.5;
-              3.0, 0.5
-              ];
+    -0.46  0.30;
+    0.50  0.30;
+    0.50 -0.30;
+    -0.46 -0.30;
+    -0.80 -0.20;
+    -0.80  0.20];
+
+TestRegion = [3.0, 0.5;
+    3.0, 3.5;
+    5.0, 3.5;
+    5.0, 2.8;
+    5.5, 2.8;
+    5.5, 1.4;
+    5.0, 1.4;
+    5.0, 0.5;
+    3.0, 0.5];
+
 GoalRegion = [2.40, 2.20;
-              2.56, 2.20;
-              2.56, 2.94;
-              2.40, 2.94;
-              2.40, 2.20];
-          
-% % Normal Test Grid
-[grid_XY]=polygrid(TestRegion(:,1),TestRegion(:,2),400);
-TH = wrap2Pi(pi/2:pi/16:3/2*pi);
-% % Fine Test Grid
-% [grid_XY]=polygrid(TestRegion(:,1),TestRegion(:,2),1600);
-% TH = wrap2Pi(pi/2:pi/32:3/2*pi);
+    2.56, 2.20;
+    2.56, 2.94;
+    2.40, 2.94;
+    2.40, 2.20];
+
+RobotHull=LinInterpToRes(RobotHull,0.05);
+
+switch ResTestGrid
+    case 1 % coarse Test Grid
+        grid_res = 0.1;
+        angle_res = pi/4;
+    case 2 % normal Test Grid
+        grid_res = 0.05;
+        angle_res = pi/8;
+    case 3 % fine Test Grid
+        grid_res = 0.025;
+        angle_res = pi/16;
+end
+
+[grid_XY]=polygrid(TestRegion(:,1),TestRegion(:,2),(1/grid_res)^2);
+TH = wrap2Pi(pi/2:angle_res:3/2*pi);
 grid_XYTH=addTHtoGridXY(grid_XY,TH);
 [LabGrid,XY_occ] = getMapXYOccFormBmp(map,0.02);
 
@@ -50,7 +71,7 @@ toKeep=false(length(grid_XYTH),1);
 for ii = 1:length(grid_XYTH)
     robotPose = grid_XYTH(ii,:);
     RobotHull_RotTrans = RotTransXY(RobotHull,robotPose(3),robotPose(1),robotPose(2));
-    if ~any(InPolygon(XY_occ(:,1),XY_occ(:,2),RobotHull_RotTrans(:,1),RobotHull_RotTrans(:,2)))
+    if all(InPolygon(RobotHull_RotTrans(:,1),RobotHull_RotTrans(:,2),SimpleLabCoordinates(:,1),SimpleLabCoordinates(:,2)))
         toKeep(ii)=1;
     end
 end
@@ -58,7 +79,7 @@ end
 grid_XYTH=grid_XYTH(toKeep,:);
 figure()
 hold on
-show(LabGrid)
+plot(Map_XY_CCW(:,1),Map_XY_CCW(:,2),'k','LineWidth',3)
 plot(TestRegion(:,1),TestRegion(:,2),'r-')
 plot(GoalRegion(:,1),GoalRegion(:,2),'g-')
 plotRobotPose(grid_XYTH,'k')
@@ -69,27 +90,27 @@ n=length(grid_XYTH);
 ppm = ParforProgressStarter2('Calculating...', n, 0.1, 0, 1, 1);
 parfor ii=1:n
     [LSL_W_cloth,~,~]=BuildLSLColFree(LSL_cloth,ObstacleTable_cloth,XY_ObsTable_cloth,grid_XY,map,grid_XYTH(ii,:),'fwd');
-    [LSL_W_circ,~,~]=BuildLSLColFree(LSL_circ,ObstacleTable_circ,XY_ObsTable_circ,grid_XY,map,grid_XYTH(ii,:),'fwd');    
-%     pathInGoal_cloth(ii)=pathThroughGoalRegion(GoalRegion,LSL_W_cloth);
-%     if pathInGoal_cloth(ii)
-%         clf
-%         figure(1)
-%         hold on
-%         show(LabGrid)
-%         plot(TestRegion(:,1),TestRegion(:,2),'r-')
-%         plot(GoalRegion(:,1),GoalRegion(:,2),'g-')
-%         plotRobotPose(grid_XYTH,'k')
-%         plotRobotPath(LSL_W_cloth)
-%         hold off
-%         drawnow
-%         disp(ii)
-%     end
+    [LSL_W_circ,~,~]=BuildLSLColFree(LSL_circ,ObstacleTable_circ,XY_ObsTable_circ,grid_XY,map,grid_XYTH(ii,:),'fwd');
+        pathInGoal_cloth(ii)=pathThroughGoalRegion(GoalRegion,LSL_W_cloth);
+%         if pathInGoal_cloth(ii)
+%             clf
+%             figure(1)
+%             hold on
+%             show(LabGrid)
+%             plot(TestRegion(:,1),TestRegion(:,2),'r-')
+%             plot(GoalRegion(:,1),GoalRegion(:,2),'g-')
+%             plotRobotPose(grid_XYTH,'k')
+%             plotRobotPath(LSL_W_cloth)
+%             hold off
+%             drawnow
+%             disp(ii)
+%         end
     pathInGoal_circ(ii)=pathThroughGoalRegion(GoalRegion,LSL_W_circ);
     ppm.increment(ii);
 end
 delete(ppm);
-save('Benchmark1_medium.mat','GoalRegion','grid_XY','grid_XYTH','pathInGoal_circ','pathInGoal_cloth','TestRegion','TH')
-
+save(saveFileName,'angle_res','grid_res','GoalRegion','grid_XY','grid_XYTH','pathInGoal_circ','pathInGoal_cloth','TestRegion','TH')
+%}
 %% FUNCTIONS
 function pathInGoal=pathThroughGoalRegion(GoalRegion,Path)
 for ii=1:length(Path)
@@ -130,7 +151,7 @@ end
 end
 
 function plotRobotPose(grid_XYTH,plotColor)
-r=0.01;
+r=0.025;
 X_Pose=[grid_XYTH(:,1), grid_XYTH(:,1)+r*cos(grid_XYTH(:,3)), nan(size(grid_XYTH(:,1)))].';
 Y_Pose=[grid_XYTH(:,2), grid_XYTH(:,2)+r*sin(grid_XYTH(:,3)), nan(size(grid_XYTH(:,1)))].';
 plot(X_Pose(:).',Y_Pose(:).',plotColor,'LineWidth',1.5)

@@ -65,7 +65,6 @@ for ii = 1:length(grid_XYTH)
     end
 end
 
-
 grid_XYTH=grid_XYTH(toKeep,:);
 figure()
 hold on
