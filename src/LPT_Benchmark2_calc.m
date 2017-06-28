@@ -45,7 +45,7 @@ GoalRegion = [
               6.8, 5.2;
               6.8, 4.4;
               ];
-
+GoalRegion=flip(GoalRegion);
 RobotHull=LinInterpToRes(RobotHull,0.05);
 % Normal Test Grid
 [grid_XY]=polygrid(TestRegion(:,1),TestRegion(:,2),400);
@@ -77,17 +77,18 @@ plotRobotPose(grid_XYTH,'k')
 pathInGoal_cloth=false(length(grid_XYTH),1);
 pathInGoal_circ=false(length(grid_XYTH),1);
 n=length(grid_XYTH);
-ppm = ParforProgressStarter2('Calculating...', n, 0.1, 0, 1, 1);
-parfor ii=1:n
+% ppm = ParforProgressStarter2('Calculating...', n, 0.1, 0, 1, 1);
+for ii=1:n
 % 1700
-    [LSL_W_cloth,~,~]=BuildLSLColFree(LSL_cloth,ObstacleTable_cloth,XY_ObsTable_cloth,grid_XY,map,grid_XYTH(ii,:));
-    [LSL_W_circ,~,~]=BuildLSLColFree(LSL_circ,ObstacleTable_circ,XY_ObsTable_circ,grid_XY,map,grid_XYTH(ii,:));    
+    [LSL_W_cloth,~,~]=BuildLSLColFree(LSL_cloth,ObstacleTable_cloth,XY_ObsTable_cloth,grid_XY,map,grid_XYTH(ii,:),'bkw');
+    [LSL_W_circ,~,~]=BuildLSLColFree(LSL_circ,ObstacleTable_circ,XY_ObsTable_circ,grid_XY,map,grid_XYTH(ii,:),'bkw');    
     pathInGoal_cloth(ii)=pathThroughGoalRegion(GoalRegion,LSL_W_cloth);
+% % If visual inspection is desired
 %     if pathInGoal_cloth(ii)
 %         clf
 %         figure(1)
 %         hold on
-%         show(LabGrid)
+%         plot(Map_XY_CCW(:,1),Map_XY_CCW(:,2),'k-','LineWidth',2)
 %         plot(TestRegion(:,1),TestRegion(:,2),'r-')
 %         plot(GoalRegion(:,1),GoalRegion(:,2),'g-')
 %         plotRobotPose(grid_XYTH,'k')
@@ -97,14 +98,14 @@ parfor ii=1:n
 %         disp(ii)
 %     end
     pathInGoal_circ(ii)=pathThroughGoalRegion(GoalRegion,LSL_W_circ);
-    ppm.increment(ii);
+%     ppm.increment(ii);
 end
-delete(ppm);
+% delete(ppm);
 
 % plotRobotPose(grid_XYTH(pathInGoal_circ,:),'r')
 % plotRobotPose(grid_XYTH(pathInGoal_cloth,:),'b')
 
-save('Benchmark2_medium.mat')
+% save('Benchmark2_medium.mat')
 
 %% FUNCTIONS
 
@@ -130,7 +131,6 @@ if nn ~= 1
     Path(ii_todelete)=[];
 end
 
-
 X_path=zeros(1);
 Y_path=zeros(1);
 kk=0;
@@ -140,7 +140,7 @@ for ii=1:length(Path)
     Y_path(kk)=[Path(ii).Y;nan];
 end
 
-if any(InPolygon(X_path,X_path,GoalRegion(:,1),GoalRegion(:,2)))
+if any(InPolygon(X_path,Y_path,GoalRegion(:,1),GoalRegion(:,2)))
     pathInGoal=true;
 else
     pathInGoal = false;

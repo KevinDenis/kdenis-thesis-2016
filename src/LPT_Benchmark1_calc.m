@@ -38,11 +38,11 @@ GoalRegion = [2.40, 2.20;
               2.40, 2.20];
           
 % % Normal Test Grid
-% [grid_XY]=polygrid(TestRegion(:,1),TestRegion(:,2),400);
-% TH = wrap2Pi(pi/2:pi/16:3/2*pi);
-% Fine Test Grid
-[grid_XY]=polygrid(TestRegion(:,1),TestRegion(:,2),1600);
-TH = wrap2Pi(pi/2:pi/32:3/2*pi);
+[grid_XY]=polygrid(TestRegion(:,1),TestRegion(:,2),400);
+TH = wrap2Pi(pi/2:pi/16:3/2*pi);
+% % Fine Test Grid
+% [grid_XY]=polygrid(TestRegion(:,1),TestRegion(:,2),1600);
+% TH = wrap2Pi(pi/2:pi/32:3/2*pi);
 grid_XYTH=addTHtoGridXY(grid_XY,TH);
 [LabGrid,XY_occ] = getMapXYOccFormBmp(map,0.02);
 
@@ -54,7 +54,6 @@ for ii = 1:length(grid_XYTH)
         toKeep(ii)=1;
     end
 end
-
 
 grid_XYTH=grid_XYTH(toKeep,:);
 figure()
@@ -69,10 +68,9 @@ pathInGoal_circ=false(length(grid_XYTH),1);
 n=length(grid_XYTH);
 ppm = ParforProgressStarter2('Calculating...', n, 0.1, 0, 1, 1);
 parfor ii=1:n
-% 1700
-    [LSL_W_cloth,~,~]=BuildLSLColFree(LSL_cloth,ObstacleTable_cloth,XY_ObsTable_cloth,grid_XY,map,grid_XYTH(ii,:));
-    [LSL_W_circ,~,~]=BuildLSLColFree(LSL_circ,ObstacleTable_circ,XY_ObsTable_circ,grid_XY,map,grid_XYTH(ii,:));    
-    pathInGoal_cloth(ii)=pathThroughGoalRegion(GoalRegion,LSL_W_cloth);
+    [LSL_W_cloth,~,~]=BuildLSLColFree(LSL_cloth,ObstacleTable_cloth,XY_ObsTable_cloth,grid_XY,map,grid_XYTH(ii,:),'fwd');
+    [LSL_W_circ,~,~]=BuildLSLColFree(LSL_circ,ObstacleTable_circ,XY_ObsTable_circ,grid_XY,map,grid_XYTH(ii,:),'fwd');    
+%     pathInGoal_cloth(ii)=pathThroughGoalRegion(GoalRegion,LSL_W_cloth);
 %     if pathInGoal_cloth(ii)
 %         clf
 %         figure(1)
@@ -90,14 +88,9 @@ parfor ii=1:n
     ppm.increment(ii);
 end
 delete(ppm);
-
-% plotRobotPose(grid_XYTH(pathInGoal_circ,:),'r')
-% plotRobotPose(grid_XYTH(pathInGoal_cloth,:),'b')
-
-save('Benchmark1_veryfine.mat')
+save('Benchmark1_medium.mat','GoalRegion','grid_XY','grid_XYTH','pathInGoal_circ','pathInGoal_cloth','TestRegion','TH')
 
 %% FUNCTIONS
-
 function pathInGoal=pathThroughGoalRegion(GoalRegion,Path)
 for ii=1:length(Path)
     if ~Path(ii).free
@@ -120,7 +113,6 @@ if nn ~= 1
     Path(ii_todelete)=[];
 end
 
-
 X_path=zeros(1);
 Y_path=zeros(1);
 kk=0;
@@ -130,14 +122,13 @@ for ii=1:length(Path)
     Y_path(kk)=[Path(ii).Y;nan];
 end
 
-if any(InPolygon(X_path,X_path,GoalRegion(:,1),GoalRegion(:,2)))
+if any(InPolygon(X_path,Y_path,GoalRegion(:,1),GoalRegion(:,2)))
     pathInGoal=true;
 else
     pathInGoal = false;
 end
 end
 
-%}
 function plotRobotPose(grid_XYTH,plotColor)
 r=0.01;
 X_Pose=[grid_XYTH(:,1), grid_XYTH(:,1)+r*cos(grid_XYTH(:,3)), nan(size(grid_XYTH(:,1)))].';
