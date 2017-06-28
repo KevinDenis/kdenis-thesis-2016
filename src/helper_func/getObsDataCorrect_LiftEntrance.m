@@ -1,12 +1,11 @@
 % initWorkspace
 
-[labgrid,obs_out] = getXYOccFormBmpMap('RobotLaboEntranceEdges_Corners.bmp',0.02);
-load('idxGood.mat')
+[labgrid,obs_out] = getXYOccFormBmpMap('LiftCorners.bmp',0.02);
 % show(labgrid)
-% 
-% 
-% 
-% 
+
+
+
+
 % obs_x=obs_out(:,1);
 % obs_y=obs_out(:,2);
 % figure()
@@ -22,5 +21,5 @@ load('idxGood.mat')
 %     idxGood(kk)=min_id;
 % end
 
-obs_out=[obs_out(idxGood(1:9),:);inf,inf;obs_out(idxGood(10:end),:)];
+obs_out=obs_out(idxGood,:)
 plot(obs_out(:,1),obs_out(:,2),'k')
