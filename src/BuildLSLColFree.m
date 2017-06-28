@@ -51,23 +51,29 @@ LSL=FreeAllPaths(LSL);
 % originaly getMapEdgeXYOccFormBmp
 
 %% User defined start position
-if nargin == 5
-    figureFullScreen()
-    hold on
-    show(LabGrid)
-    title('Select begin position (1st click) and orientation (2nd click)')
-    set(gca,'FontSize',14)
-    set(gca, 'box', 'off')
-    [xStart,yStart]=ginput(1);
-    scatter(xStart,yStart,'*r')
-    [xOrient,yOrient]=ginput(1);
-    plot([xStart xOrient],[yStart yOrient],'*-r')
-    thStart=atan2(yOrient-yStart,xOrient-xStart);
-    robotPose=[xStart yStart thStart];
-    fprintf('Use defined robot pose [%2.2f, %2.2f, %2.2f°] \n', robotPose(1),robotPose(2),robotPose(3)*180/pi);
-    close all
-else
-    robotPose=(varargin{1});
+switch nargin
+    case 5
+        figureFullScreen()
+        hold on
+        show(LabGrid)
+        title('Select begin position (1st click) and orientation (2nd click)')
+        set(gca,'FontSize',14)
+        set(gca, 'box', 'off')
+        [xStart,yStart]=ginput(1);
+        scatter(xStart,yStart,'*r')
+        [xOrient,yOrient]=ginput(1);
+        plot([xStart xOrient],[yStart yOrient],'*-r')
+        thStart=atan2(yOrient-yStart,xOrient-xStart);
+        robotPose=[xStart yStart thStart];
+        fprintf('Use defined robot pose [%2.2f, %2.2f, %2.2f°] \n', robotPose(1),robotPose(2),robotPose(3)*180/pi);
+        close all
+        keepLSL='all';
+    case 6
+        robotPose=(varargin{1});
+        keepLSL='all';
+    case 7
+        robotPose=(varargin{1});
+        keepLSL = (varargin{2});
 end
 
 %% Transform Lab Occupancy Grid to Robot Coordinates
@@ -108,7 +114,15 @@ end
 %fprintf('Adjustment of paths length to generate collision-free trajectories took %2.3f sec\n', toc)
 
 [LSL] = CleanupLooseStarts(LSL);
-LSL=getForwardMotionFromStateLattice(LSL);
+
+switch keepLSL
+    case 'fwd'
+        LSL=getForwardMotionFromStateLattice(LSL);
+    case 'bkw'
+        LSL=getBackwardMotionFromStateLattice(LSL);
+end
+
+
 LSL_W=RotTransMotionPrem(LSL,robotPose(3),robotPose(1),robotPose(2));
 
 %% Plot
