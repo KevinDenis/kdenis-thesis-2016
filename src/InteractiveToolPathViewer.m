@@ -24,7 +24,7 @@ initWorkspace
 
 %% User settings
 selectCurve = 1; % Cloth = 1, Circular = 2, Bézier = 3;
-seeShape    = 0; % y/n --> 1/0
+seeShape    = 1; % y/n --> 1/0
 showObstacleInfluance = 0; % y/n --> 1/0. Hard code commented out
 stringSelectedCurve={'clothoid';'circular';'bézier'};
 

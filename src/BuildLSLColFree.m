@@ -45,9 +45,10 @@
 %==========================================================================
 
 function [LSL_W,robotPose,LabGrid]=BuildLSLColFree(LSL,ObstacleTable,XY_ObsTable,grid_XY,bmp,varargin)
-showPlot=1;
+showPlot=0;
 LSL=FreeAllPaths(LSL);
-[LabGrid,~,XY_occ_lab] = getMapEdgeXYOccFormBmp(bmp,0.02); % grid cels occupancy grid are 0.02 --> 2cm which is 2x path resolution
+[LabGrid,XY_occ_lab] = getMapXYOccFormBmp(bmp,0.02); % grid cels occupancy grid are 0.02 --> 2cm which is 2x path resolution
+% originaly getMapEdgeXYOccFormBmp
 
 %% User defined start position
 if nargin == 5
@@ -71,13 +72,13 @@ end
 
 %% Transform Lab Occupancy Grid to Robot Coordinates
 XY_occ_lab_R=TransRotXY(XY_occ_lab,-robotPose(3),-robotPose(1),-robotPose(2));
-XY_occ_lab_R(abs(XY_occ_lab_R(:,1))>6,:)=[];
-XY_occ_lab_R(abs(XY_occ_lab_R(:,2))>6,:)=[];
+XY_occ_lab_R(abs(XY_occ_lab_R(:,1))>8,:)=[];
+XY_occ_lab_R(abs(XY_occ_lab_R(:,2))>8,:)=[];
 
-LabGrid_R = robotics.BinaryOccupancyGrid(12,12,50);
-LabGrid_R.GridLocationInWorld=[-6 -6];
+LabGrid_R = robotics.BinaryOccupancyGrid(16,16,50);
+LabGrid_R.GridLocationInWorld=[-8 -8];
 setOccupancy(LabGrid_R,XY_occ_lab_R,ones(size(XY_occ_lab_R,1),1))
-% inflate(LabGrid_R,0.01)
+inflate(LabGrid_R,0.01)
 [ii_lab_R,jj_lab_R]=meshgrid(1:LabGrid_R.GridSize(1),1:LabGrid_R.GridSize(2));
 ii_all_lab_R=ii_lab_R(:);
 jj_all_lab_R=jj_lab_R(:);
@@ -104,10 +105,10 @@ for ii=1:length(idxFound)
     end
 end
 
-disp(['Adjustment of paths length to generate collision-free trajectories took ', num2str(toc,5),' sec'])
+%fprintf('Adjustment of paths length to generate collision-free trajectories took %2.3f sec\n', toc)
 
 [LSL] = CleanupLooseStarts(LSL);
-% StateLattice=getForwardMotionFromStateLattice(StateLattice);
+LSL=getForwardMotionFromStateLattice(LSL);
 LSL_W=RotTransMotionPrem(LSL,robotPose(3),robotPose(1),robotPose(2));
 
 %% Plot
@@ -122,9 +123,9 @@ if showPlot
     ylabel('y [m]')
     axis equal
     title('')
-    plotGrid(grid_XY,robotPose)
+%     plotGrid(grid_XY,robotPose)
+%     plotRobotPath(LSL_W)
     plotPath(LSL_W)
-    % plotRobotPath(LSL_W)
     plotRoboticWheelchair(robotPose)
     l=legend('Discrete Grid','Collision-free paths','Robot pose','Location','SE');
     set(l,'FontSize',16);

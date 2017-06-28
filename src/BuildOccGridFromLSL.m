@@ -127,7 +127,7 @@ progressbar('Calculating Lookup Table [Obstacle Based]')
 for ii=1:n
     ObstacleTable(ii).x=XY_ObsTable_U(ii,1);
     ObstacleTable(ii).y=XY_ObsTable_U(ii,2);
-    if ii~=length(idxUnique)
+    if ii~=n
         idxPath=idxUnique(ii):idxUnique(ii+1)-1; % take all the non-unique idx intil the next unique idx.
     else
         idxPath=idxUnique(ii):length(IdxSorted); % don't use idxSorted(end), because this end refers to the unsorted array !
