@@ -1,7 +1,7 @@
 initWorkspace
 %% Init workspace for benchmark.
 % User Input
-ResTestGrid = 1;
+ResTestGrid = 2; % {Coarse, Medium, Fine}
 stringResTestGrid={'coarse';'normal';'fine'};
 saveFileName=['Benchmark1_',stringResTestGrid{ResTestGrid},'.mat'];
 % Will load data unless it is allready in workspace
