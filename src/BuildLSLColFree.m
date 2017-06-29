@@ -45,7 +45,6 @@
 %==========================================================================
 
 function [LSL_W,robotPose,LabGrid]=BuildLSLColFree(LSL,ObstacleTable,XY_ObsTable,grid_XY,bmp,varargin)
-showPlot=0;
 LSL=FreeAllPaths(LSL);
 [LabGrid,XY_occ_lab] = getMapXYOccFormBmp(bmp,0.02); % grid cels occupancy grid are 0.02 --> 2cm which is 2x path resolution
 % originaly getMapEdgeXYOccFormBmp
@@ -68,12 +67,19 @@ switch nargin
         fprintf('Use defined robot pose [%2.2f, %2.2f, %2.2f°] \n', robotPose(1),robotPose(2),robotPose(3)*180/pi);
         close all
         keepLSL='all';
+        showPlot=1;
     case 6
         robotPose=(varargin{1});
         keepLSL='all';
+        showPlot=1;
     case 7
         robotPose=(varargin{1});
         keepLSL = (varargin{2});
+        showPlot=1;
+    case 8
+        robotPose=(varargin{1});
+        keepLSL = (varargin{2});
+        showPlot=(varargin{3});
 end
 
 %% Transform Lab Occupancy Grid to Robot Coordinates
@@ -84,7 +90,7 @@ XY_occ_lab_R(abs(XY_occ_lab_R(:,2))>8,:)=[];
 LabGrid_R = robotics.BinaryOccupancyGrid(16,16,50);
 LabGrid_R.GridLocationInWorld=[-8 -8];
 setOccupancy(LabGrid_R,XY_occ_lab_R,ones(size(XY_occ_lab_R,1),1))
-inflate(LabGrid_R,0.01)
+% inflate(LabGrid_R,0.005)
 [ii_lab_R,jj_lab_R]=meshgrid(1:LabGrid_R.GridSize(1),1:LabGrid_R.GridSize(2));
 ii_all_lab_R=ii_lab_R(:);
 jj_all_lab_R=jj_lab_R(:);
