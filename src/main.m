@@ -78,7 +78,7 @@ initWorkspace
 usePrecomputedData = 1; % use precomputed data y/n --> 1/0
 saveCalculatedData = 0; % save calculated data y/n --> 1/0
 selectCurve        = 1; % Cloth = 1, Circular = 2, Bézier = 3; very slow calculation for Bézier Curve due to COP calculations ! % default use of precomputed data
-selectMap          = 3; % RobotLab_Elevator=1, RobotLab=2, RobotLab_ZoomEntrance=3, Elevator=4
+selectMap          = 4; % RobotLab_Elevator=1, RobotLab=2, RobotLab_ZoomEntrance=3, Elevator=4
 seeLPP             = 0; % simumate the plan recognition algorithm
 
 stringSelectedCurve={'clothoid';'circular';'bézier'};
