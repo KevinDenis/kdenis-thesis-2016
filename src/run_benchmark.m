@@ -1,10 +1,10 @@
 initWorkspace
 
-selectMap = [1,2];
-selectResTestGrid = [2];
+selectMap = [4];
+selectResTestGrid = 3;
 
 Map_ResTestGrid = getAllComb(selectMap,selectResTestGrid);
-Map_ResTestGrid=sortrows(Map_ResTestGrid,2); % sort with ascending computing time;
+Map_ResTestGrid=sortrows(Map_ResTestGrid,2); % sort with increasing computing time;
 
 for ii=1:size(Map_ResTestGrid,1)
     Map_ii = Map_ResTestGrid(ii,1);

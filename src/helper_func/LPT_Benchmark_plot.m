@@ -2,7 +2,7 @@ function LPT_Benchmark_plot(mapSelection,ResTestGrid)
 
 %% Init workspace for benchmark. 
 co=get(groot,'DefaultAxesColorOrder');
-stringResTestGrid={'coarse';'medium';'fine'};
+stringResTestGrid={'coarse';'medium';'fine';'finest'};
 load(['Benchmark',num2str(mapSelection),'_',stringResTestGrid{ResTestGrid},'.mat'])
 load('ColorPalet.mat')
 

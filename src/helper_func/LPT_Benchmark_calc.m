@@ -1,7 +1,7 @@
 function LPT_Benchmark_calc(mapSelection,ResTestGrid)
 %#ok<*PFOUS,*PFBNS> % MATLAB, don't show PARFOR-warning 
 %% Init workspace for benchmark
-stringResTestGrid={'coarse';'medium';'fine'};
+stringResTestGrid={'coarse';'medium';'fine';'finest'};
 saveFileName=['data_mat/Benchmark',num2str(mapSelection),'_',stringResTestGrid{ResTestGrid},'.mat'];
 fprintf('loading data for benchmark %d using %s grid ...',mapSelection,stringResTestGrid{ResTestGrid});
 tic
@@ -26,10 +26,13 @@ switch ResTestGrid
     case 3 % fine Test Grid
         grid_res = 0.025;
         angle_res = pi/16;
+    case 4 % finest Test Grid
+        grid_res = 0.025;
+        angle_res = pi/32;
 end
 
 switch mapSelection
-    case 1 % Robot Labo Entrance Benchmark
+    case 1 % Robot Labo Entrance Benchmark with 80cm door (20cm play)
         angle_range = pi/2;
         TH = wrap2Pi(-angle_range:angle_res:angle_range);
         driveDir = 'fwd';
@@ -57,13 +60,65 @@ switch mapSelection
                         2.40, 2.94;
                         2.40, 2.20];
         GoalTarget = mean(GoalRegion(1:end-1,:),1);
-    case 2 % Lift Entrance Benchmark
+    case 2 % Robot Labo Entrance Benchmark with 70cm door (10cm play)
+        angle_range = pi/2;
+        TH = wrap2Pi(-angle_range:angle_res:angle_range);
+        driveDir = 'fwd';
+        map = 'RobotLaboEntranceEdges_narrow.bmp';
+        load('RobotLaboEntrance_Corners_XY_CCW_narrow.mat')
+        Map_XY_CCW=RobotLaboEntrance_Corners_XY_CCW_narrow;
+        SimpleMapXY = Map_XY_CCW;
+        SimpleMapXY(9,1)=8;
+        SimpleMapXY(10,:)=[];
+        SimpleMapXY(10,1)=8;
+        SimpleMapXY=[SimpleMapXY;[0.01,0.01;2.11,0.01]];
+        TestRegion =   [3.0, 0.5;
+                        3.0, 3.5;
+                        5.0, 3.5;
+                        5.0, 2.8;
+                        5.5, 2.8;
+                        5.5, 1.4;
+                        5.0, 1.4;
+                        5.0, 0.5;
+                        3.0, 0.5];
+
+        GoalRegion =   [2.40, 2.20;
+                        2.56, 2.20;
+                        2.56, 2.84;
+                        2.40, 2.84;
+                        2.40, 2.20];
+        GoalTarget = mean(GoalRegion(1:end-1,:),1);
+    case 3 % Lift Entrance Benchmark
         angle_range = pi/2;
         TH = wrap2Pi((-angle_range:angle_res:angle_range)+pi);
         driveDir = 'bkw';
         map = 'LiftEdges.bmp';
         load('LiftEntrance_Corners_XY_CCW.mat')
         Map_XY_CCW=LiftEntrance_Corners_XY_CCW;
+
+        SimpleMapXY = [Map_XY_CCW;Map_XY_CCW(1,:)];
+
+        TestRegion = [3.0, 5.5;
+                      6.7, 5.5;
+                      6.7, 7.3;
+                      3.0, 7.3;
+                      3.0, 5.5];
+
+        GoalRegion = [6.8, 4.4;
+                      7.2, 4.4;
+                      7.2, 5.2;
+                      6.8, 5.2;
+                      6.8, 4.4];
+        GoalRegion=flip(GoalRegion);
+        GoalTarget = mean(GoalRegion(1:end-1,:),1);
+        GoalTarget(1) = 6;
+    case 4 % Lift Entrance Benchmark
+        angle_range = pi/2;
+        TH = wrap2Pi((-angle_range:angle_res:angle_range)+pi);
+        driveDir = 'bkw';
+        map = 'LiftEdges_narrow.bmp';
+        load('LiftEntrance_Corners_XY_CCW_narrow.mat')
+        Map_XY_CCW=LiftEntrance_Corners_XY_CCW_narrow;
 
         SimpleMapXY = [Map_XY_CCW;Map_XY_CCW(1,:)];
 
@@ -138,7 +193,9 @@ ppm = ParforProgressStarter2('Calculating...', n, 0.1, 0, 1, 1);
 parfor ii=1:n
     [LSL_W_cloth,~,~]=BuildLSLColFree(LSL_cloth,ObstacleTable_cloth,XY_ObsTable_cloth,grid_XY,map,grid_XYTH(ii,:),driveDir,0);
     [LSL_W_circ,~,~]=BuildLSLColFree(LSL_circ,ObstacleTable_circ,XY_ObsTable_circ,grid_XY,map,grid_XYTH(ii,:),driveDir,0);
-        pathInGoal_cloth(ii)=pathThroughGoalRegion(GoalRegion,LSL_W_cloth);
+    pathInGoal_cloth(ii)=pathThroughGoalRegion(GoalRegion,LSL_W_cloth);
+    pathInGoal_circ(ii)=pathThroughGoalRegion(GoalRegion,LSL_W_circ); 
+    ppm.increment(ii);
 %         if pathInGoal_cloth(ii)
 %             clf
 %             figure(1)
@@ -153,8 +210,6 @@ parfor ii=1:n
 % %             disp(pathInGoal_cloth(ii))
 % %             disp(ii)
 %         end
-    pathInGoal_circ(ii)=pathThroughGoalRegion(GoalRegion,LSL_W_circ); 
-    ppm.increment(ii);
 end
 delete(ppm);
 fprintf(' done ! (took %3.3f min) \n',toc/60)
