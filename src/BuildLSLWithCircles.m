@@ -33,7 +33,7 @@
 
 function [LSL]=BuildLSLWithCircles(LSLset)
 res=LSLset.res;
-n=500; % there are 200 paths in total, forward and backward.
+n=500; % there are 500 paths in total, forward and backward.
 th=linspace(0,2*pi,n+1); th(end)=[];
 v=sin(th);
 w=cos(th);
