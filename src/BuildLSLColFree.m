@@ -143,7 +143,7 @@ if showPlot
     ylabel('y [m]')
     axis equal
     title('')
-%     plotGrid(grid_XY,robotPose)
+    if ~isempty(grid_XY); plotGrid(grid_XY,robotPose); end
 %     plotRobotPath(LSL_W)
     plotPath(LSL_W)
     plotRoboticWheelchair(robotPose)
