@@ -36,7 +36,7 @@
 %
 %==========================================================================
 
-function LocalPathPlanning(LSL_W,LabGrid,robotPose)
+function [goalIdx]=LocalPathPlanning(LSL_W,LabGrid,robotPose)
 close all
 figureFullScreen();
 show(LabGrid)
