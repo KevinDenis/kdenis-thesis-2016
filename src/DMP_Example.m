@@ -202,7 +202,6 @@ LSL = FreeAllPaths(LSL);
 
 %% Plot
 if showPlot
-    figure()
     title('')
     hold on
     grid on
@@ -211,11 +210,13 @@ if showPlot
     axis equal
     plotGrid(grid_XY,robotPose)
     plotPath(LSL)
-    plotSimpleRobot(robotPose)
-    l=legend('Discrete grids','Clothoids','Robot pose','Location','SE');
-    set(l,'FontSize',16);
-    set(gca,'FontSize',14)
+%     plotRoboticWheelchair(robotPose)
+    l=legend('Discrete grids','Clothoid','Location','SE');
+    set(l,'FontSize',12);
+    set(gca,'FontSize',12)
+    axis equal
     hold off
+    saveCurrentFigure('DMP_MP')
 end
 end
 
@@ -424,16 +425,24 @@ OptPath=GSL_free(idx_optimal_edges);
 fprintf(' done ! (took %2.3f sec) \n',toc)
 
 % plot optimal path
+co=get(groot,'DefaultAxesColorOrder');
+
 figureFullScreen()
 show(LabGridEdges)
-title('Discrete Motion Planning')
+title('')
 hold on
 plotRobotPath(OptPath)
+plotRoboticWheelchair(xyth_start,co(1,:),4)
+plotRoboticWheelchair(xyth_dest,co(2,:),4)
 hold off
 xlabel('x [m]')
 ylabel('y [m]')
-set(gca,'FontSize',14)
-set(gca,'FontSize',14)
+axis equal
+axis([0 21 0 20])
+l=legend('Optimal Path','Robot footprint','Start pose','End pose','Location','SE');
+set(l,'FontSize',26);
+set(gca,'FontSize',24)
 set(gca, 'box', 'off')
+saveCurrentFigure('DMP_Voronoi_LSL')
 
 end

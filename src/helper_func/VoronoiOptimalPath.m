@@ -89,17 +89,19 @@ fprintf(' done ! (took %2.3f sec) \n',toc)
 if showPlot
     figure()
     hold on;
-    plot(XY_corners_CW(:,1),XY_corners_CW(:,2), 'k');
-    plot(vx_plot,vy_plot,'b.-');
+    plot(XY_corners_CW(:,1),XY_corners_CW(:,2), 'k','LineWidth',2);
+    plot(vx_plot,vy_plot,'b.-','LineWidth',1);
     plot(xy_opt_path(:,1),xy_opt_path(:,2), 'go-','LineWidth',2);
     hold off;
     l=legend('Obstacle','Voronoi Diagram','Optimal Path','Location','SE');
     xlabel('x [m]')
     ylabel('y [m]')
-    set(gca,'FontSize',14)
     set(l,'FontSize',16);
-    set(gca,'FontSize',14)
+    set(gca,'FontSize',16)
+    axis equal
+    axis([0 21 0 20])
     set(gca, 'box', 'off')
+    saveCurrentFigure('DMP_Voronoi2D')
 end
 end
 
