@@ -1,7 +1,21 @@
-function plotRoboticWheelchair(pose)
+function plotRoboticWheelchair(pose,varargin)
 %plotRoboticWheelchair(pose)
 %   The footprint of the wheelchair is plotted along with it's reference
 %   frame R.
+
+switch nargin
+    case 1
+        plotColor = 'k';
+        setLineWidth = 3;
+    case 2
+        plotColor = (varargin{1});
+        setLineWidth = 3;
+    case 3
+        plotColor = (varargin{1});
+        setLineWidth = (varargin{2});
+end
+        
+        
 
 % Wheelchair footprint coordinates
 RobotHull=[-0.80  0.20;
@@ -30,5 +44,5 @@ R_XY_frame=[R_X_frame;nan,nan;R_Y_frame];
 
 RobotHull_Frame=[RobotHull;nan,nan;R_XY_frame];
 
-plot(RobotHull_Frame(:,1),RobotHull_Frame(:,2),'k','Linewidth',3)
+plot(RobotHull_Frame(:,1),RobotHull_Frame(:,2),'Color',plotColor,'Linewidth',setLineWidth)
 end
