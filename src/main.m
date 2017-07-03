@@ -75,8 +75,8 @@
 initWorkspace
 
 %% User settings
-usePrecomputedData = 1; % use precomputed data y/n --> 1/0
-saveCalculatedData = 0; % save calculated data y/n --> 1/0
+usePrecomputedData = 0; % use precomputed data y/n --> 1/0
+saveCalculatedData = 1; % save calculated data y/n --> 1/0
 selectCurve        = 1; % Cloth = 1, Circular = 2, Bézier = 3; very slow calculation for Bézier Curve due to COP calculations ! % default use of precomputed data
 selectMap          = 4; % RobotLab_Elevator=1, RobotLab=2, RobotLab_ZoomEntrance=3, Elevator=4
 seeLPP             = 0; % simumate the plan recognition algorithm
@@ -153,13 +153,13 @@ if seeLPP; LocalPathPlanning(LSL_W,LabGrid,robotPose); end
 if saveCalculatedData && ~usePrecomputedData
     fprintf(['saving data for ',stringSelectedCurve{selectCurve}, ' curve ... ']);
     tic
-    save('data_mat/LSLset.mat','LSLset')
-    save('data_mat/grid_XY.mat','grid_XY')
+%     save('data_mat/LSLset.mat','LSLset')
+%     save('data_mat/grid_XY.mat','grid_XY')
     switch selectCurve
         case 1 % use clothoid curve as motion primitive
-            save('data_mat/LSL_cloth.mat','LSL')
-            save('data_mat/ObstacleTable_cloth.mat','ObstacleTable')
-            save('data_mat/XY_ObsTable_cloth.mat','XY_ObsTable')
+            save('data_mat/LSL_cloth_finest.mat','LSL')
+            save('data_mat/ObstacleTable_cloth_finest.mat','ObstacleTable')
+            save('data_mat/XY_ObsTable_cloth_finest.mat','XY_ObsTable')
         case 2 % use circular arcs as motion primitive
             save('data_mat/LSL_circ.mat','LSL')
             save('data_mat/ObstacleTable_circ.mat','ObstacleTable')
