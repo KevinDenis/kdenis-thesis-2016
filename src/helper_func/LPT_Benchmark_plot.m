@@ -1,10 +1,37 @@
-function LPT_Benchmark_plot(mapSelection,ResTestGrid)
+function LPT_Benchmark_plot(mapSelection,ResTestGrid,saveFigure)
 
 %% Init workspace for benchmark. 
 co=get(groot,'DefaultAxesColorOrder');
-stringResTestGrid={'coarse';'medium';'fine';'finest'};
+stringResTestGrid={'debug';'coarse';'medium';'fine';'finer';'finest'};
 load(['Benchmark',num2str(mapSelection),'_',stringResTestGrid{ResTestGrid},'.mat'])
 load('ColorPalet.mat')
+
+switch mapSelection
+    case 1
+        saveFileName_rawInput='EnterRobotLabEval_rawInput';
+        saveFileName_rawOutput='EnterRobotLabEval_rawOutput';
+        saveFileName_hist='EnterRobotLabEval_hist';
+        saveFileName_map='EnterRobotLabEval_map';
+        setAxis = [2 5.67 0 3.75];
+    case 2
+        saveFileName_rawInput='EnterRobotLabEval_narrow_rawInput';
+        saveFileName_rawOutput='EnterRobotLabEval_narrow_rawOutput';
+        saveFileName_hist='EnterRobotLabEval_narrow_hist';
+        saveFileName_map='EnterRobotLabEval_narrow_map';
+        setAxis = [2 5.67 0 3.75];
+    case 3
+        saveFileName_rawInput='EnterLiftEval_rawInput';
+        saveFileName_rawOutput='EnterLiftEval_rawOutput';
+        saveFileName_hist='EnterLiftEva_hist';
+        saveFileName_map='EnterLiftEval_map';
+        setAxis = [2.5 8.25 3.95 7.5]; 
+    case 4
+        saveFileName_rawInput='EnterLiftEval_narrow_rawInput';
+        saveFileName_rawOutput='EnterLiftEval_narrow_rawOutput';
+        saveFileName_hist='EnterLiftEval_narrow_hist';
+        saveFileName_map='EnterLiftEval_narrow_map';
+        setAxis = [2.5 8.25 3.95 7.5]; 
+end
 
 % Logic
 pathInGoal_all = any([pathInGoal_circ pathInGoal_cloth],2);
@@ -40,37 +67,67 @@ grid_XY = grid_XYTH_XY_U;
 C = discretize(grid_Mean,7);
 
 %% Plots
-figure()
-plotRobotPose(grid_XYTH,'k')
-
-figure()
+figureFullScreen()
 hold on
 plot(Map_XY_CCW(:,1),Map_XY_CCW(:,2),'k','LineWidth',3)
-plot(TestRegion(:,1),TestRegion(:,2),'r-')
-plot(GoalRegion(:,1),GoalRegion(:,2),'g-')
-plot(GoalTarget(1),GoalTarget(2),'*g','MarkerSize',10)
+plot(TestRegion(:,1),TestRegion(:,2),'r-','LineWidth',2)
+plot(GoalRegion(:,1),GoalRegion(:,2),'g-','LineWidth',2)
+plot(GoalTarget(:,1),GoalTarget(:,2),'g*','LineWidth',2,'MarkerSize',20)
+plotRobotPose(grid_XYTH,'k')
+xlabel('x [m]')
+ylabel('y [m]')
+hold off
+axis equal
+axis(setAxis)
+l=legend('Obstacle','Start region','Goal region','Target','Robot start pose','Location','SE');
+set(l,'FontSize',30);
+set(gca,'FontSize',28)
+if saveFigure; saveCurrentFigure(saveFileName_rawInput); close all; end
+
+figureFullScreen()
+hold on
+plot(Map_XY_CCW(:,1),Map_XY_CCW(:,2),'k','LineWidth',3)
+plot(TestRegion(:,1),TestRegion(:,2),'r-','LineWidth',2)
+plot(GoalRegion(:,1),GoalRegion(:,2),'g-','LineWidth',2)
+plot(GoalTarget(:,1),GoalTarget(:,2),'g*','LineWidth',2,'MarkerSize',20)
 plotRobotPose(grid_XYTH(pathInGoal_common,:),'k')
 plotRobotPose(grid_XYTH(pathInGoal_circ_U,:),'r')
 plotRobotPose(grid_XYTH(pathInGoal_cloth_U,:),'g')
+xlabel('x [m]')
+ylabel('y [m]')
 hold off
-axis normal
+axis equal
+axis(setAxis)
+l=legend('Obstacle','Start region','Goal region','Target','Common path start pose','Circular path start pose','Clothoid path start pose','Location','SW');
+set(l,'FontSize',30);
+set(gca,'FontSize',28)
+if saveFigure; saveCurrentFigure(saveFileName_rawOutput); close all; end
 
 figure()
 [n1, xout1] = hist(grid_Mean,7);
 bar(xout1,n1,1,'FaceColor',co(1,:));
 xlabel('Grid-Score')
 ylabel('Occurance')
+if saveFigure; saveCurrentFigure(saveFileName_hist);close all; end
 
-figure()
+fig=figureFullScreen();
+fig.Renderer='Painters';
 hold on
 plot(Map_XY_CCW(:,1),Map_XY_CCW(:,2),'k','LineWidth',3)
-plot(TestRegion(:,1),TestRegion(:,2),'r-')
-plot(GoalRegion(:,1),GoalRegion(:,2),'g-')
-plot(GoalTarget(1),GoalTarget(2),'*g','MarkerSize',10)
+plot(TestRegion(:,1),TestRegion(:,2),'r-','LineWidth',2)
+plot(GoalRegion(:,1),GoalRegion(:,2),'g-','LineWidth',2)
+plot(GoalTarget(:,1),GoalTarget(:,2),'g*','LineWidth',2,'MarkerSize',20)
 patch(X_Patch,Y_Patch,grid_Mean)
+xlabel('x [m]')
+ylabel('y [m]')
 colormap(ColorPalet)
 colorbar
-axis normal
+axis equal
+axis(setAxis)
+l=legend('Obstacle','Start region','Goal region','Target','Location','SE');
+set(l,'FontSize',30);
+set(gca,'FontSize',28)
+if saveFigure; saveCurrentFigure(saveFileName_map); close all; end
 end
 
 %% SUB-FUNCTIONS
@@ -90,7 +147,7 @@ Y_Patch(4,:) = Y+dx/2;
 end
 
 function plotRobotPose(grid_XYTH,plotColor)
-r=0.04;
+r=0.075;
 X_Pose=[grid_XYTH(:,1), grid_XYTH(:,1)+r*cos(grid_XYTH(:,3)), nan(size(grid_XYTH(:,1)))].';
 Y_Pose=[grid_XYTH(:,2), grid_XYTH(:,2)+r*sin(grid_XYTH(:,3)), nan(size(grid_XYTH(:,1)))].';
 plot(X_Pose(:).',Y_Pose(:).',plotColor,'LineWidth',1.5)
