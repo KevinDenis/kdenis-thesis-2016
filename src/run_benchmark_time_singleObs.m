@@ -14,7 +14,7 @@ if ~exist('XY_ObsTable_circ', 'var'); load('XY_ObsTable_circ.mat'); XY_ObsTable_
 n_circ=length(ObstacleTable_circ);
 n_cloth=length(ObstacleTable_cloth);
 
-stepSize=10;
+stepSize=20;
 
 n=min(n_circ,n_cloth);
 n=floor(n/stepSize);
@@ -47,13 +47,49 @@ n_paths_circ(end-10:end)=[];
 
 figure()
 hold on
-histogram(dt_cloth);
-histogram(dt_circ);
+histogram(dt_cloth,'FaceAlpha',1);
+histogram(dt_circ,'FaceAlpha',1);
+xlabel('Excecution time [msec]')
+ylabel('Occurance')
+l=legend('Clothoidal LPT','Circular LPT','Location','SE');
+set(l,'FontSize',12);
+set(gca,'FontSize',12)
+hold off
+saveCurrentFigure('TimeBench_SingleObs_hist')
 
 figure()
 hold on
 plot(n_paths_cloth,dt_cloth,'.');
 plot(n_paths_circ,dt_circ,'.');
+xlabel('Number of paths affected')
+ylabel('Excecution time [msec]')
+l=legend('Clothoidal LPT','Circular LPT','Location','SE');
+set(l,'FontSize',12);
+set(gca,'FontSize',12)
+hold off
+saveCurrentFigure('TimeBench_SingleObs_PathInfluence')
+
+
+mean_dt_circ=mean(dt_circ);
+mean_n_path_circ = mean(n_paths_circ);
+mean_dt_per_path_circ = mean(dt_circ./n_paths_circ)*1000;
+
+mean_dt_cloth=mean(dt_cloth);
+mean_n_path_cloth = mean(n_paths_cloth);
+mean_dt_per_path_cloth = mean(dt_cloth./n_paths_cloth)*1000;
+
+
+fprintf('\nmean circular LPT time: %1.3f msec\n',mean_dt_circ)
+fprintf('mean path circular LPT: %3.0f\n',mean_n_path_circ)
+fprintf('mean circular LPT time / path: %3.0f µsec\n\n',mean_dt_per_path_circ)
+
+fprintf('mean clothoidal LPT time: %1.3f msec\n',mean_dt_cloth)
+fprintf('mean path clothoidal LPT: %3.0f\n',mean_n_path_cloth)
+fprintf('mean clothoidal LPT time / path: %3.0f µsec\n\n',mean_dt_per_path_cloth)
+
+fprintf('clothoidal LPT is %2.0f%% slower compared to the circular LPT\n',mean_dt_cloth/mean_dt_circ*100)
+fprintf('clothoidal LPT has %2.0f%% more path compared to the circular LPT\n',mean_n_path_cloth/mean_n_path_circ*100)
+fprintf('clothoidal LPT is %2.0f%% time/path slower compared to the circular LPT\n\n',mean_dt_per_path_cloth/mean_dt_per_path_circ*100)
 
 %% Functions
 function [dt,n_paths]=UpdateStateLattice(XY_ObsGrid,LSL,ObstacleTable,XY_Table)
@@ -69,6 +105,6 @@ for jj=1:length(IDOccPaths)
         LSL(IDOccPaths(jj)).idxBlocked=IdxOccPaths(jj);
     end
 end
-dt=toc;
+dt=toc*1000;
 n_paths=length(IDOccPaths);
 end
