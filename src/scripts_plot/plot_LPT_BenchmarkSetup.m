@@ -75,13 +75,18 @@ plot(x_circleRange,y_circleRange,'-.k','LineWidth',1.5)
 text(3.25,2.65,'$\theta_{range}$','Interpreter','LaTeX','FontSize',30)
 plot(x_circleRes,y_circleRes,'-.k','LineWidth',1.5)
 text(3.45,2.45,'$\theta_{res}$','Interpreter','LaTeX','FontSize',30)
+text(4.175,2.19,'$dx$','Interpreter','LaTeX','FontSize',30)
 plot(Map_XY_CCW(:,1),Map_XY_CCW(:,2),'k','LineWidth',3)
 axis equal
 axis([1 5.5 0 4]) 
+plot([4.2,4.3],[2.1,2.1],'k','LineWidth',2)
+plot([4.2,4.2],[2.075,2.125],'k','LineWidth',2)
+plot([4.3,4.3],[2.075,2.125],'k','LineWidth',2)
 hold off
 xlabel('x [m]')
 ylabel('y [m]')
 l=legend('Test region','Goal region','Target','Selected start pose','Removed robot start pose','Start Position','Location','SW');
+
 set(l,'FontSize',30);
 set(gca,'FontSize',28)
 
@@ -109,24 +114,24 @@ for ii = 1:length(grid_XYTH)
 end
 grid_XYTH=grid_XYTH(toKeep,:);
 
-figureFullScreen(1)
-hold on
-% plotPath(LSL_cloth_W)
-plot(TestRegion(:,1),TestRegion(:,2),'r-','LineWidth',2)
-plot(GoalRegion(:,1),GoalRegion(:,2),'g-','LineWidth',2)
-plot(GoalTarget(:,1),GoalTarget(:,2),'g*','LineWidth',2,'MarkerSize',20)
-plotRobotPose2(grid_XYTH,'k')
-plot(Map_XY_CCW(:,1),Map_XY_CCW(:,2),'k','LineWidth',3)
-axis equal
-axis([1 5.5 0 4]) 
-hold off
-xlabel('x [m]')
-ylabel('y [m]')
-l=legend('Test region','Goal region','Target','Selected start pose','Location','SW');
-set(l,'FontSize',30);
-set(gca,'FontSize',28)
-
-saveCurrentFigure('BenchmarkSetupAll')
+% figureFullScreen(1)
+% hold on
+% % plotPath(LSL_cloth_W)
+% plot(TestRegion(:,1),TestRegion(:,2),'r-','LineWidth',2)
+% plot(GoalRegion(:,1),GoalRegion(:,2),'g-','LineWidth',2)
+% plot(GoalTarget(:,1),GoalTarget(:,2),'g*','LineWidth',2,'MarkerSize',20)
+% plotRobotPose2(grid_XYTH,'k')
+% plot(Map_XY_CCW(:,1),Map_XY_CCW(:,2),'k','LineWidth',3)
+% axis equal
+% axis([1 5.5 0 4]) 
+% hold off
+% xlabel('x [m]')
+% ylabel('y [m]')
+% l=legend('Test region','Goal region','Target','Selected start pose','Location','SW');
+% set(l,'FontSize',30);
+% set(gca,'FontSize',28)
+% 
+% saveCurrentFigure('BenchmarkSetupAll')
 
 %% FUNCTIONS
 function grid_X_Y_TH=addTHtoGridXY(grid_X_Y,TH)
