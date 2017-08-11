@@ -103,8 +103,8 @@ switch mapSelection
         SimpleMapXY = [Map_XY_CCW;Map_XY_CCW(1,:)];
 
         TestRegion = [3.0, 5.5;
-                      6.7, 5.5;
-                      6.7, 7.3;
+                      5.7, 5.5;
+                      5.7, 7.3;
                       3.0, 7.3;
                       3.0, 5.5];
 
@@ -115,7 +115,7 @@ switch mapSelection
                       6.8, 4.4];
         GoalRegion=flip(GoalRegion);
         GoalTarget = mean(GoalRegion(1:end-1,:),1);
-        GoalTarget(1) = 6;
+%         GoalTarget(1) = 6;
     case 4 % Lift Entrance Benchmark
         TH = wrap2Pi(-angle_range:angle_res:angle_range)+pi;
         driveDir = 'bkw';
