@@ -13,7 +13,6 @@ if plotClothCurve
     load('LSL_cloth.mat')
     StringCurve='Clothoid';
     StringFileName='MPClothoid';
-    
 else
     load('LSL_bezier.mat')
     StringCurve='Bézier Curve';
@@ -35,7 +34,7 @@ plot(grid_XY(idxIn0,1),grid_XY(idxIn0,2),'o','Color',co(2,:),'MarkerSize',10)
 plotPath(MP)
 plotReachableEndPoses(MP,robotPose)
 plotRoboticWheelchair(robotPose)
-l=legend('Discrete grids','ROI','Grids In ROI',StringCurve,'Reachable end pose','Robot pose','Location','SE');
+l=legend('Discrete grids','ROI','Grids In ROI',StringCurve,'Reachable end-pose','Robot pose','Location','SE');
 set(l,'FontSize',26);
 set(gca,'FontSize',24)
 axis equal
