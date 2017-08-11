@@ -2,7 +2,7 @@ initWorkspace
 clc
 close all
 
-usePrecomputedData = 0;
+usePrecomputedData = 1;
 saveComputedData = 0;
 
 if usePrecomputedData
@@ -17,11 +17,11 @@ else
     if ~exist('ObstacleTable_circ', 'var'); load('ObstacleTable_circ.mat'); ObstacleTable_circ=ObstacleTable; end
     if ~exist('XY_ObsTable_circ', 'var'); load('XY_ObsTable_circ.mat'); XY_ObsTable_circ=XY_ObsTable; end
 
-    selectMap = 2; % RobotLab_Elevator=1, RobotLab=2, RobotLab_ZoomEntrance=3, Elevator=4
+    selectMap = 3; % RobotLab_Elevator=1, RobotLab=2, RobotLab_ZoomEntrance=3, Elevator=4
 
     [userRobotPose,XY_occ_lab]=getUseDefPose(selectMap);
     
-    n_des = 100;
+    n_des = 1000;
     n_space = round(n_des^(1/3));
     n_angle = round(n_des/n_space^2);
     x_var=linspace(-0.5,0.5,n_space);
@@ -33,35 +33,40 @@ else
     allRobotPoses = repmat(userRobotPose,size(robotPose_vec,1),1)+robotPose_vec;
 
     n=size(robotPose_vec,1);
+    removeMaxElem = floor(n*0.01);
     delMaxdT=floor(n/10);
-    dt_sum_circ=zeros(n,1);
+    dt_circ=zeros(n,1);
     n_obs_circ=zeros(n,1);
-    dt_sum_cloth=zeros(n,1);
+    dt_cloth=zeros(n,1);
     n_obs_cloth=zeros(n,1);
-    path_affected_circ = cell(length(n),1);
-    path_affected_cloth = cell(length(n),1);
-    dt_matrix_circ = cell(length(n),1);
-    dt_matrix_cloth = cell(length(n),1);
+
     ppm = ParforProgressStarter2('Calculating...', n, 0.1, 0, 1, 1);
+    
+    hash = randn(size(XY_ObsTable_cloth,2),1);
+    XY_ObsTable_cloth_hash = round(XY_ObsTable_cloth*hash,6);
+    XY_ObsTable_circ_hash = round(XY_ObsTable_circ*hash,6);
+    
     for ii=1:n
         XY_occ_lab_R=getXY_occ_lab_R(XY_occ_lab,allRobotPoses(ii,:));
-        [dt_sum_circ(ii), n_obs_circ(ii), path_affected_circ{ii}, dt_matrix_circ{ii}]=AdjustPathLength(LSL_circ,ObstacleTable_circ,XY_ObsTable_circ,XY_occ_lab_R);
-        [dt_sum_cloth(ii), n_obs_cloth(ii), path_affected_cloth{ii}, dt_matrix_cloth{ii}]=AdjustPathLength(LSL_cloth,ObstacleTable_cloth,XY_ObsTable_cloth,XY_occ_lab_R);
+        XY_occ_lab_R_hash = round(XY_occ_lab_R*hash,6);
+        [dt_cloth(ii), n_obs_cloth(ii)]=AdjustPathLength(LSL_cloth,ObstacleTable_cloth,XY_ObsTable_cloth_hash,XY_occ_lab_R_hash);
+        [dt_circ(ii), n_obs_circ(ii)]=AdjustPathLength(LSL_circ,ObstacleTable_circ,XY_ObsTable_circ_hash,XY_occ_lab_R_hash);
         ppm.increment(ii);
     end
     delete(ppm);
     
-%     [dt_sum_cloth,idx_cloth_S]=sort(dt_sum_cloth);
-%     n_obs_cloth=n_obs_cloth(idx_cloth_S);
-%     dt_sum_cloth(end-delMaxdT:end)=[];
-%     n_obs_cloth(end-delMaxdT:end)=[];
-% 
-% 
-%     [dt_sum_circ,idx_circ_S]=sort(dt_sum_circ);
-%     n_obs_circ=n_obs_circ(idx_circ_S);
-%     dt_sum_circ(end-10:end)=[];
-%     n_obs_circ(end-10:end)=[];
-%     
+    % Clothoidal LPT - mat
+    [dt_cloth,idx_mat_cloth_S]=sort(dt_cloth);
+    n_obs_cloth=n_obs_cloth(idx_mat_cloth_S);
+    dt_cloth(end-removeMaxElem:end)=[];
+    n_obs_cloth(end-removeMaxElem:end)=[];
+
+    % Circular LPT - mat
+    [dt_circ,idx_mat_circ_S]=sort(dt_circ);
+    n_obs_circ=n_obs_circ(idx_mat_circ_S);
+    dt_circ(end-removeMaxElem:end)=[];
+    n_obs_circ(end-removeMaxElem:end)=[];
+     
     if saveComputedData
         save('data_mat/TimeBench_MultiObs.mat','dt_circ','n_obs_circ','dt_cloth','n_obs_cloth')
     end
@@ -70,24 +75,23 @@ end
 
 figure()
 hold on
-histogram(dt_sum_cloth,'FaceAlpha',1);
-histogram(dt_sum_circ,'FaceAlpha',1);
+histogram(dt_cloth,'FaceAlpha',1);
+histogram(dt_circ,'FaceAlpha',1);
 xlabel('Excecution time [msec]')
 ylabel('Occurance')
 l=legend('Clothoidal LPT','Circular LPT','Location','N');
-set(l,'FontSize',12);
-set(gca,'FontSize',12)
-grid minor
+set(l,'FontSize',14);
+set(gca,'FontSize',14)
 hold off
 saveCurrentFigure('TimeBench_MultiObs_hist')
 
-mean_dt_circ=mean(dt_sum_circ);
+mean_dt_circ=mean(dt_circ);
 mean_n_obs_circ = mean(n_obs_circ);
-mean_dt_per_obs_circ = mean(dt_sum_circ./n_obs_circ)*1000;
+mean_dt_per_obs_circ = mean(dt_circ./n_obs_circ)*1000;
 
-mean_dt_cloth=mean(dt_sum_cloth);
+mean_dt_cloth=mean(dt_cloth);
 mean_n_obs_cloth = mean(n_obs_cloth);
-mean_dt_per_obs_cloth = mean(dt_sum_cloth./n_obs_cloth)*1000;
+mean_dt_per_obs_cloth = mean(dt_cloth./n_obs_cloth)*1000;
 
 fprintf('\nmean circular LPT time: %3.0f msec\n',mean_dt_circ)
 fprintf('mean obstacles circular LPT: %3.0f\n',mean_n_obs_circ)
@@ -103,56 +107,22 @@ fprintf('clothoidal LPT is %2.0f%% time/obscle slower compared to the circular L
 
 figure()
 hold on
-plot(n_obs_cloth,dt_sum_cloth,'.');
-plot(n_obs_circ,dt_sum_circ,'.');
+plot(n_obs_cloth,dt_cloth,'.');
+plot(n_obs_circ,dt_circ,'.');
 xlabel('Number of obstacles')
 ylabel('Excecution time [msec]')
-l=legend('Clothoidal LPT','Circular LPT','Location','SE');
-set(l,'FontSize',12);
-set(gca,'FontSize',12)
+l=legend('Clothoidal LPT','Circular LPT','Location','NW');
+set(l,'FontSize',14);
+set(gca,'FontSize',14)
 hold off
 saveCurrentFigure('TimeBench_MultiObs_ObstacleInfluence')
 
-
-%{
-totLength = 0;
-for ii = 1:length(n_obs_cloth)
-    totLength=totLength+length([path_affected_cloth{ii}].');
-end
-
-BigData=zeros(totLength,3);
-kk=0;
-
-for ii = 1:length(n_obs_cloth)
-    dt_matrix_cloth_ii=[dt_matrix_cloth{ii}].';
-    path_affected_cloth_ii=[path_affected_cloth{ii}].';
-    length_ii =length(path_affected_cloth_ii);
-    n_obs_cloth_ii = repelem(n_obs_cloth(ii),length_ii,1);
-    kk=kk(end)+(1:length_ii);
-    BigData(kk,:)= [path_affected_cloth_ii n_obs_cloth_ii dt_matrix_cloth_ii];
-end
-
-x=BigData(:,1);
-y=BigData(:,2);
-z=BigData(:,3);
-
-% 
-stem3(x,y,z,'linestyle','none')
-
-figure()
-plot(x,z,'.')
-%}
-
 %% Functions
-function [dt_sum,n_obs,path_affected,dt]=AdjustPathLength(LSL,ObstacleTable,XY_ObsTable,XY_occ_lab_R)
+function [dt_sum,n_obs]=AdjustPathLength(LSL,ObstacleTable,XY_ObsTable,XY_occ_lab_R)
 tic
-idxFound=find(ismember(XY_ObsTable,XY_occ_lab_R,'rows'));
-tFind=toc*1000;
+idxFound=find(ismember(XY_ObsTable,XY_occ_lab_R));
 lenIdxFound = length(idxFound);
-path_affected=zeros(1,lenIdxFound);
-dt = path_affected;
 for ii=1:lenIdxFound
-    tic
     idxRow=idxFound(ii);
     IDOccPaths = [ObstacleTable(idxRow).ID];
     IdxOccPaths = [ObstacleTable(idxRow).Idx];
@@ -162,10 +132,8 @@ for ii=1:lenIdxFound
             LSL(IDOccPaths(jj)).idxBlocked=IdxOccPaths(jj);
         end
     end
-    path_affected(ii)=length(IDOccPaths);
-    dt(ii)=toc*1000+tFind/lenIdxFound;
 end
-dt_sum = sum(dt);
+dt_sum = toc*1000;
 n_obs=length(idxFound);
 end
 
@@ -199,7 +167,6 @@ scatter(xStart,yStart,'*r')
 plot([xStart xOrient],[yStart yOrient],'*-r')
 thStart=atan2(yOrient-yStart,xOrient-xStart);
 robotPose=[xStart yStart thStart];
-robotPose=[5.24, 6.05, -76.29*pi/180] ;
 fprintf('Use defined robot pose [%2.2f, %2.2f, %2.2f°] \n', robotPose(1),robotPose(2),robotPose(3)*180/pi);
 close all
 end
