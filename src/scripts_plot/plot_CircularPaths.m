@@ -6,6 +6,8 @@ v=sin(th);
 w=cos(th);
 k=w./v;
 
+robotPose=[0 0 0];
+
 LSL(1:length(v),1)=struct('x0',0,'y0',0,'th0',0,...
                          'x1',[],'y1',[],'th1',[],...
                          'X',[],'Y',[],'TH',[],...
@@ -56,7 +58,6 @@ fig=figureFullScreen();
 subplot(1,2,1)
 title('')
 hold on
-grid on
 xlabel('\omega [rad/sec]')
 ylabel('v [m/s]')
 plot([w w(1)],[v v(1)],'.','Color',co(1,:),'MarkerSize',20)
@@ -69,13 +70,12 @@ axis(1.1*[-1 1 -1 1])
 subplot(1,2,2)
 title('')
 hold on
-grid on
 xlabel('x [m]')
 ylabel('y [m]')
 plotPath(LSL,co(1,:),2)
 plotRoboticWheelchair(robotPose)
 axis equal
-l=legend('Circular Paths','Robot pose','Location','SE');
+l=legend('Circular paths','Robot pose','Location','SE');
 set(l,'FontSize',26);
 set(gca,'FontSize',24)
 axis([-4 4 -4 4])
