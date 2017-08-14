@@ -67,7 +67,7 @@ figure()
 hold on
 histogram(dt_mat_cloth,'FaceAlpha',1);
 histogram(dt_mat_circ,'FaceAlpha',1);
-xlabel('Excecution time [msec]')
+xlabel('Excecution time [ms]')
 ylabel('Occurrence')
 l=legend('Clothoidal LPT','Circular LPT','Location','NE');
 set(l,'FontSize',14);
@@ -80,7 +80,7 @@ hold on
 plot(n_paths_mat_cloth,dt_mat_cloth,'.');
 plot(n_paths_mat_circ,dt_mat_circ,'.');
 xlabel('Number of paths affected')
-ylabel('Excecution time [msec]')
+ylabel('Excecution time [ms]')
 l=legend('Clothoidal LPT','Circular LPT','Location','SE');
 set(l,'FontSize',14);
 set(gca,'FontSize',14)

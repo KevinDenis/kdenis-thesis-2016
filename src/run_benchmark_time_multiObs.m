@@ -77,7 +77,7 @@ figure()
 hold on
 histogram(dt_cloth,'FaceAlpha',1);
 histogram(dt_circ,'FaceAlpha',1);
-xlabel('Excecution time [msec]')
+xlabel('Excecution time [ms]')
 ylabel('Occurance')
 l=legend('Clothoidal LPT','Circular LPT','Location','N');
 set(l,'FontSize',14);
@@ -109,8 +109,8 @@ figure()
 hold on
 plot(n_obs_cloth,dt_cloth,'.');
 plot(n_obs_circ,dt_circ,'.');
-xlabel('Number of obstacles')
-ylabel('Excecution time [msec]')
+xlabel('Number of occupied grid cells')
+ylabel('Excecution time [ms]')
 l=legend('Clothoidal LPT','Circular LPT','Location','NW');
 set(l,'FontSize',14);
 set(gca,'FontSize',14)
