@@ -12,8 +12,7 @@ LSL=FreeAllPaths(LSL);
 
 XY_ObsGrid=[-1.60 0.2;
              3.90 2.96;
-             1.94 -1.82;
-             4,0;];
+             1.94 -1.82];
 
 %% Main()
 
@@ -26,7 +25,7 @@ end
 
 UpdatePlot(XY_ObsGrid_ii,LSL,affected_paths)
 
-saveCurrentFigure('LPT_LT');
+% saveCurrentFigure('LPT_LT');
 
 %% Used Functions
 function [StateLattice,affected_paths]=UpdateStateLattice(XY_ObsGrid,StateLattice,ObstacleTable,XY_Table)
