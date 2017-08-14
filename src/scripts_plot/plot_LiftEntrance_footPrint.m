@@ -33,7 +33,7 @@ axis([3.5 8.25 3.95 7.5])
 hold off
 xlabel('x [m]')
 ylabel('y [m]')
-l=legend('Obstacle','Clothoid','Desired path','Robot footprint','Start pose','Location','SW');
+l=legend('Obstacle','Clothoidal LPT','Desired path','Robot footprint','Start pose','Location','SW');
 set(l,'FontSize',30);
 set(gca,'FontSize',28)
 saveCurrentFigure('EnterLiftCloth_Footprint');
@@ -49,7 +49,7 @@ axis([3.5 8.25 3.95 7.5])
 hold off
 xlabel('x [m]')
 ylabel('y [m]')
-l=legend('Obstacle','Circle','Desired path','Robot footprint','Start pose','Location','SW');
+l=legend('Obstacle','Circular LPT','Desired path','Robot footprint','Start pose','Location','SW');
 set(l,'FontSize',30);
 set(gca,'FontSize',28)
 saveCurrentFigure('EnterLiftCirc_Footprint');
