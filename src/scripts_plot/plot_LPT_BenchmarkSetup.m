@@ -85,7 +85,7 @@ plot([4.3,4.3],[2.075,2.125],'k','LineWidth',2)
 hold off
 xlabel('x [m]')
 ylabel('y [m]')
-l=legend('Test region','Goal region','Target','Selected start-pose','Removed robot start-pose','Start position','Location','SW');
+l=legend('Test region','Goal region','Target','Selected start pose','Removed robot start pose','Start position','Location','SW');
 
 set(l,'FontSize',30);
 set(gca,'FontSize',28)
@@ -131,7 +131,7 @@ grid_XYTH=grid_XYTH(toKeep,:);
 % set(l,'FontSize',30);
 % set(gca,'FontSize',28)
 % 
-% saveCurrentFigure('BenchmarkSetupAll')
+saveCurrentFigure('BenchmarkSetupAll')
 
 %% FUNCTIONS
 function grid_X_Y_TH=addTHtoGridXY(grid_X_Y,TH)

@@ -5,7 +5,7 @@ co=get(groot,'DefaultAxesColorOrder');
 
 robotPose = [0 0 0];
 
-plotClothCurve=true; % bézier : false,  cloth:true
+plotClothCurve=0; % bézier : false,  cloth:true
 [LSLset] = getLocalStateLatticeSettings();
 [grid_XY,ROI0,idxIn0,~,~]=BuildMultiSizeGrid(LSLset);
 
@@ -34,7 +34,7 @@ plot(grid_XY(idxIn0,1),grid_XY(idxIn0,2),'o','Color',co(2,:),'MarkerSize',10)
 plotPath(MP)
 plotReachableEndPoses(MP,robotPose)
 plotRoboticWheelchair(robotPose)
-l=legend('Discrete grids','ROI','Grids In ROI',StringCurve,'Reachable end-pose','Robot pose','Location','SE');
+l=legend('Discrete grids','ROI','Grids In ROI',StringCurve,'Reachable end pose','Robot pose','Location','SE');
 set(l,'FontSize',26);
 set(gca,'FontSize',24)
 axis equal
