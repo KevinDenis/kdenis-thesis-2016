@@ -1,6 +1,28 @@
-function plotRobotPath(Path)
+function plotRobotPath(Path,varargin)
 %PLOTSIMPLEROBOT Summary of this function goes here
 %   Detailed explanation goes here
+
+
+
+if nargin == 1
+    plotColor = 'g';
+    lineWidthPlot=3;
+    plotStyle='-';
+elseif nargin == 2
+    plotColor=(varargin{1});
+    lineWidthPlot=3;
+    plotStyle='-';
+elseif nargin == 3
+    plotColor=(varargin{1});
+    lineWidthPlot=(varargin{2});
+    plotStyle='-';
+elseif nargin == 4
+    plotColor=(varargin{1});
+    lineWidthPlot=(varargin{2});
+    plotStyle=(varargin{3});
+end
+
+
 
 RobotHull=[-0.80  0.20;
            -0.46  0.30;
@@ -56,7 +78,7 @@ for ii=1:length(Path)
     end
 end
 
-plot(X_path,Y_path,'g','LineWidth',3)
+plot(X_path,Y_path,'Color',plotColor,'Linewidth',lineWidthPlot);  
 % plot(XY_grid_visited(:,1),XY_grid_visited(:,2),'r*')
 plot(X_robot_rot_trans,Y_robot_rot_trans,'k','Linewidth',1)
 end
