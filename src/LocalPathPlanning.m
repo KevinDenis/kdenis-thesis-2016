@@ -58,7 +58,7 @@ if ~IsNear(vertices(goalIdx,1:3),robotPose,1e-3)
     idxStart=findrow_mex(vertices(:,4:6),vertices(goalIdx,1:3));
     goalIdx=[idxStart;goalIdx]
 end
-
+goalIdx
 %% plot optimal path
 figureFullScreen();
 show(LabGrid)
