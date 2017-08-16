@@ -2,13 +2,13 @@
 This README contains the comments of the main files which gives an overview of the developed local path planner.
 
 ## Directory Organisation
-* ROOT : containts all the most important scripts and functions. (except every file named "klad")
-* data_img : containts all the used maps and robot's footprint / geometry.
-* data_mat : containts all the precomputed data (paths and corresponding lookup tables) for fast use of the local path planner in the "main" example. Also for the plot scripts.
-* helper_external : contraints all the files which are *NOT* written by K.DENIS, but found on the web (mostly matlab file exchange https://nl.mathworks.com/matlabcentral/fileexchange/ or stackoverflow https://stackoverflow.com/questions/tagged/matlab)
-* helper_func : contraints all the sub-functions needed for the main functions from the root.
-* helper_plot : contraints all functions needed for plotting scripts
-* scripts_plot : contraints all the scripts which were used to create figures
+* ROOT : contains all the most important scripts and functions.
+* data_img : contains all the used maps and robot's footprint / geometry.
+* data_mat : contains all the precomputed data (paths and corresponding lookup tables) for fast use of the local path planner in the "main" example. Also for the plot scripts.
+* helper_external : contains all the files which are *NOT* written by Kevin DENIS, but found on the web (mostly matlab file exchange https://nl.mathworks.com/matlabcentral/fileexchange/ or stackoverflow https://stackoverflow.com/questions/tagged/matlab)
+* helper_func : contains all the sub-functions needed for the main functions from the root.
+* helper_plot : contains all functions needed for plotting scripts
+* scripts_plot : contains all the scripts which were used to create figures
 
 ## main.m
 This file builds the local path template using a Local State Lattice and
@@ -17,7 +17,7 @@ Several plots are shown to the user to evaluate and to inspect
 the obtained trajectories.
 
 ### User settings :
-  * use pre-computed data y/n (bool value usePrecomputedData)
+  * use precomputed data y/n (bool value usePrecomputedData)
   * save data in data directory y/n (bool value saveCalculatedData)
   * select curve geometry {[1],2,3} to select
     {[Clothoid], Circular, Bézier}. (int value selectCurve)
@@ -45,11 +45,7 @@ over all collision-free paths.
   * LocalPathPlanning : OPTIONAL, set seeLPP to true to see the robot
 shape move over a selected path by the user. This mimics the role of
 the plan recognition algorithm. This can also be used to ensure that
-the path taken is obstacle free, by visual inspection.
-
-### TODO :
-  * Calculate Bézier Curve LSL (only Motion Primitive at the moment)
-  * Make backups who can't be overwritten by user accidentally
+the path taken is collision-free, by visual inspection.
 
 ## BuildMultiSizeGrid.m
 Creates a multi-size grid based on LSLsettings (LSLset structure)
@@ -99,9 +95,9 @@ Given a map of the environment and a user-selected robot pose, paths lengths are
  map is translated in the robot coordinate frame {R}. This because the 
  Local Path Template / ObstacleTable / Local State Lattice is formulated 
  according to this Local Reference Frame {R}, which assumes that the 
- robotis at the orogin [0 0 0°]. 
- * Clossiion free trajectories are calculated efficiently and accuratly
- by using the pre-cumputed obstacle table, which indicates for each 
+ robot is at the origin [0 0 0°]. 
+ * Collision-free trajectories are calculated efficiently and accurately
+ by using the precomputed obstacle table, which indicates for each 
  discrete grid which paths goes through it at which length. The online 
  fase only has to mach occupied cells with the obstacle table, and 
  addjust each path length(only if this results in a smaller path 
@@ -124,12 +120,12 @@ Application of LPT on Discrete Motion Planning
 ### Part 1. Create State Lattice
 
 ### Part 2. Build Occupancy Grid
-  * This code differces from BuildOccGridFromLSL because here paths
+  * This code differs from BuildOccGridFromLSL because here paths
 length are not adjusted if they cause a collision, their are simply
 removed from the set (marked as blocked on the online-phase).
   * This makes the creation of the StateLattice Structure simpler, since
 calculating at which time/length/idx a certain cel is visited for the
-first time is not nececeaaru anymore. Just knowing which cells are
+first time is not necessary anymore. Just knowing which cells are
 occupied by taking a certain path is needed.
   * This updates the State Latice Structure.
   
