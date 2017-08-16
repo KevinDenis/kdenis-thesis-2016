@@ -78,8 +78,8 @@ initWorkspace
 usePrecomputedData = 1; % use precomputed data y/n --> 1/0
 saveCalculatedData = 0; % save calculated data y/n --> 1/0
 selectCurve        = 1; % Cloth = 1, Circular = 2, Bézier = 3; very slow calculation for Bézier Curve due to COP calculations ! % default use of precomputed data
-selectMap          = 3; % RobotLab_Elevator=1, RobotLab=2, RobotLab_ZoomEntrance=3, Elevator=4
-seeLPP             = 1; % simumate the plan recognition algorithm
+selectMap          = 2; % RobotLab_Elevator=1, RobotLab=2, RobotLab_ZoomEntrance=3, Elevator=4
+seeLPP             = 0; % simumate the plan recognition algorithm
 
 stringSelectedCurve={'clothoid';'circular';'bézier'};
 
@@ -144,10 +144,8 @@ switch selectMap
         fprintf('default value 1 chosen \n')
         map = 'RobotLaboLiftEdges.bmp';
 end
-% robotPose=[4.4 2.05 -pi];
-[LSL_W,robotPose,LabGrid]=BuildLSLColFree(LSL,ObstacleTable,XY_ObsTable,grid_XY,map,robotPose);
-% LSL_W is in the World coordinates, dependant on the user-selected robot pose
-if seeLPP; LocalPathPlanning(LSL_W,LabGrid,robotPose); end
+[LSL_W,robotPose,LabGrid]=BuildLSLColFree(LSL,ObstacleTable,XY_ObsTable,grid_XY,map);
+if seeLPP; GoalIdx=LocalPathPlanning(LSL_W,LabGrid,robotPose); end
 
 %% Saving calculated data if desired by user
 if saveCalculatedData && ~usePrecomputedData
