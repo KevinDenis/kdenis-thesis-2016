@@ -1,0 +1,1120 @@
+
+@inproceedings{ConnorsElkaim2007a,
+  address = {San Diego, CA},
+  title = {Manipulaiting B-Spline Based Paths for Obstacle Avoidance in Autonomous Ground Vehicles},
+  abstract = {The Overbot is one of the original DARPA Grand Challenge vehicles now being used as a platform for autonomous vehicle research. The vehicle, equipped with a complete actuator and sensor suite, provides for an extremely capable robotic platform with computing infrastructure and software framework already in place to create a reconfigurable testbed. For point to point navigation, calculating suitable paths is computationally difficult. Maneuvering the vehicle safely around obstacles is essential, and the ability to generate safe paths in a real time environment is crucial for vehicle viability. We present a method for developing feasible paths through complicated environments using a baseline smooth path based on cubic splines. A method for adjusting and bending the spline to avoid obstacles is developed. This method is able to iteratively refine the path to more directly compute a feasible path and thus find an efficient, collision free path in real time through an unstructured environment. This method, when implemented in a receding horizon fashion, becomes the basis for high level control.},
+  timestamp = {2016-09-26T22:41:22Z},
+  booktitle = {Proceedings of the 2007 {{National Technical Meeting}} of {{The Institute}} of {{Navigation}}},
+  author = {Connors, John and Elkaim, Gabriel},
+  month = jan,
+  year = {2007},
+  pages = {1081 -- 1088}
+}
+
+@inproceedings{ChoiEtAl2010,
+  title = {Curvature-Continuous Trajectory Generation with Corridor Constraint for Autonomous Ground Vehicles},
+  doi = {10.1109/CDC.2010.5718154},
+  abstract = {We present a practical path planning algorithm based on B{\'e}zier curves for autonomous vehicles operating under waypoints and corridor constraints. B{\'e}zier curves have useful properties for the trajectory generation problem. This paper describes how the algorithm apply these properties to generate the reference trajectory for vehicles to satisfy the path constraints. The algorithm generates the piecewise-B{\'e}zier-curves path such that the curves segments are joined smoothly with C2 constraint which leads to continuous curvature along the path. The degree of the curves are minimized to prevent them from being numerically unstable. Additionally, we discuss the constrained optimization problem that optimizes the resulting path for a user-defined cost function.},
+  timestamp = {2016-09-26T22:47:56Z},
+  booktitle = {49th {{IEEE Conference}} on {{Decision}} and {{Control}} ({{CDC}})},
+  author = {w Choi, J. and Curry, R. E. and Elkaim, G. H.},
+  month = dec,
+  year = {2010},
+  keywords = {Argon,autonomous ground vehicles,autonomous vehicles,Bezier curves,computational geometry,constrained optimization problem,continuous curvature,corridor constraints,curvature-continuous trajectory generation,Land vehicles,Mobile robots,optimisation,path constraints,Path planning,piecewise-Bezier-curves path,reference trajectory,Remotely operated vehicles,Trajectory,trajectory generation problem,user-defined cost function},
+  pages = {7166--7171},
+  file = {IEEE Xplore Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\UAZCR3T7\\Choi et al. - 2010 - Curvature-continuous trajectory generation with co.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\6GN2WEFH\\5718154.html:text/html}
+}
+
+@article{WalambeEtAl2016,
+  series = {4th IFAC Conference on Advances in Control and Optimization of Dynamical Systems ACODS 2016},
+  title = {Optimal {{Trajectory Generation}} for {{Car}}-Type {{Mobile Robot}} Using {{Spline Interpolation}}},
+  volume = {49},
+  issn = {2405-8963},
+  doi = {10.1016/j.ifacol.2016.03.121},
+  abstract = {This paper focuses on the spline based trajectory generation and motion planning in a 1:10 scale down prototype of a car. The car type vehicle can be modelled as a nonholonomic system with constraints on sideways movement. The spline based trajectory generation gives us continuous, smooth and optimized path trajectories. The motion planning algorithm is based on the nonholonomic model of a car-type robot which is differentially flat in nature. Our contribution lies in the development of spline based trajectories which overcome the parametric singularities arising from the differential flatness based approach. The spline trajectories also take care of the singularities which are otherwise observed in the optimization process if the cubic polynomial based interpolation is implemented. The hardware implementation for a prototype of a car type model is also presented. Using the concept of differential flatness, we derive control inputs which steer the vehicle along this trajectory.},
+  timestamp = {2016-09-26T22:25:17Z},
+  number = {1},
+  urldate = {2016-09-26},
+  journal = {IFAC-PapersOnLine},
+  author = {Walambe, Rahee and Agarwal, Nipun and Kale, Swagatu and Joshi, Vrunda},
+  month = jan,
+  year = {2016},
+  keywords = {car-type vehicle,differential flatness,Nonholonomy,spline polynomial,time-reparameterization},
+  pages = {601--606},
+  file = {ScienceDirect Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\IMHAHST7\\S2405896316301215.html:text/html}
+}
+
+@inproceedings{LauEtAl2009,
+  title = {Kinodynamic Motion Planning for Mobile Robots Using Splines},
+  doi = {10.1109/IROS.2009.5354805},
+  abstract = {This paper presents an approach to time-optimal kinodynamic motion planning for a mobile robot. A global path planner is used to generate collision-free straight-line paths from the robot's position to a given goal location. With waypoints of this path, an initial trajectory is generated which defines the planned position of the robot over time. A velocity profile is computed that accounts for constraints on the velocity and acceleration of the robot. The trajectory is refined to minimize the time needed for traversal by an any-time optimization algorithm. An error-feedback controller generates motor commands to execute the planned trajectory. Quintic Be{\^A}\textquestiondown{}zier splines are used to allow for curvature-continuous joins of trajectory segments, which enables the system to replan trajectories in order to react to unmapped obstacles. Experiments on real robots are presented that show our system's capabilities of smooth, precise, and predictive motion.},
+  timestamp = {2016-09-26T22:26:44Z},
+  booktitle = {2009 {{IEEE}}/{{RSJ International Conference}} on {{Intelligent Robots}} and {{Systems}}},
+  author = {Lau, B. and Sprunk, C. and Burgard, W.},
+  month = oct,
+  year = {2009},
+  keywords = {Acceleration,any-time optimization algorithm,collision-free straight-line paths,Constraint optimization,Error correction,error-feedback controller,feedback,global path planner,Mobile robots,Motion planning,optimisation,Orbital robotics,Path planning,Quintic Bezier splines,Robot sensing systems,Shape control,splines (mathematics),time-optimal kinodynamic motion planning,Trajectory,velocity profile},
+  pages = {2427--2433},
+  file = {IEEE Xplore Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\MJ4TNCH5\\Lau et al. - 2009 - Kinodynamic motion planning for mobile robots usin.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\9VQ333XR\\5354805.html:text/html}
+}
+
+@inproceedings{DemeesterEtAl2012,
+  title = {Design and Evaluation of a Lookup-Table Based Collision-Checking Approach for Fixed Sets of Mobile Robot Paths},
+  timestamp = {2017-05-24T13:54:06Z},
+  booktitle = {International {{Symposium}} on {{Robotics}}},
+  author = {Demeester, Eric and Vander Poorten, Emmanuel and Philips, Johan and Huntemann, Alexander},
+  month = aug,
+  year = {2012},
+  pages = {1045--1050}
+}
+
+@article{ElbanhawiEtAl2015,
+  title = {Continuous {{Path Smoothing}} for {{Car}}-{{Like Robots Using B}}-{{Spline Curves}}},
+  volume = {80},
+  issn = {0921-0296, 1573-0409},
+  doi = {10.1007/s10846-014-0172-0},
+  abstract = {A practical approach for generating motion paths with continuous steering for car-like mobile robots is presented here. This paper addresses two key issues in robot motion planning; path continuity and maximum curvature constraint for nonholonomic robots. The advantage of this new method is that it allows robots to account for their constraints in an efficient manner that facilitates real-time planning. B-spline curves are leveraged for their robustness and practical synthesis to model the vehicle's path. Comparative navigational-based analyses are presented to selected appropriate curve and nominate its parameters. Path continuity is achieved by utilizing a single path, to represent the trajectory, with no limitations on path, or orientation. The path parameters are formulated with respect to the robot's constraints. Maximum curvature is satisfied locally, in every segment using a smoothing algorithm, if needed. It is demonstrated that any local modifications of single sections have minimal effect on the entire path. Rigorous simulations are presented, to highlight the benefits of the proposed method, in comparison to existing approaches with regards to continuity, curvature control, path length and resulting acceleration. Experimental results validate that our approach mimics human steering with high accuracy. Accordingly, efficiently formulated continuous paths ultimately contribute towards passenger comfort improvement. Using presented approach, autonomous vehicles generate and follow paths that humans are accustomed to, with minimum disturbances.},
+  language = {en},
+  timestamp = {2016-09-26T22:30:45Z},
+  number = {1},
+  urldate = {2016-09-26},
+  journal = {Journal of Intelligent \& Robotic Systems},
+  author = {Elbanhawi, Mohamed and Simic, Milan and Jazar, Reza N.},
+  month = jan,
+  year = {2015},
+  pages = {23--56},
+  file = {Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\TC57PVCS\\Elbanhawi et al. - 2015 - Continuous Path Smoothing for Car-Like Robots Usin.pdf:application/pdf;Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\7NBUB4W2\\s10846-014-0172-0.html:text/html}
+}
+
+@inproceedings{ErenEtAl1999,
+  title = {Implementation of the Spline Method for Mobile Robot Path Control},
+  volume = {2},
+  doi = {10.1109/IMTC.1999.776966},
+  abstract = {This paper presents an implementation of a Spline Curve Algorithm in a mobile robot path-planning domain. This method is based on a continuous path mapped between two points. The path can easily be updated and modified as the robot moves. This feature makes the algorithm to be suitable for dynamic control as in the case of multiple mobile robots operating in the same environment in cooperative or competitive manner. The algorithm can be integrated with other planning strategies to improve system performance},
+  timestamp = {2016-09-26T22:22:39Z},
+  booktitle = {Proceedings of the 16th {{IEEE Instrumentation}} and {{Measurement Technology Conference}}, 1999. {{IMTC}}/99},
+  author = {Eren, H. and Fung, Chun Che and Evans, J.},
+  year = {1999},
+  keywords = {Australia,Boundary conditions,dynamic control,Matrices,mobile robot,Mobile robots,path control,Path planning,Robot control,Shape control,Spline,spline curve algorithm,splines (mathematics),Strategic planning,System performance},
+  pages = {739--744 vol.2},
+  file = {IEEE Xplore Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\IRTBQKEQ\\Eren et al. - 1999 - Implementation of the spline method for mobile rob.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\J6T5PKAX\\776966.html:text/html}
+}
+
+@inproceedings{ConnorsElkaim2007,
+  address = {San Diego, CA},
+  title = {Analysis of a {{Spline Based}}, {{Obstacle Avoiding Path Planning Algorithm}}},
+  doi = {10.1109/VETECS.2007.528},
+  abstract = {The Overbot is one of the original DARPA Grand Challenge vehicles now being used as a platform for autonomous vehicle research. The vehicle, equipped with a complete actuator and sensor suite, provides for an extremely capable robotic platform with computing infrastructure and software framework already in place to create a reconfigurable testbed. For point to point navigation, calculating suitable paths is computationally difficult. Maneuvering an autonomous vehicle safely around obstacles is essential, and the ability to generate safe paths in a real time environment is crucial for vehicle viability. We previously presented a method for developing feasible paths through complicated environments using a baseline smooth path based on cubic splines. This method is able to iteratively refine the path to more directly compute a feasible path and thus find an efficient, collision free path in real time through an unstructured environment. This method, when implemented in a receding horizon fashion, becomes the basis for high level control. In this work we perform Monte Carlo simulations to validate algorithm performance. The algorithm demonstrates a high success rate for all but the toughest of environments.},
+  timestamp = {2017-05-24T13:59:10Z},
+  booktitle = {2007 {{IEEE}} 65th {{Vehicular Technology Conference}} - {{VTC2007}}-{{Spring}}},
+  author = {Connors, John and Elkaim, Gabriel},
+  month = apr,
+  year = {2007},
+  keywords = {Actuators,Actuators,Algorithm design and analysis,Algorithm design and analysis,autonomous vehicle,autonomous vehicle,baseline smooth path,baseline smooth path,collision avoidance,collision avoidance,collision free path,collision free path,cubic splines,cubic splines,DARPA Grand Challenge vehicle,DARPA Grand Challenge vehicle,mobile robots,Mobile robots,Monte Carlo methods,Monte Carlo methods,Monte Carlo simulations,Monte Carlo simulations,Navigation,Navigation,Overbot,Overbot,Path planning,Path planning,point to point navigation,point to point navigation,reconfigurable testbed,reconfigurable testbed,Remotely operated vehicles,Remotely operated vehicles,road vehicles,road vehicles,robotic platform,robotic platform,Robot sensing systems,Robot sensing systems,Software testing,Software testing,Spline,Spline,spline based obstacle avoiding path planning algorithm,spline based obstacle avoiding path planning algorithm,Vehicle safety,Vehicle safety},
+  pages = {2565--2569},
+  file = {IEEE Xplore Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\Z62UTHT6\\Connors and Elkaim - 2007 - Analysis of a Spline Based, Obstacle Avoiding Path.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\CS7HIMQ2\\4212956.html:text/html}
+}
+
+@inproceedings{ChoiEtAl2008,
+  title = {Path {{Planning Based}} on {{B{\'e}zier Curve}} for {{Autonomous Ground Vehicles}}},
+  doi = {10.1109/WCECS.2008.27},
+  abstract = {In this paper we present two path planning algorithms based on Bezier curves for autonomous vehicles with way points and corridor constraints. Bezier curves have useful properties for the path generation problem. The paper describes how the algorithms apply these properties to generate the reference trajectory for vehicles to satisfy the path constraints. Both algorithms join cubic Bezier curve segments smoothly to generate the path. Additionally, we discuss the constrained optimization problem that optimizes the resulting path for a user-defined cost function. The simulation shows the generation of successful routes for autonomous vehicles using these algorithms as well as control results for a simple kinematic vehicle. Extensions of these algorithms towards navigating through an unstructured environment with limited sensor range are discussed.},
+  timestamp = {2016-09-26T22:46:41Z},
+  booktitle = {World {{Congress}} on {{Engineering}} and {{Computer Science}} 2008, {{WCECS}} '08. {{Advances}} in {{Electrical}} and {{Electronics Engineering}} - {{IAENG Special Edition}} of The},
+  author = {w Choi, J. and Curry, R. and Elkaim, G.},
+  month = oct,
+  year = {2008},
+  keywords = {Automotive engineering,autonomous ground vehicles,autonomous vehicle,Bezier curve,collision avoidance,constrained optimization,Constraint optimization,corridor constraints,cubic Bezier curve segments,curve fitting,Feedback control,kinematic vehicle,Land vehicles,Mobile robots,optimisation,optimization,path constraints,path generation problem,Path planning,path planning algorithms,reference trajectory,Remotely operated vehicles,Unmanned aerial vehicles,user-defined cost function,Vehicle dynamics,Vehicles},
+  pages = {158--166},
+  file = {IEEE Xplore Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\MB9BD5BM\\Choi et al. - 2008 - Path Planning Based on B #x0E9\;zier Curve for Auto.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\MG8R4A3Z\\5233184.html:text/html}
+}
+
+@book{LaValle2006,
+  title = {Planning {{Algorithms}}},
+  isbn = {978-0-521-86205-9},
+  abstract = {Planning algorithms are impacting technical disciplines and industries around the world, including robotics, computer-aided design, manufacturing, computer graphics, aerospace applications, drug design, and protein folding. Written for computer scientists and engineers with interests in artificial intelligence, robotics, or control theory, this is the only book on this topic that tightly integrates a vast body of literature from several fields into a coherent source for teaching and reference in a wide variety of applications. Difficult mathematical material is explained through hundreds of examples and illustrations.},
+  language = {en},
+  timestamp = {2016-10-08T11:36:16Z},
+  publisher = {{Cambridge University Press}},
+  author = {LaValle, Steven M.},
+  month = may,
+  year = {2006}
+}
+
+@inproceedings{VanLoockEtAl2013,
+  title = {Time-Optimal Path Planning for Flat Systems with Application to a Wheeled Mobile Robot},
+  doi = {10.1109/RoMoCo.2013.6614607},
+  abstract = {The time-optimal path planning problem aims at bringing a system from an initial to terminal state in minimal time while obeying both geometric and dynamic constraints. Path planning problems are often decoupled into a high-level path planning stage where a feasible geometric path is determined and a low level stage where system dynamics are taken into account. The paper combines the geometric and dynamic approach into a single optimization problem for so-called differentially flat systems. The geometric path is represented as a convex combination of two or more feasible paths. Relying on differential flatness, the dynamics of the system are projected onto the path which leads to a single input system. The resulting optimization problem is transformed into a fixed end-time optimal control problem that can be initialized easily. An application to a wheeled mobile robot, a challenging non-linear system, will illustrate the proposed approach throughout the paper.},
+  timestamp = {2017-08-02T14:13:50Z},
+  booktitle = {2013 9th {{Workshop}} on {{Robot Motion}} and {{Control}} ({{RoMoCo}})},
+  author = {Van Loock, W. and Pipeleers, G. and Swevers, J.},
+  month = jul,
+  year = {2013},
+  keywords = {convex combination,dynamic constraints,fixed end-time optimal control problem,flat systems,geometric constraints,geometry,high-level path planning stage,Mobile robots,nonlinear control systems,nonlinear system,Optimal control,optimisation,optimization,Path planning,single input system,single optimization problem,splines (mathematics),time optimal control,wheeled mobile robot,Wheels},
+  pages = {192--196},
+  file = {IEEE Xplore Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\DRR3ZHZ8\\Loock e.a. - 2013 - Time-optimal path planning for flat systems with a.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\42N6CWE7\\6614607.html:text/html}
+}
+
+@inproceedings{BruyninckxReynaerts1997,
+  title = {Path Planning for Mobile and Hyper-Redundant Robots Using {{Pythagorean}} Hodograph Curves},
+  doi = {10.1109/ICAR.1997.620243},
+  abstract = {Pythagorean hodograph curves (PH curves) have a number of advantages over other splines commonly used in planar robot path planning: (1) the integral of curvature is small; (2) the curve, its length, curvature and total ``bending energy'' are known in closed-form; (3) start and end positions and directions are straightforwardly usable as boundary conditions; and (4) length can be traded off against curvature quite easily. These facts make PH curves especially interesting for the planning of car-like mobile robot paths, as well as for the calculation of the ``backbone curve'' in the inverse kinematics of hyper-redundant robots},
+  timestamp = {2017-08-10T15:36:47Z},
+  booktitle = {8th {{International Conference}} on {{Advanced Robotics}}, 1997. {{ICAR}} '97. {{Proceedings}}},
+  author = {Bruyninckx, H. and Reynaerts, D.},
+  month = jul,
+  year = {1997},
+  keywords = {Angular velocity,Axles,bending energy,Boundary conditions,curvature,hyper-redundant robots,inverse kinematics,iterative methods,Kinematics,Mechanical engineering,Mechanical splines,mobile robot,Mobile robots,Motion planning,Path planning,Pythagorean hodograph curves,redundancy,robot kinematics,splines,splines (mathematics),Wheels},
+  pages = {595--600},
+  file = {IEEE Xplore Abstract Record:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\ZXJG7ZAU\\620243.html:text/html}
+}
+
+@article{LepeticEtAl2003,
+  title = {Time Optimal Path Planning Considering Acceleration Limits},
+  volume = {45},
+  issn = {0921-8890},
+  doi = {10.1016/j.robot.2003.09.007},
+  abstract = {A robot path planning technique is proposed in the paper. It was developed for robots with differential drive, but with minor modifications it could be used for all types of nonholonomic robots. The path was planned in the way to minimise the time of reaching the end point in desired direction and with desired velocity, starting from the initial state described by the start point, initial direction and initial velocity. The limitation was the grip of the tires that results in the acceleration limits. The path is presented as a spline curve and was optimised by placing the control points through which the curve should pass.},
+  timestamp = {2016-10-29T15:39:39Z},
+  number = {3\textendash{}4},
+  urldate = {2016-10-29},
+  journal = {Robotics and Autonomous Systems},
+  author = {Lepeti{\v c}, Marko and Klan{\v c}ar, Gregor and {\v S}krjanc, Igor and Matko, Drago and Poto{\v c}nik, Bo{\v s}tjan},
+  month = dec,
+  year = {2003},
+  keywords = {Acceleration limits,Mobile robots,Path planning,Spline curve,velocity profile},
+  pages = {199--210},
+  file = {ScienceDirect Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\RZFPXTKX\\Lepetič e.a. - 2003 - Time optimal path planning considering acceleratio.pdf:application/pdf;ScienceDirect Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\GM8EFGTS\\S0921889003001544.html:text/html}
+}
+
+@book{Andersson2013,
+  address = {Leuven},
+  title = {A {{General}}-{{Purpose Software Framework}} for {{Dynamic Optimization}}},
+  isbn = {978-94-6018-750-6},
+  abstract = {Methods and software for derivative-based numerical optimization in general
+and simulation-based optimization in particular have seen a large rise in
+popularity over the past 30 years. Still, due to practical difficulties in
+implementing many of the methods in a fast and reliable manner, it remains
+an underused technology both in academia and in industry. To address this,
+we present a set of methods and tools with the aim of making techniques for
+dynamic optimization more accessible. In particular, we present CasADi, an
+open-source software framework for numerical optimization and algorithmic
+differentiation (AD) that offers a level of abstraction which is lower than
+algebraic modeling languages, but higher than conventional AD tools. We
+also discuss several of the many application problems which have already been
+addressed with CasADi by researchers from diverse fields.},
+  language = {en},
+  timestamp = {2017-05-24T13:33:50Z},
+  urldate = {2016-10-29},
+  publisher = {{KU Leuven}},
+  author = {Andersson, Joel},
+  month = oct,
+  year = {2013},
+  file = {Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\EHTQNRM2\\Andersson - 2013 - A General-Purpose Software Framework for Dynamic O.pdf:application/pdf;Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\RDJ6JWE9\\418048.html:text/html}
+}
+
+@misc{Kamermans2013,
+  title = {A {{Primer}} on {{B{\'e}zier Curves}}},
+  abstract = {A detailed explanation of B{\'e}zier curves, and how to do the many things that we commonly want to do with them.},
+  timestamp = {2016-10-30T09:31:03Z},
+  urldate = {2016-10-30},
+  howpublished = {\url{http://pomax.github.io/bezierinfo}},
+  author = {Kamermans, Mike},
+  month = jun,
+  year = {2013},
+  file = {Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\SPUI6A3X\\bezierinfo.html:text/html}
+}
+
+@book{Sederberg2016,
+  address = {Provo, UT},
+  title = {Computer {{Aided Geometric Design}}},
+  language = {en},
+  timestamp = {2017-05-04T17:40:12Z},
+  urldate = {2016-10-30},
+  publisher = {{Brigham Young University}},
+  author = {Sederberg, Thomas W.},
+  month = sep,
+  year = {2016},
+  file = {cagd.pdf:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\RP78U8Q3\\cagd.pdf:application/pdf}
+}
+
+@book{BoydVandenberghe2004,
+  address = {Cambridge},
+  title = {Convex Optimization},
+  isbn = {0-521-83378-7},
+  timestamp = {2016-11-14T15:49:36Z},
+  publisher = {{Cambridge university press}},
+  author = {Boyd, Stephen and Vandenberghe, Lieven},
+  year = {2004}
+}
+
+@inproceedings{DemeesterEtAl2003,
+  address = {Coimbra, Portugal},
+  title = {Fine Motion Planning for Shared Wheelchair Control: Requirements and Preliminary Experiments},
+  timestamp = {2016-11-27T17:34:25Z},
+  booktitle = {Proceedings of the 11th {{International Conference}} on {{Advanced Robotics}}},
+  author = {Demeester, Eric and Nuttin, Marnix and Van Brussel, Hendrik},
+  month = jun,
+  year = {2003}
+}
+
+@article{NashKoenig2013,
+  title = {Any-{{Angle Path Planning}}},
+  volume = {34},
+  copyright = {Copyright Association for the Advancement of Artificial Intelligence Winter 2013},
+  issn = {07384602},
+  abstract = {In robotics and video games, one often discretizes continuous terrain into a grid with blocked and unblocked grid cells and then uses a path-planning algorithms to find a shortest path on the resulting grid graph. This path, however, is typically not a shortest path in the continuous terrain. In this overview article, the authors have discussed a path-planning methodology, for quickly finding paths in continuous terrain that are typically shorter than shortest grid paths. Any-angle path-planning algorithms are variants of the heuristic path-planning algorithm A* that find short paths by propagating information along grid edges (like A*, to be fast) without constraining the resulting paths to grid edges (unlike A*, to find short paths).},
+  language = {English},
+  timestamp = {2016-11-28T09:25:02Z},
+  number = {4},
+  urldate = {2016-11-28},
+  journal = {AI Magazine},
+  author = {Nash, Alex and Koenig, Sven},
+  year = {Winter 2013},
+  keywords = {Algorithms,Computers--Artificial Intelligence,Computer \& video games,Research \& development--R\&D,Robotics},
+  pages = {85--107},
+  file = {Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\W6Q9CW3A\\Nash and Koenig - 2013 - Any-Angle Path Planning.pdf:application/pdf}
+}
+
+@inproceedings{PivtoraikoKelly2012,
+  address = {Algarve, Portugal},
+  title = {Generating {{State Lattice Motion Primitives}} for {{Differentially Constrained Motion Planning}}},
+  abstract = {We propose a method of generating motion primitives
+for motion planning under differential constraints. These
+primitives lend themselves particularly well to off-line precomputation.
+In this manner, they are attractive due to their
+capacity to capture the mobility constraints of the robot and to
+establish a state sampling policy that is conducive to efficient
+search. The first objective allows encoding mobility constraints
+into primitives, thereby enabling fast unconstrained search to
+produce feasible solutions. The second objective enables high
+quality (lattice) sampling of state space, further speeding up
+exploration during search. A number of techniques, novel
+in differentially constrained planning, are enabled with this
+approach, including incremental search, efficient bi-directional
+search and incremental sampling.},
+  language = {en},
+  timestamp = {2017-05-24T14:18:30Z},
+  booktitle = {International {{Conference}} on {{Intelligent Robots}} and {{Systems}}},
+  author = {Pivtoraiko, Mihail and Kelly, Alonzo},
+  month = oct,
+  year = {2012},
+  pages = {101--108},
+  file = {3Mihail.pdf:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\HJIQ8MUJ\\3Mihail.pdf:application/pdf}
+}
+
+@inproceedings{PivtoraikoKelly2005,
+  title = {Generating near Minimal Spanning Control Sets for Constrained Motion Planning in Discrete State Spaces},
+  doi = {10.1109/IROS.2005.1545046},
+  abstract = {We propose a principled method to create a search space for constrained motion planning, which efficiently encodes only feasible motion plans. The space of possible paths is encoded implicitly in the connections between states, but only feasible and only local connections are allowed. Furthermore, we propose a systematic method to generate a near-minimal set of spatially distinct motion alternatives. This set of motion primitives preserves the connectivity of the representation while eliminating redundancy - leading to a very efficient structure for motion planning at the chosen resolution.},
+  timestamp = {2017-05-24T14:00:03Z},
+  booktitle = {2005 {{IEEE}}/{{RSJ International Conference}} on {{Intelligent Robots}} and {{Systems}}},
+  author = {Pivtoraiko, M. and Kelly, A.},
+  month = aug,
+  year = {2005},
+  keywords = {constrained motion planning,Control systems,discrete state spaces,discrete systems,Kinematics,Lattices,Motion control,motion control,near minimal spanning control sets,Orbital robotics,Road accidents,Sampling methods,Space exploration,State-space methods,Vehicles},
+  pages = {3231--3237},
+  file = {IEEE Xplore Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\85IWHUW4\\Pivtoraiko and Kelly - 2005 - Generating near minimal spanning control sets for .pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\PEAKIZ7G\\1545046.html:text/html}
+}
+
+@inproceedings{PivtoraikoKelly2005a,
+  address = {Munich, Germany.},
+  title = {Efficient {{Constrained Path Planning Via Search In State Lattices}}},
+  abstract = {ning
+that is based on a special search space which efficiently
+encodes feasible paths. The paths are encoded
+implicitly as connections between states, but only feasible
+and local connections are included. Once this search
+space is developed, we systematically generate a nearminimal
+set of spatially distinct path primitives. This set
+expresses the local connectivity of constrained motions
+and also eliminates redundancies. The set of primitives is
+used to define heuristic search, and thereby create a very
+efficient path planner at the chosen resolution. We also
+discuss a wide variety of space and terrestrial robotics
+applications where this motion planner can be especially
+useful.},
+  timestamp = {2017-05-24T13:59:46Z},
+  booktitle = {Proc. of '{{The}} 8th {{International Symposium}} on {{Artifical Intelligence}}, {{Robotics}} and {{Automation}} in {{Space}}},
+  author = {Pivtoraiko, Mihail and Kelly, Alonzo},
+  month = sep,
+  year = {2005}
+}
+
+@inproceedings{RufliEtAl2009,
+  title = {Smooth Path Planning in Constrained Environments},
+  doi = {10.1109/ROBOT.2009.5152506},
+  abstract = {In this paper we describe a novel path planning approach for mobile robots operating in indoor environments. In such scenarios, robots must be able to maneuver in crowded spaces, partially filled with static and dynamic obstacles (such as people). Our approach produces smooth, complex maneuvers over large distances through the use of an anytime graph search algorithm applied to a novel multi-resolution state lattice, where the resolution is adapted based on both environmental characteristics and task characteristics. In addition, we present a novel approach for generating fast globally optimal trajectories in constrained spaces (i.e. rooms connected via doors and hallways). This approach exploits offline precomputation to provide extremely efficient online performance and is applicable to a wide range of both indoor and outdoor navigation scenarios. By combining an anytime, multi-resolution lattice-based search algorithm with our precomputation technique, globally optimal trajectories in up to four dimensions (2D position, heading and velocity) are obtained in real-time.},
+  timestamp = {2016-12-05T15:18:33Z},
+  booktitle = {2009 {{IEEE International Conference}} on {{Robotics}} and {{Automation}}},
+  author = {Rufli, M. and Ferguson, D. and Siegwart, R.},
+  month = may,
+  year = {2009},
+  keywords = {Indoor environments,Lattices,Mobile robots,Navigation,Orbital robotics,Path planning,Remotely operated vehicles,Robotics and automation,USA Councils,Vehicle dynamics},
+  pages = {3780--3785},
+  file = {IEEE Xplore Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\VCRAPH2A\\Rufli et al. - 2009 - Smooth path planning in constrained environments.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\9IIA3399\\Rufli et al. - 2009 - Smooth path planning in constrained environments.html:text/html}
+}
+
+@article{BertolazziFrego2015,
+  title = {G1 Fitting with Clothoids},
+  volume = {38},
+  issn = {1099-1476},
+  doi = {10.1002/mma.3114},
+  abstract = {A new algorithm for the solution to the problem of Hermite G1 interpolation with a clothoid curve is herein proposed, that is, a clothoid that interpolates two given points in a plane with assigned unit tangent vectors. The interpolation problem is formulated as a system of three nonlinear equations with multiple solutions, which is difficult to solve even numerically. In this work the solution of this system is reduced to the computation of the zeros of only one single nonlinear function in one variable. The location of the relevant zero is tackled analytically: it is provided the interval containing the zero where the solution is proved to exist and to be unique. A simple guess function allows to find that zero with very few iterations in all of the possible instances. Computing clothoid curves calls for evaluating Fresnel-related integrals, asymptotic expansions near critical values are herein conceived to avoid loss of precision. This is particularly important when the solution of the interpolation problem is close to a straight line or an arc of circle. The present algorithm is shown to be simple and compact. The comparison with literature algorithms proves that the present algorithm converges more quickly and accuracy is conserved in all of the possible instances, whereas other algorithms have a loss of accuracy near the transition zones. Copyright \textcopyright{} 2014 John Wiley \& Sons, Ltd.},
+  language = {en},
+  timestamp = {2017-02-25T14:40:14Z},
+  number = {5},
+  urldate = {2017-02-25},
+  journal = {Mathematical Methods in the Applied Sciences},
+  author = {Bertolazzi, Enrico and Frego, Marco},
+  month = mar,
+  year = {2015},
+  keywords = {clothoid,Fresnel integrals,Hermite G1 interpolation},
+  pages = {881--897},
+  file = {Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\W4DEX29T\\Bertolazzi and Frego - 2015 - G1 fitting with clothoids.pdf:application/pdf;Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\AQG34PCG\\abstract.html:text/html}
+}
+
+@article{WaltonMeek2009,
+  title = {G1 Interpolation with a Single {{Cornu}} Spiral Segment},
+  volume = {223},
+  issn = {0377-0427},
+  doi = {10.1016/j.cam.2007.12.022},
+  abstract = {Cornu spiral segments are used in applications such as the geometric design of highways and railways, robot path planning, and shape completion. For some applications, e.g.~shape completion in computer vision, it is important to use a single visually pleasing curve segment to smoothly fill a gap, even though the gap may not be filled in a curvature continuous manner. An improved method for doing so using a Cornu spiral segment is discussed. The method is generally suitable for any application where it is required to smoothly fit a curve between two given points when the corresponding tangent directions, but not the curvatures, are also given or known.},
+  timestamp = {2017-02-25T14:42:01Z},
+  number = {1},
+  urldate = {2017-02-25},
+  journal = {Journal of Computational and Applied Mathematics},
+  author = {Walton, D. J. and Meek, D. S.},
+  month = jan,
+  year = {2009},
+  keywords = {clothoid,Cornu spiral,Euler spiral,G    1     interpolation},
+  pages = {86--96},
+  file = {ScienceDirect Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\TW94BPEF\\Walton and Meek - 2009 - interpolation with a single Cornu spiral segment.pdf:application/pdf;ScienceDirect Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\U87T4ST2\\S037704270700670X.html:text/html}
+}
+
+@article{MeekWalton1989,
+  title = {The Use of {{Cornu}} Spirals in Drawing Planar Curves of Controlled Curvature},
+  volume = {25},
+  issn = {0377-0427},
+  doi = {10.1016/0377-0427(89)90076-9},
+  abstract = {Cornu spirals or clothoids have been used in highway design for many years. In the past the spirals have been found manually by draftsmen. The purpose of this paper is to show that it is practical to find these spirals with a micro-computer. The design curve will be made up of arcs of circles and segments of Cornu spirals joined in such a way that the curvature is continuous throughout, and takes its largest values on the arcs of circles. Thus, the radii of the circles used will limit, and control the curvature of the whole design curve.},
+  timestamp = {2017-02-25T14:43:57Z},
+  number = {1},
+  urldate = {2017-02-25},
+  journal = {Journal of Computational and Applied Mathematics},
+  author = {Meek, D. S. and Walton, D. J.},
+  month = jan,
+  year = {1989},
+  keywords = {controlled curvature,Cornu spiral},
+  pages = {69--78},
+  file = {ScienceDirect Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\4ZQEDRDT\\Meek and Walton - 1989 - The use of Cornu spirals in drawing planar curves .pdf:application/pdf;ScienceDirect Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\NP3MTMIE\\0377042789900769.html:text/html}
+}
+
+@article{MeekWalton2009,
+  title = {A Two-Point {{Hermite}} Interpolating Family of Spirals},
+  volume = {223},
+  issn = {0377-0427},
+  doi = {10.1016/j.cam.2007.12.027},
+  abstract = {A one-parameter family of spirals that can match planar, two-point G 1 Hermite data is presented. These spirals can be used as an alternative to the biarc, which is also a one-parameter family of curves that can match two-point G 1 Hermite data. Some suggestions on choosing the free parameter of the family of spirals is given. It is shown that there is a unique G 1 Hermite interpolating spiral that passes through a given point in an allowable region. Three examples of the use of these spirals are given: curve completion with spirals, design with spirals, and approximation of the clothoid by spirals.},
+  timestamp = {2017-02-25T14:46:49Z},
+  number = {1},
+  urldate = {2017-02-25},
+  journal = {Journal of Computational and Applied Mathematics},
+  author = {Meek, D. S. and Walton, D. J.},
+  month = jan,
+  year = {2009},
+  keywords = {Family of spirals,Two-point     G    1     Hermite interpolation},
+  pages = {97--113},
+  file = {ScienceDirect Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\Q3QU3HP8\\Meek and Walton - 2009 - A two-point Hermite interpolating family of spiral.pdf:application/pdf;ScienceDirect Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\9SE7WASM\\S0377042707006711.html:text/html}
+}
+
+@article{Makino1988,
+  title = {Clothoidal {{Interpolation}} \textemdash{} {{A New Tool}} for {{High}}-{{Speed Continuous Path Control}}},
+  volume = {37},
+  issn = {0007-8506},
+  doi = {10.1016/S0007-8506(07)61578-9},
+  abstract = {Summary
+The Clothoid or Cornu Spiral la a planar curve which is frequently used in high-way design. The curvature of the curve is proportional to the length of the curve measured from the origin of the spiral. In this report, methods of connecting double Clothoids between two lines are mainly discussed. By applying this methods to welding, painting. sealing and bonding robots, it is expected to obtain faster continuous path motion. Theoretical analysis is given and some experimental results with the SCARA robot are shown.},
+  timestamp = {2017-02-25T14:48:06Z},
+  number = {1},
+  urldate = {2017-02-25},
+  journal = {CIRP Annals - Manufacturing Technology},
+  author = {Makino, H.},
+  year = {1988},
+  keywords = {clothoid,continuous path control,interpolation,robot,trajectory design},
+  pages = {25--28},
+  file = {ScienceDirect Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\INFJKCJU\\Makino - 1988 - Clothoidal Interpolation — A New Tool for High-Spe.pdf:application/pdf;ScienceDirect Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\VPN2QUKV\\S0007850607615789.html:text/html}
+}
+
+@article{PrasslerEtAl1999,
+  title = {Navigating a {{Robotic Wheelchair}} in a {{Railway Station}} during {{Rush Hour}}},
+  volume = {18},
+  issn = {0278-3649},
+  doi = {10.1177/02783649922066529},
+  abstract = {This paper describes the hardware design, control, and navigation system of and some preliminary experiments with the robotic wheelchair Mobility Aid for elderly and disabled people (MAid). MAid's general task is to transport people with severely impaired motion skills. The authors did not set out to reinvent and redevelop the set of standard skills of so-called intelligent wheelchairs, such as Follow Wall, FollowCorridor, PassDoorway, which are commonly described in the literature. These maneuvers require motion control skills that disabled people, in spite of their disabilities, are eager to learn and quite good at using. Instead, this work focused on generalizing the approach to fine motion control by considering those maneuvers identified as very burdensome due to their duration and required concentration. One of these functions is deliberative locomotion in rapidly changing, large-scale environments, such as shopping malls, entry halls of theaters, and concourses of airports or railway stations, where tens or hundreds of people and objects move around. MAid's performance was tested in the central station of Ulm during rush hour and in the exhibition halls of the Hannover Messe '98, the largest industrial fair in the world. Altogether, MAid has survived more than 36 h of testing in public, crowded environments with heavy passenger traffic.},
+  language = {en},
+  timestamp = {2017-05-03T13:24:55Z},
+  number = {7},
+  urldate = {2017-05-03},
+  journal = {The International Journal of Robotics Research},
+  author = {Prassler, E. and Scholz, J. and Fiorini, P.},
+  month = jul,
+  year = {1999},
+  pages = {711--727}
+}
+
+@article{PanEtAl2012,
+  title = {Collision-Free and Smooth Trajectory Computation in Cluttered Environments},
+  volume = {31},
+  issn = {0278-3649, 1741-3176},
+  doi = {10.1177/0278364912453186},
+  language = {en},
+  timestamp = {2017-05-04T08:26:15Z},
+  number = {10},
+  urldate = {2017-05-04},
+  journal = {The International Journal of Robotics Research},
+  author = {Pan, Jia and Zhang, Liangjun and Manocha, Dinesh},
+  month = sep,
+  year = {2012},
+  pages = {1155--1175}
+}
+
+@article{TounsiLeCorre1996,
+  series = {Robotics},
+  title = {Trajectory Generation for Mobile Robots},
+  volume = {41},
+  issn = {0378-4754},
+  doi = {10.1016/0378-4754(95)00085-2},
+  abstract = {In this paper, first we present different curves used in path generation. We show the advantages and drawbacks of each curve. Next, we propose a method of calculation of a complex smooth path. This smooth path minimizes the integral-square-jerk. Finally, we introduce a variable velocity along the path. The velocity of the robot is a function of path curvature so as to control the centrifugal acceleration.},
+  timestamp = {2017-05-04T17:06:00Z},
+  number = {3},
+  urldate = {2017-05-04},
+  journal = {Mathematics and Computers in Simulation},
+  author = {Tounsi, M. and Le Corre, J. F.},
+  month = jul,
+  year = {1996},
+  pages = {367--376},
+  file = {ScienceDirect Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\BIPRRGV8\\0378475495000852.html:text/html}
+}
+
+@article{Baass1982,
+  title = {Use {{Of Of Clothoid Templates In Highway Design}}},
+  timestamp = {2017-05-24T13:36:23Z},
+  urldate = {2017-05-09},
+  journal = {Transportation Association of Canada},
+  author = {Baass, K. G.},
+  month = sep,
+  year = {1982},
+  file = {Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\AFMXIDV6\\Baass - 1982 - USE OF CLOTHOID TEMPLATES IN HIGHWAY DESIGN.html:text/html}
+}
+
+@article{KellyNagy2003,
+  title = {Reactive {{Nonholonomic Trajectory Generation}} via {{Parametric Optimal Control}}},
+  volume = {22},
+  issn = {0278-3649, 1741-3176},
+  doi = {10.1177/02783649030227008},
+  language = {en},
+  timestamp = {2017-05-09T08:35:41Z},
+  number = {7-8},
+  urldate = {2017-05-09},
+  journal = {The International Journal of Robotics Research},
+  author = {Kelly, Alonzo and Nagy, Bryan},
+  month = jul,
+  year = {2003},
+  pages = {583--601}
+}
+
+@inproceedings{ScheuerFraichard1997,
+  title = {Continuous-Curvature Path Planning for Car-like Vehicles},
+  volume = {2},
+  doi = {10.1109/IROS.1997.655130},
+  abstract = {We consider path planning for a car-like vehicle. Previous solutions to this problem computed paths made up of circular arcs connected by tangential line segments. Such paths have a discontinuous curvature profile. Accordingly a vehicle following such a path has to stop at each curvature discontinuity in order to re-orientate its front wheels. To remove this limitation, we add a continuous-curvature constraint to the problem at hand. In addition, we introduce a constraint on the curvature derivative, so as to reflect the fact that a car-like vehicle can only re-orientate its front wheels with a finite velocity. We propose an efficient solution to the problem at hand that relies upon the definition of a set of paths with continuous curvature and maximum curvature derivative. These paths contain at most eight pieces, each piece being either a line segment, a circular arc of maximum curvature, or a clothoid arc. They are called simple continuous curvature paths. They are used to design a local path planner. The experimental results are presented},
+  timestamp = {2017-05-09T08:45:41Z},
+  booktitle = {, {{Proceedings}} of the 1997 {{IEEE}}/{{RSJ International Conference}} on {{Intelligent Robots}} and {{Systems}}, 1997. {{IROS}} '97},
+  author = {Scheuer, A. and Fraichard, T.},
+  month = sep,
+  year = {1997},
+  keywords = {Axles,car-like vehicles,circular arc,clothoid arc,computational geometry,continuous-curvature path planning,curvature derivative,H infinity control,line segment,Mobile robots,Path planning,road vehicles,Robotics and automation,Turning,Vehicles,Wheels},
+  pages = {997--1003 vol.2},
+  file = {IEEE Xplore Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\P9ZFCKCQ\\Scheuer and Fraichard - 1997 - Continuous-curvature path planning for car-like ve.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\9RVVHRN6\\655130.html:text/html}
+}
+
+@book{Cope1993,
+  title = {British Railway Track: Design, Construction and Maintenance},
+  isbn = {0-903489-03-1},
+  timestamp = {2017-05-09T09:05:16Z},
+  publisher = {{Permanent Way Institution Loughborough,, UK}},
+  author = {Cope, Geoffrey H.},
+  year = {1993}
+}
+
+@article{FleuryEtAl1995,
+  title = {Primitives for Smoothing Mobile Robot Trajectories},
+  volume = {11},
+  issn = {1042-296X},
+  doi = {10.1109/70.388788},
+  abstract = {Clothoids are very useful for smoothing the motion of a mobile robot moving along a trajectory. This paper addresses the problem of smoothing mobile robot motions when cusps, i.e., changes of motion direction along the trajectory, are imposed. We pinpoint some special curves (that we call ``anticlothoids'') and we discuss how they can be used together with clothoids in order to smooth a predefined trajectory},
+  timestamp = {2017-05-09T09:12:12Z},
+  number = {3},
+  journal = {IEEE Transactions on Robotics and Automation},
+  author = {Fleury, S. and Soueres, P. and Laumond, J. P. and Chatila, R.},
+  month = jun,
+  year = {1995},
+  keywords = {anticlothoids,Automatic control,clothoids,cusps,Equations,Force control,geometry,Manipulators,Mobile robots,mobile robot trajectory smoothing,motion direction changes,Orbital robotics,Path planning,primitives,Robot control,Robotics and automation,Robot motion,Smoothing methods},
+  pages = {441--448},
+  file = {IEEE Xplore Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\MQSIJJDQ\\Fleury et al. - 1995 - Primitives for smoothing mobile robot trajectories.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\HP3KDQV4\\388788.html:text/html}
+}
+
+@article{BrezakPetrovic2011,
+  series = {18th IFAC World Congress},
+  title = {Path {{Smoothing Using Clothoids}} for {{Differential Drive Mobile Robots}}},
+  volume = {44},
+  issn = {1474-6670},
+  doi = {10.3182/20110828-6-IT-1002.02944},
+  abstract = {This paper presents a new online path-smoothing algorithm for smoothing a path that consists of straight line segments and is primarily intended for differential drive mobile robots. Algorithm allows non-zero initial path curvature, which is important for replanning. Further, algorithm uses clothoid curves as primitives for path smoothing, which have inherent property that their curvature changes proportionally with distance traveled along the curve.},
+  timestamp = {2017-05-09T09:19:56Z},
+  number = {1},
+  urldate = {2017-05-09},
+  journal = {IFAC Proceedings Volumes},
+  author = {Brezak, Mi{\v s}el and Petrovi{\'c}, Ivan},
+  month = jan,
+  year = {2011},
+  keywords = {clothoid,Mobile robots,Navigation,Path planning,Path smoothing},
+  pages = {1133--1138},
+  file = {ScienceDirect Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\T7WF8AVN\\Brezak and Petrović - 2011 - Path Smoothing Using Clothoids for Differential Dr.pdf:application/pdf;ScienceDirect Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\IBX6UPSR\\S1474667016437614.html:text/html}
+}
+
+@article{McCraeSingh2009,
+  title = {Sketching Piecewise Clothoid Curves},
+  volume = {33},
+  issn = {0097-8493},
+  doi = {10.1016/j.cag.2009.05.006},
+  abstract = {We present a novel approach to sketching 2D curves with minimally varying curvature as piecewise clothoids. A stable and efficient algorithm fits a sketched piecewise linear curve using a number of clothoid segments with G 2 continuity based on a specified error tolerance. Further, adjacent clothoid segments can be locally blended to result in a G 3 curve with curvature that predominantly varies linearly with arc length. We also handle intended sharp corners or G 1 discontinuities, as independent rotations of clothoid pieces. Our formulation is ideally suited to conceptual design applications where aesthetic fairness of the sketched curve takes precedence over the precise interpolation of geometric constraints. We show the effectiveness of our results within a system for sketch-based road and robot-vehicle path design, where clothoids are already widely used.},
+  timestamp = {2017-05-09T10:01:07Z},
+  number = {4},
+  urldate = {2017-05-09},
+  journal = {Computers \& Graphics},
+  author = {McCrae, James and Singh, Karan},
+  month = aug,
+  year = {2009},
+  keywords = {Line and curve generation},
+  pages = {452--461},
+  file = {ScienceDirect Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\6CVWWTQ6\\McCrae and Singh - 2009 - Sketching piecewise clothoid curves.pdf:application/pdf;ScienceDirect Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\R84E8ZF2\\S0097849309000843.html:text/html}
+}
+
+@misc{BertolazziFrego2016,
+  title = {G1 Fitting with Clothoids [Source Code]},
+  copyright = {BSD-2-Clause},
+  timestamp = {2017-06-06T17:35:35Z},
+  urldate = {2017-05-09},
+  howpublished = {\url{https://github.com/ebertolazzi/G1fitting}},
+  author = {Bertolazzi, Enrico and Frego, Marco},
+  month = nov,
+  year = {2016},
+  file = {Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\7WVHBWNA\\G1fitting.html:text/html}
+}
+
+@article{PivtoraikoEtAl2009,
+  title = {Differentially Constrained Mobile Robot Motion Planning in State Lattices},
+  volume = {26},
+  issn = {1556-4967},
+  doi = {10.1002/rob.20285},
+  abstract = {We present an approach to the problem of differentially constrained mobile robot motion planning in arbitrary cost fields. The approach is based on deterministic search in a specially discretized state space. We compute a set of elementary motions that connects each discrete state value to a set of its reachable neighbors via feasible motions. Thus, this set of motions induces a connected search graph. The motions are carefully designed to terminate at discrete states, whose dimensions include relevant state variables (e.g., position, heading, curvature, and velocity). The discrete states, and thus the motions, repeat at regular intervals, forming a lattice. We ensure that all paths in the graph encode feasible motions via the imposition of continuity constraints on state variables at graph vertices and compliance of the graph edges with a differential equation comprising the vehicle model. The resulting state lattice permits fast full configuration space cost evaluation and collision detection. Experimental results with research prototype rovers demonstrate that the planner allows us to exploit the entire envelope of vehicle maneuverability in rough terrain, while featuring real-time performance. \textcopyright{} 2009 Wiley Periodicals, Inc.},
+  language = {en},
+  timestamp = {2017-05-15T12:09:23Z},
+  number = {3},
+  urldate = {2017-05-15},
+  journal = {Journal of Field Robotics},
+  author = {Pivtoraiko, Mihail and Knepper, Ross A. and Kelly, Alonzo},
+  month = mar,
+  year = {2009},
+  pages = {308--333},
+  file = {Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\DBASB984\\abstract.html:text/html}
+}
+
+@article{ReedsShepp1990,
+  title = {Optimal Paths for a Car That Goes Both Forwards and Backwards.},
+  volume = {145},
+  issn = {0030-8730},
+  abstract = {Project Euclid - mathematics and statistics online},
+  timestamp = {2017-05-24T13:58:59Z},
+  number = {2},
+  urldate = {2017-05-18},
+  journal = {Pacific Journal of Mathematics},
+  author = {Reeds, J. A. and Shepp, L. A.},
+  year = {1990},
+  pages = {367--393},
+  file = {Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\7B9MUFAZ\\1102645450.html:text/html}
+}
+
+@techreport{Nilsson1984,
+  address = {333 Ravenswood Ave., Menlo Park, CA 94025},
+  title = {Shakey {{The Robot}}},
+  abstract = {From 1966 through 1972, the Artificial Intelligence Center at SRI conducted research on a mobile robot system nicknamed ``Shakey.?? Endowed with a limited ability to perceive and model its environment, Shakey could perform tasks that required planning, route-finding, and the rearranging of simple objects. Although the Shakey project led to numerous advances in AI techniques, many of which were reported in the literature, much specific information that might be useful in current robotics research appears only in a series of relatively inaccessible SRI technical reports. Our purpose here, consequently, is to make this material more readily available by extracting and reprinting those sections of the reports that seem particularly interesting, relevant and important.},
+  timestamp = {2017-05-23T09:25:16Z},
+  institution = {AI Center, SRI International},
+  author = {Nilsson, Nils J.},
+  month = apr,
+  year = {1984},
+  keywords = {Execution!monitoring Robot!vehicle,LANDMARK,PLANEX,Robot!planning,Robot!Shakey,Robot!vision,Shakey,STRIPS}
+}
+
+@article{BurgardEtAl1999,
+  title = {Experiences with an Interactive Museum Tour-Guide Robot},
+  volume = {114},
+  issn = {0004-3702},
+  doi = {10.1016/S0004-3702(99)00070-3},
+  abstract = {This article describes the software architecture of an autonomous, interactive tour-guide robot. It presents a modular and distributed software architecture, which integrates localization, mapping, collision avoidance, planning, and various modules concerned with user interaction and Web-based telepresence. At its heart, the software approach relies on probabilistic computation, on-line learning, and any-time algorithms. It enables robots to operate safely, reliably, and at high speeds in highly dynamic environments, and does not require any modifications of the environment to aid the robot's operation. Special emphasis is placed on the design of interactive capabilities that appeal to people's intuition. The interface provides new means for human-robot interaction with crowds of people in public places, and it also provides people all around the world with the ability to establish a ``virtual telepresence'' using the Web. To illustrate our approach, results are reported obtained in mid-1997, when our robot ``RHINO'' was deployed for a period of six days in a densely populated museum. The empirical results demonstrate reliable operation in public environments. The robot successfully raised the museum's attendance by more than 50\%. In addition, thousands of people all over the world controlled the robot through the Web. We conjecture that these innovations transcend to a much larger range of application domains for service robots.},
+  timestamp = {2017-05-23T09:34:38Z},
+  number = {1},
+  urldate = {2017-05-23},
+  journal = {Artificial Intelligence},
+  author = {Burgard, Wolfram and Cremers, Armin B. and Fox, Dieter and H{\"a}hnel, Dirk and Lakemeyer, Gerhard and Schulz, Dirk and Steiner, Walter and Thrun, Sebastian},
+  month = oct,
+  year = {1999},
+  keywords = {collision avoidance,Entertainment,Human robot interaction,Localization,Logic,Machine learning,Mapping,Mobile robotics,Planning,Probabilistic reasoning},
+  pages = {3--55},
+  file = {ScienceDirect Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\CEQZFPNM\\S0004370299000703.html:text/html}
+}
+
+@article{AltshulerEtAl2011,
+  title = {Multi-Agent {{Cooperative Cleaning}} of {{Expanding Domains}}},
+  volume = {30},
+  issn = {0278-3649, 1741-3176},
+  doi = {10.1177/0278364910377245},
+  language = {en},
+  timestamp = {2017-05-23T09:47:14Z},
+  number = {8},
+  urldate = {2017-05-23},
+  journal = {The International Journal of Robotics Research},
+  author = {Altshuler, Yaniv and Yanovski, Vladimir and Wagner, Israel A and Bruckstein, Alfred M},
+  month = jul,
+  year = {2011},
+  pages = {1037--1071}
+}
+
+@inproceedings{BormannEtAl2015,
+  title = {New Brooms Sweep Clean - an Autonomous Robotic Cleaning Assistant for Professional Office Cleaning},
+  doi = {10.1109/ICRA.2015.7139818},
+  abstract = {Millions of office workplaces are cleaned by a surprisingly small group of cleaning workers every day, however, cleaning companies struggle to recruit enough personnel these days. One solution to this challenge is to schedule available professionals for demanding tasks while relieving them from simpler activities which are transferred to a robotic cleaning assistant. Two of such tasks are floor cleaning and waste disposal which account for 70\% of the daily cleaning efforts. This paper presents the world's first autonomous cleaning robot prototype that masters both of these tasks and whose development was accompanied by the advice of a large cleaning company. Besides a detailed description of the overall system and its individual components an evaluation is provided based on real world experiments. The results indicate that both cleaning tasks can be solved at high quality but with potential for increased efficiency to meet the required performance. Hence, the paper concludes with a discussion on measures necessary for the development of a commercial prototype.},
+  timestamp = {2017-05-23T09:47:32Z},
+  booktitle = {2015 {{IEEE International Conference}} on {{Robotics}} and {{Automation}} ({{ICRA}})},
+  author = {Bormann, R. and Hampp, J. and H{\"a}gele, M.},
+  month = may,
+  year = {2015},
+  keywords = {autonomous cleaning robot prototype,autonomous robotic cleaning assistant,Brooms sweep clean,cleaning,commercial prototype,Histograms,Mobile robots,Navigation,Pollution,professional office cleaning,robot kinematics,Robot sensing systems,service robots},
+  pages = {4470--4477},
+  file = {IEEE Xplore Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\ZKFBI5VK\\Bormann et al. - 2015 - New brooms sweep clean - an autonomous robotic cle.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\9XVTVHK4\\7139818.html:text/html}
+}
+
+@article{ThrunEtAl2000,
+  title = {Probabilistic {{Algorithms}} and the {{Interactive Museum Tour}}-{{Guide Robot Minerva}}},
+  volume = {19},
+  issn = {0278-3649},
+  doi = {10.1177/02783640022067922},
+  abstract = {This paper describes Minerva, an interactive tour-guide robot that was successfully                 deployed in a Smithsonian museum. Minerva's software is pervasively                 probabilistic, relying on explicit representations of uncertainty in perception and                 control. During 2 weeks of operation, the robot interacted with thousands of people,                 both in the museum and through the Web, traversing more than 44 km at speeds of up                 to 163 cm/sec in the unmodified museum.},
+  language = {en},
+  timestamp = {2017-05-23T09:57:20Z},
+  number = {11},
+  urldate = {2017-05-23},
+  journal = {The International Journal of Robotics Research},
+  author = {Thrun, S. and Beetz, M. and Bennewitz, M. and Burgard, W. and Cremers, A. B. and Dellaert, F. and Fox, D. and H{\"a}hnel, D. and Rosenberg, C. and Roy, N. and Schulte, J. and Schulz, D.},
+  month = nov,
+  year = {2000},
+  pages = {972--999},
+  file = {SAGE PDF Full Text:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\A8QFZVQ8\\Thrun et al. - 2000 - Probabilistic Algorithms and the Interactive Museu.pdf:application/pdf}
+}
+
+@article{MillerEtAl2012,
+  title = {A Geometric Approach to Robotic Laundry Folding},
+  volume = {31},
+  issn = {0278-3649},
+  doi = {10.1177/0278364911430417},
+  abstract = {We consider the problem of autonomous robotic laundry folding, and propose a solution to the perception and manipulation challenges inherent to the task. At the core of our approach is a quasi-static cloth model which allows us to neglect the complex dynamics of cloth under significant parts of the state space, allowing us to reason instead in terms of simple geometry. We present an algorithm which, given a 2D cloth polygon and a desired sequence of folds, outputs a motion plan for executing the corresponding manipulations, deemed g-folds, on a minimal number of robot grippers. We define parametrized fold sequences for four clothing categories: towels, pants, short-sleeved shirts, and long-sleeved shirts, each represented as polygons. We then devise a model-based optimization approach for visually inferring the class and pose of a spread-out or folded clothing article from a single image, such that the resulting polygon provides a parse suitable for these folding primitives. We test the manipulation and perception tasks individually, and combine them to implement an autonomous folding system on the Willow Garage PR2. This enables the PR2 to identify a clothing article spread out on a table, execute the computed folding sequence, and visually track its progress over successive folds.},
+  language = {en},
+  timestamp = {2017-05-23T10:00:03Z},
+  number = {2},
+  urldate = {2017-05-23},
+  journal = {The International Journal of Robotics Research},
+  author = {Miller, Stephen and {van den Berg}, Jur and Fritz, Mario and Darrell, Trevor and Goldberg, Ken and Abbeel, Pieter},
+  month = feb,
+  year = {2012},
+  pages = {249--267},
+  file = {SAGE PDF Full Text:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\PVXS9KEC\\Miller et al. - 2012 - A geometric approach to robotic laundry folding.pdf:application/pdf}
+}
+
+@article{EverettGage1999,
+  title = {From {{Laboratory}} to {{Warehouse}}: {{Security Robots Meet}} the {{Real World}}},
+  volume = {18},
+  issn = {0278-3649},
+  shorttitle = {From {{Laboratory}} to {{Warehouse}}},
+  doi = {10.1177/02783649922066448},
+  abstract = {The Mobile Detection Assessment and Response System robotic security program has                 successfully demonstrated simultaneous control of multiple robots navigating                 autonomously within an operational warehouse environment. This real-world warehouse                 installation required adapting a navigational paradigm designed for highly                 structured environments such as office corridors (with smooth walls and regularly                 spaced doorways) to a semistructured warehouse environment (with no exposed walls                 and within which odd-shaped objects unpredictably move about from day to day). A                 number of challenges, some expected and others unexpected, were encountered during                 the transfer of the system first to a beta-test/demonstration site and then to an                 operational warehouse. This paper examines these problems (and others previously                 encountered) in a historical context of the evolution of navigation and other needed                 technologies, and the transition of these technologies from the research lab to an                 operational warehouse environment. A key lesson is that system robustness can only                 be ensured by exhaustively exercising the system's operational                 capabilities in a number of diverse environments. This approach helps to uncover                 latent system hardware deficiencies and software implementation errors not                 manifested in the initial system hardware or initial development environment, and to                 identify sensor modes or processing algorithms tuned too tightly to the specific                 characteristics of the initial development environment.},
+  language = {en},
+  timestamp = {2017-05-23T10:08:35Z},
+  number = {7},
+  urldate = {2017-05-23},
+  journal = {The International Journal of Robotics Research},
+  author = {Everett, H. R. and Gage, Douglas W.},
+  month = jul,
+  year = {1999},
+  pages = {760--768},
+  file = {SAGE PDF Full Text:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\2TWJQW2N\\Everett and Gage - 1999 - From Laboratory to Warehouse Security Robots Meet.pdf:application/pdf}
+}
+
+@inproceedings{VanderPoortenEtAl2012,
+  title = {Backwards {{Maneuvering Powered Wheelchairs}} with {{Haptic Guidance}}},
+  language = {en},
+  timestamp = {2017-05-24T14:07:14Z},
+  urldate = {2017-05-23},
+  booktitle = {International {{Conference}} on {{Human Haptic Sensing}} and {{Touch Enabled Computer Applications}}},
+  publisher = {{Springer}},
+  author = {Vander Poorten, Emmanuel and Demeester, Eric and H{\"u}ntemann, Alexander and Reekmans, Eli and Philips, Johan and De Schutter, Joris},
+  year = {2012},
+  pages = {419--431},
+  file = {Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\G99KDQKX\\345357.html:text/html}
+}
+
+@inproceedings{DemeesterEtAl2012a,
+  title = {Wheelchair {{Navigation Assistance}} in the {{FP7 Project RADHAR}}: {{Objectives}} and {{Current State}}},
+  shorttitle = {Wheelchair {{Navigation Assistance}} in the {{FP7 Project RADHAR}}},
+  abstract = {This paper presents the research objectives and current state of the semi-autonomous navigation components that are being developed in the FP7 project RADHAR (www.radhar.eu). RADHAR proposes a framework to fuse the inherently uncertain information from both environment perception and a wheelchair driver's steering signals by estimating the trajectory the wheelchair should execute in that environment, and to adopt this fused information for providing safe navigation assistance. In order to provide intuitive, bilateral navigation assistance a haptic joystick prototype was developed and control algorithms were developed and tested for this haptic joystick. The key components for this semi-autonomous navigation assistance in the RADHAR framework are explained and experimental results are shown.; The research leading to these results has received funding from the European Community's Seventh Framework Pro- gramme FP7/2007-2013 - Challenge 2 - Cognitive Systems, Interaction, Robotics - under grant agreement No. 248873- RADHAR.; Publication Status: published},
+  language = {eng},
+  timestamp = {2017-05-24T14:09:12Z},
+  urldate = {2017-05-23},
+  booktitle = {Conference on {{Intelligent Robots}} and {{Systems}}},
+  author = {Demeester, Eric and Vander Poorten, Emmanuel and H{\"u}ntemann, Alexander and De Schutter, Joris},
+  month = oct,
+  year = {2012}
+}
+
+@inproceedings{DemeesterEtAl2012b,
+  title = {{{ML}}, {{MAP}} and Greedy {{POMDP}} Shared Control: Comparison of Wheelchair Navigation Assistance for Switch Interfaces},
+  shorttitle = {{{ML}}, {{MAP}} and Greedy {{POMDP}} Shared Control},
+  abstract = {This paper describes and compares three approaches for providing navigation assistance to powered wheelchair users: a Maximum Likelihood (ML) approach, a Maximum A Posteriori (MAP) approach, and a greedy Partially Observable Markov Decision Process (POMDP) approach. The approaches are evaluated by controlling a wheelchair in simulation using a switch interface. The results show that for this experimental setup (1) all three approaches allow the driver to reach any of the specified goal positions with greater accuracy and faster than without assistance, (2) ML produces paths that are jagged, because its decisions are based on the latest user signals only, (3) MAP decisions are much less impulsive than ML, except at the start, (4) greedy POMDP is more cautious in taking actions prematurely because it considers the probability of all driver plans when evaluating the effect of an action.; This research has received funding from the European Community's Seventh Framework Programme FP7/2007-2013 - Challenge 2 - Cognitive Systems, Interaction, Robotics - under grant agreement No. 248873-RADHAR.; Publication Status: published},
+  language = {eng},
+  timestamp = {2017-05-24T14:05:59Z},
+  urldate = {2017-05-23},
+  booktitle = {International {{Symposium}} on {{Robotics}}},
+  author = {Demeester, Eric and H{\"u}ntemann, Alexander and Vander Poorten, Emmanuel and De Schutter, Joris},
+  year = {2012},
+  keywords = {robotic wheelchairs; plan recognition; intention estimation; shared control; switch interface}
+}
+
+@inproceedings{VanderPoortenEtAl2012a,
+  title = {Powered Wheelchair Navigation Assistance through Kinematically Correct Environmental Haptic Feedback},
+  doi = {10.1109/ICRA.2012.6225349},
+  abstract = {This article introduces a set of novel haptic guidance algorithms intended to provide intuitive and reliable assistance for electric wheelchair navigation through narrow or crowded spaces. The proposed schemes take hereto the non-holonomic nature and a detailed geometry of the wheelchair into consideration. The methods encode the environment as a set of collision-free circular paths and, making use of a model-free impedance controller, `haptically' guide the user along collision-free paths or away from obstructed paths or paths that simply do not coincide with the motion intended by the user. The haptic feedback plays a central role as it establishes a fast bilateral communication channel between user and wheelchair controller and allows a direct negotiation about wheelchair motion. If found unsatisfactory, suggested trajectories can always be overruled by the user. Relying on inputs from user modeling and intention recognition schemes, the system can reduce forces needed to move along intended directions, thereby avoiding unnecessary fatigue of the user. A commercial powered wheelchair was upgraded and feasability tests were conducted to validate the proposed methods. The potential of the proposed approaches was hereby demonstrated.},
+  timestamp = {2017-05-24T14:30:29Z},
+  booktitle = {2012 {{IEEE International Conference}} on {{Robotics}} and {{Automation}}},
+  author = {Vander Poorten, E. and Demeester, E. and Reekmans, E. and Philips, J. and H{\"u}ntemann, A. and Schutter, J. De},
+  month = may,
+  year = {2012},
+  keywords = {collision avoidance,collision-free circular paths,electric vehicles,environmental haptic feedback,fast bilateral communication channel,geometry,handicapped aids,haptic guidance algorithm,haptic interfaces,Impedance,intention recognition scheme,medical robotics,Mobile robots,model-free impedance controller,Motion control,Navigation,powered wheelchair navigation assistance,user modeling scheme,Vectors,wheelchairs},
+  pages = {3706--3712},
+  file = {IEEE Xplore Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\RM5TXXQG\\Poorten et al. - 2012 - Powered wheelchair navigation assistance through k.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\ZV34KR7A\\6225349.html:text/html}
+}
+
+@article{MoralesEtAl2017,
+  title = {Social Robotic Wheelchair Centered on Passenger and Pedestrian Comfort},
+  volume = {87},
+  issn = {0921-8890},
+  doi = {10.1016/j.robot.2016.09.010},
+  abstract = {The use of robot technology such as robotic wheelchairs is crucial to provide services for super-aging societies. A social issue in current robotic wheelchairs is the lack of passenger and pedestrian comfort considerations. This paper proposes a balanced navigation model for the passenger and pedestrians in terms of social issues regarding wheelchair navigation. The model considers comfort requirements for the passenger and pedestrians and is used to compute social wheelchair paths. Model validation was performed with human participants in the case of a single passenger and a pedestrian where experimental results show that overall comfort should be considered for computing socially accepted paths. Passengers and pedestrians scored the paths computed by the social planner as more comfortable than state of the art shortest paths.},
+  timestamp = {2017-05-24T14:22:28Z},
+  urldate = {2017-05-24},
+  journal = {Robotics and Autonomous Systems},
+  author = {Morales, Yoichi and Miyashita, Takahiro and Hagita, Norihiro},
+  month = jan,
+  year = {2017},
+  keywords = {Human–robot comfortable interaction,Social navigation,Spatial cognition},
+  pages = {355--362},
+  file = {ScienceDirect Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\CXPGIZWW\\Morales et al. - 2017 - Social robotic wheelchair centered on passenger an.pdf:application/pdf;ScienceDirect Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\PEPGASDS\\S092188901630570X.html:text/html}
+}
+
+@inproceedings{Lankenau2001,
+  address = {Evry, France},
+  title = {Avoiding Mode Confusion in Service Robots - the Bremen Autonomous Wheelchair as an Example},
+  abstract = {This paper introduces a new formal approach to find potential mode confusion situations in shared-control systems such as service and rehabilitation robots. So far, this subject is primarily discussed in the avionics domain. Here, it is motivated why these experiences should be transferred into the service robotics community and how it could be done. The cooperative obstacle avoidance module of the Bremen Autonomous Wheelchair "Rolland" serves as an example to explain the method.},
+  timestamp = {2017-05-25T09:56:17Z},
+  booktitle = {Proc. of the 7th {{Int}}. {{Conf}}. on {{Rehabilitation Robotics}} ({{ICORR}} 2001)},
+  author = {Lankenau, A.},
+  year = {2001},
+  pages = {162--167}
+}
+
+@misc{RADHARWebPage,
+  title = {{{RADHAR}} - {{Robotic ADaptation}} to {{Humans Adapting}} to {{Robots}}},
+  abstract = {RADHAR will develop a driving assistance system involving environment perception, driver perception and modelling, and robot decision making. RADHAR proposes a framework to seamlessly fuse the inherently uncertain information from both environment perception and the driver's steering signals by estimating the trajectory the robot should execute, and to adopt this fused information for safe navigation with a level of autonomy adjusted to the user's capabilities and desires. This requires lifelong, unsupervised but safe learning by the robot. As a consequence, a continuous interaction between two learning systems (the robot and the user) will emerge, hence Robotic ADaptation to Humans Adapting to Robots (RADHAR). The framework will be demonstrated on a robotic wheelchair platform that navigates in an everyday environment with everyday objects. RADHAR targets as main scientific outcomes: online 3D perception combining laser scanners and vision with traversability analysis of the terrain; novel paradigm for fusing environment and user perception and for safe robot navigation.},
+  timestamp = {2017-05-25T12:21:45Z},
+  urldate = {2017-05-25},
+  howpublished = {\url{https://www.radhar.eu/}},
+  author = {{European Commission (FP7-ICT-248873)}},
+  file = {RADHAR:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\4AJXUGFD\\www.radhar.eu.html:text/html}
+}
+
+@inproceedings{MoralesEtAl2013,
+  title = {Human-Comfortable Navigation for an Autonomous Robotic Wheelchair},
+  doi = {10.1109/IROS.2013.6696743},
+  abstract = {Reliable autonomous navigation is an active research topic that has drawn the attention for decades, however, human factors such as navigational comfort has not received the same level of attention. This work proposes the concept of ``comfortable map'' and presents a navigation approach for autonomous passenger vehicles which in top of being safe and reliable is comfortable. In our approach we first extract information from users preference related to comfort while sitting on a robotic wheelchair under different conditions in an indoor corridor environment. Human-comfort factors are integrated to a geometric map generated by SLAM framework. Then a global planner computes a safe and comfortable path which is followed by the robotic wheelchair. Finally, an evaluation with 29 participants using a fully autonomous robotic wheelchair, showed that more than 90\% of them found the proposed approach more comfortable than a shortest-path state of the art approach.},
+  timestamp = {2017-05-25T15:31:19Z},
+  booktitle = {2013 {{IEEE}}/{{RSJ International Conference}} on {{Intelligent Robots}} and {{Systems}}},
+  author = {Morales, Y. and Kallakuri, N. and Shinozawa, K. and Miyashita, T. and Hagita, N.},
+  month = nov,
+  year = {2013},
+  keywords = {Acceleration,autonomous passenger vehicles,autonomous robotic wheelchair,comfortable map,comfortable path,geometric map,geometry,global planner,human-comfortable navigation,human-comfort factors,human factors,indoor corridor environment,Mobile robots,Navigation,Path planning,reliable autonomous navigation,service robots,shortest-path state of the art approach,SLAM framework,SLAM (robots),Trajectory,user preference,Vehicles,wheelchairs},
+  pages = {2737--2743},
+  file = {IEEE Xplore Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\U4DKIDK3\\Morales et al. - 2013 - Human-comfortable navigation for an autonomous rob.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\Q3FHRV9P\\6696743.html:text/html}
+}
+
+@inproceedings{MercyEtAl2016,
+  title = {Real-Time Motion Planning in the Presence of Moving Obstacles},
+  doi = {10.1109/ECC.2016.7810517},
+  abstract = {Safe operation of autonomous systems demands a collision-free motion trajectory at every time instant. This paper presents a method to calculate time-optimal motion trajectories for autonomous systems moving through an environment with both stationary and moving obstacles. To transform this motion planning problem into a small dimensional optimization problem, suitable for real-time optimization, the approach (i) uses a spline parameterization of the motion trajectory; and (ii) exploits spline properties to reduce the number of constraints. Solving this optimization problem with a receding horizon allows dealing with modeling errors and variations in the environment. In addition to extensive numerical simulations, the method is experimentally validated on a KUKA youBot. The average solving time of the optimization problem in the experiments is 0.05s, which is sufficiently fast for correcting deviations from the initial trajectory.},
+  timestamp = {2017-06-06T17:16:42Z},
+  booktitle = {2016 {{European Control Conference}} ({{ECC}})},
+  author = {Mercy, T. and Loock, W. Van and Pipeleers, G.},
+  month = jun,
+  year = {2016},
+  keywords = {autonomous systems,collision avoidance,collision free motion trajectory,KUKA youBot,motion trajectory,moving obstacles,numerical analysis,numerical simulations,optimisation,optimization,Path planning,Planning,real-time motion planning,real-time systems,safe operation,Shape,small dimensional optimization problem,spline parameterization,splines (mathematics),time optimal motion trajectories,Trajectory,Vehicles},
+  pages = {1586--1591},
+  file = {IEEE Xplore Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\TA9ERJIE\\Mercy et al. - 2016 - Real-time motion planning in the presence of movin.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\FMUM2XPV\\7810517.html:text/html}
+}
+
+@inproceedings{VanParysPipeleers2016,
+  title = {Online Distributed Motion Planning for Multi-Vehicle Systems},
+  doi = {10.1109/ECC.2016.7810516},
+  abstract = {This work presents an online distributed motion planning strategy for cooperating vehicles. The motion planning is formulated as an optimization problem that returns smooth trajectories. These are parameterized as splines, which allows a representation with a limited number of variables and enables guaranteed constraint satisfaction with a finite set of constraints. The computations for solving the problem are distributed among the agents by using the Alternating Direction Method of Multipliers (ADMM). In order to cope with a dynamic environment and disturbances, the algorithm is formulated in a receding horizon fashion, such that the future part of a motion trajectory is reoptimized iteratively. The required update time and the amount of inter-agent communication are reduced by performing only one ADMM iteration per update. In this way the method converges over the subsequent path updates. Simulations with a formation of holonomic vehicles in a dynamic environment demonstrate the capability of the proposed approach to generate optimal trajectories at an update rate of 20 Hz.},
+  timestamp = {2017-06-06T17:18:33Z},
+  booktitle = {2016 {{European Control Conference}} ({{ECC}})},
+  author = {Van Parys, R. and Pipeleers, G.},
+  month = jun,
+  year = {2016},
+  keywords = {ADMM,alternating direction method of multipliers,cooperating vehicles,cooperative systems,Dynamics,Mobile robots,motion trajectory,multi-robot systems,multivehicle systems,Nickel,online distributed motion planning,optimisation,optimization,optimization problem,Path planning,Planning,receding horizon,splines (mathematics),Trajectory,Vehicles},
+  pages = {1580--1585},
+  file = {IEEE Xplore Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\TI63S9IM\\Parys and Pipeleers - 2016 - Online distributed motion planning for multi-vehic.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\4MUVDT39\\7810516.html:text/html}
+}
+
+@inproceedings{VanParysPipeleers2017,
+  address = {Toulouse, France},
+  title = {Spline-{{Based Motion Planning}} in an {{Obstructed 3D}} Environment},
+  language = {eng},
+  timestamp = {2017-06-06T17:24:11Z},
+  booktitle = {Proceedings of the 20th {{IFAC World Congress}}},
+  author = {Van Parys, R. and Pipeleers, G.},
+  month = jul,
+  year = {2017}
+}
+
+@misc{MercyVanParys2017,
+  title = {Omg-Tools: {{Optimal Motion Generation}}-Tools: Motion Planning Made Easy},
+  copyright = {LGPL-3.0},
+  shorttitle = {Omg-Tools},
+  timestamp = {2017-08-13T09:36:09Z},
+  howpublished = {\url{https://github.com/meco-group/omg-tools}},
+  author = {Mercy, T. and Van Parys, R.},
+  month = may,
+  year = {2017},
+  file = {Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\UM3WUCSS\\omg-tools.html:text/html}
+}
+
+@article{VanLoockEtAl2015,
+  title = {B-Spline Parameterized Optimal Motion Trajectories for Robotic Systems with Guaranteed Constraint Satisfaction},
+  volume = {6},
+  issn = {2191-9151},
+  doi = {https://doi.org/10.5194/ms-6-163-2015},
+  abstract = {When optimizing the performance of constrained robotic system, the motion trajectory plays a crucial role. In this research the motion planning problem for systems that admit a polynomial description of the system dynamics through differential flatness is tackled by parameterizing the system's so-called flat output as a polynomial spline. Using basic properties of B-splines, sufficient conditions on the spline coefficients are derived ensuring satisfaction of the operating constraints over the entire time horizon. Furthermore, an intuitive relaxation is proposed to tackle conservatism and a supporting software package is released. Finally, to illustrate the overall approach and potential, a numerical benchmark of a flexible link manipulator is discussed.},
+  language = {English},
+  timestamp = {2017-08-02T14:13:17Z},
+  number = {2},
+  urldate = {2017-08-02},
+  journal = {Mechanical Sciences},
+  author = {Van Loock, W. and Pipeleers, G. and Swevers, J.},
+  month = sep,
+  year = {2015},
+  pages = {163--171},
+  file = {Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\G688CNRK\\Loock et al. - 2015 - B-spline parameterized optimal motion trajectories.pdf:application/pdf;Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\NP24WHKT\\2015.html:text/html}
+}
+
+@article{KruseEtAl2013,
+  title = {Human-Aware Robot Navigation: {{A}} Survey},
+  volume = {61},
+  issn = {0921-8890},
+  shorttitle = {Human-Aware Robot Navigation},
+  doi = {10.1016/j.robot.2013.05.007},
+  abstract = {Navigation is a basic skill for autonomous robots. In the last years human\textendash{}robot interaction has become an important research field that spans all of the robot capabilities including perception, reasoning, learning, manipulation and navigation. For navigation, the presence of humans requires novel approaches that take into account the constraints of human comfort as well as social rules. Besides these constraints, putting robots among humans opens new interaction possibilities for robots, also for navigation tasks, such as robot guides. This paper provides a survey of existing approaches to human-aware navigation and offers a general classification scheme for the presented methods.},
+  timestamp = {2017-08-03T09:08:22Z},
+  number = {12},
+  journal = {Robotics and Autonomous Systems},
+  author = {Kruse, Thibault and Pandey, Amit Kumar and Alami, Rachid and Kirsch, Alexandra},
+  month = dec,
+  year = {2013},
+  keywords = {Autonomous robot,Human-aware,Human-centered environment,Navigation,Survey},
+  pages = {1726--1743},
+  file = {ScienceDirect Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\AVQXS3KJ\\Kruse et al. - 2013 - Human-aware robot navigation A survey.pdf:application/pdf;ScienceDirect Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\GDT5AKSX\\S0921889013001048.html:text/html}
+}
+
+@book{Hall1966,
+  address = {New York (N.Y.)},
+  series = {Anchor books},
+  title = {The Hidden Dimension},
+  isbn = {0-385-08476-5},
+  abstract = {An examination of various cultural concepts of space and how differences among them affect modern society. Introducing the science of "proxemics," Hall demonstrates how man's use of space can affect personal business relations, cross-cultural exchanges, architecture, city planning, and urban renewal.},
+  timestamp = {2017-08-03T09:25:16Z},
+  publisher = {{Doubleday}},
+  author = {Hall, Edward T},
+  year = {1966},
+  keywords = {Non-verbale communicatie}
+}
+
+@article{ArechavaletaEtAl2008,
+  title = {On the Nonholonomic Nature of Human Locomotion},
+  volume = {25},
+  issn = {0929-5593, 1573-7527},
+  doi = {10.1007/s10514-007-9075-2},
+  abstract = {In the kinematic realm, wheeled robot's determining characteristic lies in its nonholonomic constraint. Indeed, the wheels of the robot unequivocally force the robot vehicle to move tangentially to its main axis. Here we test the hypothesis that human locomotion can also be partly described by such a nonholonomic system. This hypothesis is inspired by the trivial observation that humans do not walk sideways: some constraints of different natures (anatomical, mechanical\ldots) may restrict the way humans generate locomotor trajectories. To model these constraints, we propose a simple differential system satisfying the so called rolling without sliding constraint. We validated the proposed model by comparing simulated trajectories with actual (recorded) trajectories obtained from goal-oriented locomotion of human subjects. These subjects had to start from a pre-defined position and direction in space and cross over to a distant porch so that both initial and final positions and directions were controlled. A comparative analysis was successfully undertaken by making use of numerical methods to compute the control inputs from actual trajectories. To achieve this, three body segments were used as local reference frames: head, pelvis and torso. The best simulations were obtained using the last body segment. We therefore suggest an analogy between the steering wheels and the torso segment, meaning that for the control of locomotion, the trunk behavior is constrained in a nonholonomic manner. Our approach allowed us to successfully predict 87 percent of trajectories recorded in seven subjects and might be particularly relevant for future pluridisciplinary research programs dealing with modeling of biological locomotor behaviors.},
+  language = {en},
+  timestamp = {2017-08-03T14:00:48Z},
+  number = {1-2},
+  urldate = {2017-08-03},
+  journal = {Autonomous Robots},
+  author = {Arechavaleta, Gustavo and Laumond, Jean-Paul and Hicheur, Halim and Berthoz, Alain},
+  month = aug,
+  year = {2008},
+  pages = {25--35},
+  file = {Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\5I5UGCUK\\Arechavaleta et al. - 2008 - On the nonholonomic nature of human locomotion.pdf:application/pdf;Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\UFU8RQEE\\s10514-007-9075-2.html:text/html}
+}
+
+@article{Helbing1991,
+  title = {A Mathematical Model for the Behavior of Pedestrians},
+  volume = {36},
+  issn = {00057940},
+  timestamp = {2017-08-03T14:08:41Z},
+  number = {4},
+  journal = {Behavioral Science},
+  author = {Helbing, Dirk},
+  month = oct,
+  year = {1991},
+  pages = {298}
+}
+
+@article{TrautmanEtAl2015,
+  title = {Robot Navigation in Dense Human Crowds: {{Statistical}} Models and Experimental Studies of Human\textendash{}robot Cooperation},
+  volume = {34},
+  issn = {0278-3649},
+  shorttitle = {Robot Navigation in Dense Human Crowds},
+  doi = {10.1177/0278364914557874},
+  abstract = {We consider the problem of navigating a mobile robot through dense human crowds. We begin by exploring a fundamental impediment to classical motion planning algorithms called the ``freezing robot problem'': once the environment surpasses a certain level of dynamic complexity, the planner decides that all forward paths are unsafe, and the robot freezes in place (or performs unnecessary maneuvers) to avoid collisions. We argue that this problem can be avoided if the robot anticipates human cooperation, and accordingly we develop interacting Gaussian processes, a prediction density that captures cooperative collision avoidance, and a ``multiple goal'' extension that models the goal-driven nature of human decision making. We validate this model with an empirical study of robot navigation in dense human crowds (488 runs), specifically testing how cooperation models effect navigation performance. The multiple goal interacting Gaussian processes algorithm performs comparably with human teleoperators in crowd densities nearing 0.8 humans/m2, while a state-of-the-art non-cooperative planner exhibits unsafe behavior more than three times as often as the multiple goal extension, and twice as often as the basic interacting Gaussian process approach. Furthermore, a reactive planner based on the widely used dynamic window approach proves insufficient for crowd densities above 0.55 people/m2. We also show that our non-cooperative planner or our reactive planner capture the salient characteristics of nearly any dynamic navigation algorithm. Based on these experimental results and theoretical observations, we conclude that a cooperation model is critical for safe and efficient robot navigation in dense human crowds.},
+  language = {en},
+  timestamp = {2017-08-04T07:21:45Z},
+  number = {3},
+  journal = {The International Journal of Robotics Research},
+  author = {Trautman, Pete and Ma, Jeremy and Murray, Richard M. and Krause, Andreas},
+  month = mar,
+  year = {2015},
+  pages = {335--356},
+  file = {SAGE PDF Full Text:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\U9AQHBIK\\Trautman et al. - 2015 - Robot navigation in dense human crowds Statistica.pdf:application/pdf}
+}
+
+@inproceedings{TrautmanKrause2010,
+  title = {Unfreezing the Robot: {{Navigation}} in Dense, Interacting Crowds},
+  shorttitle = {Unfreezing the Robot},
+  doi = {10.1109/IROS.2010.5654369},
+  abstract = {In this paper, we study the safe navigation of a mobile robot through crowds of dynamic agents with uncertain trajectories. Existing algorithms suffer from the ``freezing robot'' problem: once the environment surpasses a certain level of complexity, the planner decides that all forward paths are unsafe, and the robot freezes in place (or performs unnecessary maneuvers) to avoid collisions. Since a feasible path typically exists, this behavior is suboptimal. Existing approaches have focused on reducing the predictive uncertainty for individual agents by employing more informed models or heuristically limiting the predictive covariance to prevent this overcautious behavior. In this work, we demonstrate that both the individual prediction and the predictive uncertainty have little to do with the frozen robot problem. Our key insight is that dynamic agents solve the frozen robot problem by engaging in ``joint collision avoidance'': They cooperatively make room to create feasible trajectories. We develop IGP, a nonparametric statistical model based on dependent output Gaussian processes that can estimate crowd interaction from data. Our model naturally captures the non-Markov nature of agent trajectories, as well as their goal-driven navigation. We then show how planning in this model can be efficiently implemented using particle based inference. Lastly, we evaluate our model on a dataset of pedestrians entering and leaving a building, first comparing the model with actual pedestrians, and find that the algorithm either outperforms human pedestrians or performs very similarly to the pedestrians. We also present an experiment where a covariance reduction method results in highly overcautious behavior, while our model performs desirably.},
+  timestamp = {2017-08-06T11:33:47Z},
+  booktitle = {2010 {{IEEE}}/{{RSJ International Conference}} on {{Intelligent Robots}} and {{Systems}}},
+  author = {Trautman, P. and Krause, A.},
+  month = oct,
+  year = {2010},
+  keywords = {collision avoidance,crowd interaction estimation,freezing robot problem,Gaussian processes,goal-driven navigation,human pedestrian,IGP,interacting Gaussian process,mobile robot,Mobile robots,nonparametric statistical model,predictive covariance,robot navigation,robot vision,safe navigation,uncertain systems,uncertain trajectory},
+  pages = {797--803},
+  file = {IEEE Xplore Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\6E3RACR2\\Trautman and Krause - 2010 - Unfreezing the robot Navigation in dense, interac.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\JBHT25WX\\5654369.html:text/html}
+}
+
+@inproceedings{ScandoloFraichard2011,
+  title = {An Anthropomorphic Navigation Scheme for Dynamic Scenarios},
+  doi = {10.1109/ICRA.2011.5979772},
+  abstract = {This paper is concerned with the navigation of personal robots in human-populated environments. The behavior of a person among its peers is governed by a number of unspoken social rules, e.g. maintaining an appropriate distance. The primary contribution of this paper is a navigation scheme that is anthropomorphic, i.e. that emulates human behaviors and seeks to adhere to these social rules. Unlike previous works in this area, the focus herein is on dynamic scenarios. The navigation scheme proposed explicitly reasons on the future behavior of the people involved so as to produce better socially acceptable trajectories (not to mention safer trajectories as well). The navigation scheme relies upon a novel cost function called the social costmap that captures in a unified way the different social rules imposed by the people populating the robot's workspace.},
+  timestamp = {2017-08-07T14:11:16Z},
+  booktitle = {2011 {{IEEE International Conference}} on {{Robotics}} and {{Automation}}},
+  author = {Scandolo, L. and Fraichard, T.},
+  month = may,
+  year = {2011},
+  keywords = {anthropomorphic navigation scheme,Cost function,dynamic scenarios,human-populated environment,Humans,Mobile robots,Navigation,personal robot navigation,Planning,Psychology,robot dynamics,Robots,robot workspace,social costmap,Trajectory,unspoken social rules},
+  pages = {809--814},
+  file = {IEEE Xplore Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\8EQKTSG7\\Scandolo and Fraichard - 2011 - An anthropomorphic navigation scheme for dynamic s.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\SK3F8I49\\5979772.html:text/html}
+}
+
+@inproceedings{ShiEtAl2008,
+  title = {Human-Aware Robot Motion Planning with Velocity Constraints},
+  doi = {10.1109/CTS.2008.4543969},
+  abstract = {This paper addresses the issue of how high-speed robots may move among humans such that the robots complete their tasks efficiently while the humans in the environment feel safe and comfortable. It describes the Segway robotic platform used for this research and then discusses the three primary research areas needed to develop the human-aware motion planner. First, it is necessary to conduct experiments with humans to develop human aware velocity constraints as a function of the distance of the robot from a human. Next, these velocity constraints must be used to plan the robot motion in real time. Finally, practical implementation of this motion planner requires the ability to robustly detect humans using the available vision sensors. The approach taken to each of these problems is described in this paper along with preliminary results.},
+  timestamp = {2017-08-07T15:14:21Z},
+  booktitle = {2008 {{International Symposium}} on {{Collaborative Technologies}} and {{Systems}}},
+  author = {Shi, Dongqing and Jr, E. G. Collins and Goldiez, B. and Donate, A. and Liu, Xiuwen and Dunlap, D.},
+  month = may,
+  year = {2008},
+  keywords = {Cognitive robotics,high speed robots,Human aware motion planning,human aware robot motion planning,human detection,human response,Human robot interaction,Indoor environments,man-machine systems,Mechanical engineering,Motion detection,Motion planning,Path planning,position control,Robot motion,Robot sensing systems,Robustness,service robots,velocity constraints,velocity control,vision sensors},
+  pages = {490--497},
+  file = {IEEE Xplore Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\26R2DHIH\\Shi et al. - 2008 - Human-aware robot motion planning with velocity co.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\23HKDR4S\\4543969.html:text/html}
+}
+
+@book{Altman2014,
+  title = {Accelerating {{MATLAB Performance}}: 1001 Tips to Speed up {{MATLAB}} Programs},
+  isbn = {1-4822-1129-7 978-1-4822-1129-0},
+  shorttitle = {Accelerating {{MATLAB Performance}}},
+  abstract = {The MATLAB\textregistered{} programming environment is often perceived as a platform suitable for prototyping and modeling but not for},
+  language = {English},
+  timestamp = {2017-08-09T13:36:02Z},
+  urldate = {2017-08-09},
+  publisher = {{Chapman \& Hall/CRC}},
+  author = {Altman, Yair M.},
+  month = dec,
+  year = {2014},
+  file = {Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\TB9USEM9\\9781482211290.html:text/html}
+}
+
+@misc{Denis2017,
+  title = {{{ROB}} - {{Mastertheses}} / Kdenis-2016},
+  abstract = {Path planning algorithm for semi-autonomous mobile robots with fast and accurate collision checking Master Thesis Kevin Denis.},
+  timestamp = {2017-08-11T09:33:19Z},
+  urldate = {2017-08-11},
+  howpublished = {\url{https://gitlab.mech.kuleuven.be/rob-mastertheses/kdenis-2016}},
+  journal = {GitLab},
+  author = {Denis, Kevin},
+  month = aug,
+  year = {2017},
+  file = {Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\UEZC9QVU\\kdenis-2016.html:text/html}
+}
+
+@article{ZipsEtAl2016,
+  title = {Optimisation Based Path Planning for Car Parking in Narrow Environments},
+  volume = {79},
+  issn = {0921-8890},
+  doi = {10.1016/j.robot.2016.02.004},
+  abstract = {In the last decades, a large variety of robot motion planners emerged. However, manoeuvring in very narrow environments, e.g., for common parking scenarios, cannot be reliably handled with existing path planners at low computing costs. This is why, this paper presents a fast optimisation based path planner which specialises on narrow environments. In the proposed approach, the kinematic differential equations are discretised. For the resulting discrete path segments, a static optimisation problem is formulated to determine the path independently of the considered scenario. In each iteration step, the path length is also optimised to handle close distances to the obstacles as well as longer driving distances. Due to the local nature heuristic rules for driving direction changes are formulated which intend to imitate the behaviour of a human driver. The drawback of the local nature is the lack of global information to handle scenarios with obstacles blocking the path. To overcome this problem, a tree-based guidance for the local planner is introduced. The landmarks for the tree are implicitly created by the local planner allowing an efficient exploration of the free configuration space. The performance of the algorithm is evaluated utilising Monte-Carlo simulations and compared to state-of-the-art path planning algorithms.},
+  timestamp = {2017-08-14T12:51:51Z},
+  journal = {Robotics and Autonomous Systems},
+  author = {Zips, Patrik and B{\"o}ck, Martin and Kugi, Andreas},
+  month = may,
+  year = {2016},
+  keywords = {Car-like robots,Minkowski sum,Non-holonomic path planning,Static optimisation},
+  pages = {1--11},
+  file = {ScienceDirect Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\S9DFQN2W\\Zips et al. - 2016 - Optimisation based path planning for car parking i.pdf:application/pdf;ScienceDirect Snapshot:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\5NCFKTCI\\S0921889016000294.html:text/html}
+}
+
+@inproceedings{BouraineEtAl2011,
+  title = {Relaxing the Inevitable Collision State Concept to Address Provably Safe Mobile Robot Navigation with Limited Field-of-Views in Unknown Dynamic Environments},
+  doi = {10.1109/IROS.2011.6094901},
+  abstract = {This paper addresses the problem of provably safe navigation for a mobile robot with a limited field-of-view placed in a unknown dynamic environment. In such a situation, absolute motion safety (in the sense that no collision will ever take place whatever happens in the environment) is impossible to guarantee in general. It is therefore settled for a weaker level of motion safety dubbed passive motion safety: it guarantees that, if a collision is inevitable, the robot will be at rest. The primary contribution of this paper is a relaxation of the Inevitable Collision State (ICS) concept called Braking ICS. A Braking ICS is a state for which, no matter what the future trajectory of the robot is, it is impossible to stop before a collision takes place. Braking ICS are designed with a passive motion safety perspective for robots with a limited field-of-view in unknown dynamic environments. Braking ICS are formally defined and a number of important properties are established. These properties are then used to design a Braking ICS checker, i.e. an algorithm that checks whether a given state is a Braking ICS or not. In a companion paper, it is shown how the Braking ICS checker can be integrated into a reactive navigation scheme whose passive motion safety is provably guaranteed.},
+  timestamp = {2017-08-14T13:42:33Z},
+  booktitle = {2011 {{IEEE}}/{{RSJ International Conference}} on {{Intelligent Robots}} and {{Systems}}},
+  author = {Bouraine, S. and Fraichard, T. and Salhi, H.},
+  month = sep,
+  year = {2011},
+  keywords = {Bismuth,collision avoidance,Integrated circuit modeling,Robots,Safety,Sensors,Trajectory},
+  pages = {2985--2991},
+  file = {IEEE Xplore Full Text PDF:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\S68FZATS\\Bouraine et al. - 2011 - Relaxing the inevitable collision state concept to.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\Kevin\\AppData\\Roaming\\Zotero\\Zotero\\Profiles\\q74epfv3.default\\zotero\\storage\\H4QGHG8E\\6094901.html:text/html}
+}
+
+

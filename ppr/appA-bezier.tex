@@ -1,0 +1,93 @@
+\chapter{Bézier Curve Calculations} \label{app:BezierCurve}
+\vspace{-2em}
+This appendix further elaborates the mathematical properties of the Bézier curve and provides an elaborated overview of the COP formulation to obtain a set of kinematically feasable trajectories for the sAMR given a set of CEPs.
+
+\section{Mathematical Formulations and Derivatives} \label{sec:BezierMathGen}
+The curvature ($\kappa$) of the Bézier curve needs to be calculated since this is present in the objective function and in the contrains of the COP \cref{eq:BezierCOP}. The first step is to transform the general formulation shown in \Cref{eq:BezierCurveGeneralApp} and rearange the terms in it's matrix formulation displayed in \Cref{eq:BezierCurveMat}. To calculate the derivative of the Bézier curve, another property is used:  the derivative of Bézier curve of order $n$, is another Bézier curve of order $n-1$ \cite{Sederberg2016}, see \cref{eq:BezierCurveGeneralDerivative}. The same method can be applied in order to calculate the second order derivative $\bm{B}''(n,u)$. The curvature is calculated as shown in \cref{eq:curvature}. The first and second derivative are shown in matrix form in \cref{eq:BezierCurveMatFirstDev,eq:BezierCurveMatSecondDev}.
+
+\begin{equation} 
+\bm{B}(n,u) = \sum_{i=0}^{n-1}
+\underbrace{ \begin{pmatrix} n-1 \\ i \end{pmatrix}}_\text{binomial term} \cdot~
+\underbrace{(1-u)^{n-1-i} \cdot u^i}_\text{polynomial term}
+\cdot~\underbrace{ P_i}_\text{control point}
+\label{eq:BezierCurveGeneralApp}
+\end{equation}
+
+\begin{equation}
+B(u) =
+\begin{bmatrix}
+u^3 & u^2 & u & 1  
+\end{bmatrix}
+\begin{bmatrix*}[r]
+-1 &  3 & -3 & 1\\ 
+ 3 & -6 &  3 & 0\\ 
+-3 &  3 &  0 & 0\\ 
+ 1 &  0 &  0 & 0 
+\end{bmatrix*}
+\begin{bmatrix}
+P_1  \\ P_2 \\ P_3 \\ P_4 
+\end{bmatrix} \label{eq:BezierCurveMat}
+\end{equation}
+
+%TODO
+% CHECK AGAIN
+\begin{equation} \label{eq:BezierCurveGeneralDerivative}
+\bm{B}'(n,u) = \sum_{i=0}^{n-2}
+\begin{pmatrix} n-1 \\ i \end{pmatrix} \cdot~
+(1-u)^{n-1-i} \cdot u^i
+\cdot~( P_{i+1}-P_{i})
+\end{equation}
+
+
+\begin{align}
+B'(u)  &=
+\begin{bmatrix}
+u^2 & u & 1  
+\end{bmatrix}
+\begin{bmatrix*}[r]
+ 1 & -2 & 1\\ 
+-2 &  2 & 0\\ 
+ 1 &  0 & 0 
+\end{bmatrix*}
+\begin{bmatrix}
+P_1-P_2  \\ P_2- P_3  \\ P_3- P_4 
+\end{bmatrix} \label{eq:BezierCurveMatFirstDev}\\
+B''(u) & =
+\begin{bmatrix}
+u & 1  
+\end{bmatrix}
+\begin{bmatrix*}[r]
+ 1 & -2\\ 
+-2 &  2
+\end{bmatrix*}
+\begin{bmatrix}
+P_1- 2 P_2 + P_3  \\ P_2 - 2 P_3 + P_4 
+\end{bmatrix}&  \label{eq:BezierCurveMatSecondDev}
+\end{align}
+
+\section{Constrained Optimization Problem Formulation}
+The problem of connecting one pose to another is mathematically described as a two point G1 Hermite interpolation. When using a cubic Bézier curve, two degrees of freedom are left when connecting one arbitrary pose $\bm{p_s}=[x_s, y_s, \theta_s]$ to another $\bm{p_e}=[x_e, y_e, \theta_e]$. A COP is formulated satisfying the kinematic contraints while minimizing bending energy of the curve, resulting in a more comfortable path for the drive. The resulting COP yields a non-convex problem which is subjected to local minima, a optimal solution is therefore hard to find. The calculation of the COP is done with Casadi, developed at the Optimization in Engineering Center of the KU Leuven \cite{Andersson2013}. 
+
+\begin{mini!}
+{P_{1:4}}{ f(P_{1:4}) = \int_0^1{\kappa(u)^2du }
+\label{eq:ObjectiveFunctionApp}}
+{\label{eq:BezierCOP}}
+{}
+\addConstraint{P_1-P_s}{=[0,0]} \label{eq:startPos}
+\addConstraint{ \begin{bmatrix}-\tan\theta_s & 1\end{bmatrix}(P_2 - P_s)^T}{=0} \label{eq:startOrient}
+\addConstraint{P_4-P_e}{= [0,0]} \label{eq:endPos}
+\addConstraint{ \begin{bmatrix}-\tan\theta_e & 1\end{bmatrix}(P_e - P_3)^T}{=0} \label{eq:endOrient}
+\addConstraint{\kappa(u)^2- \kappa_{max}^2}{\leqslant 0} \label{eq:maxCurvature}
+\addConstraint{lb_x\leqslant}{\ P_{x,2-3}}{\leqslant ub_x} \label{eq:boundX}
+\addConstraint{lb_y\leqslant}{\ P_{y,2-3}}{\leqslant ub_y.} \label{eq:boundY}
+\end{mini!}
+\begin{flalign}
+	\text{With:}& \nonumber \\
+	& P_{1:4}, \ \text{the four control point defining the cubic Bézier curve} \nonumber \\
+	& u =0:\Delta u:1, \ \text{parameter to construct the curve} \nonumber \\
+	& \kappa(u) = \frac{B'(u) \times B''(u)}{\|B'(u)\|^3} = \frac{x'y''-y'x''}{(x'^2+y'^2)^{\nf{3}{2}}}, \ \text{curvature} \label{eq:curvature} \\
+	& \kappa_{max}, \ \text{maximum allowed curvature} \nonumber \\
+	& P_{s,e}, \ \text{start and end position} \nonumber \\
+	& lb_{x,y}, \ \text{lower bound on the x,y-position of the control points} \nonumber \\
+	& ub_{x,y}, \ \text{upper bound on the x,y-position of the control points} \nonumber &
+\end{flalign}

@@ -1,0 +1,14 @@
+\chapter{Future Work} \label{cha:FutWork}
+This chapter presents possible future work building on the outcome of the present thesis, or on particular aspects put forward in it with the aim to further improve the reliability of the LPP as reviewed in \cref{sec:ReqLPP}.
+
+The implementation of human-aware navigation will lead to a navigation system that helps the user of the sAMR to adopt a more socially compliant motion. This can be done by using a social cost model attributing a higher cost to paths leading to asocial behavior. The human-robot cooperation model developed in \cite{TrautmanKrause2010,TrautmanEtAl2015} appears promising in this regard and once implemented may enable the wheelchair to navigate in an efficient and safe manner through densely crowded areas.
+
+The computational efficiency of the clothoidal LPT is unfavorable compared to the circular LPT. This can be addressed by looking at ways to lower the number of paths to be calculated. The position of the EPs could be determined by the environment or by the user’s intention. This will lower the amount of paths in the LPT resulting in a faster execution time while still keeping the flexibility of the clothoidal paths. Two possible solutions were put forward in \cref{sec:EvalConc}, one using several fixed sets of asymmetrical LPTs and the other, by deciding online the location of $n$ successive EPs.
+
+The motion control unit, needed to execute and follow a planned path has not been discussed in this thesis. This controller will cope with the influence on the castor wheels (\cref{sec:WheelchairPlatform}) which the planner has omitted. These castor wheels will have an influence on the first few centimetres of the executed path if they are not aligned correctly. This yields a controller with a much higher dimensional space compared to the current 3D planner ($x,y,\theta$) and will (at least) have to include the orientation of the different castor wheels.
+
+Context-based navigation can be implemented by the use of semantic knowledge-based maps. These maps would contain information that could help during the navigation. For example, when a sAMR is driving in a train station and knows it is in the ticket office, it should not expect any cooperation from the person waiting in line. Therefore, context-aware navigation could also lead towards a more socially compliant navigation.
+
+\newpage
+
+Finally, the COP used to plan a motion with dynamic obstacles is a costly operation, which can only be performed for a small subset of the calculated paths. A better method could be based on a grid planner benefiting from the similarity between the distance-time collision space from similar paths, like the D* or Incremental Phi* planner.

@@ -1,0 +1,246 @@
+\documentclass[oneside,english,master=wtk,inputenc="utf8"]{kulemt}
+\setup{title={Path planning algorithm for semi-autonomous mobile robots with fast and accurate collision checking}}
+\setup{author={Kevin Denis},
+           promotor={Prof.\,dr.\,ir.\ E.~Demeester \and Prof.\,dr.\,ir.\ H.~Bruyninckx},
+           assessor={Prof.\,dr.\,ir.\ C.~Tampère \and Dr.\,ir.\ E.~Aertbeliën},
+           assistant={Dr.\ J.~Philips}}
+
+% The following \setup may be removed entirely if no filing card is wanted
+\begin{comment}
+\setup{filingcard,
+  translatedtitle=,
+  udc=621.3,
+  shortabstract={Here comes a very short abstract, containing no more than 500
+    words. \LaTeX\ commands can be used here. Blank lines (or the command
+    \texttt{\string\pa r}) are not allowed!
+    \endgraf }}
+\end{comment}
+%\setup{coverpageonly} % Uncomment the next line for generating the cover page
+%\setup{frontpagesonly} % only the first pages
+
+\setup{font=lm}
+%\maxtocdepth{subsection}
+
+% Extra LaTeX packages
+\usepackage[numbers]{natbib}
+\usepackage{graphicx}
+\graphicspath{{./figures/}} % add sub folder figures to LaTeX
+\usepackage[T1]{fontenc} % ° in text
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{textcomp}
+\usepackage{units}
+\usepackage{nicefrac}
+%\usepackage{subfloat} % sub figures 1.a 1.b
+%\usepackage{caption}
+\usepackage{bm}
+\usepackage{tikz-qtree}
+\usetikzlibrary{trees}
+\usepackage{calc}
+\usepackage{subcaption}
+\usepackage {optidef} % Constraint Optimisation Problem
+\usepackage{mathtools} % align matrixes l m r
+\usepackage{gensymb} % \degree in math
+\usepackage[chapter]{algorithm}
+\usepackage{algorithmicx}
+\usepackage[noend]{algpseudocode}
+\usepackage{enumitem}
+\usepackage{todonotes}
+\usepackage{comment}
+\usepackage{etoolbox}
+\usepackage{titletoc}
+\usepackage{stdclsdv}
+\usepackage{tocloft}
+\usepackage{bigints}
+%\usepackage{svg}
+% keep this at the end
+\usepackage[pdfusetitle,colorlinks,plainpages=false]{hyperref} % commented out for printed versions.. 
+\usepackage[noabbrev]{cleveref}
+
+% User made shotcuts en commands
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert} 
+\newcommand{\ts}{\textsuperscript}
+\setlist[itemize,enumerate]{noitemsep, nolistsep}
+\newcommand{\nf}{\nicefrac}
+
+\newcommand*\doublecaption[2]{\caption[#1]{\textsc{#1} #2}}
+\algrenewcommand\algorithmicrequire{\textbf{Input:}}
+\algrenewcommand\algorithmicensure{\textbf{Output:}}
+\algrenewcommand{\algorithmiccomment}[1]{\hfill$\%$ #1}
+\algnewcommand{\LeftComment}[1]{\Statex $\%$ #1}
+
+\makeatletter
+\patchcmd{\listof}% <cmd>
+  {\float@listhead}% <search>
+  {\@namedef{l@#1}{\l@figure}\float@listhead}% <replace>
+  {}{}% <success><failure>
+\makeatother
+
+\renewcommand*\listalgorithmname{}
+
+\makeatletter
+\newcommand*\listoffta{%
+  \chapter\listofftaname
+  \def\@lofmaketitle{\section*\listfigurename}%
+  \listoffigures*%
+  \let\listoffigures\relax
+  \def\@lotmaketitle{\section*\listtablename}%
+  \listoftables*%
+  \let\listoftables\relax
+  \begingroup
+  \let\clearpage\relax
+  \section*{List of Algorithms}
+  \vskip-28.1mm
+  \listofalgorithms
+  \endgroup}
+\newcommand*\listofftaname{List of Figures, Tables and Algorithms}
+\makeatother
+
+%\includeonly{chap1-intro}
+%\includeonly{chap2-litstudy}
+%\includeonly{chap3-design}
+%\includeonly{chap4-eval}
+%\includeonly{chap6-futwork}
+%\includeonly{chap7-concl}
+
+\begin{document}
+
+\begin{preface}
+I discovered my passion for autonomous mobile robots during my master thesis in engineering technology (\emph{industrieel ingenieur}), when I had to make an autonomous robot move, starting from an autonomous vacuum cleaner and a few extra sensors for localization and navigation purposes. 
+\hbadness=10000 \\ \\
+This passion led me to my current studies in engineering science (\emph{burgerlijk ingenieur}). 
+The reason for this is twofold. Firstly, I wanted to expand my knowledge of robotics and mechatronics, which are in my eyes the most fascinating domains in engineering today. 
+Secondly, I saw it as a personal challenge to do both masters, which is not that common, because of the distinct nature and complementarity of these studies. One is focusing more on the practical side, the other on the conceptual side.
+\hbadness=10000 \\ \\
+This thesis symbolizes for me the end of my studies, which have become a critical chapter in my life. I would like to thank the following persons who assisted me all along the development of my thesis.  Without their precious help, I would not have been able to write it:
+\\
+My promoter, Eric Demeester, who presented to me this fascinating thesis topic and who helped me every step of the way during my thesis-journey.
+\\
+My promoter, Herman Bruyninkxs, for the fruitful discussions and critical eye on the work I produced during this year.
+\\
+My mentor Johan Philips, who was always available when I needed help.
+\\
+My supervisors, Chris Tampère and Erwin Aertbeliën, who gave me meaningful advice and input, especially during my midterm presentation.
+\hbadness=10000 \\ \\
+I would also like to thank my parents, who encouraged me during those intensive years of my student life and who support many of my undertakings.
+\hbadness=10000 \\ \\
+\emph{Et bien sûr, le meilleur pour la fin ! Merci Alisson, pour ces 6 merveilleuses années passées à tes côtés, pleines d'amour, de tendresse et de soutien. J'ai hâte d'ouvrir ce nouveau chapitre de ma vie avec toi \dots}
+\end{preface}
+
+\tableofcontents*
+
+\begin{abstract}
+\vspace{-1.03em}
+This thesis aims to improve the current local path planning algorithm developed at the Department of Mechanical Engineering of the KU Leuven. The algorithm is used in the context of navigation assistance of electric-powered wheelchairs for the elderly or disabled. The paths obtained from the local path planner are used to model the wheelchair user's intention as well as the path the wheelchair will take. This assistance will help the user to navigate more effectively in challenging situations such as passing through narrow door openings.
+
+Based on the Local Path Template method, which consists of a fixed set of paths starting from the current position and orientation of the robot, the planning algorithm uses an efficient lookup table to adjust each individual trajectory length according to the environment, to obtain collision-free paths.
+
+The current algorithm only uses circular local paths, which is only a small subset of the feasible trajectories a wheelchair can execute. The main contribution of this thesis is to expand this set of local paths by using another curve geometry, the clothoid, a curve whose curvature changes linearly with its arc length. These different paths are generated by using a local version of the State Lattice method, creating Motion Primitives which comply with the wheelchair's kinematic constraints. 
+
+A conceptual solution is presented to enable this new path planner to plan a path considering dynamic obstacles. By using a motion model of a moving obstacle, the dynamic planner calculates a safe velocity profile for the fixed set of paths to yield a collision-free motion along each path.
+
+Other aspects highlighted in this thesis include human-aware robot navigation, a novel research area combining robot navigation with the emerging research area of human-robot interaction. This combination will enable the design of a socially compliant path planner which inherently respects non-written rules of human interaction. A human-robot cooperation model developed in recent literature will be presented as a possible solution to enable the wheelchair to navigate effectively in densely crowded areas.
+
+In comparison to its predecessor the circular path planner, the developed clothoid-based planner achieves substantially improved planning capacity when a more complex path is needed to reach a certain goal. This comes at a cost: the clothoid planner generates six times more paths than the circular planner, which in total take four times longer to process.
+\end{abstract}
+
+\begin{abstract*}
+\vspace{-1.03em}
+Deze thesis heeft tot doel de huidige lokale padplanningsalgoritme ontwikkeld aan het Departement Werktuigkunde van de KU Leuven te verbeteren. Het algoritme wordt gebruikt voor navigatie assistentie van elektrische rolstoelen voor ouderen of mindervaliden. De paden die worden berekend door de lokale padplanner worden gebruikt om de intentie van de rolstoelgebruiker te modelleren, evenals het pad dat de rolstoel zal nemen. Deze assistentie helpt de gebruiker om efficiënter te navigeren in moeilijke situaties, zoals door smalle deuropeningen te gaan.
+
+Op basis van de Lokale-Padsjabloon methode, die bestaat uit een vaste set van paden die afkomstig zijn van de huidige positie en oriëntatie van de robot, gebruikt het padplanningsalgoritme een efficiënte opzoektabel om elke individuele trajectlengte aan de omgeving aan te passen om botsingsvrije trajecten te verkrijgen.
+
+Het huidige algoritme gebruikt enkel circulaire lokale paden, die slechts een klein deel van de trajecten vertegenwoordigen die een rolstoel kan uitvoeren. De belangrijkste bijdrage van deze thesis is het uitbreiden van deze reeks lokale paden door gebruik te maken van een andere curve geometrie, de clothoïde, een kromme waarvan de kromming lineair verandert met zijn booglengte. Deze verschillende paden worden gegenereerd door gebruik te maken van een lokale versie van de State Lattice methode, waardoor bewegingsprimitieven worden gecreëerd die voldoen aan de kinematische beperkingen van de rolstoel.
+
+Deze thesis stelt een conceptuele oplossing voor om de nieuwe padplanner in staat te stellen een pad te plannen dat rekening houdt met dynamische obstakels. Door een bewegingsmodel van een obstakel te gebruiken, berekent de dynamische planner een veilig snelheidsprofiel voor het vaste set van paden om een botsingsvrije beweging langs elk pad te genereren.
+
+Andere aspecten die in deze thesis aan bod komen zijn onder meer mensbewuste robotnavigatie, een nieuw onderzoeksgebied dat robotnavigatie combineert met het opkomende onderzoeksgebied van mens-robot interactie. Deze combinatie zal het ontwerp van een sociaal aanvaardbare padplanner mogelijk maken die ongeschreven regels van menselijke interactie respecteert. Een mens-robot samenwerkingsmodel ontwikkeld in recente literatuur wordt voorgesteld als mogelijke oplossing om de rolstoel effectief te besturen in een dichte menigte.
+
+Vergeleken met zijn voorganger, de circulaire padplanner, levert de clothoïde-gebaseerde planner een aanzienlijk verbeterde planningscapaciteit wanneer een meer complex pad nodig is om een bepaald doel te bereiken. Dit heeft echter een prijs: de clothoïde-planner genereert zes keer meer paden dan de circulaire planner, wat gezamenlijk vier keer langer duurt om te verwerken.
+\end{abstract*}
+
+\listoffta
+
+\chapter{List of Abbreviations and Symbols}
+\section*{Abbreviations}
+\begin{flushleft}
+\renewcommand{\arraystretch}{1.1}
+\begin{tabularx}{\textwidth}{@{}p{14mm}X@{}}
+CEP		& Candidate End Pose \\
+COP		& Constrained Optimization Problem \\
+DMP		& Discrete Motion Planning \\
+DOF		& Degree Of Freedom \\
+EP			& Expansion Position \\
+FRP		& Freezing Robot Problem \\
+ICR			& Instant Center of Rotation \\
+LPP		& Local Path Planner \\
+LPPA		& Local Path Planning Algorithm \\
+LPT		& Local Path Template \\
+LSL		& Local State Lattice \\
+MP			& Motion Primitive \\
+MSG		& Multi-Size Grid \\ 
+OG			& Occupancy Grid \\
+ROI			& Region Of Interest \\
+sAMR		& semi-Autonomous Mobile Robot
+\end{tabularx}
+\end{flushleft}
+
+\newpage
+
+\section*{Symbols}
+\begin{flushleft}
+\renewcommand{\arraystretch}{1.1}
+\begin{tabularx}{\textwidth}{@{}p{16mm}X@{}}
+$v$					& Linear velocity $(\nf{m}{s})$ \\
+$\omega$   	& Angular velocity $(\nf{rad}{s})$  \\
+$F$					& Force $(N)$ \\
+$u_{right,left}$ & Right, left wheel rotational velocity $(\nf{rad}{s})$ \\
+$b$ 					& Distance between both driven wheels $(m)$ \\
+$r$   				& Turning radius, distance to the instant centre of rotation $(m)$\\
+$\kappa$  		& Curvature $(\nf{1}{m})$ \\
+$\kappa'$		& Change in cruvate per unit of length $(\nf{1}{m^2})$ \\
+$d\theta$		& Angular discretization $(rad)$ \\
+$\{R\}$ 			& Local reference frame of the robot \\
+$\{I\}$ 				& Inertial or global reference frame \\
+$P$ 				& 2D point or position $[x, y]$ \\
+${p}$				& Pose $[x,y,\theta]$ \\
+$\bm{p_s},\bm{p_0}$ 	& Start pose $[x,y,\theta]$ \\
+$\bm{p_e},\bm{p_1}$  	& End pose $[x,y,\theta]$ \\
+$\bm{p_{grid}}$ & Candidate End Pose  $[x,y,\theta]$\\
+$\bm{P_{grid}}$ & Matrix containing all the Candidate End Poses $[\bm{x},\bm{y},\bm{\theta}]$ \\
+$k$					& discrete index \\
+$\bm{B}$ 		& Bézier curve $[\bm{x}, \bm{y}]$\\
+$u$					& Parameter to construct the Bézier curve $(u =0:\Delta u:1)$ \\
+$n$					& Amount of control points of the Bézier curve (order = $n-1$) \\
+$L_{tot}$		& Total length of a path ($\bm{s}(end)=L_{tot}$) $(m)$\\
+$\mathcal{LSL}$ 	& Local State Lattice data structure\\
+$\mathcal{P}$ 		& Path data structure, one entry of $\mathcal{LSL}$  \\
+$\mathcal{C}$ 		& Cells of the precomputed lookup table\\
+$\bm{XY\Theta}$ 	& Discrete set of poses along a precomputed path \\
+$\bm{s}$ 				& Discrete lengths along a precomputed path  \\
+$\bm{\kappa}$ 		& Discrete curvature along a precomputed path   \\
+$blockIdx$ 				& Last row index of a precomputed path yielding a collision-free path   \\
+$pathID$  				& Unique identification number of a precomputed path \\
+$pathIdx$ 				&	Row index accessing precomputed data ($\bm{XY\Theta}$, $\bm{s}$, $\bm{\kappa}$)
+\end{tabularx}
+\end{flushleft}
+
+% Now comes the main text
+\mainmatter
+\include{chap1-intro}
+\include{chap2-litstudy}
+\include{chap3-design}
+\include{chap4-eval}
+\include{chap5-futwork}
+\include{chap6-concl}
+\appendixpage*
+\appendix
+\include{appA-bezier}
+\include{appB-src}
+
+\backmatter
+% The bibliography comes after the appendices.
+% You can replace the standard "abbrv" bibliography style by another one.
+\bibliographystyle{abbrv}
+\bibliography{references}
+\end{document}

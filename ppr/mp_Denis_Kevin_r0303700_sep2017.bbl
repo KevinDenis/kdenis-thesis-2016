@@ -1,0 +1,292 @@
+\begin{thebibliography}{10}
+
+\bibitem{Altman2014}
+Y.~M. Altman.
+\newblock {\em Accelerating {{MATLAB Performance}}: 1001 Tips to Speed up
+  {{MATLAB}} Programs}.
+\newblock {Chapman \& Hall/CRC}, Dec. 2014.
+
+\bibitem{Andersson2013}
+J.~Andersson.
+\newblock {\em A {{General}}-{{Purpose Software Framework}} for {{Dynamic
+  Optimization}}}.
+\newblock {KU Leuven}, Leuven, Oct. 2013.
+
+\bibitem{ArechavaletaEtAl2008}
+G.~Arechavaleta, J.-P. Laumond, H.~Hicheur, and A.~Berthoz.
+\newblock On the nonholonomic nature of human locomotion.
+\newblock {\em Autonomous Robots}, 25(1-2):25--35, Aug. 2008.
+
+\bibitem{Baass1982}
+K.~G. Baass.
+\newblock Use {{Of Of Clothoid Templates In Highway Design}}.
+\newblock {\em Transportation Association of Canada}, Sept. 1982.
+
+\bibitem{BertolazziFrego2015}
+E.~Bertolazzi and M.~Frego.
+\newblock G1 fitting with clothoids.
+\newblock {\em Mathematical Methods in the Applied Sciences}, 38(5):881--897,
+  Mar. 2015.
+
+\bibitem{BertolazziFrego2016}
+E.~Bertolazzi and M.~Frego.
+\newblock G1 fitting with clothoids [source code].
+\newblock \url{https://github.com/ebertolazzi/G1fitting}, Nov. 2016.
+
+\bibitem{BouraineEtAl2011}
+S.~Bouraine, T.~Fraichard, and H.~Salhi.
+\newblock Relaxing the inevitable collision state concept to address provably
+  safe mobile robot navigation with limited field-of-views in unknown dynamic
+  environments.
+\newblock In {\em 2011 {{IEEE}}/{{RSJ International Conference}} on
+  {{Intelligent Robots}} and {{Systems}}}, pages 2985--2991, Sept. 2011.
+
+\bibitem{BrezakPetrovic2011}
+M.~Brezak and I.~Petrovi{\'c}.
+\newblock Path {{Smoothing Using Clothoids}} for {{Differential Drive Mobile
+  Robots}}.
+\newblock {\em IFAC Proceedings Volumes}, 44(1):1133--1138, Jan. 2011.
+
+\bibitem{BruyninckxReynaerts1997}
+H.~Bruyninckx and D.~Reynaerts.
+\newblock Path planning for mobile and hyper-redundant robots using
+  {{Pythagorean}} hodograph curves.
+\newblock In {\em 8th {{International Conference}} on {{Advanced Robotics}},
+  1997. {{ICAR}} '97. {{Proceedings}}}, pages 595--600, July 1997.
+
+\bibitem{Cope1993}
+G.~H. Cope.
+\newblock {\em British Railway Track: Design, Construction and Maintenance}.
+\newblock {Permanent Way Institution Loughborough,, UK}, 1993.
+
+\bibitem{DemeesterEtAl2012b}
+E.~Demeester, A.~H{\"u}ntemann, E.~Vander~Poorten, and J.~De~Schutter.
+\newblock {{ML}}, {{MAP}} and greedy {{POMDP}} shared control: Comparison of
+  wheelchair navigation assistance for switch interfaces.
+\newblock In {\em International {{Symposium}} on {{Robotics}}}, 2012.
+
+\bibitem{DemeesterEtAl2003}
+E.~Demeester, M.~Nuttin, and H.~Van~Brussel.
+\newblock Fine motion planning for shared wheelchair control: Requirements and
+  preliminary experiments.
+\newblock In {\em Proceedings of the 11th {{International Conference}} on
+  {{Advanced Robotics}}}, Coimbra, Portugal, June 2003.
+
+\bibitem{DemeesterEtAl2012a}
+E.~Demeester, E.~Vander~Poorten, A.~H{\"u}ntemann, and J.~De~Schutter.
+\newblock Wheelchair {{Navigation Assistance}} in the {{FP7 Project RADHAR}}:
+  {{Objectives}} and {{Current State}}.
+\newblock In {\em Conference on {{Intelligent Robots}} and {{Systems}}}, Oct.
+  2012.
+
+\bibitem{DemeesterEtAl2012}
+E.~Demeester, E.~Vander~Poorten, J.~Philips, and A.~Huntemann.
+\newblock Design and evaluation of a lookup-table based collision-checking
+  approach for fixed sets of mobile robot paths.
+\newblock In {\em International {{Symposium}} on {{Robotics}}}, pages
+  1045--1050, Aug. 2012.
+
+\bibitem{Denis2017}
+K.~Denis.
+\newblock {{ROB}} - {{Mastertheses}} / kdenis-2016.
+\newblock \url{https://gitlab.mech.kuleuven.be/rob-mastertheses/kdenis-2016},
+  Aug. 2017.
+
+\bibitem{RADHARWebPage}
+{European Commission (FP7-ICT-248873)}.
+\newblock {{RADHAR}} - {{Robotic ADaptation}} to {{Humans Adapting}} to
+  {{Robots}}.
+\newblock \url{https://www.radhar.eu/}.
+
+\bibitem{FleuryEtAl1995}
+S.~Fleury, P.~Soueres, J.~P. Laumond, and R.~Chatila.
+\newblock Primitives for smoothing mobile robot trajectories.
+\newblock {\em IEEE Transactions on Robotics and Automation}, 11(3):441--448,
+  June 1995.
+
+\bibitem{Hall1966}
+E.~T. Hall.
+\newblock {\em The Hidden Dimension}.
+\newblock Anchor books. {Doubleday}, New York (N.Y.), 1966.
+
+\bibitem{Helbing1991}
+D.~Helbing.
+\newblock A mathematical model for the behavior of pedestrians.
+\newblock {\em Behavioral Science}, 36(4):298, Oct. 1991.
+
+\bibitem{KellyNagy2003}
+A.~Kelly and B.~Nagy.
+\newblock Reactive {{Nonholonomic Trajectory Generation}} via {{Parametric
+  Optimal Control}}.
+\newblock {\em The International Journal of Robotics Research},
+  22(7-8):583--601, July 2003.
+
+\bibitem{KruseEtAl2013}
+T.~Kruse, A.~K. Pandey, R.~Alami, and A.~Kirsch.
+\newblock Human-aware robot navigation: {{A}} survey.
+\newblock {\em Robotics and Autonomous Systems}, 61(12):1726--1743, Dec. 2013.
+
+\bibitem{Lankenau2001}
+A.~Lankenau.
+\newblock Avoiding mode confusion in service robots - the bremen autonomous
+  wheelchair as an example.
+\newblock In {\em Proc. of the 7th {{Int}}. {{Conf}}. on {{Rehabilitation
+  Robotics}} ({{ICORR}} 2001)}, pages 162--167, Evry, France, 2001.
+
+\bibitem{Makino1988}
+H.~Makino.
+\newblock Clothoidal {{Interpolation}} \textemdash{} {{A New Tool}} for
+  {{High}}-{{Speed Continuous Path Control}}.
+\newblock {\em CIRP Annals - Manufacturing Technology}, 37(1):25--28, 1988.
+
+\bibitem{McCraeSingh2009}
+J.~McCrae and K.~Singh.
+\newblock Sketching piecewise clothoid curves.
+\newblock {\em Computers \& Graphics}, 33(4):452--461, Aug. 2009.
+
+\bibitem{MercyEtAl2016}
+T.~Mercy, W.~V. Loock, and G.~Pipeleers.
+\newblock Real-time motion planning in the presence of moving obstacles.
+\newblock In {\em 2016 {{European Control Conference}} ({{ECC}})}, pages
+  1586--1591, June 2016.
+
+\bibitem{MercyVanParys2017}
+T.~Mercy and R.~Van~Parys.
+\newblock Omg-tools: {{Optimal Motion Generation}}-tools: Motion planning made
+  easy.
+\newblock \url{https://github.com/meco-group/omg-tools}, May 2017.
+
+\bibitem{MoralesEtAl2013}
+Y.~Morales, N.~Kallakuri, K.~Shinozawa, T.~Miyashita, and N.~Hagita.
+\newblock Human-comfortable navigation for an autonomous robotic wheelchair.
+\newblock In {\em 2013 {{IEEE}}/{{RSJ International Conference}} on
+  {{Intelligent Robots}} and {{Systems}}}, pages 2737--2743, Nov. 2013.
+
+\bibitem{PanEtAl2012}
+J.~Pan, L.~Zhang, and D.~Manocha.
+\newblock Collision-free and smooth trajectory computation in cluttered
+  environments.
+\newblock {\em The International Journal of Robotics Research},
+  31(10):1155--1175, Sept. 2012.
+
+\bibitem{PivtoraikoKelly2005}
+M.~Pivtoraiko and A.~Kelly.
+\newblock Generating near minimal spanning control sets for constrained motion
+  planning in discrete state spaces.
+\newblock In {\em 2005 {{IEEE}}/{{RSJ International Conference}} on
+  {{Intelligent Robots}} and {{Systems}}}, pages 3231--3237, Aug. 2005.
+
+\bibitem{PivtoraikoKelly2012}
+M.~Pivtoraiko and A.~Kelly.
+\newblock Generating {{State Lattice Motion Primitives}} for {{Differentially
+  Constrained Motion Planning}}.
+\newblock In {\em International {{Conference}} on {{Intelligent Robots}} and
+  {{Systems}}}, pages 101--108, Algarve, Portugal, Oct. 2012.
+
+\bibitem{PivtoraikoEtAl2009}
+M.~Pivtoraiko, R.~A. Knepper, and A.~Kelly.
+\newblock Differentially constrained mobile robot motion planning in state
+  lattices.
+\newblock {\em Journal of Field Robotics}, 26(3):308--333, Mar. 2009.
+
+\bibitem{PrasslerEtAl1999}
+E.~Prassler, J.~Scholz, and P.~Fiorini.
+\newblock Navigating a {{Robotic Wheelchair}} in a {{Railway Station}} during
+  {{Rush Hour}}.
+\newblock {\em The International Journal of Robotics Research}, 18(7):711--727,
+  July 1999.
+
+\bibitem{ScandoloFraichard2011}
+L.~Scandolo and T.~Fraichard.
+\newblock An anthropomorphic navigation scheme for dynamic scenarios.
+\newblock In {\em 2011 {{IEEE International Conference}} on {{Robotics}} and
+  {{Automation}}}, pages 809--814, May 2011.
+
+\bibitem{ScheuerFraichard1997}
+A.~Scheuer and T.~Fraichard.
+\newblock Continuous-curvature path planning for car-like vehicles.
+\newblock In {\em , {{Proceedings}} of the 1997 {{IEEE}}/{{RSJ International
+  Conference}} on {{Intelligent Robots}} and {{Systems}}, 1997. {{IROS}} '97},
+  volume~2, pages 997--1003 vol.2, Sept. 1997.
+
+\bibitem{Sederberg2016}
+T.~W. Sederberg.
+\newblock {\em Computer {{Aided Geometric Design}}}.
+\newblock {Brigham Young University}, Provo, UT, Sept. 2016.
+
+\bibitem{TrautmanKrause2010}
+P.~Trautman and A.~Krause.
+\newblock Unfreezing the robot: {{Navigation}} in dense, interacting crowds.
+\newblock In {\em 2010 {{IEEE}}/{{RSJ International Conference}} on
+  {{Intelligent Robots}} and {{Systems}}}, pages 797--803, Oct. 2010.
+
+\bibitem{TrautmanEtAl2015}
+P.~Trautman, J.~Ma, R.~M. Murray, and A.~Krause.
+\newblock Robot navigation in dense human crowds: {{Statistical}} models and
+  experimental studies of human\textendash{}robot cooperation.
+\newblock {\em The International Journal of Robotics Research}, 34(3):335--356,
+  Mar. 2015.
+
+\bibitem{VanLoockEtAl2015}
+W.~Van~Loock, G.~Pipeleers, and J.~Swevers.
+\newblock B-spline parameterized optimal motion trajectories for robotic
+  systems with guaranteed constraint satisfaction.
+\newblock {\em Mechanical Sciences}, 6(2):163--171, Sept. 2015.
+
+\bibitem{VanParysPipeleers2016}
+R.~Van~Parys and G.~Pipeleers.
+\newblock Online distributed motion planning for multi-vehicle systems.
+\newblock In {\em 2016 {{European Control Conference}} ({{ECC}})}, pages
+  1580--1585, June 2016.
+
+\bibitem{VanParysPipeleers2017}
+R.~Van~Parys and G.~Pipeleers.
+\newblock Spline-{{Based Motion Planning}} in an {{Obstructed 3D}} environment.
+\newblock In {\em Proceedings of the 20th {{IFAC World Congress}}}, Toulouse,
+  France, July 2017.
+
+\bibitem{VanderPoortenEtAl2012}
+E.~Vander~Poorten, E.~Demeester, A.~H{\"u}ntemann, E.~Reekmans, J.~Philips, and
+  J.~De~Schutter.
+\newblock Backwards {{Maneuvering Powered Wheelchairs}} with {{Haptic
+  Guidance}}.
+\newblock In {\em International {{Conference}} on {{Human Haptic Sensing}} and
+  {{Touch Enabled Computer Applications}}}, pages 419--431. {Springer}, 2012.
+
+\bibitem{VanderPoortenEtAl2012a}
+E.~Vander~Poorten, E.~Demeester, E.~Reekmans, J.~Philips, A.~H{\"u}ntemann, and
+  J.~D. Schutter.
+\newblock Powered wheelchair navigation assistance through kinematically
+  correct environmental haptic feedback.
+\newblock In {\em 2012 {{IEEE International Conference}} on {{Robotics}} and
+  {{Automation}}}, pages 3706--3712, May 2012.
+
+\bibitem{ChoiEtAl2008}
+J.~w~Choi, R.~Curry, and G.~Elkaim.
+\newblock Path {{Planning Based}} on {{B{\'e}zier Curve}} for {{Autonomous
+  Ground Vehicles}}.
+\newblock In {\em World {{Congress}} on {{Engineering}} and {{Computer
+  Science}} 2008, {{WCECS}} '08. {{Advances}} in {{Electrical}} and
+  {{Electronics Engineering}} - {{IAENG Special Edition}} of The}, pages
+  158--166, Oct. 2008.
+
+\bibitem{ChoiEtAl2010}
+J.~w~Choi, R.~E. Curry, and G.~H. Elkaim.
+\newblock Curvature-continuous trajectory generation with corridor constraint
+  for autonomous ground vehicles.
+\newblock In {\em 49th {{IEEE Conference}} on {{Decision}} and {{Control}}
+  ({{CDC}})}, pages 7166--7171, Dec. 2010.
+
+\bibitem{WaltonMeek2009}
+D.~J. Walton and D.~S. Meek.
+\newblock G1 interpolation with a single {{Cornu}} spiral segment.
+\newblock {\em Journal of Computational and Applied Mathematics},
+  223(1):86--96, Jan. 2009.
+
+\bibitem{ZipsEtAl2016}
+P.~Zips, M.~B{\"o}ck, and A.~Kugi.
+\newblock Optimisation based path planning for car parking in narrow
+  environments.
+\newblock {\em Robotics and Autonomous Systems}, 79:1--11, May 2016.
+
+\end{thebibliography}
