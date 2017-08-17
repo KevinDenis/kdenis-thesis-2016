@@ -141,7 +141,7 @@ A conceptual solution is presented to enable this new path planner to plan a pat
 
 Other aspects highlighted in this thesis include human-aware robot navigation, a novel research area combining robot navigation with the emerging research area of human-robot interaction. This combination will enable the design of a socially compliant path planner which inherently respects non-written rules of human interaction. A human-robot cooperation model developed in recent literature will be presented as a possible solution to enable the wheelchair to navigate effectively in densely crowded areas.
 
-In comparison to its predecessor the circular path planner, the developed clothoid-based planner achieves substantially improved planning capacity when a more complex path is needed to reach a certain goal. This comes at a cost: the clothoid planner generates six times more paths than the circular planner, which in total take four times longer to process.
+In comparison to its predecessor, the circular path planner, the developed clothoid-based planner achieves substantially improved planning capacity when a more complex path is needed to reach a certain goal. This comes at a cost: the clothoid planner generates six times more paths than the circular planner, which in total take four times longer to process.
 \end{abstract}
 
 \begin{abstract*}
@@ -196,9 +196,9 @@ $\omega$   	& Angular velocity $(\nf{rad}{s})$  \\
 $F$					& Force $(N)$ \\
 $u_{right,left}$ & Right, left wheel rotational velocity $(\nf{rad}{s})$ \\
 $b$ 					& Distance between both driven wheels $(m)$ \\
-$r$   				& Turning radius, distance to the instant centre of rotation $(m)$\\
+$r$   				& Turning radius, distance to the instant center of rotation $(m)$\\
 $\kappa$  		& Curvature $(\nf{1}{m})$ \\
-$\kappa'$		& Change in cruvate per unit of length $(\nf{1}{m^2})$ \\
+$\kappa'$		& Change in curvature per unit of length $(\nf{1}{m^2})$ \\
 $d\theta$		& Angular discretization $(rad)$ \\
 $\{R\}$ 			& Local reference frame of the robot \\
 $\{I\}$ 				& Inertial or global reference frame \\
@@ -216,10 +216,12 @@ $L_{tot}$		& Total length of a path ($\bm{s}(end)=L_{tot}$) $(m)$\\
 $\mathcal{LSL}$ 	& Local State Lattice data structure\\
 $\mathcal{P}$ 		& Path data structure, one entry of $\mathcal{LSL}$  \\
 $\mathcal{C}$ 		& Cells of the precomputed lookup table\\
-$\bm{XY\Theta}$ 	& Discrete set of poses along a precomputed path \\
-$\bm{s}$ 				& Discrete lengths along a precomputed path  \\
-$\bm{\kappa}$ 		& Discrete curvature along a precomputed path   \\
-$blockIdx$ 				& Last row index of a precomputed path yielding a collision-free path   \\
+$\bm{XY\Theta}$ 	& Discrete set of poses along a precomputed path $[\bm{x},\bm{y},\bm{\theta}]$ \\
+$\bm{s}$ 				& Discrete lengths along a precomputed path  $(m)$ \\
+$\bm{\kappa}$ 		& Discrete curvature along a precomputed path $(\nf{1}{m})$   \\
+$res_{OG}$			& Resolution of the OG (cm)\\ 
+$res_{path}$			& Resolution of the path (cm)\\ 
+$blockIdx$ 				& First row index of a precomputed path yielding a collision   \\
 $pathID$  				& Unique identification number of a precomputed path \\
 $pathIdx$ 				&	Row index accessing precomputed data ($\bm{XY\Theta}$, $\bm{s}$, $\bm{\kappa}$)
 \end{tabularx}

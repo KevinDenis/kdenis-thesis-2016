@@ -76,6 +76,6 @@
 \contentsline {section}{\numberline {A.1}Mathematical Formulations and Derivatives}{58}{section.A.1}
 \contentsline {section}{\numberline {A.2}Constrained Optimization Problem Formulation}{59}{section.A.2}
 \contentsline {appendix}{\chapternumberline {B}Source Code}{60}{appendix.B}
-\contentsline {section}{\numberline {B.1}Directory Organisation}{60}{section.B.1}
+\contentsline {section}{\numberline {B.1}Directory Organization}{60}{section.B.1}
 \contentsline {chapter}{Bibliography}{61}{section*.65}
 \contentsfinish 

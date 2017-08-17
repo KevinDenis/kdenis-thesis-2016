@@ -384,14 +384,14 @@ $3.90m$	& $2.96m$ & $[763,764,779]$			& $[202,192,226]$	\\ \hline
 \newpage
 
 \section{Extention for Dynamic Motion Planning} \label{sec:DynPlan}
-In the previous sections of this chapter, the focus of the developed LPPA has been on the geometry of the curve and its path length adaptation for static obstacles. This still leaves an important gap in terms of real-life operability of the LPPA as it does not prevent collisions with dynamic obstacles crossing the path taken by the sAMR. Such a situation is shown in \cref{fig:DVP_Start}. The solution put forward to avoid such collisions relies on the strength of the LPT (i) to perform path adjustments for static obstacles and (ii) to calculate an optimal speed profile ($v(t)$) to achieve a collision-free motion avoiding dynamic obstacles. This optimal speed profile is calculated by applying the methods described in \Cref{sec:OMGreview}, but for a fixed path, therefore reducing the computational cost for the calculation of the COP. This method assumes a given motion model for each obstacle and an OG representing their shape. There is however no restriction to the path or the shape (convex or concave) of the obstacles.
+In the previous sections of this chapter, the focus of the developed LPPA has been on the geometry of the curve and its path length adaptation for static obstacles. This still leaves an important gap in terms of real-life operability of the LPPA as it does not prevent collisions with dynamic obstacles crossing the path taken by the sAMR. Such a situation is shown in \cref{fig:DVP_Start}. The solution put forward to avoid such collisions relies on the strength of the LPT to perform path adjustments for static obstacles and to calculate an optimal speed profile ($v(t)$) to achieve a collision-free motion avoiding dynamic obstacles. This optimal speed profile is calculated by applying the methods described in \Cref{sec:OMGreview}, but for a fixed path, therefore reducing the computational cost for the calculation of the COP. This method assumes a given motion model for each obstacle and an OG representing their shape. There is however no restriction to the path or the shape (convex or concave) of the obstacles.
 
 \Cref{sec:STspace} explains the creation of the distance-time collision space ($s,t-$space) where $s$ is the distance along a fixed path. This collision space will be used for a COP described in \cref{sec:OSPCOP}, using a dynamic model of the wheelchair along with time-varying separating hyperplanes (shown \cref{fig:SeparatingHyperPlane}) to provide collision-free motion by finding an optimal speed profile to reach the end of a given path.
 
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.9\textwidth]{DVP_Start.pdf}
-\doublecaption{Dynamic obstacles potentially causing a collision with the sAMR.}{For clarity, only the shell of the dynamic obstacles’ OG are shown.
+\doublecaption{Dynamic obstacles potentially causing a collision with the sAMR.}{For clarity, only the shell of the dynamic obstacles' OG are shown.
 \label{fig:DVP_Start}}
 \end{figure}
 
@@ -402,8 +402,8 @@ The $s,t-$space can be seen as a grid, within which all collisions between the r
 \begin{enumerate}
 \item The full OG of the robot along the fixed path is used, to determine the first and last impact time of the moving obstacle. This will narrow the search space along the $t$-axis (\cref{fig:DVP_FirstLastImpact}, left).
 \item The full OG of the moving obstacle is determined by integrating its velocity. The first and last position on the fixed robot-path colliding with the moving obstacle is calculated. This will narrow the search space along the $s$-axis (\cref{fig:DVP_FirstLastImpact}, right).
-\item In the restricted space determined by ($[t_{first},s_{first}]-[t_{last},s_{last}]$), all discrete $s,t$ collision states are calculated, determined by the path resolution ($\Delta s$) and the time resolution ($\Delta t$). An example for a fixed time for the obstacle is shown in \cref{fig:DVP_TSocc} (left). Repeating this for every time instance results in the ($s,t-$space) diagram, indicating all the possible collision states shown in \cref{fig:DVP_TSocc} (right)
-\item Further optimization can be performed on the obtained collision states. As time-varying separating hyperplanes will be used in the COP, it will be more efficient to only keep a convex shape of the obtained collision states. This convex shape can be further simplified when applying the following (logical) constraints: (i) implying that the sAMR can't move backwards and (ii) time always moves forward (to the right) results in a nearly rectangular shape determined by ($[t_{first},s_{first}]-[t_{last},s_{last}]$). The outcome is not always rectangular, as can be seen in a ($s,t-$space) for another obstacle in \cref{fig:DVP_Solution}.
+\item In the restricted space determined by $[t_{first},s_{first}]-[t_{last},s_{last}]$, all discrete $s,t$ collision states are calculated, determined by the path resolution ($\Delta s$) and the time resolution ($\Delta t$). An example for a fixed time for the obstacle is shown in \cref{fig:DVP_TSocc} (left). Repeating this for every time instance results in a $s,t-$space grid, indicating which $s,t$ pair results in collision, shown in \cref{fig:DVP_TSocc} (right).
+\item Further optimization can be performed on the obtained collision states. As time-varying separating hyperplanes will be used in the COP, it will be more efficient to only keep a convex shape of the obtained collision states. This convex shape can be further simplified when applying the following (logical) constraints: (i) implying that the sAMR can't move backwards and (ii) time always moves forward (to the right) results in a nearly rectangular shape determined by $[t_{first},s_{first}]-[t_{last},s_{last}]$. The outcome is not always rectangular, as can be seen in a ($s,t-$space) for another obstacle in \cref{fig:DVP_Solution}.
 \end{enumerate}
 
 \begin{figure}[!htbp]
@@ -411,7 +411,7 @@ The $s,t-$space can be seen as a grid, within which all collisions between the r
 \includegraphics[width=0.49\textwidth]{DVP_FirstLastImpactTime.pdf}
 \hfill
 \includegraphics[width=0.49\textwidth]{DVP_FirstLastImpactDistance.pdf}
-\doublecaption{First and last impact time and distance}{are calculated to reduce the computational time of the individual collision states in the  $s,t-$space
+\doublecaption{First and last impact time and distance}{are calculated to reduce the computational time of the individual collision states in the  $s,t-$space.
 \label{fig:DVP_FirstLastImpact}}
 \end{figure}
 
@@ -420,14 +420,14 @@ The $s,t-$space can be seen as a grid, within which all collisions between the r
 \includegraphics[width=0.49\textwidth]{DVP_FirstLastImpactDistance_FixedTime.pdf}
 \hfill
 \includegraphics[width=0.49\textwidth]{DVP_TSocc_Diagram_Convex.pdf}
-\doublecaption{(right) The distance-time collision space is obtained by calculating the discrete distance along the robot-path resulting in a collision at a certain time with the moving obstacle.}{The slashed vertical line at $t=1.25s$ corresponds to the situation shown on the left, where distances along the robot-path are marked in red for the position of the obstacle at $t=1.25s$.
+\doublecaption{(right) The distance-time collision space is obtained by calculating the discrete distance along the robot-path resulting in a collision at a certain time with the moving obstacle.}{The slashed vertical line at $t=1.25s$ corresponds to the situation shown on the left, where distances yielding a collision along the robot-path are marked in red for the position of the obstacle at $t=1.25s$. The blocked path corresponds to the occupied  $s,t-$pairs on the distance-time collision space grid map.
 \label{fig:DVP_TSocc}}
 \end{figure}
 
 \newpage
 
 \subsection{Optimal speed profile calculation} \label{sec:OSPCOP}
-A COP can be formulated to find an optimal speed profile given a distance-time collision space compliant with kinematic and dynamic constraints of the sAMR and an objective, which is to arrive within the minimum amount of time at the end of the path. This is shown in \cref{eq:DVP_COP}. This results in finding a path in the $s,t-$space, from position $[0,0]$ to $[\bm{s}(end), t_end]$ without colliding with the simplified convex hull of the collision states. This is shown in \Cref{fig:DVP_Solution}.
+A COP can be formulated to find an optimal speed profile given a distance-time collision space compliant with kinematic and dynamic constraints of the sAMR and an objective, which is to arrive within the minimum amount of time at the end of the path. This is shown in \cref{eq:DVP_COP}. This results in finding a path in the $s,t-$space, from position $[0,0]$ to $[\bm{s}(end), t(end)]$ without colliding with the simplified convex hull of the collision states. This is shown in \Cref{fig:DVP_Solution}.
 
 The COP is formulated based on the multiple-shooting approach, resulting in the discretization of the state along the path ($\bm{x}(t)=[s(t),v(t)]$) and force input $u(t)$ over a finite grid of $N$ samples. The model representing the wheelchair dynamics ($\bm{f}$) is then integrated with an integrator function ($\bm{I}$). For this conceptual solution, a simple mass-damper model was used. The time ($T$) needed to arrive at the end of the path ($\bm{s}(end)$) is kept as a decision variable, therefore an extra variable is defined, the variable time step $h=T/N$. Although not explicitly formulated in the COP, there is a one time-varying hyperplane for every moving obstacle, each requiring two parameters $\bm{a}(t)$ and $\bm{b}(t)$ (\cite{MercyEtAl2016}. $\bm{v}_{i}$ are the fixed vertices (positions) defining the simplified convex hull of the $s,t-$space. $r_{safe}$ is a safety factor, enforcing a minimum distance in the $s-t$ plane between obtained path and the simplified convex hull. Start conditions are enforced on both start distance and speed, but only an end distance is set as a constraint for the end state.
 
