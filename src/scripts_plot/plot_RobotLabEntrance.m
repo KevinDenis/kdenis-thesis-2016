@@ -47,3 +47,32 @@ ylabel('y [m]')
 % set(l,'FontSize',30);
 set(gca,'FontSize',28)
 saveCurrentFigure('EnterRobotLabCirc');
+
+figureFullScreen(3)
+subplot(1,2,1)
+hold on
+plot(Map_XY_CCW(:,1),Map_XY_CCW(:,2),'k','LineWidth',3)
+plotPath(LSL_circ_W)
+plotRoboticWheelchair(robotPose)
+axis equal
+axis([0 5.5 0 4]) 
+hold off
+xlabel('x [m]')
+ylabel('y [m]')
+% l=legend('Obstacle','Circular path','Robot pose','Location','SE');
+% set(l,'FontSize',30);
+set(gca,'FontSize',28)
+subplot(1,2,2)
+hold on
+plot(Map_XY_CCW(:,1),Map_XY_CCW(:,2),'k','LineWidth',3)
+plotPath(LSL_cloth_W)
+plotRoboticWheelchair(robotPose)
+axis equal
+axis([0 5.5 0 4]) 
+hold off
+xlabel('x [m]')
+ylabel('y [m]')
+% l=legend('Obstacle','Clothoid path','Robot pose','Location','SE');
+% set(l,'FontSize',30);
+set(gca,'FontSize',28)
+saveCurrentFigure('EnterRobotLab_sum')
