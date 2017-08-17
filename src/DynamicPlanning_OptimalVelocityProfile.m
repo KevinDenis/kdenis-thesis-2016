@@ -176,8 +176,8 @@ end
 figure(2)
 hold on
 plotRobotPath(Path,co(1,:))
-plotRoboticWheelchair([0 0 0])
-plot(XY_occ_obs_simulated(:,1),XY_occ_obs_simulated(:,2),'-','Color',co(2,:),'LineWidth',3);
+plotRoboticWheelchair([0 0 0],'k',2)
+plot(XY_occ_obs_simulated(:,1),XY_occ_obs_simulated(:,2),'-','Color',co(2,:),'LineWidth',2);
 % plot([XY_occ_obs_t_start(:,1);XY_occ_obs_t_end(:,1)],[XY_occ_obs_t_start(:,2);XY_occ_obs_t_end(:,2)],'.','Color',co(2,:));
 axis([-1 3 0.5 1.5])
 hold off
@@ -190,7 +190,7 @@ text(0.35,1,'Last Impact Time','FontSize',12)
 set(l,'FontSize',12);
 set(gca,'FontSize',11)
 axis equal
-% saveCurrentFigure('DVP_FirstLastImpactTime')
+saveCurrentFigure('DVP_FirstLastImpactTime')
 
 
 %% First and last distance at fixed time
@@ -215,8 +215,8 @@ hold on
 plotPath(Path,co(1,:),3)
 plot(blockedPath_XY(:,1),blockedPath_XY(:,2),'Color',co(2,:),'Linewidth',3);  
 plot(XY_occ_obs_simulated(:,1),XY_occ_obs_simulated(:,2),'-','Color',co(2,:))
-plotRoboticWheelchair(firstPoseBlocked)
-plotRoboticWheelchair(lastPoseBlocked)
+plotRoboticWheelchair(firstPoseBlocked,'k',1.5)
+plotRoboticWheelchair(lastPoseBlocked,'k',1.5)
 axis([-1 3 0.5 1.5])
 hold off
 axis equal
@@ -228,7 +228,7 @@ text(1.5,2.2,'Last Impact Distance','FontSize',12)
 set(l,'FontSize',12);
 set(gca,'FontSize',11)
 axis equal
-% saveCurrentFigure('DVP_FirstLastImpactDistance')
+saveCurrentFigure('DVP_FirstLastImpactDistance')
 
 
 %% Example First and last distance at fixed time
@@ -250,9 +250,9 @@ figure(5)
 hold on
 plotPath(Path,co(1,:),3)
 plot(blockedPath_XY(:,1),blockedPath_XY(:,2),'Color',co(2,:),'Linewidth',3);  
-plot(XY_occ_obs_simulated(:,1),XY_occ_obs_simulated(:,2),'-','Color',co(2,:),'Linewidth',3)
-plotRoboticWheelchair(firstPoseBlocked)
-plotRoboticWheelchair(lastPoseBlocked)
+plot(XY_occ_obs_simulated(:,1),XY_occ_obs_simulated(:,2),'-','Color',co(2,:),'Linewidth',2)
+plotRoboticWheelchair(firstPoseBlocked,'k',1.5)
+plotRoboticWheelchair(lastPoseBlocked,'k',1.5)
 axis([-1 3 0.5 1.5])
 hold off
 axis equal
@@ -264,7 +264,7 @@ text(2.02,1.48,{'Last Impact Distance','at t = 1.25sec'},'FontSize',12)
 set(l,'FontSize',12);
 set(gca,'FontSize',11)
 axis equal
-% saveCurrentFigure('DVP_FirstLastImpactDistance_FixedTime')
+saveCurrentFigure('DVP_FirstLastImpactDistance_FixedTime')
 
 %% Blocked S-T map
 TS_occ_convex_simple_rec=simplifyConvexHull(TS_occ_rec(ConvHull_kk_rec,:));
@@ -278,7 +278,7 @@ plot([t_fixed, t_fixed],[0 max([Path.S])],'--k','LineWidth',2)
 xlabel('time [s]')
 ylabel('distance along path [m]')
 axis([0 4 0 max([Path.S])])
-l=legend('Blocked s-t','Convex hull','Simplified convex hull','fixed obstacle at t=1.25s','Location','SE');
+l=legend('Occupied s-t','Convex hull','Simplified convex hull','fixed obstacle at t=1.25s','Location','SE');
 set(l,'FontSize',45);
 set(gca,'FontSize',43)
 axis equal
