@@ -3,7 +3,8 @@ co=get(groot,'DefaultAxesColorOrder');
 if ~exist('LSL', 'var'); load('LSL_cloth_backup.mat'); end
 if ~exist('ObstacleTable', 'var'); load('ObstacleTable_cloth.mat');  end
 if ~exist('XY_ObsTable', 'var'); load('XY_ObsTable_cloth.mat'); end
-if ~exist('s_sol', 'var'); load('s_sol.mat'); end
+
+load('OVP_sol.mat')
 
 robotPose = [0 0 0];
 RobotHull=[-0.80  0.20;
@@ -37,7 +38,7 @@ t=0:dt:20;
 %Circle
 XY_occ_obs_circ=getXYobsFromBMP('obs_circle.bmp');
 C_xy_start_obs_circ = [0.5 1.5];
-V_c_obs_circ = [0 -0.25]; 
+V_c_obs_circ = 1.5*[0 -0.25]; 
 [firstImpactTime_circ,lastImpactTime_circ]=getTimeFirstLastImpact(PathOccGrid_XY,XY_occ_obs_circ,C_xy_start_obs_circ,V_c_obs_circ,t);
 t_impact_circ = firstImpactTime_circ:dt:lastImpactTime_circ;
 [TS_occ_circ,ConvHull_kk_circ]=getTSOccGrid(t_impact_circ,Path,RobotHull,XY_occ_obs_circ,C_xy_start_obs_circ,V_c_obs_circ);
@@ -52,7 +53,6 @@ t_impact_rec = firstImpactTime_rec:dt:lastImpactTime_rec;
 
 
 %% Dynamics
-
 N = 50;         %discretization points
 c = 5;         %damping coefficient [Ns/m]
 m = 200;        % wheelchair mass [kg]
@@ -82,17 +82,17 @@ h = T/N; %discretization step
 %build constraints
 con = {}; 
 for k=1:N
-%     xp = s(:,k) + h*ode(s(:,k),F(k)); %Euler integration
-    xp = rk_step(ode,s(:,k),F(k),h); %Runge-Kutta integration
+    xp = s(:,k) + h*ode(s(:,k),F(k)); %Euler integration
+%     xp = rk_step(ode,s(:,k),F(k),h); %Runge-Kutta integration
     con = {con{:}, xp == s(:,k+1)};   %impose system dynamics
     
-    con = {con{:}, a_rec(k,:)*[h*k s(1,k)].' - b_rec(k,:) <= -0.1};
+    con = {con{:}, a_rec(k,:)*[h*k s(1,k)].' - b_rec(k,:) <= -0.125};
     for ii=1:(length(obs_rec)-1)
         con = {con{:}, a_rec(k,:)*obs_rec(ii,:).' - b_rec(k,:) >= 0};
     end
     con = {con{:}, a_rec(k,:)*a_rec(k,:).' <= 1};
     
-    con = {con{:}, a_circ(k,:)*[h*k s(1,k)].' - b_circ(k,:) <= -0.1};
+    con = {con{:}, a_circ(k,:)*[h*k s(1,k)].' - b_circ(k,:) <= -0.125};
     for ii=1:(length(obs_circ)-1)
         con = {con{:}, a_circ(k,:)*obs_circ(ii,:).' - b_circ(k,:) >= 0};
     end
@@ -101,20 +101,32 @@ end
 
 con = {con{:}, F<= Fmax, F>=Fmin};%force constraints
 con = {con{:}, T>=0}; %positive motion time
-con = {con{:},	s(:,1)==[0;1.00],	s(1,end)==d,	s(2,:)<=1.0,	s(2,:)>=0.1}; %initial and final conditions
+con = {con{:},	s(:,1)==[0;1.00],	s(1,end)==d,	s(2,:)<=1.0,	s(2,:)>=0}; %initial and final conditions
 
 %necessary?
-T.setInit(6); %assign initial guess to T
-s.setInit([linspace(0,d,N+1);zeros(1,N+1)]); %assign initial guess to states
-F.setInit(ones(N,1)); %initial guess for force
-% F.setInit(F_sol); %initial guess for force
+T.setInit(4.2); %assign initial guess to T
+% s.setInit([linspace(0,d,N+1);ones(1,N+1)]); %assign initial guess to states
 
-optisolve(T, con); %solve optimization problem
+s.setInit(s_sol); %assign initial guess to states
+F.setInit(F_sol); %initial guess for force
+a_rec.setInit(a_sol_rec); %initial guess
+b_rec.setInit(b_sol_rec); %initial guess
+a_circ.setInit(a_sol_circ); %initial guess
+b_circ.setInit(b_sol_circ); %initial guess
+
+optisolve(T+(1-s(2,:))*(1-s(2,:))', con); %solve optimization problem
 t_sol = linspace(0,optival(T),N+1);
 s_sol = optival(s); %get value of casADi variable
+F_sol = optival(F);
+a_sol_rec = optival(a_rec);
+b_sol_rec = optival(b_rec);
+a_sol_circ = optival(a_circ);
+b_sol_circ = optival(b_circ);
  
 disp(strcat('Optimal motion time: ' , num2str(optival(T)), ' s'));
 
+save('matlab.mat','C_xy_start_obs_circ','C_xy_start_obs_rec','Path','s_sol','t_sol','V_c_obs_circ','V_c_obs_rec')
+save('data_mat/OVP_sol.mat','s_sol','t_sol','F_sol','a_sol_rec','b_sol_rec','a_sol_circ','b_sol_circ')
 %% Plots
 
 %% Fist plot
@@ -156,7 +168,7 @@ l=legend('Robot path','Footprint wheelchair','Robot start pose',...
 set(l,'FontSize',30);
 set(gca,'FontSize',28)
 axis equal
-saveCurrentFigure('DVP_Start')
+% saveCurrentFigure('DVP_Start')
 
 
 %% First and Last Time of Impact
@@ -230,7 +242,6 @@ set(gca,'FontSize',11)
 axis equal
 saveCurrentFigure('DVP_FirstLastImpactDistance')
 
-
 %% Example First and last distance at fixed time
 t_fixed = 1.25;
 t_sim=t_fixed;
@@ -266,7 +277,7 @@ set(gca,'FontSize',11)
 axis equal
 saveCurrentFigure('DVP_FirstLastImpactDistance_FixedTime')
 
-%% Blocked S-T map
+% % Blocked S-T map
 TS_occ_convex_simple_rec=simplifyConvexHull(TS_occ_rec(ConvHull_kk_rec,:));
 TS_occ_convex_simple_circ=simplifyConvexHull(TS_occ_circ(ConvHull_kk_circ,:));
 figureFullScreen(6)
@@ -285,6 +296,8 @@ axis equal
 saveCurrentFigure('DVP_TSocc_Diagram_Convex')
 
 %%
+TS_occ_convex_simple_rec=simplifyConvexHull(TS_occ_rec(ConvHull_kk_rec,:));
+TS_occ_convex_simple_circ=simplifyConvexHull(TS_occ_circ(ConvHull_kk_circ,:));
 figureFullScreen(7)
 hold on
 plot(TS_occ_rec(:,1),TS_occ_rec(:,2),'.','Color',co(2,:))
@@ -293,12 +306,29 @@ plot(TS_occ_convex_simple_rec(:,1),TS_occ_convex_simple_rec(:,2),'--o','Color',c
 plot(TS_occ_circ(:,1),TS_occ_circ(:,2),'.','Color',co(3,:))
 % plot(TS_occ_rec(ConvHull_kk_rec,1),TS_occ_rec(ConvHull_kk_rec,2),'-','Color',co(3,:),'LineWidth',3)
 plot(TS_occ_convex_simple_circ(:,1),TS_occ_convex_simple_circ(:,2),'--o','Color',co(3,:),'LineWidth',3)
-plot (t_sol, s_sol(1,:),'Color',co(1,:),'LineWidth',3)
+plot (t_sol, s_sol(1,:),'-','Color',co(1,:),'LineWidth',3)
 plot([0 8],[s_sol(1,end) s_sol(1,end)],'Color',co(5,:),'LineWidth',6)
 l=legend('Occupied s-t (fast obstacle)','Simplified convex hull','Occupied s-t (slow obstacle)','Simplified convex hull','Optimal speed for fixed path','Goal Position','Location','NE');
 xlabel('Time [s]')
 ylabel('distance along path [m]')
-axis([0 8 0 max([Path.S])])
+axis([0 6 0 max([Path.S])])
 set(l,'FontSize',30);
 set(gca,'FontSize',28)
 saveCurrentFigure('DVP_Solution');
+
+figureFullScreen(8)
+hold on
+plot(TS_occ_rec(:,1),TS_occ_rec(:,2),'.','Color',co(2,:))
+% plot(TS_occ_circ(ConvHull_kk_circ,1),TS_occ_circ(ConvHull_kk_circ,2),'-','Color',co(2,:),'LineWidth',3)
+plot(TS_occ_convex_simple_rec(:,1),TS_occ_convex_simple_rec(:,2),'--o','Color',co(2,:),'LineWidth',3)
+plot(TS_occ_circ(:,1),TS_occ_circ(:,2),'.','Color',co(3,:))
+% plot(TS_occ_rec(ConvHull_kk_rec,1),TS_occ_rec(ConvHull_kk_rec,2),'-','Color',co(3,:),'LineWidth',3)
+plot(TS_occ_convex_simple_circ(:,1),TS_occ_convex_simple_circ(:,2),'--o','Color',co(3,:),'LineWidth',3)
+plot([0 8],[s_sol(1,end) s_sol(1,end)],'Color',co(5,:),'LineWidth',6)
+l=legend('Occupied s-t (fast obstacle)','Simplified convex hull','Occupied s-t (slow obstacle)','Simplified convex hull','Goal Position','Location','NE');
+xlabel('Time [s]')
+ylabel('distance along path [m]')
+axis([0 6 0 max([Path.S])])
+set(l,'FontSize',30);
+set(gca,'FontSize',28)
+saveCurrentFigure('DVP_Problem');
