@@ -6,10 +6,10 @@ co=get(groot,'DefaultAxesColorOrder');
 robotPose = [0 0 0];
 
 plotClothCurve=0; % bézier : false,  cloth:true
-[LSLset] = getLocalStateLatticeSettings();
-[grid_XY,ROI0,idxIn0,~,~]=BuildMultiSizeGrid(LSLset);
 
-if plotClothCurve
+load('grid_XY.mat')
+ 
+ if plotClothCurve
     load('LSL_cloth.mat')
     StringCurve='Clothoid';
     StringFileName='MPClothoid';

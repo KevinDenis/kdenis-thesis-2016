@@ -40,7 +40,7 @@ set(l,'FontSize',26);
 set(gca,'FontSize',24)
 axis equal
 axis([-1.5 3.5 -2 2])
-saveCurrentFigure('MPBezierCurveCommon');
+% saveCurrentFigure('MPBezierCurveCommon');
 
 
 

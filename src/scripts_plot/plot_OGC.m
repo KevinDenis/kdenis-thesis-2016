@@ -91,6 +91,7 @@ for nn=idxStartEnd
             plot(0.63,0.35,'s','MarkerEdgeColor',black,'MarkerFaceColor',black,'MarkerSize',8)
             plot(X(1:idxPath),Y(1:idxPath),'Color',co(1,:),'Linewidth',3);
             plot(X,Y,'--','Color',co(1,:),'Linewidth',2);
+            plotRoboticWheelchair([X(idxPath),Y(idxPath),TH(idxPath)],'k',1)
             text(-0.25,0.70,'$\mathcal{P}.\boldmath{p_0} : [0,0,0^{\circ}]$','FontSize',24,'Interpreter','LaTex')
             text(-0.25,0.60,'$\mathcal{P}.\boldmath{p_1} : [0.5, 0.1, 22.5^{\circ}]$','FontSize',24,'Interpreter','LaTex')
             text(-0.25,0.50,'$\mathcal{P}.pathID : 14$','FontSize',24,'Interpreter','LaTex')
@@ -99,7 +100,7 @@ for nn=idxStartEnd
             set(l,'FontSize',26);
             set(gca,'FontSize',24)
             set(gca, 'box', 'off')
-            saveCurrentFigure('OGRobotPath');
+            saveCurrentFigure('OGRobotPath_Extra');
         end
         setOccupancy(PathOccGrid,XY_occ_rot_trans,ones(size(XY_occ_rot_trans,1),1))
         if ~isempty(ii_occ_PathOcc)
