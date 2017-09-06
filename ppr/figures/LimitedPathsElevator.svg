@@ -15,7 +15,7 @@
    viewBox="0 0 744.09448819 1052.3622047"
    id="svg2"
    version="1.1"
-   inkscape:version="0.91 r13725"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
    sodipodi:docname="LimitedPathsElevator.svg">
   <sodipodi:namedview
      id="base"
@@ -24,15 +24,15 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.959798"
-     inkscape:cx="264.81388"
-     inkscape:cy="585.39583"
+     inkscape:zoom="1.4"
+     inkscape:cx="258.74014"
+     inkscape:cy="453.84121"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="2491"
+     inkscape:window-width="2489"
      inkscape:window-height="1417"
-     inkscape:window-x="61"
+     inkscape:window-x="63"
      inkscape:window-y="-8"
      inkscape:window-maximized="1" />
   <defs
@@ -191,13 +191,13 @@
       <image
          sodipodi:absref="D:\Dropbox\Documents\ShareLaTeX\Dissertation\figures\LimitedPathsElevator.jpg"
          xlink:href="LimitedPathsElevator.jpg"
-         width="165.50648"
-         height="140.96104"
-         preserveAspectRatio="none"
-         style="image-rendering:optimizeQuality"
-         id="image4172"
+         y="356.09219"
          x="262.79422"
-         y="356.09219" />
+         id="image4172"
+         style="image-rendering:optimizeQuality"
+         preserveAspectRatio="none"
+         height="140.96104"
+         width="165.50648" />
       <path
          style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          d="m 363.3104,436.81504 22.39795,0 0,13.57777 -22.10089,0 -7.96109,-2.39256 0,-8.79265 z"
@@ -206,26 +206,26 @@
     </g>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="374.35443"
        y="399.85196"
-       id="text4147"
-       sodipodi:linespacing="125%"><tspan
+       id="text4147"><tspan
          sodipodi:role="line"
          id="tspan4149"
          x="374.35443"
-         y="399.85196" /></text>
+         y="399.85196"
+         style="font-size:12.5px;line-height:1.25"> </tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="267.47638"
        y="504.34277"
-       id="text4147-7"
-       sodipodi:linespacing="125%"><tspan
+       id="text4147-7"><tspan
          sodipodi:role="line"
          id="tspan4149-5"
          x="267.47638"
-         y="504.34277" /></text>
+         y="504.34277"
+         style="font-size:12.5px;line-height:1.25"> </tspan></text>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker4290)"
        d="m 312.1101,453.60413 -22.15784,27.13441"
@@ -240,27 +240,25 @@
        sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="250.05336"
        y="489.70721"
-       id="text4252"
-       sodipodi:linespacing="125%"><tspan
+       id="text4252"><tspan
          sodipodi:role="line"
          id="tspan4254"
          x="250.05336"
          y="489.70721"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, '">Entrance Elevator</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:1.25;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, '">Entrance Elevator</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="378.04959"
        y="394.50037"
-       id="text4256"
-       sodipodi:linespacing="125%"><tspan
+       id="text4256"><tspan
          sodipodi:role="line"
          id="tspan4258"
          x="378.04959"
          y="394.50037"
-         style="font-size:10px;-inkscape-font-specification:'Latin Modern Roman, ';font-family:'Latin Modern Roman';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">Wheelchair</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:1.25;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, '">Wheelchair</tspan></text>
   </g>
 </svg>
