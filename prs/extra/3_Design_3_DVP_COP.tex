@@ -1,0 +1,29 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{lmodern}
+\usepackage{optidef}
+\usepackage{bm}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Kevin Denis}
+\title{Extra formulas}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert} 
+
+\begin{document}
+\begin{mini}[2]
+{(\bm{x}_{1:N},u_{1:N},\bm{a}_{1:N},b_{1:N},T)}{T+(v_{max}-\bm{x}_{1:N,2})^T\, (v_{max}-\bm{x}_{1:N,2})}
+{\label{eq:DVP_COP}}{}
+\addConstraint{\bm{x}_{k+1}}{=\bm{I}(\bm{f}(\bm{x}_{k},{u}_k,h), \, k=1\ldots N}
+\addConstraint{{\bm{a}_{k}}^T\,\bm{v}_{i}-b_{k}}{\geqslant 0,  \, i=1: N_{vertices}} 
+\addConstraint{{\bm{a}_{k}}^T\,\bm{x}_{k}-b_{k}}{\leqslant - r_{safe}} 
+\addConstraint{\bm{x}_1}{= [0,v_{start}]} 
+\addConstraint{\bm{x}_{N,1}}{= \bm{s}(end)} 
+\addConstraint{ 0 \leqslant}{\ \bm{x}_ {k,2} \leqslant v_{max}} 
+\addConstraint{u_{min} \leqslant}{\ u_k \leqslant u_{max}} 
+\addConstraint{T\geqslant}{0} 
+\addConstraint{\norm{\bm{a}_{k}}\leqslant}{1}
+\end{mini}
+
+\end{document}

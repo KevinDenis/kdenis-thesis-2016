@@ -1,0 +1,22 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{lmodern}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Kevin Denis}
+\title{Extra formulas}
+\begin{document}
+\begin{align*}
+u_{right,left}&=f(v,\omega) \\
+&\Downarrow\\
+u_{right,left}&\stackrel{?}{=}f(\kappa, \dots)
+\end{align*}
+\begin{align*}
+v &= \frac{r_{wheel}\cdot(u_{right} + u_{left})}{2} & \omega &= \frac{r_{wheel}\cdot(u_{right} - u_{left})}{B} \\
+v & = R \cdot \omega & \kappa &= \frac{1}{R} \\
+\omega & \sim \kappa & &\text{if $v$ constant}  \\
+u_{right} & = \frac{b\cdot v}{2\cdot r_{wheel}} \kappa + \frac{v}{r_{wheel}} & u_{left} & = \frac{-b \cdot v}{2\cdot r_{wheel}} \kappa + \frac{v}{r_{wheel}} 
+\end{align*}
+\end{document}
