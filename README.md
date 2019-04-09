@@ -14,7 +14,7 @@ Other aspects highlighted in this thesis include human-aware robot navigation, a
 
 In comparison to its predecessor the circular path planner, the developed clothoid-based planner achieves substantially improved planning capacity when a more complex path is needed to reach a certain goal. This comes at a cost: the clothoid planner generates six times more paths than the circular planner, which in total take four times longer to process.
 
-## GitLab organization
+## Repository  organization
 
 ### adm (Administration)
 Here, all the administrative matter for this thesis is stored (e.g. logs, meeting rapport, etc.).
@@ -29,4 +29,7 @@ Here, all the source code used for this thesis is presented.
 Here, the source code for the final master's thesis paper the and pdf's will be available. Here are also all the original figures.
 
 ### prs	(Presentation)
-Here, the source code for the presentation (midterm and final) and pdf's will be available.
+Here, the source code for the presentation (midterm and final) and pdf's are available.
+
+### pub (Publication)
+Here, the publication in a Conference Proceeding (presented at ICAPS 2018) is available.
