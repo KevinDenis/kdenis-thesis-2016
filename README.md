@@ -16,20 +16,20 @@ In comparison to its predecessor the circular path planner, the developed clotho
 
 ## Repository  organization
 
-### adm (Administration)
+### [Administration](adm)
 Here, all the administrative matter for this thesis is stored (e.g. logs, meeting rapport, etc.).
 
-### lit (Literature)
+### [Literature](lit)
 Here, the majority of the cited articles within this thesis are available in this directory.
 
-### src (Source code)
+### [Source code](src)
 Here, all the source code used for this thesis is presented.
 
-### ppr (Paper)
+### [Paper](ppr)
 Here, the source code for the final master's thesis paper the and pdf's will be available. Here are also all the original figures.
 
-### prs	(Presentation)
+### [Presentation](prs)
 Here, the source code for the presentation (midterm and final) and pdf's are available.
 
-### pub (Publication)
-Here, the publication in a Conference Proceeding (presented at ICAPS 2018) is available.
+### [Publication](pub)
+Here, the publication in a Conference Proceeding (presented at [ICAPS 2018](https://www.youtube.com/watch?v=oWDkkJ2ZbM0), published in [ICAPS 2019](https://aaai.org/ojs/index.php/ICAPS/article/view/3537)) is available.
